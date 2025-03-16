@@ -607,7 +607,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td><td role="cell">
 <p>Process: <strong>ckkeyrollfd</strong></p>
 </td></tr></tbody></table></figure><p>Amnesty International was not able to capture payloads related this exploitation but suspects that the iOS Photos app or the Photostream service were used as part of an exploit chain to deploy Pegasus. The apps themselves may have been exploited or their functionality misused to deliver a more traditional JavaScript or browser exploit to the device.</p><p>As you can see<span> from the tables above</span>, additional process names such as <strong>mptbd</strong>, <strong>ckeblld</strong>, <strong>fservernetd</strong>, and <strong>ckkeyrollfd</strong> appear right after <strong>bh</strong>. As with <strong>fmld</strong> and <strong>pcsd,</strong> Amnesty International believes these to be additional payloads downloaded and executed after a successful compromise. As our investigations progressed, we identified dozens of malicious process names involved in Pegasus infections.</p><p>Additionally, Amnesty International found the same iCloud account <strong>bogaardlisa803[@]gmail.com</strong> recorded as linked to the “com.apple.private.alloy.photostream” service on both devices. Purposefully created iCloud accounts seem to be central to the delivery of multiple “zero-click” attack vectors in many recent cases of compromised devices analysed by Amnesty International.</p><h2 class="wp-block-heading" id="h-4-an-imessage-zero-click-0day-used-widely-in-2019"><span>4. An iMessage zero-click 0day used widely in 2019</span></h2><p>While SMS messages carrying malicious links were the tactic of choice for NSO Group’s customers between 2016 and 2018, in more recent years they appear to have become increasingly rare. The discovery of network injection attacks in Morocco signalled that the attackers’ tactics were indeed changing. Network injection is an effective and cost-efficient attack vector for domestic use especially in countries with leverage over mobile operators. However, while it is only effective on domestic networks, the targeting of foreign targets or of individuals in diaspora communities also changed. </p><p>From 2019 an increasing amount of vulnerabilities in iOS, especially iMessage and FaceTime, started getting patched thanks to their discoveries by vulnerability researchers, or to cybersecurity vendors reporting exploits discovered in-the-wild.</p><p>In response, Amnesty International extended its forensic methodology to collect any relevant traces by iMessage and FaceTime. iOS keeps a record of Apple IDs seen by each installed application in a plist file located at <em>/private/var/mobile/Library/Preferences/com.apple.identityservices.<strong>idstatuscache</strong>.plist</em>. This file is also typically available in a regular iTunes backup, so it can be easily extracted without the need of a jailbreak.</p><p>These records played critical role in later investigations. In many cases we discovered suspected Pegasus processes executed on devices immediately following suspicious iMessage account lookups. For example, the following records were extracted from the phone of a French journalist (CODE FRJRN2):</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell"> <p>2019-08-16 12:08:44</p> </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="40222532272532336e2f777900272d21292c6e232f2d">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b090e190c0e191845045c522b0c060a020745080406">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-08-16 12:33:52</p>
 </td><td role="cell">
@@ -635,11 +635,11 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr></tbody></table><figcaption class="wp-element-caption">*The date of the first entry for FRJRN2 was updated on 11 Jan 2023 to correct a typo.</figcaption></figure><p>Amnesty International’s forensic analysis of multiple devices found similar records. In many cases the same iMessage account reoccurs across multiple targeted devices, potentially indicating that those devices have been targeted by the same operator. Additionally, the processes <strong>roleaccountd</strong> and <strong>stagingd</strong> occur consistently, along with others.</p><p>For example, the iPhone of a Hungarian journalist (CODE HUJRN1) instead showed the following records:</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell">
 <p>2019-09-24 13:26:15</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6dcd3c5c5dfd5d7d2d7c0dfd3c587858283f6d9c3c2dad9d9dd98d5d9db">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6a000f191903090b0e0b1c030f195b595e5f2a051f1e0605050144090507">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-24 13:26:51</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="385d5555595c594e515d4b000a0e0e785f55595154165b5755">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8cdc5c5c9ccc9dec1cddb909a9e9ee8cfc5c9c1c486cbc7c5">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-24 13:32:10</p>
 </td><td role="cell">
@@ -651,7 +651,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr></tbody></table></figure><p>In this case, the first suspicious processes performing some network activity were recorded 5 minutes after the first lookup. The <em>com.apple.CrashReporter.plist</em> file was already present on this device after a previous successful infection and was not written again. </p><p>The iPhone of yet another Hungarian journalist (CODE HUJRN2) show lookups for the same iMessage accounts along with numerous other processes along with <strong>roleaccountd</strong> and <strong>stagingd</strong>:</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell">
 <p>2019-07-15 12:01:37</p>
 </td><td role="cell">
-<p>Lookup of mailto:e<strong>\x00\x00</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8d9dcd9ced1ddcb808a8e8ef8dfd5d9d1d496dbd7d5">[email&#160;protected]</a> by com.apple.madrid (iMessage)</p>
+<p>Lookup of mailto:e<strong>\x00\x00</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e8898c899e818d9bd0dadedea88f85898184c68b8785">[email&#160;protected]</a> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-07-15 14:21:40</p>
 </td><td role="cell">
@@ -691,11 +691,11 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-10 06:09:04</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd9890909c999c8b94988ec5cfcbcbbd9a909c9491d39e9290">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4c1c9c9c5c0c5d2cdc1d79c969292e4c3c9c5cdc88ac7cbc9">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-10 06:09:47</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="204a45535349434144415649455311131415604f55544c4f4f4b0e434f4d">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23494650504a40424742554a465012101716634c56574f4c4c480d404c4e">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-10-30 14:09:51</p>
 </td><td role="cell">
@@ -719,7 +719,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr></tbody></table></figure><p>Interestingly we found signs of a new iOS infection technique being used to compromise this device. A successful infection occurred on 10th July 2020:</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell">
 <p>2020-07-06 05:22:21</p>
 </td><td role="cell">
-<p>Lookup of <strong>f\x00\<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7df9797ced789c5cb9f95e7c0cac6cecb89c4c8ca">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
+<p>Lookup of <strong>f\x00\<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ceb6fefea7bee0aca2f6fc8ea9a3afa7a2e0ada1a3">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2020-07-10 14:12:09</p>
 
@@ -746,7 +746,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr><tr role="row"><td role="cell">
 <p>2021-02-08 10:42:40</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="513d383f303a343d3d34236363616211363c30383d7f323e3c">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d0104030c06080101081f5f5f5d5e2d0a000c0401430e0200">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2021-02-08 11:27:10</p>
 </td><td role="cell">
@@ -770,7 +770,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr><tr role="row"><td role="cell">
 <p>2021-04-02 10:15:38</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="234f4a4d4248464f4f46511111131063444e424a4f0d404c4e">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9df1f4f3fcf6f8f1f1f8efafafadaeddfaf0fcf4f1b3fef2f0">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2021-04-02 10:36:00</p>
 </td><td role="cell">
@@ -1372,7 +1372,7 @@ var aimch = {"candle":"https:\/\/www.amnesty.org\/en\/wp-content\/plugins\/wp-pl
 <script src="https://www.amnesty.org/en/wp-includes/js/dist/api-fetch.min.js?ver=4c185334c5ec26e149cc" id="wp-api-fetch-js"></script>
 <script id="wp-api-fetch-js-after">
 wp.apiFetch.use( wp.apiFetch.createRootURLMiddleware( "https://www.amnesty.org/en/wp-json/" ) );
-wp.apiFetch.nonceMiddleware = wp.apiFetch.createNonceMiddleware( "4b1c535c49" );
+wp.apiFetch.nonceMiddleware = wp.apiFetch.createNonceMiddleware( "4d7428e30a" );
 wp.apiFetch.use( wp.apiFetch.nonceMiddleware );
 wp.apiFetch.use( wp.apiFetch.mediaUploadMiddleware );
 wp.apiFetch.nonceEndpoint = "https://www.amnesty.org/en/wp-admin/admin-ajax.php?action=rest-nonce";

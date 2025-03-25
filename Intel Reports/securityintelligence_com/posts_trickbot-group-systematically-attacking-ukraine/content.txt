@@ -1972,16 +1972,16 @@ email data: {user|password|imap server[:port]|smtp server[:port]} or {destinatio
 if first symbol of server is '*' - not using SSL for connecting<br>
 example conf file:<br>
 period=35<br>
-mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deaabbadaa9eabadbff0bdb1b3">[email&#160;protected]</a>|myPwd|imap.usa.com|smtp.usa.com}<br>
-mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a0e1f090e3a1b0f090e081b16131b1454191517">[email&#160;protected]</a>|pwd12345|*imap.australian.com|*smtp.australian.com}<br>
-mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94e7f1faf0e0fbd4f9f5fdf8baf9f5fdf8">[email&#160;protected]</a>}<br>
-mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5332373721362020133e323a3f313c2b7d303c3e">[email&#160;protected]</a>}</code></p>
+mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9cddccacdf9cccad897dad6d4">[email&#160;protected]</a>|myPwd|imap.usa.com|smtp.usa.com}<br>
+mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed99889e99ad8c989e999f8c81848c83c38e8280">[email&#160;protected]</a>|pwd12345|*imap.australian.com|*smtp.australian.com}<br>
+mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f5c4a414b5b406f424e464301424e4643">[email&#160;protected]</a>}<br>
+mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3657525244534545765b575f5a54594e1855595b">[email&#160;protected]</a>}</code></p>
 <p>When executed with the correct parameters, <strong>buildDelegate_x64.exe</strong> takes the source DLL, in this case <strong>delegate_x64.dll</strong>, which is a template for the AnchorMail malware, and modifies it with the configuration values which are specified in the file <strong>conf.txt</strong>. The builder parses the contents of <strong>conf.txt</strong>, and uses them to construct a configuration block for AnchorMail.</p>
 <p>In this instance, conf.txt contains the following contents:</p>
 <p><code>period=10<br>
-mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73091218012c18060107423342464a43455e414b4647445d1112101f1c06175d1a1d151c">[email&#160;protected]</a>|ohvohNgaeT6Shoche8Ei|15906-28547.bacloud.info|15906-28547.bacloud.info}<br>
-mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="403a212b321f2b353234720071757970766d72787574776e2221232c2f35246e292e262f">[email&#160;protected]</a>|doo9ahxuuBug9cuuV8ga|15906-28547.bacloud.info|15906-28547.bacloud.info}<br>
-mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccb6fd8cfdf9f5fcfae1fef4f9f8fbe2aeadafa0a3b9a8e2a5a2aaa3">[email&#160;protected]</a>}</code></p>
+mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa809b9188a5918f888ecbbacbcfc3caccd7c8c2cfcecdd4989b9996958f9ed493949c95">[email&#160;protected]</a>|ohvohNgaeT6Shoche8Ei|15906-28547.bacloud.info|15906-28547.bacloud.info}<br>
+mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dba1bab0a984b0aea9afe99beaeee2ebedf6e9e3eeefecf5b9bab8b7b4aebff5b2b5bdb4">[email&#160;protected]</a>|doo9ahxuuBug9cuuV8ga|15906-28547.bacloud.info|15906-28547.bacloud.info}<br>
+mail={<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1cb80f180848881879c83898485869fd3d0d2dddec4d59fd8dfd7de">[email&#160;protected]</a>}</code></p>
 <p>The builder then generates a 16-byte XOR key and uses this to encrypt the configuration block. The configuration block and the XOR key are then injected into the template binary, which contains the marker strings &lsquo;YYYYYYYYYYYYYYYY&rsquo; and &lsquo;ZZZZZZZZZZZZZZZZ&rsquo; to indicate the locations in the binary where the configuration block and key should be written to. This updated binary is then saved as file <strong>delegat.dll</strong>.</p>
 <p>The script then executes the generated DLL, <strong>delegat.dll</strong>, using the in-built Windows rundll32 command.</p>
 <p>Finally, the script file <strong>2.bat</strong> is executed which deletes all the dropped files except for the generated file <strong>delegat.dll</strong>.</p>

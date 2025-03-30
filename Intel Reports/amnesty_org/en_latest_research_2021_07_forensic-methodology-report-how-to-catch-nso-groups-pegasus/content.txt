@@ -610,7 +610,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td><td role="cell">
 <p>Process: <strong>ckkeyrollfd</strong></p>
 </td></tr></tbody></table></figure><p>Amnesty International was not able to capture payloads related this exploitation but suspects that the iOS Photos app or the Photostream service were used as part of an exploit chain to deploy Pegasus. The apps themselves may have been exploited or their functionality misused to deliver a more traditional JavaScript or browser exploit to the device.</p><p>As you can see<span> from the tables above</span>, additional process names such as <strong>mptbd</strong>, <strong>ckeblld</strong>, <strong>fservernetd</strong>, and <strong>ckkeyrollfd</strong> appear right after <strong>bh</strong>. As with <strong>fmld</strong> and <strong>pcsd,</strong> Amnesty International believes these to be additional payloads downloaded and executed after a successful compromise. As our investigations progressed, we identified dozens of malicious process names involved in Pegasus infections.</p><p>Additionally, Amnesty International found the same iCloud account <strong>bogaardlisa803[@]gmail.com</strong> recorded as linked to the “com.apple.private.alloy.photostream” service on both devices. Purposefully created iCloud accounts seem to be central to the delivery of multiple “zero-click” attack vectors in many recent cases of compromised devices analysed by Amnesty International.</p><h2 class="wp-block-heading" id="h-4-an-imessage-zero-click-0day-used-widely-in-2019"><span>4. An iMessage zero-click 0day used widely in 2019</span></h2><p>While SMS messages carrying malicious links were the tactic of choice for NSO Group’s customers between 2016 and 2018, in more recent years they appear to have become increasingly rare. The discovery of network injection attacks in Morocco signalled that the attackers’ tactics were indeed changing. Network injection is an effective and cost-efficient attack vector for domestic use especially in countries with leverage over mobile operators. However, while it is only effective on domestic networks, the targeting of foreign targets or of individuals in diaspora communities also changed. </p><p>From 2019 an increasing amount of vulnerabilities in iOS, especially iMessage and FaceTime, started getting patched thanks to their discoveries by vulnerability researchers, or to cybersecurity vendors reporting exploits discovered in-the-wild.</p><p>In response, Amnesty International extended its forensic methodology to collect any relevant traces by iMessage and FaceTime. iOS keeps a record of Apple IDs seen by each installed application in a plist file located at <em>/private/var/mobile/Library/Preferences/com.apple.identityservices.<strong>idstatuscache</strong>.plist</em>. This file is also typically available in a regular iTunes backup, so it can be easily extracted without the need of a jailbreak.</p><p>These records played critical role in later investigations. In many cases we discovered suspected Pegasus processes executed on devices immediately following suspicious iMessage account lookups. For example, the following records were extracted from the phone of a French journalist (CODE FRJRN2):</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell"> <p>2019-08-16 12:08:44</p> </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6b4b3a4b1b3a4a5f8b9e1ef96b1bbb7bfbaf8b5b9bb">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="31535443565443421f5e060871565c50585d1f525e5c">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-08-16 12:33:52</p>
 </td><td role="cell">
@@ -638,11 +638,11 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr></tbody></table><figcaption class="wp-element-caption">*The date of the first entry for FRJRN2 was updated on 11 Jan 2023 to correct a typo.</figcaption></figure><p>Amnesty International’s forensic analysis of multiple devices found similar records. In many cases the same iMessage account reoccurs across multiple targeted devices, potentially indicating that those devices have been targeted by the same operator. Additionally, the processes <strong>roleaccountd</strong> and <strong>stagingd</strong> occur consistently, along with others.</p><p>For example, the iPhone of a Hungarian journalist (CODE HUJRN1) instead showed the following records:</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell">
 <p>2019-09-24 13:26:15</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="264c4355554f45474247504f435517151213664953524a49494d0845494b">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8de7e8fefee4eeece9ecfbe4e8febcbeb9b8cde2f8f9e1e2e2e6a3eee2e0">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-24 13:26:51</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb9e96969a9f9a8d929e88c3c9cdcdbb9c969a9297d5989496">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f1f9f9f5f0f5e2fdf1e7aca6a2a2d4f3f9f5fdf8baf7fbf9">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-24 13:32:10</p>
 </td><td role="cell">
@@ -654,7 +654,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr></tbody></table></figure><p>In this case, the first suspicious processes performing some network activity were recorded 5 minutes after the first lookup. The <em>com.apple.CrashReporter.plist</em> file was already present on this device after a previous successful infection and was not written again. </p><p>The iPhone of yet another Hungarian journalist (CODE HUJRN2) show lookups for the same iMessage accounts along with numerous other processes along with <strong>roleaccountd</strong> and <strong>stagingd</strong>:</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell">
 <p>2019-07-15 12:01:37</p>
 </td><td role="cell">
-<p>Lookup of mailto:e<strong>\x00\x00</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="35545154435c50460d070303755258545c591b565a58">[email&#160;protected]</a> by com.apple.madrid (iMessage)</p>
+<p>Lookup of mailto:e<strong>\x00\x00</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bfafffaedf2fee8a3a9adaddbfcf6faf2f7b5f8f4f6">[email&#160;protected]</a> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-07-15 14:21:40</p>
 </td><td role="cell">
@@ -694,11 +694,11 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-10 06:09:04</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e2b23232f2a2f38272b3d767c78780e29232f2722602d2123">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f99c9494989d988f909c8ac1cbcfcfb99e94989095d79a9694">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-09-10 06:09:47</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="79131c0a0a101a181d180f101c0a484a4d4c39160c0d15161612571a1614">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12787761617b71737673647b776123212627527d67667e7d7d793c717d7f">[email&#160;protected]</a></strong> by com.apple.madrid (iMessage)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2019-10-30 14:09:51</p>
 </td><td role="cell">
@@ -722,7 +722,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr></tbody></table></figure><p>Interestingly we found signs of a new iOS infection technique being used to compromise this device. A successful infection occurred on 10th July 2020:</p><figure class="wp-block-table is-style-responsive"><table role="table"><tbody role="rowgroup"><tr role="row"><td role="cell">
 <p>2020-07-06 05:22:21</p>
 </td><td role="cell">
-<p>Lookup of <strong>f\x00\<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="245c14144d540a46481c16644349454d480a474b49">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
+<p>Lookup of <strong>f\x00\<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b135b5b021b45090753592b0c060a020745080406">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2020-07-10 14:12:09</p>
 
@@ -749,7 +749,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr><tr role="row"><td role="cell">
 <p>2021-02-08 10:42:40</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6dadfd8d7ddd3dadad3c484848685f6d1dbd7dfda98d5d9db">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d7174737c76787171786f2f2f2d2e5d7a707c7471337e7270">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2021-02-08 11:27:10</p>
 </td><td role="cell">
@@ -773,7 +773,7 @@ var woocommerce_params = {"ajax_url":"\/en\/wp-admin\/admin-ajax.php","wc_ajax_u
 </td></tr><tr role="row"><td role="cell">
 <p>2021-04-02 10:15:38</p>
 </td><td role="cell">
-<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ef2f7f0fff5fbf2f2fbecacacaeaddef9f3fff7f2b0fdf1f3">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
+<p>Lookup of <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="701c191e111b151c1c15024242404330171d11191c5e131f1d">[email&#160;protected]</a></strong> by iMessage (com.apple.madrid)</p>
 </td></tr><tr role="row"><td role="cell">
 <p>2021-04-02 10:36:00</p>
 </td><td role="cell">
@@ -1303,7 +1303,7 @@ var amnestyCoreI18n = {"listSeparator":",","openDoubleQuote":"\u201c","closeDoub
 </script>
 <script src="https://www.amnesty.org/en/wp-content/themes/humanity-theme/assets/scripts/bundle.js?ver=2.0.13" id="amnesty-theme-js"></script>
 <script id="aidonations-app-js-extra">
-var amnestyWC = {"nonce":"7b541f299f","wooccm":[]};
+var amnestyWC = {"nonce":"36c7fcb9f2","wooccm":[]};
 </script>
 <script src="https://www.amnesty.org/en/wp-content/plugins/humanity-donations/assets/scripts/app.js?ver=1.1.4" id="aidonations-app-js"></script>
 <script src="https://www.amnesty.org/en/wp-content/plugins/wp-plugin-amnesty-branding/assets/scripts/siteeditor.js?ver=2.0.6" id="aibrand-site-editor-js"></script>
@@ -1379,7 +1379,7 @@ var aimch = {"candle":"https:\/\/www.amnesty.org\/en\/wp-content\/plugins\/wp-pl
 <script src="https://www.amnesty.org/en/wp-includes/js/dist/api-fetch.min.js?ver=d387b816bc1ed2042e28" id="wp-api-fetch-js"></script>
 <script id="wp-api-fetch-js-after">
 wp.apiFetch.use( wp.apiFetch.createRootURLMiddleware( "https://www.amnesty.org/en/wp-json/" ) );
-wp.apiFetch.nonceMiddleware = wp.apiFetch.createNonceMiddleware( "b09b6af403" );
+wp.apiFetch.nonceMiddleware = wp.apiFetch.createNonceMiddleware( "36c78f9495" );
 wp.apiFetch.use( wp.apiFetch.nonceMiddleware );
 wp.apiFetch.use( wp.apiFetch.mediaUploadMiddleware );
 wp.apiFetch.nonceEndpoint = "https://www.amnesty.org/en/wp-admin/admin-ajax.php?action=rest-nonce";
@@ -1436,7 +1436,7 @@ moment.updateLocale( 'en_GB', {"months":["January","February","March","April","M
 </script>
 <script src="https://www.amnesty.org/en/wp-includes/js/dist/date.min.js?ver=aaca6387d1cf924acc51" id="wp-date-js"></script>
 <script id="wp-date-js-after">
-wp.date.setSettings( {"l10n":{"locale":"en_GB","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"meridiem":{"am":"am","pm":"pm","AM":"AM","PM":"PM"},"relative":{"future":"%s from now","past":"%s ago","s":"a second","ss":"%d seconds","m":"a minute","mm":"%d minutes","h":"an hour","hh":"%d hours","d":"a day","dd":"%d days","M":"a month","MM":"%d months","y":"a year","yy":"%d years"},"startOfWeek":1},"formats":{"time":"g:i a","date":"j F Y","datetime":"j F Y H:i","datetimeAbbreviated":"j F Y H:i"},"timezone":{"offset":0,"offsetFormatted":"0","string":"Europe\/London","abbr":"GMT"}} );
+wp.date.setSettings( {"l10n":{"locale":"en_GB","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"meridiem":{"am":"am","pm":"pm","AM":"AM","PM":"PM"},"relative":{"future":"%s from now","past":"%s ago","s":"a second","ss":"%d seconds","m":"a minute","mm":"%d minutes","h":"an hour","hh":"%d hours","d":"a day","dd":"%d days","M":"a month","MM":"%d months","y":"a year","yy":"%d years"},"startOfWeek":1},"formats":{"time":"g:i a","date":"j F Y","datetime":"j F Y H:i","datetimeAbbreviated":"j F Y H:i"},"timezone":{"offset":1,"offsetFormatted":"1","string":"Europe\/London","abbr":"BST"}} );
 </script>
 <script src="https://www.amnesty.org/en/wp-includes/js/dist/primitives.min.js?ver=aef2543ab60c8c9bb609" id="wp-primitives-js"></script>
 <script id="wp-components-js-translations">

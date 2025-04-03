@@ -47,8 +47,8 @@
     <link rel="canonical" href="https://www.ibm.com/think"/>
 
     
-    <link rel="preload" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-masthead-container.lc-fd7a25fa2b38604dfa3151a1be7b4333-lc.min.js" as="script">
-<link rel="preload" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-leadspace.lc-76e07f1ff8a18f533eb9a6343c886a47-lc.min.js" as="script">
+    <link rel="preload" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-masthead-container.lc-11a74ae7d66d7afe28ac0d2d5fc858de-lc.min.js" as="script">
+<link rel="preload" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-leadspace.lc-ea1bb26cb6cc29bec348f73706396b78-lc.min.js" as="script">
 
 
 
@@ -223,7 +223,7 @@
     
 <link rel="stylesheet" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-base.lc-30313e00669f877069f15dd099f23454-lc.min.css" type="text/css">
 <link rel="stylesheet" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-idlStylesCarbon.lc-e04b6838e8faca925eaf0ace381309d0-lc.min.css" type="text/css">
-<link rel="stylesheet" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-idlStyles.lc-c9558e0ade77e10136e272c6c945dfd5-lc.min.css" type="text/css">
+<link rel="stylesheet" href="/etc.clientlibs/adobe-cms/clientlibs/clientlib-idlStyles.lc-95060c33539fcb8c4eccc9e6b6059042-lc.min.css" type="text/css">
 
 
 
@@ -284,11 +284,18 @@
 
 
 
-<c4d-masthead-container data-endpoint="#" auth-method="profile-api" has-contact="false" has-profile has-search has-cart></c4d-masthead-container>
+<c4d-masthead-container data-endpoint="#" auth-method="profile-api" has-contact="false" has-global="false" has-profile has-search has-cart current-region-text="Your Current Region is" different-region-text="Select Different Region"></c4d-masthead-container>
 
 
 
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-masthead-container.lc-fd7a25fa2b38604dfa3151a1be7b4333-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-masthead-container.lc-11a74ae7d66d7afe28ac0d2d5fc858de-lc.min.js"></script>
+
+
+
+    
+<script src="/etc.clientlibs/clientlibs/granite/jquery.lc-7842899024219bcbdb5e72c946870b79-lc.min.js"></script>
+<script src="/etc.clientlibs/adobe-cms/components/structure/navigation/masthead/clientlibs/site.lc-cf5c95c1dfd507e8674a352c89bf846d-lc.min.js"></script>
+
 
 
 
@@ -345,6 +352,12 @@
        document.querySelector('c4d-masthead-container').setAttribute("has-search","false");
        document.querySelector('c4d-masthead-container').setAttribute("has-profile","false");
     }
+     document.addEventListener("DOMContentLoaded", function() {
+        const mastheadContainer = document.querySelector("c4d-masthead-container");
+        if (mastheadContainer && mastheadContainer.getAttribute("has-global") === "false") {
+            document.querySelector('.earth-language-icon').style.display = 'none';
+        }
+    });
 </script>
 </div>
 <div class="container responsivegrid">
@@ -480,8 +493,8 @@
 
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-leadspace.lc-76e07f1ff8a18f533eb9a6343c886a47-lc.min.js"></script>
-<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-background-media.lc-80150c8b5de1ed9e5c0921a341c1488b-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-leadspace.lc-ea1bb26cb6cc29bec348f73706396b78-lc.min.js"></script>
+<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-background-media.lc-6faae89242fc91d92838fe9079c74d45-lc.min.js"></script>
 
 
 </div>
@@ -506,11 +519,11 @@
         <div class="cds--spotlight--list-container cds--spotlight--list-container--left">
             
                 <div>
-                    <caem-tile href="https://www.ibm.com/think/videos/ai-academy/data-strategy-gen-ai" cta-type="local">
-                        <c4d-image slot="image" default-src="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/9c/f0/202501_aiacademy_prior_pk_cj_0227_darken_final.component.crop-thumbnail-1-by-1.ts=0.jpg/content/adobe-cms/us/en/think/videos/ai-academy/data-strategy-gen-ai/jcr:content/root/leadspace_container/leadspace_copy_copy">
+                    <caem-tile href="https://www.ibm.com/think/insights/csrd-omnibus-proposal" cta-type="local">
+                        <c4d-image slot="image" default-src="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/s-migr/ul/g/aa/bf/csrd-learn_leadspace_image_26jul23-whitebackground.component.crop-thumbnail-1-by-1.ts=0.png/content/adobe-cms/us/en/think/insights/csrd-omnibus-proposal/jcr:content/root/leadspace_container/leadspace_article">
                         </c4d-image>
                         <p class="spotlight-paragraph body-short-02">
-                            AI Academy
+                            What is the CSRD Omnibus proposal?
                         </p>
 
                         <p slot='cta' class="spotlight-paragraph cds--spotlight--tile-link body-short-02">
@@ -526,29 +539,11 @@
                 
             
                 <div>
-                    <caem-tile href="https://www.ibm.com/think/news/red-hat-marco-bill-peter-q-a" cta-type="local">
-                        
-                        <p class="spotlight-paragraph productive-heading-03">
-                            A look at open source&#39;s evolution with Red Hat&#39;s Marco Bill-Peter
-                        </p>
-
-                        <p slot='cta' class="spotlight-paragraph cds--spotlight--tile-link body-short-02">
-                            
-                                
-                                
-                                Get the news
-                            
-                            
-                        </p>
-                    </caem-tile>
-                </div>
-                
-            
-                <div>
-                    <caem-tile href="https://www.ibm.com/think/insights/6-ways-mainframes-are-a-strategic-asset-ai-era" cta-type="local">
-                        
-                        <p class="spotlight-paragraph productive-heading-03">
-                            6 ways mainframes are a strategic asset in the AI era
+                    <caem-tile href="https://www.ibm.com/think/videos/ai-academy/data-strategy-gen-ai" cta-type="local">
+                        <c4d-image slot="image" default-src="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/9c/f0/202501_aiacademy_prior_pk_cj_0227_darken_final.component.crop-thumbnail-1-by-1.ts=0.jpg/content/adobe-cms/us/en/think/videos/ai-academy/data-strategy-gen-ai/jcr:content/root/leadspace_container/leadspace_copy_copy">
+                        </c4d-image>
+                        <p class="spotlight-paragraph body-short-02">
+                            AI Academy
                         </p>
 
                         <p slot='cta' class="spotlight-paragraph cds--spotlight--tile-link body-short-02">
@@ -576,6 +571,25 @@
                                 
                                 
                                 Get the news
+                            
+                            
+                        </p>
+                    </caem-tile>
+                </div>
+                
+            
+                <div>
+                    <caem-tile href="https://www.ibm.com/think/insights/6-ways-mainframes-are-a-strategic-asset-ai-era" cta-type="local">
+                        
+                        <p class="spotlight-paragraph productive-heading-03">
+                            6 ways mainframes are a strategic asset in the AI era
+                        </p>
+
+                        <p slot='cta' class="spotlight-paragraph cds--spotlight--tile-link body-short-02">
+                            
+                                
+                                
+                                Read insight
                             
                             
                         </p>
@@ -617,7 +631,7 @@
     <c4d-image-item media="(max-width: 480px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/stock-assets/adb-stk/ul/g/14/dd/adobestock_644241211.component.xs.ts=1743530740484.jpeg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/spotlight"></c4d-image-item>
     
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-image.lc-7a83422e95846e7a3b9ba7deb7fbfb3e-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-image.lc-671da99701800274cbe8c021980f4f4e-lc.min.js"></script>
 
 
     
@@ -811,7 +825,7 @@
     
     
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-button.lc-cd95a02a1490584009a64d30d5d8161d-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-button.lc-05a1fe023b0f1a7b14342e561e39612b-lc.min.js"></script>
 
 
     
@@ -821,7 +835,7 @@
 
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-item.lc-b79c73d2d995e6ca4a5d4144cde5ac35-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-item.lc-9ed07e2e0db89dde9a7fc697eda42865-lc.min.js"></script>
 
 
 </div>
@@ -847,7 +861,7 @@
 
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-caem-tile.lc-7da1ffaf066d257647a35f80cb243c27-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-caem-tile.lc-f3dde281ac3c2c1d0009d6151b435ee1-lc.min.js"></script>
 
 
 
@@ -880,23 +894,23 @@
 
     
 
-            
         
-        
+    
+    
 
-        
-            <span class="productive-heading-02"><p>Stay ahead with the latest tech news<br />
+    
+        <span class="productive-heading-02"><p>Stay ahead with the latest tech news<br />
 </p>
 <h2> </h2>
 <p> </p>
 <p> </p>
 </span>
-        
-        <span class=" "><p>Weekly insights, research and expert views on AI, security, cloud and more in the Think Newsletter</p>
+    
+    <span class=" "><p>Weekly insights, research and expert views on AI, security, cloud and more in the Think Newsletter</p>
 <p> </p>
 </span>
+    
         
-            
     
     
     
@@ -914,14 +928,13 @@
     
 
 
-        
-    </c4d-promo-banner>
+    
+</c4d-promo-banner>
 </div>
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-countdown.lc-7e22b172fb4b7e1afcc3d6c3628ed6b1-lc.min.js"></script>
-<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-promo-banner.lc-45f9e0f71683ec9a78d2b28c01a9b7cb-lc.min.js"></script>
-
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-countdown.lc-d67d31357189443c2beab0458cc2273d-lc.min.js"></script>
+<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-promo-banner.lc-fc346c4f470c1aa8139d1b22099a4f3e-lc.min.js"></script>
 
 
 </div>
@@ -985,7 +998,7 @@
 
     
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-cibm-cta.lc-3ffe353c3f26bcde47f40bdc9a64deb2-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-cibm-cta.lc-5af0fdf6e0885784d114782c6e03fd9a-lc.min.js"></script>
 
 
     
@@ -1016,7 +1029,7 @@
 
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-link-list.lc-ffeafa2af603ebcd7c6e7420f689bfa7-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-link-list.lc-e7b065df69374662cf40cec1a699a5c9-lc.min.js"></script>
 
 
 
@@ -1126,8 +1139,8 @@
 
     
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-group.lc-dc0638d76526c2b6d5276320ab0d5205-lc.min.js"></script>
-<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-card.lc-008b3be935e6fef1b86636d71c127d9b-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-group.lc-6e0e1424ec28b53b9e6b7bfdd052f9cd-lc.min.js"></script>
+<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-card.lc-ca53cb990b4d5fd41937c29ba7ea93ea-lc.min.js"></script>
 
 
     
@@ -2304,8 +2317,8 @@
 </div>
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-carousel.lc-0877c1b7c007427274cc341b93f259eb-lc.min.js"></script>
-<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-block-cards.lc-8c2c3915aaf95359fa76f99ea61ee512-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-carousel.lc-bd762aea178c705822e1e002d3be8580-lc.min.js"></script>
+<script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-block-cards.lc-3ab082d1cb5766219c145f93d22f18d9-lc.min.js"></script>
 
 
 </div>
@@ -2596,7 +2609,9 @@
         
     
 
-        Hybrid by design: The great tech reset
+        <div class="caem-tile__text">
+            Hybrid by design: The great tech reset
+        </div>
         
     
     <div>
@@ -2615,7 +2630,7 @@
 
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -2647,7 +2662,9 @@
         
     
 
-        2024 CIO, CTO, CDO Study
+        <div class="caem-tile__text">
+            2024 CIO, CTO, CDO Study
+        </div>
         
     
     <div>
@@ -2663,7 +2680,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -2710,7 +2727,9 @@
         
     
 
-        2024 CEO study
+        <div class="caem-tile__text">
+            2024 CEO study
+        </div>
         
     
     <div>
@@ -2726,7 +2745,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -2758,7 +2777,9 @@
         
     
 
-        Sustainability: Beyond Checking the Box
+        <div class="caem-tile__text">
+            Sustainability: Beyond Checking the Box
+        </div>
         
     
     <div>
@@ -2774,7 +2795,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -3033,7 +3054,9 @@
         
     
 
-        Become an expert on all security topics, from SOAR to MFA.
+        <div class="caem-tile__text">
+            Become an expert on all security topics, from SOAR to MFA.
+        </div>
         
     
     <div>
@@ -3049,7 +3072,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View all security explainers
         </p>
 
@@ -3096,7 +3119,9 @@
         
     
 
-        Learn about sustainability topics, from green computing to hydropower.
+        <div class="caem-tile__text">
+            Learn about sustainability topics, from green computing to hydropower.
+        </div>
         
     
     <div>
@@ -3112,7 +3137,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View all sustainability explainers
         </p>
 
@@ -3202,7 +3227,9 @@
         
     
 
-        From hybrid cloud to IaaS, learn about cloud fundamentals and emerging tech.
+        <div class="caem-tile__text">
+            From hybrid cloud to IaaS, learn about cloud fundamentals and emerging tech.
+        </div>
         
     
     
@@ -3216,7 +3243,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View all cloud explainers
         </p>
 
@@ -3490,7 +3517,7 @@
 </div>
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-item-row.lc-5b5b4af8ad32c0466432c71ebfb1c727-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-item-row.lc-c91f6d0c964ba9748c1ceff940c961ea-lc.min.js"></script>
 
 
 </div>
@@ -3716,7 +3743,9 @@
         
     
 
-        Uncover insights with data collection, organization and analysis.
+        <div class="caem-tile__text">
+            Uncover insights with data collection, organization and analysis.
+        </div>
         
     
     <div>
@@ -3734,7 +3763,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View analytics tutorials
         </p>
 
@@ -3781,7 +3810,9 @@
         
     
 
-        Learn about an open source interpreted high-level programming language for general-purpose programming.
+        <div class="caem-tile__text">
+            Learn about an open source interpreted high-level programming language for general-purpose programming.
+        </div>
         
     
     <div>
@@ -3799,7 +3830,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View python tutorials
         </p>
 
@@ -3889,7 +3920,9 @@
         
     
 
-        Dive into models that can understand and generate natural language.
+        <div class="caem-tile__text">
+            Dive into models that can understand and generate natural language.
+        </div>
         
     
     
@@ -3903,7 +3936,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View LLM tutorials
         </p>
 
@@ -4226,7 +4259,9 @@
         
     
 
-        IBM TechXchange brings technologists and business practitioners who use IBM products together through local events, webinars and our online community, designed for deep technical learning, sharing and networking. 
+        <div class="caem-tile__text">
+            IBM TechXchange brings technologists and business practitioners who use IBM products together through local events, webinars and our online community, designed for deep technical learning, sharing and networking. 
+        </div>
         
     
     
@@ -4240,7 +4275,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Learn more
         </p>
 
@@ -4355,7 +4390,9 @@
         
     
 
-        Visiting 7 cities around the world, Think on Tour is helping local leaders scale AI for their businesses.
+        <div class="caem-tile__text">
+            Visiting 7 cities around the world, Think on Tour is helping local leaders scale AI for their businesses.
+        </div>
         
     
     
@@ -4369,7 +4406,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Learn more
         </p>
 
@@ -4625,7 +4662,9 @@
         
     
 
-        Hybrid by design: The great tech reset
+        <div class="caem-tile__text">
+            Hybrid by design: The great tech reset
+        </div>
         
     
     <div>
@@ -4643,7 +4682,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -4675,7 +4714,9 @@
         
     
 
-        2024 CIO, CTO, CDO Study
+        <div class="caem-tile__text">
+            2024 CIO, CTO, CDO Study
+        </div>
         
     
     <div>
@@ -4691,7 +4732,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -4738,7 +4779,9 @@
         
     
 
-        2024 CEO study
+        <div class="caem-tile__text">
+            2024 CEO study
+        </div>
         
     
     <div>
@@ -4754,7 +4797,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -4786,7 +4829,9 @@
         
     
 
-        Sustainability: Beyond Checking the Box
+        <div class="caem-tile__text">
+            Sustainability: Beyond Checking the Box
+        </div>
         
     
     <div>
@@ -4802,7 +4847,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Read now
         </p>
 
@@ -5064,7 +5109,9 @@
         
     
 
-        Become an expert on all security topics, from SOAR to MFA.
+        <div class="caem-tile__text">
+            Become an expert on all security topics, from SOAR to MFA.
+        </div>
         
     
     <div>
@@ -5080,7 +5127,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View all security explainers
         </p>
 
@@ -5127,7 +5174,9 @@
         
     
 
-        Learn about sustainability topics, from green computing to hydropower.
+        <div class="caem-tile__text">
+            Learn about sustainability topics, from green computing to hydropower.
+        </div>
         
     
     <div>
@@ -5143,7 +5192,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View all sustainability explainers
         </p>
 
@@ -5233,7 +5282,9 @@
         
     
 
-        From hybrid cloud to IaaS, learn about cloud fundamentals and emerging tech.
+        <div class="caem-tile__text">
+            From hybrid cloud to IaaS, learn about cloud fundamentals and emerging tech.
+        </div>
         
     
     
@@ -5247,7 +5298,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View all cloud explainers
         </p>
 
@@ -5752,7 +5803,9 @@
         
     
 
-        Uncover insights with data collection, organization and analysis.
+        <div class="caem-tile__text">
+            Uncover insights with data collection, organization and analysis.
+        </div>
         
     
     <div>
@@ -5770,7 +5823,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View analytics tutorials
         </p>
 
@@ -5817,7 +5870,9 @@
         
     
 
-        Learn about an open source interpreted high-level programming language for general-purpose programming.
+        <div class="caem-tile__text">
+            Learn about an open source interpreted high-level programming language for general-purpose programming.
+        </div>
         
     
     <div>
@@ -5835,7 +5890,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View python tutorials
         </p>
 
@@ -5925,7 +5980,9 @@
         
     
 
-        Dive into models that can understand and generate natural language.
+        <div class="caem-tile__text">
+            Dive into models that can understand and generate natural language.
+        </div>
         
     
     
@@ -5939,7 +5996,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             View LLM tutorials
         </p>
 
@@ -6265,7 +6322,9 @@
         
     
 
-        IBM TechXchange brings technologists and business practitioners who use IBM products together through local events, webinars and our online community, designed for deep technical learning, sharing and networking. 
+        <div class="caem-tile__text">
+            IBM TechXchange brings technologists and business practitioners who use IBM products together through local events, webinars and our online community, designed for deep technical learning, sharing and networking. 
+        </div>
         
     
     
@@ -6279,7 +6338,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Learn more
         </p>
 
@@ -6394,7 +6453,9 @@
         
     
 
-        Visiting 7 cities around the world, Think on Tour is helping local leaders scale AI for their businesses.
+        <div class="caem-tile__text">
+            Visiting 7 cities around the world, Think on Tour is helping local leaders scale AI for their businesses.
+        </div>
         
     
     
@@ -6408,7 +6469,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             Learn more
         </p>
 
@@ -6706,7 +6767,6 @@
     
 
 
-    <div id="mbox-relatedcontent">
       <caem-tile-group>
         
 
@@ -6728,21 +6788,21 @@
         
         
         
-        <c4d-image id="image-2131622790" alt="System administrator doing diagnostic tests on computer servers" slot="image" default-src="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xl.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image" class="">
+        <c4d-image id="image-2131622790" alt="System administrator doing diagnostic tests on computer servers" slot="image" default-src="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xl.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image" class="">
             
             
                 
                     
-    <c4d-image-item media="(min-width: 1312px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xl-retina.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(min-width: 1312px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xl.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(min-width: 1056px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-l-retina.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(min-width: 1056px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-l.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(min-width: 672px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-m-retina.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(min-width: 672px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-m.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(min-width: 481px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-s-retina.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(min-width: 481px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-s.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(max-width: 480px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xs-retina.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
-    <c4d-image-item media="(max-width: 480px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xs.ts=1743530756486.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 1312px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xl-retina.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 1312px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xl.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 1056px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-l-retina.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 1056px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-l.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 672px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-m-retina.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 672px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-m.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 481px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-s-retina.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(min-width: 481px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-s.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(max-width: 480px) and (min-resolution: 192dpi)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xs-retina.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
+    <c4d-image-item media="(max-width: 480px)" srcset="/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/ibs/ul/g/a7/93/9ef6062a-f3b8-4d6f-8166131002d6bf65.component.tile-card-xs.ts=1743545846735.jpg/content/adobe-cms/us/en/think/jcr:content/root/table_of_contents/tile_group_container_1733762068/container/tile_card_copy_437640641/image"></c4d-image-item>
     
     
     
@@ -6772,7 +6832,9 @@
         
     
 
-        6 ways mainframes are strategic assets
+        <div class="caem-tile__text">
+            6 ways mainframes are strategic assets
+        </div>
         
     
     
@@ -6786,7 +6848,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -6869,7 +6931,9 @@
         
     
 
-        What is technical debt?
+        <div class="caem-tile__text">
+            What is technical debt?
+        </div>
         
     
     
@@ -6883,7 +6947,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -6966,7 +7030,9 @@
         
     
 
-        Optimizing IT infrastructure with AI
+        <div class="caem-tile__text">
+            Optimizing IT infrastructure with AI
+        </div>
         
     
     
@@ -6980,7 +7046,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -7063,7 +7129,9 @@
         
     
 
-        How the Mayo Clinic’s AI medicine app helps in stroke prevention
+        <div class="caem-tile__text">
+            How the Mayo Clinic’s AI medicine app helps in stroke prevention
+        </div>
         
     
     
@@ -7077,7 +7145,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -7102,13 +7170,13 @@
 
 
       </caem-tile-group>
-    </div>
   </div>
 
 
 
-    
-    
+  
+    <script defer src="/etc.clientlibs/adobe-cms/components/content/organisms/tile-group/tile-group-container/clientlibs.lc-92a38a0479519d42cd16961ae5a4bd09-lc.min.js"></script>
+
 
 
 </div>
@@ -7360,7 +7428,6 @@
     
 
 
-    <div id="mbox-relatedcontent">
       <caem-tile-group>
         
 
@@ -7426,7 +7493,9 @@
         
     
 
-        Why identity threat detection and response matters
+        <div class="caem-tile__text">
+            Why identity threat detection and response matters
+        </div>
         
     
     
@@ -7440,7 +7509,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -7523,7 +7592,9 @@
         
     
 
-        FYSA - Adobe Cold Fusion Path Traversal Vulnerability
+        <div class="caem-tile__text">
+            FYSA - Adobe Cold Fusion Path Traversal Vulnerability
+        </div>
         
     
     
@@ -7537,7 +7608,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -7620,7 +7691,9 @@
         
     
 
-        How TikTok is reframing cybersecurity efforts
+        <div class="caem-tile__text">
+            How TikTok is reframing cybersecurity efforts
+        </div>
         
     
     
@@ -7634,7 +7707,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -7717,7 +7790,9 @@
         
     
 
-        What is Digital Identity?
+        <div class="caem-tile__text">
+            What is Digital Identity?
+        </div>
         
     
     
@@ -7731,7 +7806,7 @@
     
 
 
-        <p slot="cta">
+        <p slot="cta" class="caem-tile__link">
             
         </p>
 
@@ -7756,12 +7831,11 @@
 
 
       </caem-tile-group>
-    </div>
   </div>
 
 
 
-    
+  
     
 
 
@@ -8331,7 +8405,7 @@
 
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-block.lc-8835ef33101839c615be62fa4281c1d6-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-content-block.lc-12d3dc499fc1ebf562a21374eaa2f852-lc.min.js"></script>
 
 
 </div>
@@ -8472,7 +8546,7 @@
 
          
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-video-player.lc-d253db70d3eeb45a98cb12f7626b4a07-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-video-player.lc-0552ba865d92d7a51182216754e5614c-lc.min.js"></script>
 <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-video-player-container.lc-55363444860a24db3d70e267bce0f5c1-lc.min.js"></script>
 
 
@@ -9554,7 +9628,7 @@
 </c4d-table-of-contents>
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-table-of-contents.lc-600f481f87e333e46978e10708cf8e39-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-table-of-contents.lc-860ddb295f16a0fa6ab826bb0296e2a7-lc.min.js"></script>
 
 
 </div>
@@ -9567,7 +9641,7 @@
 
 
     
-    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-footer.lc-391d276f6abe4da8919d4d85a9f740af-lc.min.js"></script>
+    <script defer src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-footer.lc-0411b9cf48794cfd92732ef16834f968-lc.min.js"></script>
 
 </div>
 
@@ -9630,7 +9704,7 @@
 
     
     <script src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-base.lc-18f193433bf96d7320eee136848e463b-lc.min.js"></script>
-<script src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-idlStyles.lc-e2981208cb2390884a0f4396ace19a62-lc.min.js"></script>
+<script src="/etc.clientlibs/adobe-cms/clientlibs/clientlib-idlStyles.lc-b69564ddd3f744c61574694583659a04-lc.min.js"></script>
 <script src="/etc.clientlibs/adobe-cms/components/poc/ibm-image-dm/clientlibs/site.lc-96f41d35e09f648917c6d3f54d19b8c1-lc.min.js"></script>
 
 
@@ -10109,5 +10183,5 @@
     });
 </script>
 
-<script type="text/javascript"  src="/FU63uPmq/Ie8/so7/xWkH1tqHsa/NOf5zwtVh2bLJ7a3/HgAzLVlZ/Dw9/dTXBjSHY"></script><link rel="stylesheet" type="text/css"  href="/FU63uPmq/Ie8/so7/xWkH1tqHsa/0Sf55r/axkkLVlZ/Wl9/pdVB3Wy9Z"><script  src="/FU63uPmq/Ie8/so7/xWkH1tqHsa/0Sf55r/axkkLVlZ/TVY/YbkchOVwp" async defer></script><div id="sec-overlay" style="display:none;"><div id="sec-container"></div></div></body>
+<script type="text/javascript"  src="/lekHX/ZwEjm/Mg8GIm/DXo5/cu1thS6hkmXVwY/QFJ-eUU/PC/JkKyJJNyI"></script><link rel="stylesheet" type="text/css"  href="/lekHX/ZwEjm/Mg8GIm/DXo5/pS1t/LgVweUU/Tz/MEemF8MyJZ"><script  src="/lekHX/ZwEjm/Mg8GIm/DXo5/pS1t/LgVweUU/Qi/oyclgmEU8p" async defer></script><div id="sec-overlay" style="display:none;"><div id="sec-container"></div></div></body>
 </html>

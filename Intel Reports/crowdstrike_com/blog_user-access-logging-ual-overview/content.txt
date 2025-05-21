@@ -1,6 +1,6 @@
 
 <!DOCTYPE HTML>
-<html lang="en-US" hrefLang="en-US" data-wcmmode-disabled="true">
+<html lang="en-US" data-href-lang="en-US" data-wcmmode-disabled="true">
     <head>
     <meta charset="UTF-8"/>
     <title>How to Leverage User Access Logging for Forensic Investigations</title>
@@ -37,7 +37,7 @@
 <meta name="og:image" content="https://www.crowdstrike.com/content/dam/crowdstrike/www/en-us/wp/2021/06/Blog_1060x698-3-1.jpeg"/>
 <meta name="og:description" content="o help your investigations, this blog post provides an overview of UAL databases and offers examples of interpreting the treasure trove of data that they contain."/>
 <meta name="og:locale" content="en-US"/>
-<meta name="article:modified_time" content="2025-05-07T15:44:21"/>
+<meta name="article:modified_time" content="2025-05-20T21:15:02"/>
 <meta name="twitter:title" content="How to Leverage User Access Logging for Forensic Investigations"/>
 <meta name="twitter:description" content="o help your investigations, this blog post provides an overview of UAL databases and offers examples of interpreting the treasure trove of data that they contain."/>
 <meta name="twitter:image" content="https://www.crowdstrike.com/content/dam/crowdstrike/www/en-us/wp/2021/06/Blog_1060x698-3-1.jpeg"/>
@@ -161,7 +161,7 @@
             <input type="hidden" name="as_domain" value="addsearch.com"/>
         </div>
     
-  
+
         
         
             
@@ -1224,7 +1224,7 @@
 <p><span style="	font-weight: 400;
 ">UAL is a feature included by default in Server editions of Microsoft Windows, starting with Server 2012. As defined by </span><a href="https://docs.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server"><span style="	font-weight: 400;
 ">Microsoft</span></a><span style="	font-weight: 400;
-">, UAL is a feature that “logs unique client access requests, in the form of IP addresses and user names, of installed products and roles on the local server.”</span> <span style="	font-weight: 400;
+">, UAL is a feature that “logs unique client access requests, in the form of IP addresses and usernames, of installed products and roles on the local server.”</span> <span style="	font-weight: 400;
 ">This means that UAL records user access to various services running on a Windows Server. The access is logged to databases on disk that contain information on the type of service accessed, the user account that performed the access and the source IP address from which the access occurred. One key element of UAL is that each record is based on the combination of username, source IP and service accessed — so it’s naturally suited for identifying anomalous or rare access to a system.</span> <span style="	font-weight: 400;
 ">With default settings, this information is retained for up to three years. Naturally, this data can be extremely valuable in forensic investigations. Unfortunately, there’s a marked lack of awareness of this type of artifact in the digital forensic community. Many forensic solutions do not parse these databases, and therefore threat analysts could potentially miss data relevant to an investigation.</span></p>
 <h2><span style="	font-weight: 400;
@@ -1333,7 +1333,7 @@
 ">In this example, the account CORP\abcsvc accessed eight systems in rapid succession via SMB, coming from the IP address 10.20.52.40. Further, in each case the </span><b>TotalAccesses</b><span style="	font-weight: 400;
 "> value is 1, meaning this was the only time for the year that this account accessed each system via SMB from the source IP address.</span> <span style="	font-weight: 400;
 ">When combined with other indicators to pivot from, UAL analysis at scale can help drive the direction of the investigation. For example, if there is a known compromised user account, UAL analysis can quickly identify other (Server 2012&#43;) systems that the account accessed, by searching for records where the </span><b>AuthenticatedUserName</b><span style="	font-weight: 400;
-"> value matches the compromised user name.</span> <span style="	font-weight: 400;
+"> value matches the compromised username.</span> <span style="	font-weight: 400;
 ">Similarly, if there is a system that’s known to be compromised, analyzing UAL at scale can provide rapid insights into threat actor lateral movement activities. This can be accomplished by finding UAL entries where the </span><b>Address</b> <span style="	font-weight: 400;
 ">field matches the IP address of the compromised system. This can quickly provide an overview of which accounts a threat actor was using from the compromised server, as well as systems targeted for lateral movement. (Did we mention this data is retained for up to 3 years by default?)</span> <span style="	font-weight: 400;
 ">Armed with pivot points like these as a starting point, one can quickly glean critical insights from UAL data. Even without any other indicators to go on, it’s possible to spot anomalous activity by looking out for rare combinations of user, source IP address and RoleGuid via the </span><b>TotalAccesses</b> <span style="	font-weight: 400;

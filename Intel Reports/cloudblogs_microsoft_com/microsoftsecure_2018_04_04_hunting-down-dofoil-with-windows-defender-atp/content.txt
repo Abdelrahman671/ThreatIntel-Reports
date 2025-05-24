@@ -358,6 +358,17 @@ body.dark {
 	text-decoration: none !important;
 	cursor: default;
 }
+
+/* fix to hide author social links if none are set in profile */
+.author-overview__social-link:not([href]),
+.author-overview__social-link[href=""] {
+display: none !important;
+}
+
+/* fix separator not displaying */
+:root {
+--separator-width: 2px;
+}
 :root :where(p){font-size: var(--wp--preset--font-size--body-large);}
 :root :where(.wp-block-heading){margin-top: var(--wp--preset--spacing--xl);}
 :root :where(.wp-block-image){margin-top: var(--wp--preset--spacing--xl);margin-bottom: var(--wp--preset--spacing--xl);}

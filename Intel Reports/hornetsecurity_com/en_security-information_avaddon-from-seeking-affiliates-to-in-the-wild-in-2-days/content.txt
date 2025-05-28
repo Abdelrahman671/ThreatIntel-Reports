@@ -219,6 +219,110 @@ if('1' === '1') {
     f.parentNode.insertBefore(j, f);
     })(window, document, "script", "AW-971747734");
 }
+</script><script data-no-optimize="1" data-no-minify="1" data-cfasync="false" data-borlabs-cookie-script-blocker-ignore>
+	if ('0' === '1' && '1' === '1') {
+		window['gtag_enable_tcf_support'] = true;
+	}
+	window.dataLayer = window.dataLayer || [];
+	if (typeof gtag !== 'function') { function gtag(){dataLayer.push(arguments);} }
+	gtag('set', 'developer_id.dYjRjMm', true);
+	if ('1' === '1') {
+		let getCookieValue = function (name) {
+			return document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+		};
+		let cookieValue = getCookieValue('borlabs-cookie-gcs');
+		let consentsFromCookie = {};
+		if (cookieValue !== '') {
+			 consentsFromCookie = JSON.parse(decodeURIComponent(cookieValue));
+		}
+		let defaultValues = {
+			'ad_storage': 'denied',
+			'ad_user_data': 'denied',
+			'ad_personalization': 'denied',
+			'analytics_storage': 'denied',
+			'functionality_storage': 'denied',
+			'personalization_storage': 'denied',
+			'security_storage': 'denied',
+			'wait_for_update': 500,
+		};
+		gtag('consent', 'default', { ...defaultValues, ...consentsFromCookie });
+		gtag('set', 'ads_data_redaction', true);
+	}
+	
+	if('0' === '1') {
+		var url = new URL(window.location.href);
+				
+		if ((url.searchParams.has('gtm_debug') && url.searchParams.get('gtm_debug') !== '') || document.cookie.indexOf('__TAG_ASSISTANT=') !== -1 || document.documentElement.hasAttribute('data-tag-assistant-present')) {
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+"https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,"script","dataLayer","GTM-MNRF7M");
+		} else {
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+"https://www.hornetsecurity.com/app/uploads/borlabs-cookie/"+i+'.js?ver=5sfzr887';f.parentNode.insertBefore(j,f);
+})(window,document,"script","dataLayer","GTM-MNRF7M");
+		}
+  	}
+  	
+	(function () {
+		var borlabsCookieConsentChangeHandler = function () {
+			window.dataLayer = window.dataLayer || [];
+			if (typeof gtag !== 'function') { function gtag(){dataLayer.push(arguments);} }
+			
+			let gtmConsents = {};
+			if ('1' === '1') {
+				if ('0' === '1') {
+					gtmConsents = {
+						'analytics_storage': BorlabsCookie.Consents.hasAllServicesConsented('statistics') === true ? 'granted' : 'denied',
+						'functionality_storage': BorlabsCookie.Consents.hasAllServicesConsented('statistics') === true ? 'granted' : 'denied',
+						'personalization_storage': BorlabsCookie.Consents.hasAllServicesConsented('marketing') === true ? 'granted' : 'denied',
+						'security_storage': BorlabsCookie.Consents.hasAllServicesConsented('statistics') === true ? 'granted' : 'denied',
+					};
+				} else {
+					gtmConsents = {
+						'ad_storage': BorlabsCookie.Consents.hasAllServicesConsented('marketing') === true ? 'granted' : 'denied',
+						'ad_user_data': BorlabsCookie.Consents.hasAllServicesConsented('marketing') === true ? 'granted' : 'denied',
+						'ad_personalization': BorlabsCookie.Consents.hasAllServicesConsented('marketing') === true ? 'granted' : 'denied',
+						'analytics_storage': BorlabsCookie.Consents.hasAllServicesConsented('statistics') === true ? 'granted' : 'denied',
+						'functionality_storage': BorlabsCookie.Consents.hasAllServicesConsented('statistics') === true ? 'granted' : 'denied',
+						'personalization_storage': BorlabsCookie.Consents.hasAllServicesConsented('marketing') === true ? 'granted' : 'denied',
+						'security_storage': BorlabsCookie.Consents.hasAllServicesConsented('statistics') === true ? 'granted' : 'denied',
+					};
+				}
+				BorlabsCookie.CookieLibrary.setCookie(
+					'borlabs-cookie-gcs',
+				  	JSON.stringify(gtmConsents),
+					BorlabsCookie.Settings.automaticCookieDomainAndPath.value ? '' : BorlabsCookie.Settings.cookieDomain.value,
+					BorlabsCookie.Settings.cookiePath.value,
+					BorlabsCookie.Cookie.getPluginCookie().expires,
+					BorlabsCookie.Settings.cookieSecure.value,
+					BorlabsCookie.Settings.cookieSameSite.value
+				);
+				gtag('consent', 'update', gtmConsents);
+			}
+			
+			var consents = BorlabsCookie.Cookie.getPluginCookie().consents;
+			for (var serviceGroup in consents) {
+				for (var service of consents[serviceGroup]) {
+					if (!window.BorlabsCookieGtmPackageSentEvents.includes(service) && service !== 'borlabs-cookie') {
+						window.dataLayer.push({
+							event: 'borlabs-cookie-opt-in-'+service,
+						});
+						window.BorlabsCookieGtmPackageSentEvents.push(service);
+					}
+				}
+			}
+		  	var afterConsentsEvent = document.createEvent('Event');
+		    afterConsentsEvent.initEvent('borlabs-cookie-google-tag-manager-after-consents', true, true);
+		  	document.dispatchEvent(afterConsentsEvent);
+		};
+		window.BorlabsCookieGtmPackageSentEvents = [];
+		document.addEventListener('borlabs-cookie-consent-saved', borlabsCookieConsentChangeHandler);
+		document.addEventListener('borlabs-cookie-handle-unblock', borlabsCookieConsentChangeHandler);
+	})();
 </script><meta name="generator" content="image-prioritizer 1.0.0-beta2">
 <style id="uagb-style-conditional-extension">@media (min-width: 1025px){body .uag-hide-desktop.uagb-google-map__wrap,body .uag-hide-desktop{display:none !important}}@media (min-width: 768px) and (max-width: 1024px){body .uag-hide-tab.uagb-google-map__wrap,body .uag-hide-tab{display:none !important}}@media (max-width: 767px){body .uag-hide-mob.uagb-google-map__wrap,body .uag-hide-mob{display:none !important}}</style><style id="uagb-style-frontend-766">.uag-blocks-common-selector{z-index:var(--z-index-desktop) !important}@media (max-width: 976px){.uag-blocks-common-selector{z-index:var(--z-index-tablet) !important}}@media (max-width: 767px){.uag-blocks-common-selector{z-index:var(--z-index-mobile) !important}}
 </style></head>
@@ -605,57 +709,59 @@ if('1' === '1') {
 
             <div class="grid-columns grid-columns--max3">
             
-<article id="post-1263014" class="teaser post-1263014 post type-post status-publish format-standard has-post-thumbnail hentry category-threat-reports page_category-threat-reports">
+<article id="post-2585" class="teaser post-2585 post type-post status-publish format-standard has-post-thumbnail hentry category-podcast page_category-podcasts">
     <figure class="wp-block-image">
-        <a href="https://www.hornetsecurity.com/en/blog/emotet-botnet-takedown/" class="teaser__media">
+        <a href="https://www.hornetsecurity.com/en/blog/api-email-security-vs-dns-route-email-security/" class="teaser__media">
+            <img width="800" height="500" src="https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-webp.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Thumbnail : The Security Swarm Podcast" decoding="async" srcset="https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-webp.webp 800w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-320x200.webp 320w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-362x226.webp 362w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-768x480.webp 768w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-691x432.webp 691w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-240x150.webp 240w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-345x216.webp 345w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-48x30.webp 48w" sizes="(max-width: 800px) 100vw, 800px" />        </a>
+    </figure>
+    <div class="teaser__inner">
+        <h3 class="teaser__title"><a href="https://www.hornetsecurity.com/en/blog/api-email-security-vs-dns-route-email-security/">EP28: Differences Between DNS/Route-Based Email Security and Email Security via API</a></h3>
+        <div class="teaser__head">
+            <div class="teaser__info"><a href="https://www.hornetsecurity.com/en/blog/category/podcast/" rel="category tag">Podcast</a></div>
+            <div class="teaser__date">24 November 2023</div>        </div>
+                    <p>
+                Remember the days of DNS route-based email security? It's been a steadfast approach, but in&hellip;            </p>
+                <p class="readmore">
+            <a href="https://www.hornetsecurity.com/en/blog/api-email-security-vs-dns-route-email-security/">Read more</a>
+        </p>
+    </div>
+</article><!-- #post-2585 -->
+
+<article id="post-1261983" class="teaser post-1261983 post type-post status-publish format-standard has-post-thumbnail hentry category-threat-reports page_category-threat-reports">
+    <figure class="wp-block-image">
+        <a href="https://www.hornetsecurity.com/en/blog/ransomware-prices-pressure-and-protection/" class="teaser__media">
             <img width="800" height="500" src="https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-webp.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Blog Thumbnail : Threat Research" decoding="async" srcset="https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-webp.webp 800w, https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-320x200.webp 320w, https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-362x226.webp 362w, https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-768x480.webp 768w, https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-691x432.webp 691w, https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-240x150.webp 240w, https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-345x216.webp 345w, https://www.hornetsecurity.com/app/uploads/2024/05/thumb-threat-review-jpg-webp-48x30.webp 48w" sizes="(max-width: 800px) 100vw, 800px" />        </a>
     </figure>
     <div class="teaser__inner">
-        <h3 class="teaser__title"><a href="https://www.hornetsecurity.com/en/blog/emotet-botnet-takedown/">Emotet Botnet Takedown</a></h3>
+        <h3 class="teaser__title"><a href="https://www.hornetsecurity.com/en/blog/ransomware-prices-pressure-and-protection/">Ransomware: Prices, Pressure and Protection</a></h3>
         <div class="teaser__head">
             <div class="teaser__info"><a href="https://www.hornetsecurity.com/en/blog/category/threat-reports/" rel="category tag">Threat Reports</a></div>
-            <div class="teaser__date">28 January 2021</div>        </div>
+            <div class="teaser__date">19 April 2021</div>        </div>
+                    <p>
+                Ransomware is the simplest way to monetize computer intrusions. Ransomware is thus the single greatest&hellip;            </p>
                 <p class="readmore">
-            <a href="https://www.hornetsecurity.com/en/blog/emotet-botnet-takedown/">Read more</a>
+            <a href="https://www.hornetsecurity.com/en/blog/ransomware-prices-pressure-and-protection/">Read more</a>
         </p>
     </div>
-</article><!-- #post-1263014 -->
+</article><!-- #post-1261983 -->
 
-<article id="post-1283568" class="teaser post-1283568 post type-post status-publish format-standard has-post-thumbnail hentry category-podcast page_category-podcasts">
+<article id="post-1277625" class="teaser post-1277625 post type-post status-publish format-standard has-post-thumbnail hentry category-podcast page_category-podcasts">
     <figure class="wp-block-image">
-        <a href="https://www.hornetsecurity.com/en/blog/vendor-risk-insulation/" class="teaser__media">
+        <a href="https://www.hornetsecurity.com/en/blog/microsoft-security-saga-whistleblower-insights/" class="teaser__media">
             <img width="800" height="500" src="https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-webp.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Thumbnail : The Security Swarm Podcast" decoding="async" srcset="https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-webp.webp 800w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-320x200.webp 320w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-362x226.webp 362w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-768x480.webp 768w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-691x432.webp 691w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-240x150.webp 240w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-345x216.webp 345w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-48x30.webp 48w" sizes="(max-width: 800px) 100vw, 800px" />        </a>
     </figure>
     <div class="teaser__inner">
-        <h3 class="teaser__title"><a href="https://www.hornetsecurity.com/en/blog/vendor-risk-insulation/">How to Insulate your Business from Vendor Risk</a></h3>
+        <h3 class="teaser__title"><a href="https://www.hornetsecurity.com/en/blog/microsoft-security-saga-whistleblower-insights/">Microsoft’s Security Saga Continues: Insights from Whistleblower</a></h3>
         <div class="teaser__head">
             <div class="teaser__info"><a href="https://www.hornetsecurity.com/en/blog/category/podcast/" rel="category tag">Podcast</a></div>
-            <div class="teaser__date">09 August 2024</div>        </div>
+            <div class="teaser__date">22 July 2024</div>        </div>
                     <p>
-                This episode of the Security Swarm podcast features guest Eric Siron, a Microsoft MVP in&hellip;            </p>
+                In this episode, Andy sits down once again with Paul to continue their conversation about&hellip;            </p>
                 <p class="readmore">
-            <a href="https://www.hornetsecurity.com/en/blog/vendor-risk-insulation/">Read more</a>
+            <a href="https://www.hornetsecurity.com/en/blog/microsoft-security-saga-whistleblower-insights/">Read more</a>
         </p>
     </div>
-</article><!-- #post-1283568 -->
-
-<article id="post-2617" class="teaser post-2617 post type-post status-publish format-standard has-post-thumbnail hentry category-podcast page_category-podcasts">
-    <figure class="wp-block-image">
-        <a href="https://www.hornetsecurity.com/en/blog/tech-news-cyber-security/" class="teaser__media">
-            <img width="800" height="500" src="https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-webp.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Thumbnail : The Security Swarm Podcast" decoding="async" srcset="https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-webp.webp 800w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-320x200.webp 320w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-362x226.webp 362w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-768x480.webp 768w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-691x432.webp 691w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-240x150.webp 240w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-345x216.webp 345w, https://www.hornetsecurity.com/app/uploads/2023/04/The-Security-Swarm-Podcast-jpg-webp-48x30.webp 48w" sizes="(max-width: 800px) 100vw, 800px" />        </a>
-    </figure>
-    <div class="teaser__inner">
-        <h3 class="teaser__title"><a href="https://www.hornetsecurity.com/en/blog/tech-news-cyber-security/">EP02: How Tech Pros Handle Security News</a></h3>
-        <div class="teaser__head">
-            <div class="teaser__info"><a href="https://www.hornetsecurity.com/en/blog/category/podcast/" rel="category tag">Podcast</a></div>
-            <div class="teaser__date">26 April 2023</div>        </div>
-                    <p>
-                Welcome back for another episode of the Security Swarm Podcast, the podcast that brings you&hellip;            </p>
-                <p class="readmore">
-            <a href="https://www.hornetsecurity.com/en/blog/tech-news-cyber-security/">Read more</a>
-        </p>
-    </div>
-</article><!-- #post-2617 -->
+</article><!-- #post-1277625 -->
             </div>
         </div>
     </section>
@@ -721,7 +827,7 @@ if('1' === '1') {
 <script type="speculationrules">
 {"prerender":[{"source":"document","where":{"and":[{"href_matches":"\/en\/*"},{"not":{"href_matches":["\/wp\/wp-*.php","\/wp\/wp-admin\/*","\/app\/uploads\/*","\/app\/*","\/app\/plugins\/*","\/app\/themes\/vdclassic\/*","\/en\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prerender, .no-prerender a"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"moderate"}]}
 </script>
-<script type="module" src="https://www.hornetsecurity.com/app/plugins/borlabs-cookie/assets/javascript/borlabs-cookie-prioritize.min.js?ver=3.3.8-319" id="borlabs-cookie-prioritize-js-module" data-cfasync="false" data-no-minify="1" data-no-optimize="1"></script>
+<script type="module" src="https://www.hornetsecurity.com/app/plugins/borlabs-cookie/assets/javascript/borlabs-cookie-prioritize.min.js?ver=3.3.8-322" id="borlabs-cookie-prioritize-js-module" data-cfasync="false" data-no-minify="1" data-no-optimize="1"></script>
 <script type="module" src="https://www.hornetsecurity.com/app/plugins/borlabs-cookie/assets/javascript/borlabs-cookie.min.js?ver=3.3.8" id="borlabs-cookie-core-js-module" data-cfasync="false" data-no-minify="1" data-no-optimize="1"></script>
 <!--googleoff: all--><div data-nosnippet data-borlabs-cookie-consent-required='true' id='BorlabsCookieBox'></div><div id='BorlabsCookieWidget' class='brlbs-cmpnt-container'></div><!--googleon: all--><!-- Start of Async HubSpot Analytics Code -->
 <script type="text/javascript">
@@ -749,8 +855,8 @@ wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
 <script defer='defer' src="https://www.hornetsecurity.com/app/plugins/gravityforms/js/placeholders.jquery.min.js?ver=1748011521" id="gform_placeholder-js"></script>
 <script defer='defer' src="https://www.hornetsecurity.com/app/plugins/gravityforms/assets/js/dist/vendor-theme.min.js?ver=1748011521" id="gform_gravityforms_theme_vendors-js"></script>
 <script id="gform_gravityforms_theme-js-extra">
-var gform_theme_config = {"common":{"form":{"honeypot":{"version_hash":"1f9043e3262a0b01a10b5d61614988cb"},"ajax":{"ajaxurl":"https:\/\/www.hornetsecurity.com\/wp\/wp-admin\/admin-ajax.php","ajax_submission_nonce":"a8944b5e86","i18n":{"step_announcement":"Step %1$s of %2$s, %3$s","unknown_error":"There was an unknown error processing your request. Please try again."}}}},"hmr_dev":"","public_path":"https:\/\/www.hornetsecurity.com\/app\/plugins\/gravityforms\/assets\/js\/dist\/","config_nonce":"e1371204b4"};
-var gform_theme_config = {"common":{"form":{"honeypot":{"version_hash":"1f9043e3262a0b01a10b5d61614988cb"},"ajax":{"ajaxurl":"https:\/\/www.hornetsecurity.com\/wp\/wp-admin\/admin-ajax.php","ajax_submission_nonce":"a8944b5e86","i18n":{"step_announcement":"Step %1$s of %2$s, %3$s","unknown_error":"There was an unknown error processing your request. Please try again."}}}},"hmr_dev":"","public_path":"https:\/\/www.hornetsecurity.com\/app\/plugins\/gravityforms\/assets\/js\/dist\/","config_nonce":"e1371204b4"};
+var gform_theme_config = {"common":{"form":{"honeypot":{"version_hash":"1f9043e3262a0b01a10b5d61614988cb"},"ajax":{"ajaxurl":"https:\/\/www.hornetsecurity.com\/wp\/wp-admin\/admin-ajax.php","ajax_submission_nonce":"32b99cb4e9","i18n":{"step_announcement":"Step %1$s of %2$s, %3$s","unknown_error":"There was an unknown error processing your request. Please try again."}}}},"hmr_dev":"","public_path":"https:\/\/www.hornetsecurity.com\/app\/plugins\/gravityforms\/assets\/js\/dist\/","config_nonce":"871feed3fc"};
+var gform_theme_config = {"common":{"form":{"honeypot":{"version_hash":"1f9043e3262a0b01a10b5d61614988cb"},"ajax":{"ajaxurl":"https:\/\/www.hornetsecurity.com\/wp\/wp-admin\/admin-ajax.php","ajax_submission_nonce":"32b99cb4e9","i18n":{"step_announcement":"Step %1$s of %2$s, %3$s","unknown_error":"There was an unknown error processing your request. Please try again."}}}},"hmr_dev":"","public_path":"https:\/\/www.hornetsecurity.com\/app\/plugins\/gravityforms\/assets\/js\/dist\/","config_nonce":"871feed3fc"};
 </script>
 <script defer='defer' src="https://www.hornetsecurity.com/app/plugins/gravityforms/assets/js/dist/scripts-theme.min.js?ver=1748011521" id="gform_gravityforms_theme-js"></script>
 

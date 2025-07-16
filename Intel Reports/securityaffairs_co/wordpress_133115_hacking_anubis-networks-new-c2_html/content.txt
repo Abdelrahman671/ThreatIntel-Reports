@@ -50,7 +50,7 @@
 <link rel="alternate" type="application/rss+xml" title="Security Affairs &raquo; Anubis Networks is back with new C2 server Comments Feed" href="https://securityaffairs.com/133115/hacking/anubis-networks-new-c2.html/feed" />
 <script type="text/javascript">
 /* <![CDATA[ */
-window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.1.0\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/securityaffairs.com\/wp-includes\/js\/wp-emoji.js?ver=5498e0a2bc92f039064553741ec81ae7","twemoji":"https:\/\/securityaffairs.com\/wp-includes\/js\/twemoji.js?ver=5498e0a2bc92f039064553741ec81ae7"}};
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/securityaffairs.com\/wp-includes\/js\/wp-emoji.js?ver=038833f7c03cf3d94453c4b4a31f5938","twemoji":"https:\/\/securityaffairs.com\/wp-includes\/js\/twemoji.js?ver=038833f7c03cf3d94453c4b4a31f5938"}};
 /**
  * @output wp-includes/js/wp-emoji-loader.js
  */
@@ -170,6 +170,11 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 	/**
 	 * Checks if two sets of Emoji characters render the same visually.
 	 *
+	 * This is used to determine if the browser is rendering an emoji with multiple data points
+	 * correctly. set1 is the emoji in the correct form, using a zero-width joiner. set2 is the emoji
+	 * in the incorrect form, using a zero-width space. If the two sets render the same, then the browser
+	 * does not support the emoji correctly.
+	 *
 	 * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
 	 * scope. Everything must be passed by parameters.
 	 *
@@ -214,6 +219,42 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 	}
 
 	/**
+	 * Checks if the center point of a single emoji is empty.
+	 *
+	 * This is used to determine if the browser is rendering an emoji with a single data point
+	 * correctly. The center point of an incorrectly rendered emoji will be empty. A correctly
+	 * rendered emoji will have a non-zero value at the center point.
+	 *
+	 * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+	 * scope. Everything must be passed by parameters.
+	 *
+	 * @since 6.8.2
+	 *
+	 * @private
+	 *
+	 * @param {CanvasRenderingContext2D} context 2D Context.
+	 * @param {string} emoji Emoji to test.
+	 *
+	 * @return {boolean} True if the center point is empty.
+	 */
+	function emojiRendersEmptyCenterPoint( context, emoji ) {
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, context.canvas.width, context.canvas.height );
+		context.fillText( emoji, 0, 0 );
+
+		// Test if the center point (16, 16) is empty (0,0,0,0).
+		var centerPoint = context.getImageData(16, 16, 1, 1);
+		for ( var i = 0; i < centerPoint.data.length; i++ ) {
+			if ( centerPoint.data[ i ] !== 0 ) {
+				// Stop checking the moment it's known not to be empty.
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Determines if the browser properly renders Emoji that Twemoji can supplement.
 	 *
 	 * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
@@ -226,10 +267,11 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 	 * @param {CanvasRenderingContext2D} context 2D Context.
 	 * @param {string} type Whether to test for support of "flag" or "emoji".
 	 * @param {Function} emojiSetsRenderIdentically Reference to emojiSetsRenderIdentically function, needed due to minification.
+	 * @param {Function} emojiRendersEmptyCenterPoint Reference to emojiRendersEmptyCenterPoint function, needed due to minification.
 	 *
 	 * @return {boolean} True if the browser can render emoji, false if it cannot.
 	 */
-	function browserSupportsEmoji( context, type, emojiSetsRenderIdentically ) {
+	function browserSupportsEmoji( context, type, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint ) {
 		var isIdentical;
 
 		switch ( type ) {
@@ -251,16 +293,16 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 				}
 
 				/*
-				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * Test for Sark flag compatibility. This is the least supported of the letter locale flags,
 				 * so gives us an easy test for full support.
 				 *
 				 * To test for support, we try to render it, and compare the rendering to how it would look if
-				 * the browser doesn't render it correctly ([U] + [N]).
+				 * the browser doesn't render it correctly ([C] + [Q]).
 				 */
 				isIdentical = emojiSetsRenderIdentically(
 					context,
-					'\uD83C\uDDFA\uD83C\uDDF3', // as the sequence of two code points
-					'\uD83C\uDDFA\u200B\uD83C\uDDF3' // as the two code points separated by a zero-width space
+					'\uD83C\uDDE8\uD83C\uDDF6', // as the sequence of two code points
+					'\uD83C\uDDE8\u200B\uD83C\uDDF6' // as the two code points separated by a zero-width space
 				);
 
 				if ( isIdentical ) {
@@ -285,31 +327,21 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 				return ! isIdentical;
 			case 'emoji':
 				/*
-				 * Rise Like a Phoenix.
+				 * Does Emoji 16.0 cause the browser to go splat?
 				 *
-				 * To test for Emoji 15.1 support, try to render a new emoji: Phoenix.
+				 * To test for Emoji 16.0 support, try to render a new emoji: Splatter.
 				 *
-				 * A phoenix, a mythical immortal bird with flame-like feathers found in the folklore of many global
-				 * cultures. Often used to symbolize renewal or rebirth.
+				 * The splatter emoji is a single code point emoji. Testing for browser support
+				 * required testing the center point of the emoji to see if it is empty.
 				 *
-				 * The Phoenix emoji is a ZWJ sequence combining 🐦 Bird, Zero Width Joiner and 🔥 Fire.
-				 * These display as a single emoji on supported platforms.
+				 * 0xD83E 0xDEDF (\uD83E\uDEDF) == 🫟 Splatter.
 				 *
-				 * 0xD83D 0xDC26 (\uD83D\uDC26) == 🐦 Bird
-				 * 0x200D                       == Zero-Width Joiner (ZWJ) that links the code points for the new emoji or
-				 * 0x200B                       == Zero-Width Space (ZWS) that is rendered for clients not supporting the new emoji.
-				 * 0xD83D 0xDD25 (\uD83D\uDD25) == 🔥 Fire
-				 *
-				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
-				 * sequence come from older emoji standards.
+				 * When updating this test, please ensure that the emoji is either a single code point
+				 * or switch to using the emojiSetsRenderIdentically function and testing with a zero-width
+				 * joiner vs a zero-width space.
 				 */
-				isIdentical = emojiSetsRenderIdentically(
-					context,
-					'\uD83D\uDC26\u200D\uD83D\uDD25', // as the zero-width joiner sequence
-					'\uD83D\uDC26\u200B\uD83D\uDD25' // separated by a zero-width space
-				);
-
-				return ! isIdentical;
+				var notSupported = emojiRendersEmptyCenterPoint( context, '\uD83E\uDEDF' );
+				return ! notSupported;
 		}
 
 		return false;
@@ -328,10 +360,11 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 	 * @param {string[]} tests Tests.
 	 * @param {Function} browserSupportsEmoji Reference to browserSupportsEmoji function, needed due to minification.
 	 * @param {Function} emojiSetsRenderIdentically Reference to emojiSetsRenderIdentically function, needed due to minification.
+	 * @param {Function} emojiRendersEmptyCenterPoint Reference to emojiRendersEmptyCenterPoint function, needed due to minification.
 	 *
 	 * @return {SupportTests} Support tests.
 	 */
-	function testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically ) {
+	function testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint ) {
 		var canvas;
 		if (
 			typeof WorkerGlobalScope !== 'undefined' &&
@@ -354,7 +387,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 
 		var supports = {};
 		tests.forEach( function ( test ) {
-			supports[ test ] = browserSupportsEmoji( context, test, emojiSetsRenderIdentically );
+			supports[ test ] = browserSupportsEmoji( context, test, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint );
 		} );
 		return supports;
 	}
@@ -407,7 +440,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 					[
 						JSON.stringify( tests ),
 						browserSupportsEmoji.toString(),
-						emojiSetsRenderIdentically.toString()
+						emojiSetsRenderIdentically.toString(),
+						emojiRendersEmptyCenterPoint.toString()
 					].join( ',' ) +
 					'));';
 				var blob = new Blob( [ workerScript ], {
@@ -424,7 +458,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 			} catch ( e ) {}
 		}
 
-		supportTests = testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically );
+		supportTests = testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint );
 		setSessionSupportTests( supportTests );
 		resolve( supportTests );
 	} )
@@ -521,7 +555,7 @@ window.advanced_ads_ready_queue = window.advanced_ads_ready_queue || [];
 		padding: 0 !important;
 	}
 </style>
-<link rel='stylesheet' id='wp-block-library-css' href='https://c0.wp.com/c/6.8.1/wp-includes/css/dist/block-library/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://c0.wp.com/c/6.8.2/wp-includes/css/dist/block-library/style.css' type='text/css' media='all' />
 <style id='wp-block-library-theme-inline-css' type='text/css'>
 .wp-block-audio :where(figcaption){
   color:#555;
@@ -714,8 +748,8 @@ window.advanced_ads_ready_queue = window.advanced_ads_ready_queue || [];
 }
 
 </style>
-<link rel='stylesheet' id='mediaelement-css' href='https://c0.wp.com/c/6.8.1/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wp-mediaelement-css' href='https://c0.wp.com/c/6.8.1/wp-includes/js/mediaelement/wp-mediaelement.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mediaelement-css' href='https://c0.wp.com/c/6.8.2/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://c0.wp.com/c/6.8.2/wp-includes/js/mediaelement/wp-mediaelement.css' type='text/css' media='all' />
 <style id='jetpack-sharing-buttons-style-inline-css' type='text/css'>
 .jetpack-sharing-buttons__services-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:0;list-style-type:none;margin:5px;padding:0}.jetpack-sharing-buttons__services-list.has-small-icon-size{font-size:12px}.jetpack-sharing-buttons__services-list.has-normal-icon-size{font-size:16px}.jetpack-sharing-buttons__services-list.has-large-icon-size{font-size:24px}.jetpack-sharing-buttons__services-list.has-huge-icon-size{font-size:36px}@media print{.jetpack-sharing-buttons__services-list{display:none!important}}.editor-styles-wrapper .wp-block-jetpack-sharing-buttons{gap:0;padding-inline-start:0}ul.jetpack-sharing-buttons__services-list.has-background{padding:1.25em 2.375em}
 </style>
@@ -737,8 +771,8 @@ window.advanced_ads_ready_queue = window.advanced_ads_ready_queue || [];
 <link rel='stylesheet' id='security-affairs-bootstrap-timepicker-style-css' href='https://securityaffairs.com/wp-content/themes/security_affairs/css/bootstrap-datetimepicker.min.css?ver=1.0.0' type='text/css' media='all' />
 <link rel='stylesheet' id='security-affairs-main-style-css' href='https://securityaffairs.com/wp-content/themes/security_affairs/css/style.css?ver=1.0.0' type='text/css' media='all' />
 <link rel='stylesheet' id='security-affairs-slick-style-css' href='https://securityaffairs.com/wp-content/themes/security_affairs/slick/slick.css?ver=1.0.0' type='text/css' media='all' />
-<script type="text/javascript" src="https://c0.wp.com/c/6.8.1/wp-includes/js/jquery/jquery.js" id="jquery-core-js"></script>
-<script type="text/javascript" src="https://c0.wp.com/c/6.8.1/wp-includes/js/jquery/jquery-migrate.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/jquery.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/jquery-migrate.js" id="jquery-migrate-js"></script>
 <script type="text/javascript" id="cookie-law-info-js-extra">
 /* <![CDATA[ */
 var Cli_Data = {"nn_cookie_ids":[],"cookielist":[],"non_necessary_cookies":[],"ccpaEnabled":"","ccpaRegionBased":"","ccpaBarEnabled":"","strictlyEnabled":["necessary","obligatoire"],"ccpaType":"gdpr","js_blocking":"","custom_integration":"","triggerDomRefresh":"","secure_cookies":""};
@@ -856,6 +890,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                <a href="https://securityaffairs.com/must-read/"> <div class="btn">MUST READ</div> </a>
                 <div class="text-slider-wrap">
                     <marquee width="100%" direction="left" height="" scrollamount="3">
+                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179978/hacking/u-s-cisa-adds-wing-ftp-server-flaw-to-its-known-exploited-vulnerabilities-catalog.html">U.S. CISA adds Wing FTP Server flaw to its Known Exploited Vulnerabilities catalog<gwmw style="display:none;"></gwmw></a></p>
+                        <span>&nbsp;|&nbsp;</span>
+                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179969/malware/android-malware-konfety-evolves-with-zip-manipulation-and-dynamic-loading.html">Android Malware Konfety evolves with ZIP manipulation and dynamic loading</a></p>
+                        <span>&nbsp;|&nbsp;</span>
+                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179958/data-breach/belk-hit-by-may-cyberattack-dragonforce-stole-150gb-of-data.html">Belk hit by May cyberattack: DragonForce stole 150GB of data</a></p>
+                        <span>&nbsp;|&nbsp;</span>
+                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179950/hacking/north-korea-linked-actors-spread-xorindex-malware-via-67-malicious-npm-packages.html">North Korea-linked actors spread XORIndex malware via 67 malicious npm packages</a></p>
+                        <span>&nbsp;|&nbsp;</span>
+                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179925/cyber-crime/fbi-seized-multiple-piracy-sites-distributing-pirated-video-games.html">FBI seized multiple piracy sites distributing pirated video games</a></p>
+                        <span>&nbsp;|&nbsp;</span>
                                             <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179940/hacking/an-attacker-using-a-500-radio-setup-could-potentially-trigger-train-brake-failures-or-derailments-from-a-distance.html">An attacker using a $500 radio setup could potentially trigger train brake failures or derailments from a distance</a></p>
                         <span>&nbsp;|&nbsp;</span>
                                             <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179919/cyber-crime/interlock-ransomware-group-deploys-new-php-based-rat-via-filefix.html">Interlock ransomware group deploys new PHP-based RAT via FileFix</a></p>
@@ -885,16 +929,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                             <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179789/hacking/perfektblue-bluetooth-attack-allows-hacking-infotainment-systems-of-mercedes-volkswagen-and-skoda.html">PerfektBlue Bluetooth attack allows hacking infotainment systems of Mercedes, Volkswagen, and Skoda</a></p>
                         <span>&nbsp;|&nbsp;</span>
                                             <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179782/data-breach/qantas-data-breach-impacted-5-7-million-individuals.html">Qantas data breach impacted 5.7 million individuals</a></p>
-                        <span>&nbsp;|&nbsp;</span>
-                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179774/apt/donot-apt-is-expanding-scope-targeting-european-foreign-ministries.html">DoNot APT is expanding scope targeting European foreign ministries</a></p>
-                        <span>&nbsp;|&nbsp;</span>
-                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179766/data-breach/nippon-steel-solutions-data-breach.html">Nippon Steel Solutions suffered a data breach following a zero-day attack</a></p>
-                        <span>&nbsp;|&nbsp;</span>
-                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179754/malware/iranian-group-pay2key-i2p-ramps-up-ransomware-attacks-against-israel-and-us-with-incentives-for-affiliates.html">Iranian group Pay2Key.I2P ramps Up ransomware attacks against Israel and US with incentives for affiliates</a></p>
-                        <span>&nbsp;|&nbsp;</span>
-                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179745/malware/hackers-weaponize-shellter-red-teaming-tool-to-spread-infostealers.html">Hackers weaponize Shellter red teaming tool to spread infostealers</a></p>
-                        <span>&nbsp;|&nbsp;</span>
-                                            <p style="display: inline-block;" class="mb-0"><a href="https://securityaffairs.com/179738/security/microsoft-patch-tuesday-security-updates-for-july-2025-fixed-a-zero-day.html">Microsoft Patch Tuesday security updates for July 2025 fixed a zero-day</a></p>
                         <span>&nbsp;|&nbsp;</span>
                                         </marquee>
                 </div>
@@ -1155,7 +1189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-<ul class="wp-block-list"><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bcddd8d1d5d2fcddd2c9ded5cfd2d9c8cbd3ced792dfd3d1">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3d2dedad4dcc2c6d2c7c1dcf3d2ddc6d1dac0ddd6c7c4dcc1d89dd0dcde">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8beae6e2ece4f9fef8e3eacbeae5fee9e2f8e5eefffce4f9e0a5e8e4e6a5e9f9">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd9c90949a928a8e9e94939e928fbd9c93889f948e9398898a928f96d39e9290">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e485898d838b9397808b8d97a4858a91868d978a8190938b968fca878b89ca8696">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f0e02060800181c1a022f0e011a0d061c010a1b18001d04410c0002410d1d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b5a554e5952487b5a554e595248555e4f4c54495015585456">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f69786849398929f8cb6979883949f859893828199849dd8989382">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38299998c96998e8291999688a3828d96818a908d8697948c9188cd8d8697">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdafaca3b7a8a4bfa28daca3b8afa4bea3a8b9baa2bfa6e3a3a8b9">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107271647d717e50717e657279637e7564677f627b3e737f7d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb9b2b8aebfb49bbab5aeb9b2a8b5beafacb4a9b0f5b8b4b6">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f3d3638351f3e312a3d362c313a2b28302d3471313a2b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5e7cefae1c0c9c4d6e5c4cbd0c7ccd6cbc0d1d2cad7ce8bc6cac8">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d1f081e1508191c3d1c13081f140e1318090a120f1653131809">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="284b4d414e4e494c475a68464d5c5f475a4349465d4a415b0647464441464d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb8f8286829f9982ab8a859e898298858e9f9c849980c5888486">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7b3bc97b6b9a2b5bea4b9b2a3a0b8a5bcf9b4b8ba">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9df8f1ddfcf3e8fff4eef3f8e9eaf2eff6b3fef2f0">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f5a534f5e5d53564b507f5e514a5d564c515a4b48504d5411515a4b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a6f797e786b6462654a6b647f686379646f7e7d6578612465646f">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aec8cbd4c1c0eecfc0dbccc7ddc0cbdad9c1dcc580cdc1c3">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781e0a170b0c3819160d1a110b161d0c0f170a13561b1715">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0b6a5b7b9a4b9a6bf90beb5a4a7bfa2bbfeb3bfbdfeb2a2">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b6c7962656c644b6a657e696278656e7f7c64796025656e7f">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ece6e0c5e4ebf0e7ecf6ebe0f1f2eaf7eeabe6eae8">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="117b6374786251707f647378627f7465667e637a3f727e7c">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f657a6166624f6e617a6d667c616a7b78607d64216c6062">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="325953465346535e72535c47505b415c5746455d40591c515d5f">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cca7a5a2abab8cada2b9aea5bfa2a9b8bba3bea7e2afa3a1">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563d3a33343f383e3916373823343f253833222139243d7835393b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1aaafa0a3bba5a681a0afb4a3a8b2afa4b5b6aeb3aaefa2aeac">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3559575a5a4c75545b40575c465b5041425a475e1b565a58">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe929b9898849b8c9fbe9f908b9c978d909b8a89918c95d09d9193d09c8c">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4c8cbc6cdcacccbe4c5cad1c6cdd7cac1d0d3cbd6cf8acac1d0">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d11120f19163d1c13081f140e1318090a120f16531e1210">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107d7177717f50717e657279637e7564677f627b3e737f7d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b464a475c4a594e6b4a455e494258454e5f5c44594005484446">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d101c13190f1c16183d1c13081f140e1318090a120f16531e1210">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f39e928b879681b3929d86919a809d9687849c8198dd9c9d96">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620f0b10100d1022030c17000b110c0716150d10094c010d0f">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4924220928273c2b203a272c3d3e263b22672a2624">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7d9d2c3d8c3d6f7d6d9c2d5dec4d9d2c3c0d8c5dc99d4d8da">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6c8cfd0c3ca95e6c7c8d3c4cfd5c8c3d2d1c9d4cd88c5c9cb">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6b9a6b3a4b7b2b9a496b7b8a3b4bfa5b8b3a2a1b9a4bdf8b5b9bb">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1a1b0a1bebabe91bfb4a5a6bea3bab0bfa4b3b8a2ffbebfbdb8bfb4">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="32425e53415f5372535c47505b415c5746455d40591c515d5f">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f686999d93b6979883949f859893828199849dd895999b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e2e2e2e2e1e3f302b3c372d303b2a29312c35703d3133703c2c">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f8888888889db899968d9a918b969d8c8f978a93d69b9795">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bebe9f4fdfee8e8f4e9dbfaf5eef9f2e8f5feefecf4e9f0b5f8f4f6b5f9e9">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="265416445355521666474853444f554843525149544d0845494b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1d3c4c5c8d3e1d3c4c5c8d38fc2cecc">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deacbba7b0bfb09ebfb0abbcb7adb0bbaaa9b1acb5f0bdb1b3f0bcac">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f1d060c0e1d060e2f0e011a0d061c010a1b18001d04410c0002">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f3eac1e0eff4e3e8f2efe4f5f6eef3eaafe2eeec">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9bba6adbba0aebcacba89a8a7bcaba0baa7acbdbea6bba2e7a7acbd">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8efcfbfde6efeae1fcceefe0fbece7fde0ebfaf9e1fce5a0ede1e3">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="275552544f464348555567464952454e544942535048554c0944484a">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="166577607f796456777863747f657873626179647d3875797b387464">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="790a1118163918170c1b100a171c0d0e160b12571a1614571b0b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb98809e8787ab8a859e898298858e9f9c849980c5888486">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37445c425b5b5b77565942555e445952434058455c1954585a">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b585f4e4a475f436b4a455e494258454e5f5c44594005484446">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f98a8d9c98958d91b998978c9b908a979c8d8e968b92d7979c8d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdbeb8a7a28daca3b8afa4bea3a8b9baa2bfa6e3a3a8b9">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c2835333f2e352f1c3d32293e352f3239282b332e37723f3331">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e0a0c1f151710113e1f100b1c170d101b0a09110c15501d1113">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="641016050f1724050a11060d170a0110130b160f4a070b09">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4335262f2b2c272a202803222d36212a302d2637342c31286d2d2637">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f98e909595b998978c97908a979c8d8e968b92d79a9694">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe898dbe9f908b9c978d909b8a89918c95d09d9193d09c8c">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7a0aeadb0b8be97b6b9a2b5bea4b9b2a3a0b8a5bcf9b9b2a3">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb93db998cab8a859e898298858e9f9c849980c5888486">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c647572647d5c7d72697e756f7279686b736e77327f7371">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="255f40505665444b50474c564b4051524a574e0b4b4051">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="037966796a6d6b6c43626d76616a706d6677746c71682d606c6e">[email&#160;protected]</a></li></ul>
+<ul class="wp-block-list"><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="355451585c5b75545b40575c465b5041425a475e1b565a58">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f0919d99979f81859184829fb0919e859299839e9584879f829bde939f9d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="accdc1c5cbc3ded9dfc4cdeccdc2d9cec5dfc2c9d8dbc3dec782cfc3c182cede">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8d9d5d1dfd7cfcbdbd1d6dbd7caf8d9d6cddad1cbd6ddcccfd7cad396dbd7d5">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="791814101e160e0a1d16100a3918170c1b100a171c0d0e160b12571a1614571b0b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13727e7a747c6460667e53727d66717a607d7667647c61783d707c7e3d7161">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="caaba4bfa8a3b98aaba4bfa8a3b9a4afbebda5b8a1e4a9a5a7">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9e8f8d9a919b9685bf9e918a9d968c919a8b88908d94d1919a8b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5c4dfdfcad0dfc8c4d7dfd0cee5c4cbd0c7ccd6cbc0d1d2cad7ce8bcbc0d1">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0163606f7b6468736e41606f746368726f6475766e736a2f6f6475">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccaeadb8a1ada28cada2b9aea5bfa2a9b8bba3bea7e2afa3a1">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4c2e252f3928230c2d22392e253f2229383b233e27622f2321">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6c6769644e6f607b6c677d606b7a79617c6520606b7a">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="16547d4952737a776556777863747f657873626179647d3875797b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630116000b16070223020d16010a100d0617140c11084d0d0617">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1f19151a1a1d18130e3c1219080b130e171d12091e150f52131210151219">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="caaea3a7a3beb8a38aaba4bfa8a3b9a4afbebda5b8a1e4a9a5a7">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd9996bd9c93889f948e9398898a928f96d39e9290">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c19103c1d12091e150f1219080b130e17521f1311">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543138243536383d203b14353a21363d273a3120233b263f7a3a3120">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92f7e1e6e0f3fcfafdd2f3fce7f0fbe1fcf7e6e5fde0f9bcfdfcf7">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3452514e5b5a74555a41565d475a5140435b465f1a575b59">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afc9ddc0dcdbefcec1dacdc6dcc1cadbd8c0ddc481ccc0c2">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82e4f7e5ebf6ebf4edc2ece7f6f5edf0e9ace1edeface0f0">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bcdbced5d2dbd3fcddd2c9ded5cfd2d9c8cbd3ced792d2d9c8">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="48212b2d0829263d2a213b262d3c3f273a23662b2725">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="066c74636f7546676873646f756863727169746d2865696b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e18b948f888ca1808f948388928f8495968e938acf828e8c">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d2d8cdd8cdd8d5f9d8d7ccdbd0cad7dccdced6cbd297dad6d4">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80ebe9eee7e7c0e1eef5e2e9f3eee5f4f7eff2ebaee3efed">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93f8fff6f1fafdfbfcd3f2fde6f1fae0fdf6e7e4fce1f8bdf0fcfe">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c57525d5e46585b7c5d52495e554f5259484b534e57125f5351">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aec2ccc1c1d7eecfc0dbccc7ddc0cbdad9c1dcc580cdc1c3">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f737a7979657a6d7e5f7e716a7d766c717a6b68706d74317c7072317d6d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81edeee3e8efe9eec1e0eff4e3e8f2efe4f5f6eef3eaafefe4f5">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9cf0f3eef8f7dcfdf2e9fef5eff2f9e8ebf3eef7b2fff3f1">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deb3bfb9bfb19ebfb0abbcb7adb0bbaaa9b1acb5f0bdb1b3">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f4f8f5eef8ebfcd9f8f7ecfbf0eaf7fcedeef6ebf2b7faf6f4">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8fe2eee1ebfdeee4eacfeee1faede6fce1eafbf8e0fde4a1ece0e2">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127f736a66776052737c67707b617c7766657d60793c7d7c77">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="45282c37372a3705242b30272c362b2031322a372e6b262a28">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0cdcbe0c1ced5c2c9d3cec5d4d7cfd2cb8ec3cfcd">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e28c87968d9683a2838c97808b918c8796958d9089cc818d8f">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d7d0cfdcd58af9d8d7ccdbd0cad7dccdced6cbd297dad6d4">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1dec1d4c3d0d5dec3f1d0dfc4d3d8c2dfd4c5c6dec3da9fd2dedc">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f38392839c989cb39d9687849c8198929d86919a80dd9c9d9f9a9d96">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e4948885978985a4858a91868d978a8190938b968fca878b89">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13637c787653727d66717a607d7667647c61783d707c7e">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e393939393a3828d96818a908d8697948c9188cd808c8ecd8191">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="09797979796c4968677c6b607a676c7d7e667b62276a6664">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f5f5d40494a5c5c405d6f4e415a4d465c414a5b58405d44014c4042014d5d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f3b1e3f4f2f5b1c1e0eff4e3e8f2efe4f5f6eef3eaafe2eeec">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="057760616c77457760616c772b666a68">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86f4e3ffe8e7e8c6e7e8f3e4eff5e8e3f2f1e9f4eda8e5e9eba8e4f4">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d4f545e5c4f545c7d5c53485f544e5358494a524f56135e5250">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1c3daf1d0dfc4d3d8c2dfd4c5c6dec3da9fd2dedc">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f4d505b4d56584a5a4c7f5e514a5d564c515a4b48504d5411515a4b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7c5c2c4dfd6d3d8c5f7d6d9c2d5dec4d9d2c3c0d8c5dc99d4d8da">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfadaaacb7bebbb0adad9fbeb1aabdb6acb1baaba8b0adb4f1bcb0b2">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61120017080e1321000f140308120f0415160e130a4f020e0c4f0313">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f4c575e507f5e514a5d564c515a4b48504d54115c5052115d4d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="15667e60797955747b60777c667b7061627a677e3b767a78">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7b4acb2ababab87a6a9b2a5aeb4a9a2b3b0a8b5ace9a4a8aa">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="156661707479617d55747b60777c667b7061627a677e3b767a78">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abd8dfcecac7dfc3ebcac5dec9c2d8c5cedfdcc4d9c085c5cedf">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0a3a5babf90b1bea5b2b9a3beb5a4a7bfa2bbfebeb5a4">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f98d90969a8b908ab998978c9b908a979c8d8e968b92d79a9694">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8dcdac9c3c1c6c7e8c9c6ddcac1dbc6cddcdfc7dac386cbc7c5">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e29690838991a2838c97808b918c8796958d9089cc818d8f">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f392a2327202b262c240f2e213a2d263c212a3b38203d2461212a3b">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9deaf4f1f1ddfcf3e8f3f4eef3f8e9eaf2eff6b3fef2f0">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f58286b5949b80979c869b9081829a879edb969a98db9787">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6b1bfbca1a9af86a7a8b3a4afb5a8a3b2b1a9b4ade8a8a3b2">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f78fc78590b7969982959e849992838098859cd994989a">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d455453455c7d5c53485f544e5358494a524f56135e5250">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="39435c4c4a7958574c5b504a575c4d4e564b5217575c4d">[email&#160;protected]</a></li><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="047e617e6d6a6c6b44656a71666d776a6170736b766f2a676b69">[email&#160;protected]</a></li></ul>
 
 
 
@@ -1282,8 +1316,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																	<div class="col-sm-12 col-md-6 col-lg-6">
 										<div class="news-card news-card-category d-block mb-3 mb-lg-4">
 											<div class="news-card-pic mb-4 wow fadeInUp">
-												<a href="https://securityaffairs.com/179940/hacking/an-attacker-using-a-500-radio-setup-could-potentially-trigger-train-brake-failures-or-derailments-from-a-distance.html">
-																									<img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-19.png" alt="" />
+												<a href="https://securityaffairs.com/179978/hacking/u-s-cisa-adds-wing-ftp-server-flaw-to-its-known-exploited-vulnerabilities-catalog.html">
+																									<img src="https://securityaffairs.com/wp-content/uploads/2020/07/CISA.jpeg" alt="" />
+												</a>
+											</div>
+											<div class="news-card-cont ps-0 wow fadeInUp">
+												<div class="post-time mb-3">
+													<span><i><img src="https://securityaffairs.com/wp-content/themes/security_affairs/images/user-icon.svg" alt="" /></i> <a href="https://securityaffairs.com/author/paganinip">Pierluigi Paganini</a></span>
+													<span><i><img src="https://securityaffairs.com/wp-content/themes/security_affairs/images/clock-icon.svg" alt="" /></i> July 16, 2025</span>
+												</div>
+												<h5 class="mb-3"><a href="https://securityaffairs.com/179978/hacking/u-s-cisa-adds-wing-ftp-server-flaw-to-its-known-exploited-vulnerabilities-catalog.html">U.S. CISA adds Wing FTP Server flaw to its Known Exploited Vulnerabilities catalog<gwmw style="display:none;"></gwmw></a></h5>
+												<a href="https://securityaffairs.com/179978/hacking/u-s-cisa-adds-wing-ftp-server-flaw-to-its-known-exploited-vulnerabilities-catalog.html" class="btn btn-outline">Read more</a>
+											</div>
+										</div>
+									</div>
+																	<div class="col-sm-12 col-md-6 col-lg-6">
+										<div class="news-card news-card-category d-block mb-3 mb-lg-4">
+											<div class="news-card-pic mb-4 wow fadeInUp">
+												<a href="https://securityaffairs.com/179969/malware/android-malware-konfety-evolves-with-zip-manipulation-and-dynamic-loading.html">
+																									<img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-25-scaled.png" alt="" />
 												</a>
 											</div>
 											<div class="news-card-cont ps-0 wow fadeInUp">
@@ -1291,25 +1342,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 													<span><i><img src="https://securityaffairs.com/wp-content/themes/security_affairs/images/user-icon.svg" alt="" /></i> <a href="https://securityaffairs.com/author/paganinip">Pierluigi Paganini</a></span>
 													<span><i><img src="https://securityaffairs.com/wp-content/themes/security_affairs/images/clock-icon.svg" alt="" /></i> July 15, 2025</span>
 												</div>
-												<h5 class="mb-3"><a href="https://securityaffairs.com/179940/hacking/an-attacker-using-a-500-radio-setup-could-potentially-trigger-train-brake-failures-or-derailments-from-a-distance.html">An attacker using a $500 radio setup could potentially trigger train brake failures or derailments from a distance</a></h5>
-												<a href="https://securityaffairs.com/179940/hacking/an-attacker-using-a-500-radio-setup-could-potentially-trigger-train-brake-failures-or-derailments-from-a-distance.html" class="btn btn-outline">Read more</a>
-											</div>
-										</div>
-									</div>
-																	<div class="col-sm-12 col-md-6 col-lg-6">
-										<div class="news-card news-card-category d-block mb-3 mb-lg-4">
-											<div class="news-card-pic mb-4 wow fadeInUp">
-												<a href="https://securityaffairs.com/179919/cyber-crime/interlock-ransomware-group-deploys-new-php-based-rat-via-filefix.html">
-																									<img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-17.png" alt="" />
-												</a>
-											</div>
-											<div class="news-card-cont ps-0 wow fadeInUp">
-												<div class="post-time mb-3">
-													<span><i><img src="https://securityaffairs.com/wp-content/themes/security_affairs/images/user-icon.svg" alt="" /></i> <a href="https://securityaffairs.com/author/paganinip">Pierluigi Paganini</a></span>
-													<span><i><img src="https://securityaffairs.com/wp-content/themes/security_affairs/images/clock-icon.svg" alt="" /></i> July 14, 2025</span>
-												</div>
-												<h5 class="mb-3"><a href="https://securityaffairs.com/179919/cyber-crime/interlock-ransomware-group-deploys-new-php-based-rat-via-filefix.html">Interlock ransomware group deploys new PHP-based RAT via FileFix</a></h5>
-												<a href="https://securityaffairs.com/179919/cyber-crime/interlock-ransomware-group-deploys-new-php-based-rat-via-filefix.html" class="btn btn-outline">Read more</a>
+												<h5 class="mb-3"><a href="https://securityaffairs.com/179969/malware/android-malware-konfety-evolves-with-zip-manipulation-and-dynamic-loading.html">Android Malware Konfety evolves with ZIP manipulation and dynamic loading</a></h5>
+												<a href="https://securityaffairs.com/179969/malware/android-malware-konfety-evolves-with-zip-manipulation-and-dynamic-loading.html" class="btn btn-outline">Read more</a>
 											</div>
 										</div>
 									</div>
@@ -1375,46 +1409,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <div class="top-article">
         <div class="sngl-article sngl-article-recent wow fadeInUp animated">
-        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179940/hacking/an-attacker-using-a-500-radio-setup-could-potentially-trigger-train-brake-failures-or-derailments-from-a-distance.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-19.png" alt="" /></a></div>
+        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179978/hacking/u-s-cisa-adds-wing-ftp-server-flaw-to-its-known-exploited-vulnerabilities-catalog.html"><img src="https://securityaffairs.com/wp-content/uploads/2020/07/CISA.jpeg" alt="" /></a></div>
         <div class="sngl-article-cont">
-            <h6><a href="https://securityaffairs.com/179940/hacking/an-attacker-using-a-500-radio-setup-could-potentially-trigger-train-brake-failures-or-derailments-from-a-distance.html">An attacker using a $500 radio setup could potentially trigger train brake failures or derailments from a distance</a></h6>
+            <h6><a href="https://securityaffairs.com/179978/hacking/u-s-cisa-adds-wing-ftp-server-flaw-to-its-known-exploited-vulnerabilities-catalog.html">U.S. CISA adds Wing FTP Server flaw to its Known Exploited Vulnerabilities catalog<gwmw style="display:none;"></gwmw></a></h6>
+                        <p class="cat-date"><a href="https://securityaffairs.com/category/hacking">Hacking</a> <span>/</span> July 16, 2025</p>
+            <div class="post-time">
+            </div>
+        </div>
+    </div>
+        <div class="sngl-article sngl-article-recent wow fadeInUp animated">
+        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179969/malware/android-malware-konfety-evolves-with-zip-manipulation-and-dynamic-loading.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-25-scaled.png" alt="" /></a></div>
+        <div class="sngl-article-cont">
+            <h6><a href="https://securityaffairs.com/179969/malware/android-malware-konfety-evolves-with-zip-manipulation-and-dynamic-loading.html">Android Malware Konfety evolves with ZIP manipulation and dynamic loading</a></h6>
+                        <p class="cat-date"><a href="https://securityaffairs.com/category/malware">Malware</a> <span>/</span> July 15, 2025</p>
+            <div class="post-time">
+            </div>
+        </div>
+    </div>
+        <div class="sngl-article sngl-article-recent wow fadeInUp animated">
+        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179958/data-breach/belk-hit-by-may-cyberattack-dragonforce-stole-150gb-of-data.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-21.png" alt="" /></a></div>
+        <div class="sngl-article-cont">
+            <h6><a href="https://securityaffairs.com/179958/data-breach/belk-hit-by-may-cyberattack-dragonforce-stole-150gb-of-data.html">Belk hit by May cyberattack: DragonForce stole 150GB of data</a></h6>
+                        <p class="cat-date"><a href="https://securityaffairs.com/category/data-breach">Data Breach</a> <span>/</span> July 15, 2025</p>
+            <div class="post-time">
+            </div>
+        </div>
+    </div>
+        <div class="sngl-article sngl-article-recent wow fadeInUp animated">
+        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179950/hacking/north-korea-linked-actors-spread-xorindex-malware-via-67-malicious-npm-packages.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-20.png" alt="" /></a></div>
+        <div class="sngl-article-cont">
+            <h6><a href="https://securityaffairs.com/179950/hacking/north-korea-linked-actors-spread-xorindex-malware-via-67-malicious-npm-packages.html">North Korea-linked actors spread XORIndex malware via 67 malicious npm packages</a></h6>
                         <p class="cat-date"><a href="https://securityaffairs.com/category/hacking">Hacking</a> <span>/</span> July 15, 2025</p>
             <div class="post-time">
             </div>
         </div>
     </div>
         <div class="sngl-article sngl-article-recent wow fadeInUp animated">
-        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179919/cyber-crime/interlock-ransomware-group-deploys-new-php-based-rat-via-filefix.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-17.png" alt="" /></a></div>
+        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179925/cyber-crime/fbi-seized-multiple-piracy-sites-distributing-pirated-video-games.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-18.png" alt="" /></a></div>
         <div class="sngl-article-cont">
-            <h6><a href="https://securityaffairs.com/179919/cyber-crime/interlock-ransomware-group-deploys-new-php-based-rat-via-filefix.html">Interlock ransomware group deploys new PHP-based RAT via FileFix</a></h6>
-                        <p class="cat-date"><a href="https://securityaffairs.com/category/cyber-crime">Cyber Crime</a> <span>/</span> July 14, 2025</p>
-            <div class="post-time">
-            </div>
-        </div>
-    </div>
-        <div class="sngl-article sngl-article-recent wow fadeInUp animated">
-        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179908/data-breach/global-louis-vuitton-data-breach-impacts-uk-south-korea-and-turkey.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-16.png" alt="" /></a></div>
-        <div class="sngl-article-cont">
-            <h6><a href="https://securityaffairs.com/179908/data-breach/global-louis-vuitton-data-breach-impacts-uk-south-korea-and-turkey.html">Global Louis Vuitton data breach impacts UK, South Korea, and Turkey</a></h6>
-                        <p class="cat-date"><a href="https://securityaffairs.com/category/data-breach">Data Breach</a> <span>/</span> July 14, 2025</p>
-            <div class="post-time">
-            </div>
-        </div>
-    </div>
-        <div class="sngl-article sngl-article-recent wow fadeInUp animated">
-        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179894/security/experts-uncover-critical-flaws-in-kigen-esim-technology-affecting-billions.html"><img src="https://securityaffairs.com/wp-content/uploads/2025/07/image-15.png" alt="" /></a></div>
-        <div class="sngl-article-cont">
-            <h6><a href="https://securityaffairs.com/179894/security/experts-uncover-critical-flaws-in-kigen-esim-technology-affecting-billions.html">Experts uncover critical flaws in Kigen eSIM technology affecting billions</a></h6>
-                        <p class="cat-date"><a href="https://securityaffairs.com/category/security">Security</a> <span>/</span> July 14, 2025</p>
-            <div class="post-time">
-            </div>
-        </div>
-    </div>
-        <div class="sngl-article sngl-article-recent wow fadeInUp animated">
-        <div class="sngl-article-pic"><a href="https://securityaffairs.com/179884/intelligence/spain-awarded-e12-3-million-in-contracts-to-huawei.html"><img src="https://securityaffairs.com/wp-content/uploads/2014/03/Huawei-hacked-by-NSA.jpg" alt="" /></a></div>
-        <div class="sngl-article-cont">
-            <h6><a href="https://securityaffairs.com/179884/intelligence/spain-awarded-e12-3-million-in-contracts-to-huawei.html">Spain awarded €12.3 million in contracts to Huawei</a></h6>
-                        <p class="cat-date"><a href="https://securityaffairs.com/category/intelligence">Intelligence</a> <span>/</span> July 14, 2025</p>
+            <h6><a href="https://securityaffairs.com/179925/cyber-crime/fbi-seized-multiple-piracy-sites-distributing-pirated-video-games.html">FBI seized multiple piracy sites distributing pirated video games</a></h6>
+                        <p class="cat-date"><a href="https://securityaffairs.com/category/cyber-crime">Cyber Crime</a> <span>/</span> July 15, 2025</p>
             <div class="post-time">
             </div>
         </div>
@@ -1441,7 +1475,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                                 <a class="ftr-logo" href="https://securityaffairs.com"><img src="https://securityaffairs.com/wp-content/uploads/2023/08/footer-logo.png" alt="" /></a>
                                                                         <p>To contact me write an email to:<br><br>
                             Pierluigi Paganini : <br>
-                            <a href="/cdn-cgi/l/email-protection#67170e02150b120e000e4917060006090e090e2714020412150e131e060101060e1514490408"><span class="__cf_email__" data-cfemail="b8c8d1ddcad4cdd1dfd196c8d9dfd9d6d1d6d1f8cbdddbcdcad1ccc1d9deded9d1cacb96dbd7">[email&#160;protected]</span></a>
+                            <a href="/cdn-cgi/l/email-protection#2d5d44485f4158444a44035d4c4a4c434443446d5e484e585f4459544c4b4b4c445f5e034e42"><span class="__cf_email__" data-cfemail="beced7dbccd2cbd7d9d790cedfd9dfd0d7d0d7fecddbddcbccd7cac7dfd8d8dfd7cccd90ddd1">[email&#160;protected]</span></a>
                         </p>
                         <a href="https://securityaffairs.com/contact/" class="btn btn-blue btn-big">LEARN MORE</a>
                                             </div>
@@ -1582,8 +1616,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  */
 
 </style>
-<script type="text/javascript" src="https://c0.wp.com/c/6.8.1/wp-includes/js/dist/hooks.js" id="wp-hooks-js"></script>
-<script type="text/javascript" src="https://c0.wp.com/c/6.8.1/wp-includes/js/dist/i18n.js" id="wp-i18n-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/dist/hooks.js" id="wp-hooks-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/dist/i18n.js" id="wp-i18n-js"></script>
 <script type="text/javascript" id="wp-i18n-js-after">
 /* <![CDATA[ */
 wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
@@ -1648,9 +1682,9 @@ _stq.push([ "clickTrackerInit", "29506073", "133115" ]);
 <!--
 Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
 
-Object Caching 306/402 objects using Memcached
+Object Caching 312/395 objects using Memcached
 Page Caching using Memcached 
-Database Caching 1/41 queries in 0.126 seconds using Memcached (Request-wide modification query)
+Database Caching 10/38 queries in 0.123 seconds using Memcached (Request-wide modification query)
 
-Served from: securityaffairs.com @ 2025-07-15 04:39:40 by W3 Total Cache
+Served from: securityaffairs.com @ 2025-07-16 04:36:22 by W3 Total Cache
 -->

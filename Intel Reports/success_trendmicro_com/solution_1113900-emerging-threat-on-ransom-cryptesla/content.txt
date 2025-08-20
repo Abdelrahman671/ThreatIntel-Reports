@@ -158,7 +158,7 @@
 				id: '13b53d8c-cac0-47ba-93b6-5c3ade1c7a78', 
 				geo: 'NAM', 
 				tenant: '3e04753a-ae5b-42d4-a86d-d6f05460f9e4', 
-				correlationId: '934df796-9f22-4360-9854-448b1afe20dd',
+				correlationId: '751286d9-62a5-4fef-8906-4aa0eafe2d52',
                 orgEnvironmentId: '0073ab7a-205b-eae9-b2ae-2e80b3468f09',
                 orgId: 'c14f72a9-1edd-ee11-9048-0022482ab229',
                 portalProductionOrTrialType: 'Production',
@@ -178,7 +178,7 @@
 
         // For client side telemetry intializing Dynamics365PortalAnalytics cookie object
 		
-        window["Microsoft"].Dynamic365.Portal.dynamics365PortalAnalytics = '00gf2iL0BfyfkalDo7e_X27HkzNDnJ1fbl7DCa2LHzMdeCUGvc-Ys_QFtxwB4lZtbHiBgGzTBv4sXMOXVen-a8kTq3W1Kbv-3lqTGUMN4TWWfNEW9CV38ie5V6HHt-1MNjxq7lYX9H8xIejNlrpQKw2'; // CodeQL [SM00430] False Positive: only alphanumeric chars allowed, for non-alphanumeric char it will return INVALID_CHARACTERS_IN_COOKIE 
+        window["Microsoft"].Dynamic365.Portal.dynamics365PortalAnalytics = '_W5k_b3z5zjD5MCvApwzsBab0y2ytlBLhIU3KWv42lj1WxfW3s-yrBLfpGhY_Ti0yUZJMqvoBezWUyHxGZq2LeQDBEwMjTrlu5eshBs_kRn9HodTYa6x6CnefgdcckqWexsCqBwRWO-qTNtEQjehpw2'; // CodeQL [SM00430] False Positive: only alphanumeric chars allowed, for non-alphanumeric char it will return INVALID_CHARACTERS_IN_COOKIE 
 		
 
 	</script>
@@ -2367,7 +2367,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 <script>
-
   const shouldShowBot = userInfoData.gboSegment ==='SB' || userInfoData.gboSegment ==='MB' || 
                         userInfoData.gboSegment ==='' || 
                         (userInfoData.gboSegment ==='ENT' && userInfoData.accountPotentialARR==='') ||
@@ -2391,7 +2390,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div data-live-agent="" aria-hidden="true">
   
-    <style>
+    
+
+<style>
   .tomo-init-button {
     --size: 56px;
     right: 1rem;
@@ -2667,17 +2668,35 @@ detailed troubleshooting.
 
   let isDialogueClosed = false;
 
+  const setChatClosedFlag = () => {
+    const expiryTime = Date.now() + '1440' * 60 * 1000;
+    localStorage.setItem("bsp_prechatClosedUntil", expiryTime.toString());
+  }
+
+  const isChatClosedRecently = () => {
+    const closedUntil = localStorage.getItem("bsp_prechatClosedUntil");
+    if (!closedUntil) return false;
+
+    const now = Date.now();
+    return now < parseInt(closedUntil, 10);
+  }
+
   const togglePreLoginBot = () => {
     const isOpen = preLoginBot.dataset.show === "true";
     preLoginBot.dataset.show = !isOpen;
-    sessionStorage.setItem("isBotClosed", isOpen);
+
+    if (!isOpen) {
+      setChatClosedFlag();
+    }
+    // sessionStorage.setItem("isBotClosed", isOpen);
 
     if (!isDialogueClosed) dialogue.dataset.show = isOpen;
   };
 
   const closePreLoginBot = () => {
     preLoginBot.dataset.show = false;
-    sessionStorage.setItem("isBotClosed", "true");
+    setChatClosedFlag();
+    // sessionStorage.setItem("isBotClosed", "true");
     setTimeout(() => (dialogue.dataset.show = true), 1200);
   };
 
@@ -2692,7 +2711,8 @@ detailed troubleshooting.
     closeDialogueButton?.addEventListener("click", closeDialogue);
 
     setTimeout(() => {
-      const isBotClosed = sessionStorage.getItem("isBotClosed") === "true";
+      //const isBotClosed = sessionStorage.getItem("isBotClosed") === "true";
+      const isBotClosed = isChatClosedRecently();
 
       if (isBotClosed) {
         dialogue.dataset.show = true;
@@ -2700,7 +2720,9 @@ detailed troubleshooting.
     }, 1200);
   }
 
-  botPreLoginInit();
+  window.addEventListener('load', botPreLoginInit);
+
+  // botPreLoginInit();
 </script>
 
   
@@ -3603,5 +3625,5 @@ detailed troubleshooting.
     
 </body>
 </html>
-<!-- Generated at 8/19/2025 4:33:30 AM -->
+<!-- Generated at 8/20/2025 4:38:47 AM -->
 <!-- Page OK -->

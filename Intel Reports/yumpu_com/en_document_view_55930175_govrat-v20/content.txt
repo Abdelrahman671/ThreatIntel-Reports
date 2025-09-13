@@ -1744,6 +1744,47 @@ googletag.enableServices();
     </div>
 </div>
 
+<aside id="country-deal-banner" class="country-deal-banner">
+    <button id="cdl-banner-close" type="button" class="country-deal-banner__close yp-internal-tracking"
+            data-custom-key="countryoffer_banner_close_GB"
+            aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <div class="country-deal-banner__content">
+        <img class="mb-auto mt-1" height="38" width="60"
+             src="https://assets.yumpu.com/release/HlVJzXl1tGtBhGT/v5/img/flags/4x3/gb.svg" alt=""/>
+        <div>
+            <div id="cdl-headline" class="country-deal-banner__headline">
+                <strong>{{country}} offer:</strong> Save <strong>7%</strong> on all YUMPU subscriptions now!            </div>
+            <div class="country-deal-banner__description mt-1">
+                Your discount will be applied automatically at checkout.            </div>
+        </div>
+    </div>
+    <a class=" yp-internal-tracking mt-1 country-deal-banner__button yp-v5-button-primary"
+       href="https://www.yumpu.com/en/user/registration?redirect=account%2Fprofile%2Fsubscription_plans%3Fcoupon%3Daufulnzykcch"
+       data-custom-key="countryoffer_banner_button_GB">
+        Save now    </a>
+</aside>
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            if (typeof InternalTracking !== 'undefined') {
+                InternalTracking.track({
+                    event: 'view',
+                    custom_key: "countryoffer_banner_view_GB"                });
+            }
+        }, 100)
+        const languageAbbr = "en";
+        const headline = $('#cdl-headline');
+        const displayNames = new Intl.DisplayNames([languageAbbr], {type: "region"});
+        headline.html(headline.html().replace('{{country}}', displayNames.of("GB")))
+
+        $('#cdl-banner-close').click(function () {
+            $('#country-deal-banner').remove()
+        })
+    })
+</script>
 
 </div>
 <div id="yp-back-to-free-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

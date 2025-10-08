@@ -75,31 +75,45 @@
 
 
     
-<script>
-	window['optimizely'] = window['optimizely'] || [];
-	window['optimizely'].push({
-		type: 'holdEvents'
-	});
+    <script>
+        window.geoIPCountry = 'US';
+        window.geoIPState = 'VA';
+        window.geoIPCountryName = 'United States';
+        window.geoIPZip = '23917';
+        window.geoPhoneCountryCode = '1'
+        window.mktoInitValues = window.mktoInitValues || {};
+        window.mktoInitValues['referringURL'] = '';        
 
-	window.OneTrustCallbacks=window.OneTrustCallbacks || [];
-	window.OneTrustCallbacks.push(function() {
+    </script>
+
+
+
+    
+	<script>
+		window['optimizely'] = window['optimizely'] || [];
+		window['optimizely'].push({
+			type: 'holdEvents'
+		});
+
+		window.OneTrustCallbacks=window.OneTrustCallbacks || [];
+		window.OneTrustCallbacks.push(function() {
 			if ( OnetrustActiveGroups && OnetrustActiveGroups.includes("C0004"))
 			{
-					window['optimizely'].push({
-						type: 'sendEvents'
-					});
-			}
-			else {
 				window['optimizely'].push({
-					type: 'holdEvents'
+					type: 'sendEvents'
 				});
 			}
-	})
+			else {
+				if(window.geoIPCountry === 'US') {
+					window['optimizely'].push({
+						type: 'holdEvents'
+					});
+				}
+			}
+		})
 
-</script>
-
-<script src="https://cdn.optimizely.com/js/6039698984927232.js" data-ot-ignore></script>
-
+	</script>
+	<script src="https://cdn.optimizely.com/js/6039698984927232.js" data-ot-ignore></script>
 
     
 		<meta name="one-trust-whitelist" content="lp.connectwise.com,screenconnect.connectwise.com,connectwise.com,www.connectwise.com,www.screenconnect.connectwise.com,munchkin.marketo.net,https://www.connectwise.com,screenconnect.com,marketplace.connectwise.com,itnation.connectwise.com,theitnation.com,boards.greenhouse.io,job-boards.greenhouse.io" />
@@ -142,20 +156,6 @@
 
 
     
-    <script>
-        window.geoIPCountry = 'US';
-        window.geoIPState = 'WY';
-        window.geoIPCountryName = 'United States';
-        window.geoIPZip = '82010';
-        window.geoPhoneCountryCode = '1'
-        window.mktoInitValues = window.mktoInitValues || {};
-        window.mktoInitValues['referringURL'] = '';        
-
-    </script>
-
-
-
-    
 <title>Resource Center | ConnectWise</title>
 
 <meta charset="utf-8">
@@ -185,7 +185,6 @@
 <meta name="twitter:card" content="summary_large_image" />
 
 <meta  name="twitter:title"  content="Resource Center | ConnectWise"  /><meta  name="twitter:description"  content="Search our resource center for the latest MSP ebooks, white papers, infographics, webinars and more. Download now and start scaling your business."  /><meta  name="twitter:site"  content="ConnectWise"  /><meta  name="twitter:image"  content="https://www.connectwise.com/globalassets/media/icons/favicons/www/cw-schema-logo.png"  />
-
 
 
     
@@ -348,16 +347,16 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         <div class="header__wrapper">
             <div class="header__logo">
                 <a href="/">
-                        <img class="header__logo-desktop" src="/contentassets/46e6af166a92407eac66d8a7c79d3c8d/logo.svg" alt="ConnectWise" loading="lazy" />
-                        <img class="header__logo-mobile" src="/contentassets/46e6af166a92407eac66d8a7c79d3c8d/logo-mobile-light.svg" alt="ConnectWise" loading="lazy" />
+                        <img class="header__logo-desktop" src="/contentassets/46e6af166a92407eac66d8a7c79d3c8d/logo.svg" fetchpriority="high" width="221" height="36" alt="ConnectWise" />
+                        <img class="header__logo-mobile" src="/contentassets/46e6af166a92407eac66d8a7c79d3c8d/logo-mobile-light.svg" fetchpriority="high" width="154" height="13" alt="ConnectWise" />
                 </a>
             </div>
             <nav class="header__main">
                     <ul class="header__main-nav">
-                            <li><a href="#" data-target="tab-8714582"><span>Platform</span></a></li>
-                            <li><a href="#" data-target="tab-35223373"><span>Solutions</span></a></li>
-                            <li><a href="#" data-target="tab-23279706"><span>Community</span></a></li>
-                            <li><a href="#" data-target="tab-6449689"><span>About Us</span></a></li>
+                            <li><a href="#" data-target="tab-20854822"><span>Platform</span></a></li>
+                            <li><a href="#" data-target="tab-22227924"><span>Solutions</span></a></li>
+                            <li><a href="#" data-target="tab-3523992"><span>Community</span></a></li>
+                            <li><a href="#" data-target="tab-66037803"><span>About Us</span></a></li>
                     </ul>
                     <a href="#" class="header__search-button"></a>
                     <div class="header__search-panel auto-suggest"
@@ -401,7 +400,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-8714582" class="header__panel">
+    <div data-id="tab-20854822" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -410,13 +409,13 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-53468424" class="h6 active">PSA and RMM</a></li>
-                            <li><a href="#" data-target="tab-43939045" class="h6 ">Cybersecurity and Data Protection</a></li>
-                            <li><a href="#" data-target="tab-59153007" class="h6 ">Automation and Integrations</a></li>
+                            <li><a href="#" data-target="tab-55275874" class="h6 active">PSA and RMM</a></li>
+                            <li><a href="#" data-target="tab-36825142" class="h6 ">Cybersecurity and Data Protection</a></li>
+                            <li><a href="#" data-target="tab-65905798" class="h6 ">Automation and Integrations</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-53468424" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-55275874" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -537,7 +536,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-43939045" class="header__subpanel ">
+                    <div data-id="tab-36825142" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -658,7 +657,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-59153007" class="header__subpanel ">
+                    <div data-id="tab-65905798" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -732,7 +731,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-35223373" class="header__panel">
+    <div data-id="tab-22227924" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -741,13 +740,13 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-52684491" class="h6 active">By Use Case</a></li>
-                            <li><a href="#" data-target="tab-45693017" class="h6 ">By Market </a></li>
-                            <li><a href="#" data-target="tab-32532691" class="h6 ">By Category</a></li>
+                            <li><a href="#" data-target="tab-41388080" class="h6 active">By Use Case</a></li>
+                            <li><a href="#" data-target="tab-1687918" class="h6 ">By Market </a></li>
+                            <li><a href="#" data-target="tab-23166605" class="h6 ">By Category</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-52684491" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-41388080" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -835,7 +834,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-45693017" class="header__subpanel ">
+                    <div data-id="tab-1687918" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -903,7 +902,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-32532691" class="header__subpanel ">
+                    <div data-id="tab-23166605" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -974,7 +973,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-23279706" class="header__panel">
+    <div data-id="tab-3523992" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -983,14 +982,14 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-64054355" class="h6 active">IT Nation</a></li>
-                            <li><a href="#" data-target="tab-55506776" class="h6 ">Events</a></li>
-                            <li><a href="#" data-target="tab-52875375" class="h6 ">University</a></li>
-                            <li><a href="#" data-target="tab-25433382" class="h6 ">Resources</a></li>
+                            <li><a href="#" data-target="tab-41128658" class="h6 active">IT Nation</a></li>
+                            <li><a href="#" data-target="tab-34293646" class="h6 ">Events</a></li>
+                            <li><a href="#" data-target="tab-64761081" class="h6 ">University</a></li>
+                            <li><a href="#" data-target="tab-23289309" class="h6 ">Resources</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-64054355" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-41128658" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1054,7 +1053,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-55506776" class="header__subpanel ">
+                    <div data-id="tab-34293646" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1146,7 +1145,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-52875375" class="header__subpanel ">
+                    <div data-id="tab-64761081" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1217,7 +1216,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-25433382" class="header__subpanel ">
+                    <div data-id="tab-23289309" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1351,7 +1350,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-6449689" class="header__panel">
+    <div data-id="tab-66037803" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -1360,12 +1359,12 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-2366649" class="h6 active">About Us</a></li>
-                            <li><a href="#" data-target="tab-3603392" class="h6 ">News and Press</a></li>
+                            <li><a href="#" data-target="tab-751683" class="h6 active">About Us</a></li>
+                            <li><a href="#" data-target="tab-32865074" class="h6 ">News and Press</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-2366649" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-751683" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1456,7 +1455,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-3603392" class="header__subpanel ">
+                    <div data-id="tab-32865074" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1531,7 +1530,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
     <div data-id="mobile-main" class="header__panel header__panel--mobile">
         <div class="header__mobile-header">
-                <img class="header__logo-mobile" src="/contentassets/46e6af166a92407eac66d8a7c79d3c8d/logo-mobile-dark.svg" alt="ConnectWise" loading="lazy" />
+                <img class="header__logo-mobile" src="/contentassets/46e6af166a92407eac66d8a7c79d3c8d/logo-mobile-dark.svg" fetchpriority="high" width="154" height="13" alt="ConnectWise" />
             <a href="#" class="header__close-button" title="Close"></a>
         </div>
     </div>
@@ -2138,7 +2137,7 @@ code {
         <div class="container">
             <div class="search-results__header">
                 <div class="search-results__count">
-                    <p><span class="search-results__count-value">154</span> result(s)</p>
+                    <p><span class="search-results__count-value">156</span> result(s)</p>
                     <a href="#" class="search-results__mobile-filter-button button">Filters &amp; Sort</a>
                 </div>
                 <div class="search-results__controls">
@@ -2192,60 +2191,60 @@ code {
                                         <a href="#" class="search-results__filter-title">Content Types</a>
                                         <div class="search-results__filter-options">
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_48145965" value="118958" type="checkbox"  />
-                                                    <label for="checkbox_48145965">Calculator</label>
+                                                    <input id="checkbox_50401735" value="118958" type="checkbox"  />
+                                                    <label for="checkbox_50401735">Calculator</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_20547396" value="7996" type="checkbox"  />
-                                                    <label for="checkbox_20547396">Checklist</label>
+                                                    <input id="checkbox_59653318" value="7996" type="checkbox"  />
+                                                    <label for="checkbox_59653318">Checklist</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_52982742" value="7997" type="checkbox"  />
-                                                    <label for="checkbox_52982742">eBook</label>
+                                                    <input id="checkbox_15045443" value="7997" type="checkbox"  />
+                                                    <label for="checkbox_15045443">eBook</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_22422244" value="7998" type="checkbox"  />
-                                                    <label for="checkbox_22422244">Executive Summary</label>
+                                                    <input id="checkbox_54886975" value="7998" type="checkbox"  />
+                                                    <label for="checkbox_54886975">Executive Summary</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_31416067" value="7999" type="checkbox"  />
-                                                    <label for="checkbox_31416067">Feature Sheet</label>
+                                                    <input id="checkbox_52210394" value="7999" type="checkbox"  />
+                                                    <label for="checkbox_52210394">Feature Sheet</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_32019437" value="132313" type="checkbox"  />
-                                                    <label for="checkbox_32019437">Guide</label>
+                                                    <input id="checkbox_31769434" value="132313" type="checkbox"  />
+                                                    <label for="checkbox_31769434">Guide</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_56686755" value="8000" type="checkbox"  />
-                                                    <label for="checkbox_56686755">Industry Reports</label>
+                                                    <input id="checkbox_64585280" value="8000" type="checkbox"  />
+                                                    <label for="checkbox_64585280">Industry Reports</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_19125605" value="8001" type="checkbox"  />
-                                                    <label for="checkbox_19125605">Infographic</label>
+                                                    <input id="checkbox_67016615" value="8001" type="checkbox"  />
+                                                    <label for="checkbox_67016615">Infographic</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_9479603" value="122815" type="checkbox"  />
-                                                    <label for="checkbox_9479603">Kit</label>
+                                                    <input id="checkbox_54839869" value="122815" type="checkbox"  />
+                                                    <label for="checkbox_54839869">Kit</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_22178722" value="8002" type="checkbox"  />
-                                                    <label for="checkbox_22178722">Threat Report</label>
+                                                    <input id="checkbox_45945348" value="8002" type="checkbox"  />
+                                                    <label for="checkbox_45945348">Threat Report</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_20251329" value="8003" type="checkbox"  />
-                                                    <label for="checkbox_20251329">Tool</label>
+                                                    <input id="checkbox_3824678" value="8003" type="checkbox"  />
+                                                    <label for="checkbox_3824678">Tool</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_10448331" value="8004" type="checkbox"  />
-                                                    <label for="checkbox_10448331">Webinar (Upcoming)</label>
+                                                    <input id="checkbox_38920221" value="8004" type="checkbox"  />
+                                                    <label for="checkbox_38920221">Webinar (Upcoming)</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_63638380" value="114747" type="checkbox"  />
-                                                    <label for="checkbox_63638380">Webinar (On Demand)</label>
+                                                    <input id="checkbox_9006946" value="114747" type="checkbox"  />
+                                                    <label for="checkbox_9006946">Webinar (On Demand)</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_8495957" value="8005" type="checkbox"  />
-                                                    <label for="checkbox_8495957">Whitepaper</label>
+                                                    <input id="checkbox_57073138" value="8005" type="checkbox"  />
+                                                    <label for="checkbox_57073138">Whitepaper</label>
                                                 </div>
                                         </div>
                                     </div>
@@ -2369,7 +2368,7 @@ code {
             </div>
         </a>
     </div>
-    <div class="search-results__results-data" data-total-results="154" data-page="1" data-total-pages="18"></div>
+    <div class="search-results__results-data" data-total-results="156" data-page="1" data-total-pages="18"></div>
 
                         </div>
                     </div>
@@ -2535,7 +2534,7 @@ code {
          data-submit-button-text="Submit">
 
 
-        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8JlVwtnYltlNk54FYIECDVb5IekC0DoNlXRU9jTJ4c_VuZkLxzkD7ID2V0biYARDmz_Fztv5li5_rrZcI8q5ZcMnb117LYbQJh1wpajlSTfuC56iDVu9v56g_JUZZ3sC4e8usSekx61GjBt_0BTlJ7k" />
+        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8JlVwtnYltlNk54FYIECDVazdrzcJrlztKH8pQIQ95kViFF_f039QZxcmP2iq6igMLKFMbxJyX1QZLL8TTtg8ipR5vSjix80OzLOdaAtlHVExCchU-wnpfwa8JBUeIv3BQjW_peEculLb1uM0yBUCPM" />
         <form data-form-id="1301" data-form-submit-action="128142" data-on-renderer="ConnectWise.GlobalModules.MarketoValidations.DomainValidation.Validate" data-on-success="ConnectWise.GlobalModules.Marketo.FormSuccess.MainSubmitForm" data-on-validate="ConnectWise.GlobalModules.MarketoValidations.DomainValidation.RegisterEmailFieldWarning" data-page-source="Resource Center" id="1301_4244_293">
         </form>
     </div>
@@ -2592,7 +2591,7 @@ code {
 
     
 
-    <script src="/dist/connectwise_bundle.js?v=1_6LL1kWZdpGZHy8t0vf1ZmDmSBKff1Ubzz5I7kDITQ"></script>
+    <script src="/dist/connectwise_bundle.js?v=SkOC6SgQEFZh1diDGGXhztztp44-JVplxrgyRqW6x-w"></script>
 
 
 

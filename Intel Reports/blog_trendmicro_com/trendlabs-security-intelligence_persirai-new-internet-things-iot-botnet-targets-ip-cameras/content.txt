@@ -2442,7 +2442,7 @@
 				<div class="alertUtilityMenu">
 					<div class="utility-wrapper alert-top-menu">
 						<div class="dropDownMenuV1">
-							<div class="label"><span class="counter">5</span> Alerts</div>
+							<div class="label"><span class="counter">6</span> Alerts</div>
 							<div class="menu"><!--Intentionally left blank--></div>
 						</div>
 					</div>
@@ -2460,6 +2460,24 @@
 							</div>
 
 							<ul class="alerts-list">
+								<li id="alert-25d11e" class="unread">
+									<div class="copy-wrapper">
+										<!-- TEXT - now clickable -->
+										<a href="https://www.zerodayinitiative.com/blog/2025/7/30/pwn2own-returns-to-ireland-with-a-one-million-dollar-whatsapp-target" target="_blank" rel="noopener noreferrer">
+											<p class="copy">Pwn2Own Ireland: Elite researchers compete for a $1M bounty to bolster zero-click defenses</p>
+										</a>
+										
+										
+										<span class="material-symbols-outlined GlobalLinkNoTx">close</span>
+									</div>
+									<!-- CTA TEXT -->
+									<a href="https://www.zerodayinitiative.com/blog/2025/7/30/pwn2own-returns-to-ireland-with-a-one-million-dollar-whatsapp-target" target="_blank" rel="noopener noreferrer">
+										<p class="ctaText">Learn more &gt;</p>
+									</a>
+									
+									
+								</li>
+							
 								<li id="alert-3ffacb" class="unread">
 									<div class="copy-wrapper">
 										<!-- TEXT - now clickable -->
@@ -2704,36 +2722,53 @@
 	<script type="text/javascript" src="//customer.cludo.com/scripts/bundles/search-script.js"></script>
 	
 	<script type="text/javascript">
-		var cludoSettings = {};
+		var CludoSearch;
+		let cludo_language = '';
 
 		if( undefined === window.utag_data ) {
-			cludoSettings.cludo_language = 'en';
+			cludo_language = 'en';
 		} else {
 			switch (window.utag_data.language_code) {
 				// Cludo dropped the ball on this one
 				case 'ja_jp':
-					cludoSettings.cludo_language = 'jp';
+					cludo_language = 'jp';
 					break;
 				case 'in_id':
-					cludoSettings.cludo_language = 'id';
+					cludo_language = 'id';
 					break;
 				default:
-					cludoSettings.cludo_language = window.utag_data.language_code.substring(0, 2); // First two letters are the language
+					cludo_language = window.utag_data.language_code.substring(0, 2); // First two letters are the language
 					break;
 			}
 		}
 
-		cludoSettings.settingsObject = {
-			customerId: 296,
-			engineId: 1798,
-			searchUrl: "/en_us/common/cse.html",
-			searchInputs: ["cludo-search-form","cludo-search-form-mobile","cludo-search-content-form"],
-			initSearchBoxText: "",
-			language: cludoSettings.cludo_language,
-			//endlessScroll: {stopAfterPage:3, resultsPerPage:10, bottomOffset: 145},
-			//translateSearchTemplates: true,
-			loading: "<div class='loader'></div>"
-		};
+		document.addEventListener( 'DOMContentLoaded', function() {
+			var cludoSettings = {
+				customerId: 296,
+				engineId: 1798,
+				searchUrl: "/en_us/common/cse.html",
+				searchInputs: ["cludo-search-form", "cludo-search-form-mobile", "cludo-search-content-form"],
+				initSearchBoxText: "",
+				language: cludo_language,
+				//endlessScroll: {stopAfterPage:3, resultsPerPage:10, bottomOffset: 145},
+				translateSearchTemplates: true,
+				loading: "<div class='loader'></div>"
+			};
+
+			CludoSearch = new Cludo(cludoSettings);
+			CludoSearch.translateProvider.translations[cludo_language]["category_header"] = "Show";
+			CludoSearch.translateProvider.translations[cludo_language]["your_search_on"] = "Showing results for" + " <span class='highlight'>{{value}}</span> ";
+			CludoSearch.translateProvider.translations[cludo_language]["total_results"] = "";
+			CludoSearch.translateProvider.translations[cludo_language]["total_result"] = "";
+			CludoSearch.translateProvider.translations[cludo_language]["in_category"] = "";
+			CludoSearch.translateProvider.translations[cludo_language]["results"] = "results";
+			CludoSearch.translateProvider.translations[cludo_language]["sort_by"] = "Sort By:";
+			CludoSearch.translateProvider.translations[cludo_language]["date"] = "Date";
+			CludoSearch.translateProvider.translations[cludo_language]["relevance"] = "Relevance";
+			CludoSearch.translateProvider.translations[cludo_language]["all_results"] = "All results";
+
+			CludoSearch.init();
+		});
 	</script>
 
 	<span class="material-symbols-outlined search-back-arrow">arrow_back</span>
@@ -3032,6 +3067,12 @@
 		<h3 class="related--articles-title">Related Articles</h3>
 		 <ul class="related--articles-items">
 			<li class="related--articles-item">
+				<a class="related--articles-item-anchor" href="/en_us/research/25/j/the-impact-of-water-kurita-lumma-stealer-doxxing.html">
+					Shifts in the Underground: The Impact of Water Kurita’s (Lumma Stealer) Doxxing
+				</a> 
+			</li>
+		
+			<li class="related--articles-item">
 				<a class="related--articles-item-anchor" href="/en_us/research/25/j/operation-zero-disco-cisco-snmp-vulnerability-exploit.html">
 					Operation Zero Disco: Attackers Exploit Cisco SNMP Vulnerability to Deploy Rootkits 
 				</a> 
@@ -3040,12 +3081,6 @@
 			<li class="related--articles-item">
 				<a class="related--articles-item-anchor" href="/en_us/research/25/j/real-time-risk-based-zero-trust.html">
 					 Trend Micro launches new integration with Zscaler to deliver real-time,  Risk-Based Zero Trust Access
-				</a> 
-			</li>
-		
-			<li class="related--articles-item">
-				<a class="related--articles-item-anchor" href="/en_us/research/25/j/self-propagating-malware-spreads-via-whatsapp.html">
-					Self-Propagating Malware Spreading Via WhatsApp, Targets Brazilian Users
 				</a> 
 			</li>
 		</ul>
@@ -3095,8 +3130,8 @@
 background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-000000?scl=1.0&qlt=95&fmt=webp');
   is at right place per Gary, feeds in height and background image via BE */
 	@media ( min-width: 1024px ) {
-		#containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1,
-		.containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1 {
+		#container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17,
+		.container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17 {
 			height: auto;
 background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-000000?scl=1.0&qlt=95&fmt=webp');
 
@@ -3109,8 +3144,8 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-000000?wid=992&fit=constrain&qlt=95&fmt=webp');
   is at right place per Gary, feeds in height and background image via BE */
 	@media ( max-width: 1023px ) and ( min-width: 768px ){
-		#containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1,
-		.containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1 {
+		#container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17,
+		.container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17 {
 			height: auto;
 background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-000000?wid=992&fit=constrain&qlt=95&fmt=webp');
 
@@ -3123,8 +3158,8 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-000000?wid=768&fit=constrain&qlt=95&fmt=webp');
   is at right place per Gary, feeds in height and background image via BE */
 	@media ( max-width: 767px ) {
-		#containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1,
-		.containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1 {
+		#container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17,
+		.container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17 {
 			height: auto;
 background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-000000?wid=768&fit=constrain&qlt=95&fmt=webp');
 
@@ -3144,7 +3179,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 
 
-<div id="containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1" class="containerfcff7e4a-8828-45ce-b747-3e37a2ac64d1 
+<div id="container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17" class="container27536ee9-fd7c-4dc6-9ff9-fc93c8e89d17 
 	container-wrap 
 	 
 	gray-border global-margin-top-none global-margin-bottom-none global-padding-top-medium global-padding-bottom-medium 
@@ -3185,7 +3220,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 <style>
 	/* MOBILE (Default) */
-	#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec {
+	#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b {
 		display: grid;
 		gap: 10px 0px;
 		grid-template-columns: 1fr;
@@ -3195,85 +3230,85 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 		}
 	}
 
-	#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnMobile {
+	#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnMobile {
 		display: none;
 	}
 
 	/* TABLET ($tablet-up: 768px) */
 	@media ( max-width: 1023px ) and ( min-width: 768px ) {
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b {
 			gap: 10px 0px;
 			grid-template-columns: 1fr;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnMobile {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnTablet {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnTablet {
 			display: none;
 		}
 	}
 
 	/* WIDE TABLET ($desktop-up: 1024px) */
 	@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b {
 			gap: 0px 10px;
 			grid-template-columns: 6fr 6fr 6fr 6fr;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnMobile {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnWideTablet {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnWideTablet {
 			display: none;
 		}
 	}
 
 	/* DESKTOP ($desktop-large-up: 1200px) */
 	@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b {
 			gap: 0px 10px;
 			grid-template-columns: 3fr 3fr 3fr 3fr;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnMobile {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnDesktop {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnDesktop {
 			display: none;
 		}
 	}
 
 	/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 	@media ( min-width: 1600px ) {
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b {
 			gap: 0px 10px;
 			grid-template-columns: 3fr 3fr 3fr 4fr;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnMobile {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .hideOnWideDesktop {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .hideOnWideDesktop {
 			display: none;
 		}
 	}
 </style>
 
 
-<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec">
+<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b">
 	<style>
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-resources-tab1 {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-resources-tab1 {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-resources-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-resources-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3281,7 +3316,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-resources-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-resources-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3289,14 +3324,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-resources-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-resources-tab1 {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-resources-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-resources-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3338,13 +3373,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-support-tab1 {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-support-tab1 {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-support-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-support-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3352,7 +3387,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-support-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-support-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3360,14 +3395,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-support-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-support-tab1 {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-support-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-support-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3409,13 +3444,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-about-tab1 {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-about-tab1 {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-about-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-about-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3423,7 +3458,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-about-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-about-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3431,14 +3466,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-about-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-about-tab1 {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-about-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-about-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3480,13 +3515,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-address-tab1 {
+		#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-address-tab1 {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-address-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-address-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3494,7 +3529,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-address-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-address-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3502,14 +3537,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-address-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-address-tab1 {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-a00faf33-946a-4a4d-9b15-a1f456420bec .grid-address-tab1 {
+			#grid-areas-29a21c9e-6cde-4e94-9d98-eb08e779b23b .grid-address-tab1 {
 				align-content: flex-start;
 			}
 
@@ -3562,11 +3597,11 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 
 <style>
-.horizontalSeparator-44747571-22d9-4fa5-8ae1-1c43cc99eeeb.border {
+.horizontalSeparator-92ab2962-b4b4-4faa-b8fb-270972ec51c6.border {
 		border-bottom: 1px solid #bcbdc0;
 }
 </style>
-<div id="horizontalV1-44747571-22d9-4fa5-8ae1-1c43cc99eeeb" class="global-margin-top- global-margin-bottom-medium global-padding-top-small global-padding-bottom- border horizontalSeparator-44747571-22d9-4fa5-8ae1-1c43cc99eeeb">
+<div id="horizontalV1-92ab2962-b4b4-4faa-b8fb-270972ec51c6" class="global-margin-top- global-margin-bottom-medium global-padding-top-small global-padding-bottom- border horizontalSeparator-92ab2962-b4b4-4faa-b8fb-270972ec51c6">
 	
 </div>
 
@@ -3577,7 +3612,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 <style>
 	/* MOBILE (Default) */
-	#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c {
+	#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 {
 		display: grid;
 		gap: 0px 0px;
 		grid-template-columns: 1fr;
@@ -3587,85 +3622,85 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 		}
 	}
 
-	#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnMobile {
+	#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnMobile {
 		display: none;
 	}
 
 	/* TABLET ($tablet-up: 768px) */
 	@media ( max-width: 1023px ) and ( min-width: 768px ) {
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnMobile {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnTablet {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnTablet {
 			display: none;
 		}
 	}
 
 	/* WIDE TABLET ($desktop-up: 1024px) */
 	@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 {
 			gap: 0px 0px;
 			grid-template-columns: 3fr 3fr 6fr;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnMobile {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnWideTablet {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnWideTablet {
 			display: none;
 		}
 	}
 
 	/* DESKTOP ($desktop-large-up: 1200px) */
 	@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr 2fr 2fr;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnMobile {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnDesktop {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnDesktop {
 			display: none;
 		}
 	}
 
 	/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 	@media ( min-width: 1600px ) {
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr 2fr 2fr;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnMobile {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .hideOnWideDesktop {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .hideOnWideDesktop {
 			display: none;
 		}
 	}
 </style>
 
 
-<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c">
+<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49">
 	<style>
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-locale1 {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-locale1 {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-locale1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-locale1 {
 				align-content: flex-start;
 			}
 
@@ -3673,7 +3708,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-locale1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-locale1 {
 				align-content: flex-start;
 			}
 
@@ -3681,14 +3716,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-locale1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-locale1 {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-locale1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-locale1 {
 				align-content: flex-start;
 			}
 
@@ -3912,13 +3947,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-spacer1 {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-spacer1 {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-spacer1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-spacer1 {
 				align-content: flex-start;
 			}
 
@@ -3926,7 +3961,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-spacer1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-spacer1 {
 				align-content: flex-start;
 			}
 
@@ -3934,14 +3969,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-spacer1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-spacer1 {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-spacer1 {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-spacer1 {
 				align-content: flex-start;
 			}
 
@@ -3951,13 +3986,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-callout {
+		#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-callout {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-callout {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-callout {
 				align-content: flex-start;
 			}
 
@@ -3965,7 +4000,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-callout {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-callout {
 				align-content: flex-start;
 			}
 
@@ -3973,14 +4008,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-callout {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-callout {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-fdbb2200-0025-4020-a0ac-94c79ef3400c .grid-footer-callout {
+			#grid-areas-10be3e57-1679-4b42-aac6-db29f8eb2f49 .grid-footer-callout {
 				align-content: flex-start;
 			}
 
@@ -4001,8 +4036,8 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 	/* height: auto;
   is at right place per Gary, feeds in height and background image via BE */
 	@media ( min-width: 1024px ) {
-		#containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916,
-		.containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916 {
+		#container5244b88a-34b2-41a7-ba26-4c2eb94464b0,
+		.container5244b88a-34b2-41a7-ba26-4c2eb94464b0 {
 			height: auto;
 
 			background-repeat: no-repeat;
@@ -4013,8 +4048,8 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 	/*height: auto;
   is at right place per Gary, feeds in height and background image via BE */
 	@media ( max-width: 1023px ) and ( min-width: 768px ){
-		#containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916,
-		.containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916 {
+		#container5244b88a-34b2-41a7-ba26-4c2eb94464b0,
+		.container5244b88a-34b2-41a7-ba26-4c2eb94464b0 {
 			height: auto;
 
 			background-repeat: no-repeat;
@@ -4025,8 +4060,8 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 	/* height: auto;
   is at right place per Gary, feeds in height and background image via BE */
 	@media ( max-width: 767px ) {
-		#containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916,
-		.containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916 {
+		#container5244b88a-34b2-41a7-ba26-4c2eb94464b0,
+		.container5244b88a-34b2-41a7-ba26-4c2eb94464b0 {
 			height: auto;
 
 			background-repeat: no-repeat;
@@ -4045,7 +4080,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 
 
-<div id="containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916" class="containerb37313e2-bb08-4b75-8ab9-9cfca2dbc916 
+<div id="container5244b88a-34b2-41a7-ba26-4c2eb94464b0" class="container5244b88a-34b2-41a7-ba26-4c2eb94464b0 
 	container-wrap 
 	 
 	gray-border global-margin-top-none global-margin-bottom-large global-padding-top-none global-padding-bottom-none 
@@ -4067,7 +4102,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 <style>
 	/* MOBILE (Default) */
-	#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 {
+	#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 {
 		display: grid;
 		gap: 0px 0px;
 		grid-template-columns: 1fr;
@@ -4077,85 +4112,85 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 		}
 	}
 
-	#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnMobile {
+	#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnMobile {
 		display: none;
 	}
 
 	/* TABLET ($tablet-up: 768px) */
 	@media ( max-width: 1023px ) and ( min-width: 768px ) {
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnMobile {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnTablet {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnTablet {
 			display: none;
 		}
 	}
 
 	/* WIDE TABLET ($desktop-up: 1024px) */
 	@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnMobile {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnWideTablet {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnWideTablet {
 			display: none;
 		}
 	}
 
 	/* DESKTOP ($desktop-large-up: 1200px) */
 	@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnMobile {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnDesktop {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnDesktop {
 			display: none;
 		}
 	}
 
 	/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 	@media ( min-width: 1600px ) {
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr 10fr 1fr;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnMobile {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .hideOnWideDesktop {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .hideOnWideDesktop {
 			display: none;
 		}
 	}
 </style>
 
 
-<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45">
+<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3">
 	<style>
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-lft {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-lft {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-lft {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-lft {
 				align-content: flex-start;
 			}
 
@@ -4163,7 +4198,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-lft {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-lft {
 				align-content: flex-start;
 			}
 
@@ -4171,14 +4206,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-lft {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-lft {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-lft {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-lft {
 				align-content: flex-start;
 			}
 
@@ -4188,13 +4223,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-footer-callout {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-footer-callout {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-footer-callout {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-footer-callout {
 				align-content: flex-start;
 			}
 
@@ -4202,7 +4237,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-footer-callout {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-footer-callout {
 				align-content: flex-start;
 			}
 
@@ -4210,14 +4245,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-footer-callout {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-footer-callout {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-footer-callout {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-footer-callout {
 				align-content: flex-start;
 			}
 
@@ -4236,13 +4271,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-rht {
+		#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-rht {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-rht {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-rht {
 				align-content: flex-start;
 			}
 
@@ -4250,7 +4285,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-rht {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-rht {
 				align-content: flex-start;
 			}
 
@@ -4258,14 +4293,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-rht {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-rht {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-780ef77a-3d89-4893-8a4d-cff34ebafe45 .grid-spacing-footer-rht {
+			#grid-areas-8f80b292-f0b1-4646-bdd2-42fb16fcd6c3 .grid-spacing-footer-rht {
 				align-content: flex-start;
 			}
 
@@ -4322,7 +4357,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 <style>
 	/* MOBILE (Default) */
-	#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 {
+	#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 {
 		display: grid;
 		gap: 0px 0px;
 		grid-template-columns: 1fr;
@@ -4332,85 +4367,85 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 		}
 	}
 
-	#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnMobile {
+	#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnMobile {
 		display: none;
 	}
 
 	/* TABLET ($tablet-up: 768px) */
 	@media ( max-width: 1023px ) and ( min-width: 768px ) {
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 {
 			gap: 0px 0px;
 			grid-template-columns: 1fr;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnMobile {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnTablet {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnTablet {
 			display: none;
 		}
 	}
 
 	/* WIDE TABLET ($desktop-up: 1024px) */
 	@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 {
 			gap: 0px 0px;
 			grid-template-columns: 6fr 6fr;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnMobile {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnWideTablet {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnWideTablet {
 			display: none;
 		}
 	}
 
 	/* DESKTOP ($desktop-large-up: 1200px) */
 	@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 {
 			gap: 0px 0px;
 			grid-template-columns: 6fr 6fr;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnMobile {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnDesktop {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnDesktop {
 			display: none;
 		}
 	}
 
 	/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 	@media ( min-width: 1600px ) {
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 {
 			gap: 0px 0px;
 			grid-template-columns: 6fr 6fr;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnMobile {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnMobile {
 			display: block;
 		}
 
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .hideOnWideDesktop {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .hideOnWideDesktop {
 			display: none;
 		}
 	}
 </style>
 
 
-<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190">
+<div class="gridAreas global-margin-top-none global-margin-bottom-none global-padding-top-none global-padding-bottom-none" id="grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72">
 	<style>
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-legal0 {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-legal0 {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-legal0 {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-legal0 {
 				align-content: flex-start;
 			}
 
@@ -4418,7 +4453,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-legal0 {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-legal0 {
 				align-content: flex-start;
 			}
 
@@ -4426,14 +4461,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-legal0 {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-legal0 {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-legal0 {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-legal0 {
 				align-content: flex-start;
 			}
 
@@ -4479,13 +4514,13 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 </div>
 
 	<style>
-		#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-copyright {
+		#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-copyright {
 			align-content: flex-start;
 		}
 
 		/* TABLET ($tablet-up: 768px) */
 		@media ( max-width: 1023px ) and ( min-width: 768px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-copyright {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-copyright {
 				align-content: flex-start;
 			}
 
@@ -4493,7 +4528,7 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* WIDE TABLET ($desktop-up: 1024px) */
 		@media ( max-width: 1199px ) and ( min-width: 1024px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-copyright {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-copyright {
 				align-content: flex-start;
 			}
 
@@ -4501,14 +4536,14 @@ background-image: url('https://trendmicro.scene7.com/is/image/trendmicro/black-0
 
 		/* DESKTOP ($desktop-large-up: 1200px) */
 		@media ( max-width: 1599px ) and ( min-width: 1200px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-copyright {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-copyright {
 				align-content: flex-start;
 			}
 		}
 
 		/* WIDE DESKTOP ($desktop-xl-up: 1600px) */
 		@media ( min-width: 1600px ) {
-			#grid-areas-c9be54f0-fb24-4973-a009-5fb4cb81e190 .grid-footer-copyright {
+			#grid-areas-a991c6b9-e92f-42e1-a829-1827b43aaf72 .grid-footer-copyright {
 				align-content: flex-start;
 			}
 

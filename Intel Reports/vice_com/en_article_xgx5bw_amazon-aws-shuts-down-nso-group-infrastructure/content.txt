@@ -352,7 +352,162 @@ var liveBlogData = {"postId":"68752","ajaxUrl":"https:\/\/www.vice.com\/wp-admin
                     ttq.page();
                 }(window, document, 'ttq');
             </script>
-            	<style>img#wpstats{display:none}</style>
+            
+<!-- custom-ads entry #3 -->
+<script type='text/javascript'>
+document.addEventListener('DOMContentLoaded', function () {
+    // Ad selectors
+    const adSelectors = [
+
+        '.lngtd-dynamic-inarticle',
+        '.lngtd-dynamic-rr',
+        '.vice_D_leaderboard_index',
+        '.vice_M_leaderboard_index',
+        '.vice_M_leaderboard',
+        '#consent-module-mspa',
+        '#consent-module-mspa',
+        '.wp-block-savage-platform-primis-video__heading',
+        '#primis_container_div',
+        '#vice_end_of_article',
+        '.wp-block-savage-platform-primis-video',
+        '.ai-content',
+        '#htl-ad-container',
+        '.raptive-ad',
+        '.ksc-container',
+        '.lngtd-dynamic-ad-container',
+        '.lngtd-dyn-ph',
+        '.sci-topbanner',
+        '.code-block',
+        '.ksl-adv-lbl',
+        '.ai-viewport-1',
+        '.ai-viewport-2',
+        '.ai-viewport-3',
+        '#mobile-adhesion-ad',
+        '.lngtd-ad-wrapper-styles',
+        '.ksc-in-con'
+    ];
+
+    // Declare the adRemovalInterval outside the removeAds function
+    let adRemovalInterval;
+
+    // Function to remove ads
+    function removeAds() {
+        let allAdsRemoved = true;
+
+        // Remove ads from the adSelectors list
+        adSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => el.remove());
+        });
+
+        // Remove ad scripts by their IDs
+        const adScriptIds = ['htl-bid-script', 'raptive-script', 'primis-script-handle'];
+        adScriptIds.forEach(id => {
+            const script = document.getElementById(id);
+            if (script) script.remove();
+        });
+
+        // Remove additional ad-related elements
+        document.querySelectorAll('.ai-dynamic, .ai-block, .adsbygoogle, [id^="google_ads_iframe"]').forEach(el => el.remove());
+
+        // Check if any ads still exist
+        adSelectors.forEach(selector => {
+            if (document.querySelectorAll(selector).length > 0) {
+                allAdsRemoved = false;
+            }
+        });
+
+        // Remove specific ad-related scripts
+        const scriptsToRemove = [
+            "https://standout-cdn.kargo.com/js/rh.min.js",
+            "https://lngtd.com/vice.js",
+            "https://socialcanvas-cdn.kargo.com/js/ksopb.js",
+            "https://standout-cdn.kargo.com/js/rh.min.js",
+            "https://srv.tunefindforfans.com/fruits/mangos.js",
+            "//b-code.liadm.com/b-02qi.min.js",
+            "https://socialcanvas-cdn.kargo.com/js/ksopb.js"
+        ];
+
+        scriptsToRemove.forEach(src => {
+            const scripts = document.querySelectorAll(`script[src="${src}"]`);
+            scripts.forEach(script => script.remove());
+        });
+
+        if (allAdsRemoved) {
+            console.log("All ads removed");
+            clearInterval(adRemovalInterval); // Stop the interval once all ads are removed
+        }
+    }
+
+    // Make a fetch request to check if ads should be disabled
+    fetch('/wp-admin/admin-ajax.php?action=check_ads', {
+        method: 'GET',
+        credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Check if ads should be disabled
+        if (data.disable_ads) {
+            console.log("User logged in, Ads removal started");
+
+            // Run the removeAds function after receiving the correct condition
+            removeAds();
+
+            // Start MutationObserver and repeated checks after confirming disable_ads is true
+            startAdObserver();
+
+            // Optional: Repeatedly check to make sure new ads are removed if they appear
+            adRemovalInterval = setInterval(removeAds, 2000); // Now defined before use
+
+            let count = 0;
+            const maxRemovals = 100;
+            const intervalId = setInterval(function() {
+                removeAds();
+                count++;
+                if (count >= maxRemovals) {
+                    clearInterval(intervalId);
+                }
+            }, 5000);
+
+			document.body.classList.add('hide-ads');
+        } else {
+            // If ads shouldn't be disabled, ensure ads are visible
+            console.log("Ads not removed");
+            adSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => el.style.visibility = 'visible');
+            });
+        }
+    })
+    .catch(err => console.error('Error checking ads:', err));
+
+    // Function to initialize MutationObserver after AJAX success
+    function startAdObserver() {
+        // MutationObserver to watch for dynamically added ads
+        const observer = new MutationObserver(function(mutationsList, observer) {
+            // Loop through all mutations that just occurred
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    // Check if any ads are added and remove them
+                    adSelectors.forEach(selector => {
+                        mutation.addedNodes.forEach(node => {
+                            if (node.matches && node.matches(selector)) {
+                                node.remove();
+                            }
+                        });
+                    });
+                }
+            }
+        });
+
+        // Observer configuration
+        const config = { childList: true, subtree: true };
+
+        // Start observing the body for added nodes
+        observer.observe(document.body, config);
+    }
+});
+</script>
+<!-- /custom-ads entry #3 -->
+	<style>img#wpstats{display:none}</style>
 		<script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"NewsArticle","headline":"Amazon Shuts Down NSO Group Infrastructure","url":"http:\/\/www.vice.com\/en\/article\/amazon-aws-shuts-down-nso-group-infrastructure\/","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.vice.com\/en\/article\/amazon-aws-shuts-down-nso-group-infrastructure\/"},"thumbnailUrl":"https:\/\/www.vice.com\/wp-content\/uploads\/sites\/2\/2021\/07\/1626699355177-aws-sign.jpeg?w=150&h=150&crop=1","image":{"@type":"ImageObject","url":"https:\/\/www.vice.com\/wp-content\/uploads\/sites\/2\/2021\/07\/1626699355177-aws-sign.jpeg"},"articleSection":"Tech","author":[{"@type":"Person","name":"Joseph Cox"}],"creator":["Joseph Cox"],"publisher":{"@type":"Organization","name":"VICE","logo":""},"keywords":["amazon","aws","cyber","nso","nso group","surveillance","world privacy","worldnews"],"dateCreated":"2021-07-19T13:09:54Z","datePublished":"2021-07-19T13:09:54Z","dateModified":"2024-07-27T07:01:21Z","metadata":{"content_type":"","ideator":[],"editor":["Emanuel Maiberg"],"senior_editor":[]}}</script><style class='wp-fonts-local'>
 @font-face{font-family:"VICE Grotesk";font-style:normal;font-weight:900;font-display:swap;src:url('https://www.vice.com/wp-content/themes/vice-2024/assets/fonts/VICEGrotesk-Black.woff2') format('woff2');}
 @font-face{font-family:"VICE Grotesk";font-style:italic;font-weight:900;font-display:swap;src:url('https://www.vice.com/wp-content/themes/vice-2024/assets/fonts/VICEGrotesk-BlackItalic.woff2') format('woff2');}
@@ -909,7 +1064,7 @@ document.body.className = document.body.className.replace('no-js','js');
 <div class='lngtd-dynamic-inarticle' id="htlad-post-article-1" style="min-height:200px; align-items: center; justify-content: center; display: flex;"></div></div>
 
 
-<p>The move comes as a group of media outlets and activist organizations published new research into NSO&#8217;s malware and phone numbers potentially selected for targeting by NSO&#8217;s government clients.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-14003053' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-14003053' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
+<p>The move comes as a group of media outlets and activist organizations published new research into NSO&#8217;s malware and phone numbers potentially selected for targeting by NSO&#8217;s government clients.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-27964059' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-27964059' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
 
 
 <div class="wp-block-savage-platform-primis-video">
@@ -924,7 +1079,7 @@ document.body.className = document.body.className.replace('no-js','js');
 <div class='lngtd-dynamic-inarticle' id="htlad-post-article-2" style="min-height:200px; align-items: center; justify-content: center; display: flex;"></div></div>
 
 
-<p><a href="https://www.amnesty.org/en/latest/research/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener">Amnesty International published a forensic investigation on Sunday</a> that, among other things, determined that NSO customers have had access to zero-day attacks in Apple&#8217;s iMessage as recently as this year. As part of that research, Amnesty wrote that a phone infected with NSO&#8217;s Pegasus malware sent information &#8220;to a service fronted by Amazon CloudFront, suggesting NSO Group has switched to using AWS services in recent months.&#8221; The Amnesty report included part of the same statement from Amazon, showing Amnesty contacted the company before publication.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-53425904' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-53425904' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
+<p><a href="https://www.amnesty.org/en/latest/research/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener">Amnesty International published a forensic investigation on Sunday</a> that, among other things, determined that NSO customers have had access to zero-day attacks in Apple&#8217;s iMessage as recently as this year. As part of that research, Amnesty wrote that a phone infected with NSO&#8217;s Pegasus malware sent information &#8220;to a service fronted by Amazon CloudFront, suggesting NSO Group has switched to using AWS services in recent months.&#8221; The Amnesty report included part of the same statement from Amazon, showing Amnesty contacted the company before publication.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-62723976' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-62723976' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
 
 
 
@@ -932,7 +1087,7 @@ document.body.className = document.body.className.replace('no-js','js');
 <div class='lngtd-dynamic-inarticle' id="htlad-post-article-3" style="min-height:200px; align-items: center; justify-content: center; display: flex;"></div></div>
 
 
-<p class="article__blockquote"><i><b>Do you work at NSO Group, did you used to, or do you know anything else about the company? We&#8217;d love to hear from you. You can contact Joseph Cox securely on Signal on +44 20 8133 5190, Wickr on josephcox, OTR chat on jfcox@jabber.ccc.de, or email joseph.cox@vice.com.</b></i></p><div class='ai-viewports ai-viewport-3 ai-insert-19-55996932' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-55996932' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
+<p class="article__blockquote"><i><b>Do you work at NSO Group, did you used to, or do you know anything else about the company? We&#8217;d love to hear from you. You can contact Joseph Cox securely on Signal on +44 20 8133 5190, Wickr on josephcox, OTR chat on jfcox@jabber.ccc.de, or email joseph.cox@vice.com.</b></i></p><div class='ai-viewports ai-viewport-3 ai-insert-19-29879356' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-29879356' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
 
 
 
@@ -940,7 +1095,7 @@ document.body.className = document.body.className.replace('no-js','js');
 <div class='lngtd-dynamic-inarticle' id="htlad-post-article-4" style="min-height:200px; align-items: center; justify-content: center; display: flex;"></div></div>
 
 
-<p>&#8220;Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment,&#8221; <a href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener">CloudFront&#8217;s website reads</a>.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-82683173' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-82683173' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
+<p>&#8220;Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds, all within a developer-friendly environment,&#8221; <a href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener">CloudFront&#8217;s website reads</a>.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-86476228' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-86476228' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
 
 
 
@@ -964,7 +1119,7 @@ document.body.className = document.body.className.replace('no-js','js');
 
 <p>&#8220;The use of cloud services protects NSO Group from some Internet scanning techniques,&#8221; Amnesty&#8217;s report added.</p>
 
-<p>Amazon has previously remained silent on NSO using its infrastructure. In May 2020 when <a href="https://www.vice.com/en/article/qj4p3w/nso-group-hack-fake-facebook-domain" target="_blank" rel="noopener">Motherboard uncovered evidence that NSO had used Amazon infrastructure to deliver malware</a>, Amazon did not respond to a request for comment asking if NSO had violated Amazon&#8217;s terms of service.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-45198683' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-45198683' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
+<p>Amazon has previously remained silent on NSO using its infrastructure. In May 2020 when <a href="https://www.vice.com/en/article/qj4p3w/nso-group-hack-fake-facebook-domain" target="_blank" rel="noopener">Motherboard uncovered evidence that NSO had used Amazon infrastructure to deliver malware</a>, Amazon did not respond to a request for comment asking if NSO had violated Amazon&#8217;s terms of service.</p><div class='ai-viewports ai-viewport-3 ai-insert-19-35916020' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-35916020' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
 
 
 
@@ -972,7 +1127,7 @@ document.body.className = document.body.className.replace('no-js','js');
 
 <p>On Sunday, journalistic organization Forbidden Stories and <a href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener">its media partners published a series of stories</a> based in part on a leak of more than 50,000 phone numbers that were allegedly selected by NSO&#8217;s clients for potential surveillance.</p>
 
-<p>In <a href="https://www.theguardian.com/news/2021/jul/18/response-from-nso-and-governments" target="_blank" rel="noopener">a statement to The Guardian</a>, NSO said &#8220;NSO does not operate the systems that it sells to vetted government customers, and does not have access to the data of its customers’ targets. NSO does not operate its technology, does not collect, nor possesses, nor has any access to any kind of data of its customers. Due to contractual and national security considerations, NSO cannot confirm or deny the identity of our government customers, as well as identity of customers of which we have shut down systems.&#8221;</p><div class='ai-viewports ai-viewport-3 ai-insert-19-16695443' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-16695443' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
+<p>In <a href="https://www.theguardian.com/news/2021/jul/18/response-from-nso-and-governments" target="_blank" rel="noopener">a statement to The Guardian</a>, NSO said &#8220;NSO does not operate the systems that it sells to vetted government customers, and does not have access to the data of its customers’ targets. NSO does not operate its technology, does not collect, nor possesses, nor has any access to any kind of data of its customers. Due to contractual and national security considerations, NSO cannot confirm or deny the identity of our government customers, as well as identity of customers of which we have shut down systems.&#8221;</p><div class='ai-viewports ai-viewport-3 ai-insert-19-60497341' style='margin: 8px auto; text-align: center; display: block; clear: both;' data-insertion-position='prepend' data-selector='.ai-insert-19-60497341' data-insertion-no-dbg data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTE5IGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdXJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg==' data-block='19'></div>
 
 
 
@@ -1013,87 +1168,87 @@ document.body.className = document.body.className.replace('no-js','js');
 
 
 
-<div class="wp-block-query is-style-post-list is-layout-flow wp-block-query-is-layout-flow"><ul class="wp-block-post-template is-layout-flow wp-block-post-template-is-layout-flow"><li class="wp-block-post post-1923518 post type-post status-publish format-standard has-post-thumbnail hentry category-horoscopes tag-astrology tag-daily-horoscopes tag-horoscopes sp_language-en">
-	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img loading="lazy" width="300" height="169" src="https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="" style="width:100%;height:100%;object-fit:cover;" decoding="async" srcset="https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg 1920w, https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg?resize=768,432 768w, https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg?resize=1536,864 1536w, https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2024/11/7_SCORPIO_DAILY_5_1920x1080_d23a92.jpg?resize=480,270 480w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">Illustration by Reesa.</figcaption></figure>
+<div class="wp-block-query is-style-post-list is-layout-flow wp-block-query-is-layout-flow"><ul class="wp-block-post-template is-layout-flow wp-block-post-template-is-layout-flow"><li class="wp-block-post post-1924053 post type-post status-publish format-standard has-post-thumbnail hentry category-news tag-air-travel tag-airports tag-faa-flight-cuts tag-flight-cuts tag-life tag-news tag-travel sp_language-en">
+	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img loading="lazy" width="300" height="154" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="How to Survive the FAA Flight Cuts No One Saw Coming" style="width:100%;height:100%;object-fit:cover;" decoding="async" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg 2880w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?resize=300,154 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?resize=768,395 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?resize=1024,526 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?resize=1536,789 1536w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?resize=2048,1052 2048w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?resize=600,308 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/How-to-Survive-the-FAA-Flight-Cuts-No-One-Saw-Coming.jpg?resize=2000,1028 2000w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">RBKomar/Getty Images</figcaption></figure>
 
 	
-	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/daily-horoscope-november-7-2025/" target="_self" >Daily Horoscope: November 7, 2025</a></h3>
+	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/how-to-survive-the-faa-flight-cuts-no-one-saw-coming/" target="_self" >How to Survive the FAA Flight Cuts No One Saw Coming</a></h3>
 
 		
-		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T00:01:00-04:00">45 minutes ago</time></div>
+		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T12:46:54-04:00">8 minutes ago</time></div>
 
 			<p class="wp-block-savage-platform-post-byline">
 	By <a href="https://www.vice.com/en/contributor/ashley-fike/" title="Posts by Ashley Fike" class="author url fn" rel="author">Ashley Fike</a></p>
 </div>
 		</div>
 	
-	</li><li class="wp-block-post post-1923866 post type-post status-publish format-standard has-post-thumbnail hentry category-news tag-animals tag-bear-attacks tag-japan tag-life tag-news sp_language-en">
-	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="157" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Japan-Just-Deployed-Troops-to-Deal-With-a-Surge-in-Bear-Attacks.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Japan Just Deployed Troops to Deal With a Surge in Bear Attacks" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Japan-Just-Deployed-Troops-to-Deal-With-a-Surge-in-Bear-Attacks.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Japan-Just-Deployed-Troops-to-Deal-With-a-Surge-in-Bear-Attacks.jpg?resize=300,157 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Japan-Just-Deployed-Troops-to-Deal-With-a-Surge-in-Bear-Attacks.jpg?resize=768,402 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Japan-Just-Deployed-Troops-to-Deal-With-a-Surge-in-Bear-Attacks.jpg?resize=1024,536 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Japan-Just-Deployed-Troops-to-Deal-With-a-Surge-in-Bear-Attacks.jpg?resize=600,314 600w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">Visual Space/Getty Images</figcaption></figure>
+	</li><li class="wp-block-post post-1924004 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-music tag-noisey tag-rap-metal sp_language-en">
+	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="169" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Rap-Metal.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Rap Metal" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Rap-Metal.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Rap-Metal.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Rap-Metal.jpg?resize=768,432 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Rap-Metal.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Rap-Metal.jpg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Rap-Metal.jpg?resize=480,270 480w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">Lindsay Brice/Getty Images</figcaption></figure>
 
 	
-	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/japan-just-deployed-troops-to-deal-with-a-surge-in-bear-attacks/" target="_self" >Japan Just Deployed Troops to Deal With a Surge in Bear Attacks</a></h3>
+	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/4-times-the-rap-metal-genre-went-off-the-rails-and-created-something-brilliant/" target="_self" >4 Times the Rap Metal Genre Went Off the Rails (and Created Something Brilliant)</a></h3>
 
 		
-		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T17:41:51-04:00">7 hours ago</time></div>
-
-			<p class="wp-block-savage-platform-post-byline">
-	By <a href="https://www.vice.com/en/contributor/luis-prada/" title="Posts by Luis Prada" class="author url fn" rel="author">Luis Prada</a></p>
-</div>
-		</div>
-	
-	</li><li class="wp-block-post post-1923831 post type-post status-publish format-standard has-post-thumbnail hentry category-news tag-human-interest tag-life tag-news sp_language-en">
-	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="157" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Father-and-Son-Killed-After-Getting-Stung-by-Over-100-Hornets-While-Ziplining.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Father and Son Killed After Getting Stung by Over 100 Hornets While Ziplining" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Father-and-Son-Killed-After-Getting-Stung-by-Over-100-Hornets-While-Ziplining.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Father-and-Son-Killed-After-Getting-Stung-by-Over-100-Hornets-While-Ziplining.jpg?resize=300,157 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Father-and-Son-Killed-After-Getting-Stung-by-Over-100-Hornets-While-Ziplining.jpg?resize=768,402 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Father-and-Son-Killed-After-Getting-Stung-by-Over-100-Hornets-While-Ziplining.jpg?resize=1024,536 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Father-and-Son-Killed-After-Getting-Stung-by-Over-100-Hornets-While-Ziplining.jpg?resize=600,314 600w" sizes="auto, (max-width: 300px) 100vw, 300px" /></figure>
-
-	
-	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/father-and-son-killed-after-getting-stung-by-over-100-hornets-while-ziplining/" target="_self" >Father and Son Killed After Getting Stung by Over 100 Hornets While Ziplining</a></h3>
-
-		
-		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T17:33:36-04:00">7 hours ago</time></div>
-
-			<p class="wp-block-savage-platform-post-byline">
-	By <a href="https://www.vice.com/en/contributor/luis-prada/" title="Posts by Luis Prada" class="author url fn" rel="author">Luis Prada</a></p>
-</div>
-		</div>
-	
-	</li><li class="wp-block-post post-1923881 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-guns-nroses tag-music tag-noisey tag-rock-music tag-slash sp_language-en">
-	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="169" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/ViceNoisey-Featured-Image-1.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Slash Breaks Down His New Live Blues Album, Names His Favorite Guitarists (Exclusive)" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/ViceNoisey-Featured-Image-1.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/ViceNoisey-Featured-Image-1.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/ViceNoisey-Featured-Image-1.jpg?resize=768,432 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/ViceNoisey-Featured-Image-1.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/ViceNoisey-Featured-Image-1.jpg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/ViceNoisey-Featured-Image-1.jpg?resize=480,270 480w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">Slash (Credit: Gene Kirkland)</figcaption></figure>
-
-	
-	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/guns-n-roses-guitarist-slash-said-management-issues-contributed-to-the-rift-between-him-and-axl-rose-in-the-90s/" target="_self" >Guns N’ Roses Guitarist Slash Said ‘Management Issues’ Contributed to the Rift Between Him and Axl Rose in the 90s</a></h3>
-
-		
-		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T17:11:10-04:00">8 hours ago</time></div>
-
-			<p class="wp-block-savage-platform-post-byline">
-	By <a href="https://www.vice.com/en/contributor/stephen-andrew-galiher/" title="Posts by Stephen Andrew Galiher" class="author url fn" rel="author">Stephen Andrew Galiher</a></p>
-</div>
-		</div>
-	
-	</li><li class="wp-block-post post-1923840 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-lady-gaga tag-noisey tag-pop-music sp_language-en">
-	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="169" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Lady-Gaga-4.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Lady Gaga" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Lady-Gaga-4.jpg 1201w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Lady-Gaga-4.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Lady-Gaga-4.jpg?resize=768,432 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Lady-Gaga-4.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Lady-Gaga-4.jpg?resize=600,337 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Lady-Gaga-4.jpg?resize=480,270 480w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">Kevin Winter/Getty Images</figcaption></figure>
-
-	
-	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/3-moments-when-lady-gaga-made-recession-angst-look-glamorous/" target="_self" >3 Moments When Lady Gaga Made Recession Angst Look Glamorous</a></h3>
-
-		
-		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T16:39:47-04:00">8 hours ago</time></div>
+		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T12:46:12-04:00">9 minutes ago</time></div>
 
 			<p class="wp-block-savage-platform-post-byline">
 	By <a href="https://www.vice.com/en/contributor/lauren-boisvert/" title="Posts by Lauren Boisvert" class="author url fn" rel="author">Lauren Boisvert</a></p>
 </div>
 		</div>
 	
-	</li><li class="wp-block-post post-1923846 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-david-draiman tag-disturbed tag-music tag-noisey tag-rock-music sp_language-en">
-	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="169" src="https://www.vice.com/wp-content/uploads/sites/2/2025/07/GettyImages-2215673740-e1751905071838.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" /><figcaption class="wp-block-post-featured-image__caption">LAS VEGAS, NEVADA &#8211; MAY 17: Singer David Draiman of Disturbed performs during a stop of &quot;The Sickness&quot; 25th anniversary tour at MGM Grand Garden Arena on May 17, 2025 in Las Vegas, Nevada. (Photo by Ethan Miller/Getty Images)</figcaption></figure>
+	</li><li class="wp-block-post post-1924016 post type-post status-publish format-standard has-post-thumbnail hentry category-gaming tag-bl4 tag-borderlands tag-borderlands-4 tag-game-sales tag-gaming tag-gaming-news tag-gaming-sales tag-gearbox-software tag-looter-shooters tag-take-two-interactive tag-video-game-news tag-video-games tag-waypoint sp_language-en">
+	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="154" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Take-Two CEO Says Borderlands 4’s PC Performance Issues Hurt Sales" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg 2880w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?resize=300,154 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?resize=768,395 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?resize=1024,526 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?resize=1536,789 1536w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?resize=2048,1052 2048w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?resize=600,308 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Take-Two-CEO-Says-Borderlands-4s-PC-Performance-Issues-Hurt-Sales.jpg?resize=2000,1028 2000w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">Screenshot: Gearbox Software</figcaption></figure>
 
 	
-	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/disturbed-frontman-david-draiman-says-band-is-tired-and-taking-a-hiatus-because-they-need-a-nice-long-break/" target="_self" >Disturbed Frontman David Draiman Says Band Is ‘Tired’ and Taking a Hiatus Because They Need a ‘Nice Long Break’</a></h3>
+	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/take-two-ceo-says-borderlands-4s-pc-performance-issues-hurt-sales/" target="_self" >Take-Two CEO Says Borderlands 4’s PC Performance Issues Hurt Sales</a></h3>
 
 		
-		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T15:37:27-04:00">9 hours ago</time></div>
+		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T12:40:51-04:00">14 minutes ago</time></div>
 
 			<p class="wp-block-savage-platform-post-byline">
-	By <a href="https://www.vice.com/en/contributor/stephen-andrew-galiher/" title="Posts by Stephen Andrew Galiher" class="author url fn" rel="author">Stephen Andrew Galiher</a></p>
+	By <a href="https://www.vice.com/en/contributor/brent-koepp/" title="Posts by Brent Koepp" class="author url fn" rel="author">Brent Koepp</a></p>
+</div>
+		</div>
+	
+	</li><li class="wp-block-post post-1923807 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-ace-frehley tag-kiss tag-rock-music tag-slash sp_language-en">
+	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="180" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-107989010.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Slash and Ace Frehley" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-107989010.jpg 1195w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-107989010.jpg?resize=300,180 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-107989010.jpg?resize=768,461 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-107989010.jpg?resize=1024,615 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-107989010.jpg?resize=600,361 600w" sizes="auto, (max-width: 300px) 100vw, 300px" /><figcaption class="wp-block-post-featured-image__caption">Slash and Ace Frehley in 2006</figcaption></figure>
+
+	
+	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/slash-reflects-on-ace-frehleys-legacy-one-of-the-great-70s-rock-guitar-heroes-exclusive/" target="_self" >Slash Reflects on Ace Frehley&#8217;s Legacy: &#8216;One of the Great 70s Rock Guitar Heroes&#8217; (Exclusive)</a></h3>
+
+		
+		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T12:19:38-04:00">35 minutes ago</time></div>
+
+			<p class="wp-block-savage-platform-post-byline">
+	By <a href="https://www.vice.com/en/contributor/daniel-kohn/" title="Posts by Daniel Kohn" class="author url fn" rel="author">Daniel Kohn</a></p>
+</div>
+		</div>
+	
+	</li><li class="wp-block-post post-1923926 post type-post status-publish format-standard has-post-thumbnail hentry category-comedy category-entertainment tag-bill-kinison tag-ozzy-osbourne tag-richard-belzer tag-sam-kinison sp_language-en">
+	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="201" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-2154390-e1762527251238.jpg?w=300" class="attachment-medium size-medium wp-post-image" alt="Sam Kinison" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" /><figcaption class="wp-block-post-featured-image__caption">Sam Kinison on stage a year before his death (Photo by Bob Scott/Fotos International/Getty Images)</figcaption></figure>
+
+	
+	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/sam-kinisons-brother-reveals-the-comedians-final-moments/" target="_self" >Sam Kinison’s Brother Reveals the Comedian’s Final Moments</a></h3>
+
+		
+		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T12:15:37-04:00">39 minutes ago</time></div>
+
+			<p class="wp-block-savage-platform-post-byline">
+	By <a href="https://www.vice.com/en/contributor/tony-alpsen/" title="Posts by Tony Alpsen" class="author url fn" rel="author">Tony Alpsen</a></p>
+</div>
+		</div>
+	
+	</li><li class="wp-block-post post-1924021 post type-post status-publish format-standard has-post-thumbnail hentry category-shopping category-tech tag-cybersecurity tag-deals tag-holiday tag-vpn sp_language-en">
+	<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="300" height="162" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/webroot-holiday-deal.webp?w=300" class="attachment-medium size-medium wp-post-image" alt="" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/webroot-holiday-deal.webp 1184w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/webroot-holiday-deal.webp?resize=300,162 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/webroot-holiday-deal.webp?resize=768,415 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/webroot-holiday-deal.webp?resize=1024,554 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/webroot-holiday-deal.webp?resize=600,324 600w" sizes="auto, (max-width: 300px) 100vw, 300px" /></figure>
+
+	
+	<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/cybersecurity-tool-keeps-you-safe-from-holiday-scams/" target="_self" >&#8216;Tis the Season for Scams: How to Protect Yourself Because the Internet Is Chaos</a></h3>
+
+		
+		<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T11:58:25-04:00">56 minutes ago</time></div>
+
+			<p class="wp-block-savage-platform-post-byline">
+	By <a href="https://www.vice.com/en/contributor/ysolt-usigan/" title="Posts by Ysolt Usigan" class="author url fn" rel="author">Ysolt Usigan</a></p>
 </div>
 		</div>
 	
@@ -1117,59 +1272,59 @@ document.body.className = document.body.className.replace('no-js','js');
 <h2 class="wp-block-heading">More<br>From VICE</h2>
 
 	
-	<div class="wp-block-query is-style-post-grid-4 is-layout-flow wp-block-query-is-layout-flow"><ul class="wp-block-post-template is-layout-flow wp-block-post-template-is-layout-flow"><li class="wp-block-post post-1923162 post type-post status-publish format-standard has-post-thumbnail hentry category-life tag-documentaries tag-film sp_language-en">
-		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="768" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?w=1024" class="attachment-large size-large wp-post-image" alt="" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg 2362w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?resize=300,225 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?resize=768,576 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?resize=1024,768 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?resize=1536,1152 1536w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?resize=2048,1536 2048w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?resize=600,450 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Key-Image02_A5.jpg?resize=2000,1500 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-block-post-featured-image__caption">Image courtesy of Shawney Cohen.</figcaption></figure>
+	<div class="wp-block-query is-style-post-grid-4 is-layout-flow wp-block-query-is-layout-flow"><ul class="wp-block-post-template is-layout-flow wp-block-post-template-is-layout-flow"><li class="wp-block-post post-1923917 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-hip-hop tag-music tag-noisey sp_language-en">
+		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="576" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/3-New-Hip-Hop-RB-Songs-You-Must-Hear-This-Week-11725.jpg?w=1024" class="attachment-large size-large wp-post-image" alt="3 New Hip-Hop &amp; R&amp;B Songs You Must Hear This Week (11/7/25)" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/3-New-Hip-Hop-RB-Songs-You-Must-Hear-This-Week-11725.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/3-New-Hip-Hop-RB-Songs-You-Must-Hear-This-Week-11725.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/3-New-Hip-Hop-RB-Songs-You-Must-Hear-This-Week-11725.jpg?resize=768,432 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/3-New-Hip-Hop-RB-Songs-You-Must-Hear-This-Week-11725.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/3-New-Hip-Hop-RB-Songs-You-Must-Hear-This-Week-11725.jpg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/3-New-Hip-Hop-RB-Songs-You-Must-Hear-This-Week-11725.jpg?resize=480,270 480w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-block-post-featured-image__caption">(Photo by Mat Hayward/Getty Images</figcaption></figure>
 
 		
-		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/watch-the-manor-uncut-trailer/" target="_self" >Watch a Documentary About a Family-Owned Strip Club, Raw and Uncut on VICE: Members Only</a></h3>
+		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/3-new-hip-hop-rb-songs-you-must-hear-this-week-11-7-25/" target="_self" >3 New Hip-Hop &amp; R&amp;B Songs You Must Hear This Week (11/7/25)</a></h3>
 
 			
-			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T13:57:32-04:00">11 hours ago</time></div>
+			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T11:44:20-04:00">1 hour ago</time></div>
 
 				<p class="wp-block-savage-platform-post-byline">
-	By <a href="https://www.vice.com/en/contributor/emma-garland/" title="Posts by Emma Garland" class="author url fn" rel="author">Emma Garland</a></p>
+	By <a href="https://www.vice.com/en/contributor/caleb-catlin/" title="Posts by Caleb Catlin" class="author url fn" rel="author">Caleb Catlin</a></p>
 </div>
 			</div>
 		
-		</li><li class="wp-block-post post-1923163 post type-post status-publish format-standard has-post-thumbnail hentry category-membership tag-interviews tag-movies sp_language-en">
-		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="576" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Manor001.jpg?w=1024" class="attachment-large size-large wp-post-image" alt="" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Manor001.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Manor001.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Manor001.jpg?resize=768,432 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Manor001.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Manor001.jpg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Manor001.jpg?resize=480,270 480w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-block-post-featured-image__caption">Images courtesy of Shawney Cohen</figcaption></figure>
+		</li><li class="wp-block-post post-1923362 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-hardcore tag-heavy-metal tag-hip-hop tag-metalcore tag-music tag-noisey sp_language-en">
+		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="577" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Quavo-new-press-e1762503237162.jpeg?w=1024" class="attachment-large size-large wp-post-image" alt="" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Quavo-new-press-e1762503237162.jpeg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Quavo-new-press-e1762503237162.jpeg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Quavo-new-press-e1762503237162.jpeg?resize=768,433 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Quavo-new-press-e1762503237162.jpeg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Quavo-new-press-e1762503237162.jpeg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Quavo-new-press-e1762503237162.jpeg?resize=480,270 480w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 		
-		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/watch-the-manor-documentary-uncut-members-only/" target="_self" >Member Exclusive: Watch ‘The Manor,’ a Film About a Family-Owned Strip Club</a></h3>
+		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/new-music-friday-5-songs-you-need-hear-this-week-11-7/" target="_self" >New Music Friday: 5 Songs You Need Hear This Week (11/7)</a></h3>
 
 			
-			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T13:49:04-04:00">11 hours ago</time></div>
-
-				<p class="wp-block-savage-platform-post-byline">
-	By <a href="https://www.vice.com/en/contributor/emma-garland/" title="Posts by Emma Garland" class="author url fn" rel="author">Emma Garland</a></p>
-</div>
-			</div>
-		
-		</li><li class="wp-block-post post-1923769 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-noisey tag-pop-music sp_language-en">
-		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="576" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/S-Club.jpg?w=1024" class="attachment-large size-large wp-post-image" alt="Pop stars" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/S-Club.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/S-Club.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/S-Club.jpg?resize=768,432 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/S-Club.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/S-Club.jpg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/S-Club.jpg?resize=480,270 480w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-block-post-featured-image__caption">Dave Hogan/Getty Images</figcaption></figure>
-
-		
-		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/3-almost-superstars-from-the-20th-century-who-didnt-quite-break-through-into-mainstream-pop-music/" target="_self" >3 Almost-Superstars from the 20th Century Who Didn’t Quite Break Through Into Mainstream Pop Music</a></h3>
-
-			
-			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T13:09:14-04:00">12 hours ago</time></div>
-
-				<p class="wp-block-savage-platform-post-byline">
-	By <a href="https://www.vice.com/en/contributor/lauren-boisvert/" title="Posts by Lauren Boisvert" class="author url fn" rel="author">Lauren Boisvert</a></p>
-</div>
-			</div>
-		
-		</li><li class="wp-block-post post-1923792 post type-post status-publish format-standard has-post-thumbnail hentry category-music tag-music tag-noisey tag-rap-music tag-snoop-dogg sp_language-en">
-		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="577" src="https://www.vice.com/wp-content/uploads/sites/2/2024/12/americans-can-buy-weed-from-snoop-dogg-online-now-e1750956777347.jpg?w=1024" class="attachment-large size-large wp-post-image" alt="americans-can-buy-weed-from-snoop-dogg-online-now" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2024/12/americans-can-buy-weed-from-snoop-dogg-online-now-e1750956777347.jpg 1200w, https://www.vice.com/wp-content/uploads/sites/2/2024/12/americans-can-buy-weed-from-snoop-dogg-online-now-e1750956777347.jpg?resize=300,169 300w, https://www.vice.com/wp-content/uploads/sites/2/2024/12/americans-can-buy-weed-from-snoop-dogg-online-now-e1750956777347.jpg?resize=768,433 768w, https://www.vice.com/wp-content/uploads/sites/2/2024/12/americans-can-buy-weed-from-snoop-dogg-online-now-e1750956777347.jpg?resize=1024,576 1024w, https://www.vice.com/wp-content/uploads/sites/2/2024/12/americans-can-buy-weed-from-snoop-dogg-online-now-e1750956777347.jpg?resize=600,338 600w, https://www.vice.com/wp-content/uploads/sites/2/2024/12/americans-can-buy-weed-from-snoop-dogg-online-now-e1750956777347.jpg?resize=480,270 480w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-block-post-featured-image__caption">Rick Kern/WireImage/Getty Images</figcaption></figure>
-
-		
-		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/snoop-doggs-new-years-eve-special-cancelled-at-nbc/" target="_self" >Snoop Dogg&#8217;s New Year&#8217;s Eve Special Cancelled at NBC</a></h3>
-
-			
-			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-06T12:40:08-04:00">12 hours ago</time></div>
+			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T11:15:21-04:00">2 hours ago</time></div>
 
 				<p class="wp-block-savage-platform-post-byline">
 	By <a href="https://www.vice.com/en/contributor/stephen-andrew-galiher/" title="Posts by Stephen Andrew Galiher" class="author url fn" rel="author">Stephen Andrew Galiher</a></p>
+</div>
+			</div>
+		
+		</li><li class="wp-block-post post-1923952 post type-post status-publish format-standard has-post-thumbnail hentry category-gaming tag-game-freak tag-game-leaks tag-gaming tag-grand-theft-auto-6 tag-gta tag-gta-6 tag-nintendo tag-nintendo-switch-2 tag-pokemon tag-pokemon-gen-10 tag-pokemon-leaks tag-pokemon-wind-wave tag-rockstar-games tag-switch-2 tag-the-pokemon-company tag-waypoint sp_language-en">
+		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="526" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?w=1024" class="attachment-large size-large wp-post-image" alt="Could GTA 6’s 2026 Delay Push Back Pokémon Gen 10’s Release Date?" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" srcset="https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg 2880w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?resize=300,154 300w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?resize=768,395 768w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?resize=1024,526 1024w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?resize=1536,789 1536w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?resize=2048,1052 2048w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?resize=600,308 600w, https://www.vice.com/wp-content/uploads/sites/2/2025/11/Could-GTA-6s-2026-Delay-Push-Back-Pokemon-Gen-10s-Release-Date.jpg?resize=2000,1028 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-block-post-featured-image__caption">Screenshot: Rockstar Games, The Pokémon Company</figcaption></figure>
+
+		
+		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/could-pokemon-gen-10-get-delayed-over-the-new-gta-6-release-date/" target="_self" >Could Pokémon Gen 10 Get Delayed Over the New GTA 6 Release Date?</a></h3>
+
+			
+			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T10:52:22-04:00">2 hours ago</time></div>
+
+				<p class="wp-block-savage-platform-post-byline">
+	By <a href="https://www.vice.com/en/contributor/brent-koepp/" title="Posts by Brent Koepp" class="author url fn" rel="author">Brent Koepp</a></p>
+</div>
+			</div>
+		
+		</li><li class="wp-block-post post-1923931 post type-post status-publish format-standard has-post-thumbnail hentry category-comedy category-entertainment tag-billy-crystal tag-eddie-murphy tag-george-carlin tag-jerry-seinfeld tag-julia-louis-dreyfus tag-richard-pryor tag-whoopi-goldberg sp_language-en">
+		<figure style="aspect-ratio:16/9;" class="wp-block-post-featured-image"><img width="1024" height="672" src="https://www.vice.com/wp-content/uploads/sites/2/2025/11/GettyImages-140317224-e1762525884953.jpg?w=1024" class="attachment-large size-large wp-post-image" alt="George Carlin" style="width:100%;height:100%;object-fit:cover;" decoding="async" loading="lazy" /><figcaption class="wp-block-post-featured-image__caption">George Carlin doing George Carlin things (Photo by: Herb Ball/NBCU Photo Bank)</figcaption></figure>
+
+		
+		<div class="wp-block-group post-list-content is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex"><h3 class="wp-block-post-title"><a href="https://www.vice.com/en/article/george-carlin-makes-richard-pryor-eddie-murphy-laugh/" target="_self" >G.O.A.T. Status: Watch George Carlin Make Richard Pryor and Eddie Murphy Laugh in Resurfaced Clip</a></h3>
+
+			
+			<div class="wp-block-group post-list-meta is-layout-flex wp-block-group-is-layout-flex"><div class="wp-block-post-date"><time data-format="human-diff" datetime="2025-11-07T10:38:58-04:00">2 hours ago</time></div>
+
+				<p class="wp-block-savage-platform-post-byline">
+	By <a href="https://www.vice.com/en/contributor/tony-alpsen/" title="Posts by Tony Alpsen" class="author url fn" rel="author">Tony Alpsen</a></p>
 </div>
 			</div>
 		
@@ -1221,13 +1376,13 @@ document.body.className = document.body.className.replace('no-js','js');
 
 </footer>
 </div>
-<div class='ai-viewports ai-viewport-1 ai-insert-2-28256940' data-insertion-position='before' data-selector='.more-like-this' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTInIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgo8ZGl2IGNsYXNzPSdsbmd0ZC1keW5hbWljLXJyJyBzdHlsZT0ibWluLWhlaWdodDo2MDBweDsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7Ij48L2Rpdj48L2Rpdj4K' data-block='2'></div>
+<div class='ai-viewports ai-viewport-1 ai-insert-2-81188624' data-insertion-position='before' data-selector='.more-like-this' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTInIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgo8ZGl2IGNsYXNzPSdsbmd0ZC1keW5hbWljLXJyJyBzdHlsZT0ibWluLWhlaWdodDo2MDBweDsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7Ij48L2Rpdj48L2Rpdj4K' data-block='2'></div>
 
-<div class='ai-viewports ai-viewport-1 ai-insert-3-30742913' data-insertion-position='after' data-selector='.entry-aside' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTMnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgo8ZGl2IGNsYXNzPSdsbmd0ZC1keW5hbWljLXJyJyBzdHlsZT0ibWluLWhlaWdodDo2MDBweDsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7Ij48L2Rpdj48L2Rpdj4K' data-block='3'></div>
+<div class='ai-viewports ai-viewport-1 ai-insert-3-53939390' data-insertion-position='after' data-selector='.entry-aside' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTMnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgo8ZGl2IGNsYXNzPSdsbmd0ZC1keW5hbWljLXJyJyBzdHlsZT0ibWluLWhlaWdodDo2MDBweDsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7Ij48L2Rpdj48L2Rpdj4K' data-block='3'></div>
 
-<div class='ai-viewports ai-viewport-2 ai-viewport-3 ai-insert-9-61877238' data-insertion-position='before' data-selector='.wp-block-jetpack-sharing-buttons-wrapper' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTkgYWktbGlzdC1ibG9jay1pcCcgc3R5bGU9J21hcmdpbjogOHB4IGF1dG87IHRleHQtYWxpZ246IGNlbnRlcjsgZGlzcGxheTogYmxvY2s7IGNsZWFyOiBib3RoOyc+Cgo8ZGl2IGNsYXNzPSdhaS1keW5hbWljIGFpLWlwLWRhdGEnICBjb3VudHJpZXM9J0tSJyBjb3VudHJ5LWxpc3Q9J1cnIGRhdGEtY29kZT0nUEdScGRpQmpiR0Z6Y3owbmJHNW5kR1F0WkhsdVlXMXBZeTFwYm1GeWRHbGpiR1VuSUhOMGVXeGxQU0p0YVc0dGFHVnBaMmgwT2pFd01IQjRPeUJrYVhOd2JHRjVPaUJtYkdWNE95QmhiR2xuYmkxcGRHVnRjem9nWTJWdWRHVnlPeUJxZFhOMGFXWjVMV052Ym5SbGJuUTZJR05sYm5SbGNqc2lQand2WkdsMlBnPT0nPjwvZGl2Pgo8L2Rpdj4K' data-block='9'></div>
+<div class='ai-viewports ai-viewport-2 ai-viewport-3 ai-insert-9-96778647' data-insertion-position='before' data-selector='.wp-block-jetpack-sharing-buttons-wrapper' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTkgYWktbGlzdC1ibG9jay1pcCcgc3R5bGU9J21hcmdpbjogOHB4IGF1dG87IHRleHQtYWxpZ246IGNlbnRlcjsgZGlzcGxheTogYmxvY2s7IGNsZWFyOiBib3RoOyc+Cgo8ZGl2IGNsYXNzPSdhaS1keW5hbWljIGFpLWlwLWRhdGEnICBjb3VudHJpZXM9J0tSJyBjb3VudHJ5LWxpc3Q9J1cnIGRhdGEtY29kZT0nUEdScGRpQmpiR0Z6Y3owbmJHNW5kR1F0WkhsdVlXMXBZeTFwYm1GeWRHbGpiR1VuSUhOMGVXeGxQU0p0YVc0dGFHVnBaMmgwT2pFd01IQjRPeUJrYVhOd2JHRjVPaUJtYkdWNE95QmhiR2xuYmkxcGRHVnRjem9nWTJWdWRHVnlPeUJxZFhOMGFXWjVMV052Ym5SbGJuUTZJR05sYm5SbGNqc2lQand2WkdsMlBnPT0nPjwvZGl2Pgo8L2Rpdj4K' data-block='9'></div>
 
-<div class='ai-viewports ai-viewport-2 ai-viewport-3 ai-insert-10-79103423' data-insertion-position='before' data-selector='.wp-block-jetpack-sharing-buttons-wrapper' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTEwIGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdCJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5kbWxqWlY5TlgyeGxZV1JsY21KdllYSmtKeUJ6ZEhsc1pUMGliV2x1TFdobGFXZG9kRG8xTUhCNE95QmthWE53YkdGNU9pQm1iR1Y0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzaVBqd3ZaR2wyUGc9PSc+PC9kaXY+CjwvZGl2Pgo=' data-block='10'></div>
+<div class='ai-viewports ai-viewport-2 ai-viewport-3 ai-insert-10-78324809' data-insertion-position='before' data-selector='.wp-block-jetpack-sharing-buttons-wrapper' data-code='PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTEwIGFpLWxpc3QtYmxvY2staXAnIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1pcC1kYXRhJyAgY291bnRyaWVzPSdLUicgY291bnRyeS1saXN0PSdCJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5kbWxqWlY5TlgyeGxZV1JsY21KdllYSmtKeUJ6ZEhsc1pUMGliV2x1TFdobGFXZG9kRG8xTUhCNE95QmthWE53YkdGNU9pQm1iR1Y0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzaVBqd3ZaR2wyUGc9PSc+PC9kaXY+CjwvZGl2Pgo=' data-block='10'></div>
 
 
 
@@ -1602,144 +1757,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script><!-- /custom-ads entry #2 -->
-
-<!-- custom-ads entry #3 -->
-<script type='text/javascript'>
-document.addEventListener('DOMContentLoaded', function () {
-    // Ad selectors
-    const adSelectors = [
-        '.wp-block-savage-platform-primis-video',
-        '.ai-content',
-        '#htl-ad-container',
-        '.raptive-ad',
-        '.lngtd-dynamic-inarticle',
-        '.lngtd-dynamic-rr',
-        '.ksc-container',
-        '.lngtd-dynamic-ad-container',
-        '.lngtd-dyn-ph',
-        '.sci-topbanner',
-        '.code-block',
-        '.ksl-adv-lbl'
-    ];
-
-    // Declare the adRemovalInterval outside the removeAds function
-    let adRemovalInterval;
-
-    // Function to remove ads
-    function removeAds() {
-        let allAdsRemoved = true;
-
-        // Remove ads from the adSelectors list
-        adSelectors.forEach(selector => {
-            document.querySelectorAll(selector).forEach(el => el.remove());
-        });
-
-        // Remove ad scripts by their IDs
-        const adScriptIds = ['htl-bid-script', 'raptive-script', 'primis-script-handle'];
-        adScriptIds.forEach(id => {
-            const script = document.getElementById(id);
-            if (script) script.remove();
-        });
-
-        // Remove additional ad-related elements
-        document.querySelectorAll('.ai-dynamic, .ai-block, .adsbygoogle, [id^="google_ads_iframe"]').forEach(el => el.remove());
-
-        // Check if any ads still exist
-        adSelectors.forEach(selector => {
-            if (document.querySelectorAll(selector).length > 0) {
-                allAdsRemoved = false;
-            }
-        });
-
-        // Remove specific ad-related scripts
-        const scriptsToRemove = [
-            "https://standout-cdn.kargo.com/js/rh.min.js",
-            "https://lngtd.com/vice.js",
-            "https://socialcanvas-cdn.kargo.com/js/ksopb.js"
-        ];
-
-        scriptsToRemove.forEach(src => {
-            const scripts = document.querySelectorAll(`script[src="${src}"]`);
-            scripts.forEach(script => script.remove());
-        });
-
-        if (allAdsRemoved) {
-            console.log("All ads removed");
-            clearInterval(adRemovalInterval); // Stop the interval once all ads are removed
-        }
-    }
-
-    // Make a fetch request to check if ads should be disabled
-    fetch('/wp-admin/admin-ajax.php?action=check_ads', {
-        method: 'GET',
-        credentials: 'same-origin'
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Check if ads should be disabled
-        if (data.disable_ads) {
-            console.log("User logged in, Ads removal started");
-
-            // Run the removeAds function after receiving the correct condition
-            removeAds();
-
-            // Start MutationObserver and repeated checks after confirming disable_ads is true
-            startAdObserver();
-            
-            // Optional: Repeatedly check to make sure new ads are removed if they appear
-            adRemovalInterval = setInterval(removeAds, 1000); // Now defined before use
-
-            let count = 0;
-            const maxRemovals = 40;
-            const intervalId = setInterval(function() {
-                adSelectors.forEach(selector => {
-                    document.querySelectorAll(selector).forEach(el => el.remove());
-                });
-                count++;
-                if (count >= maxRemovals) {
-                    clearInterval(intervalId);
-                }
-            }, 2000);
-
-			document.body.classList.add('hide-ads');
-        } else {
-            // If ads shouldn't be disabled, ensure ads are visible
-            console.log("Ads not removed");
-            adSelectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(el => el.style.visibility = 'visible');
-            });
-        }
-    })
-    .catch(err => console.error('Error checking ads:', err));
-
-    // Function to initialize MutationObserver after AJAX success
-    function startAdObserver() {
-        // MutationObserver to watch for dynamically added ads
-        const observer = new MutationObserver(function(mutationsList, observer) {
-            // Loop through all mutations that just occurred
-            for(const mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    // Check if any ads are added and remove them
-                    adSelectors.forEach(selector => {
-                        mutation.addedNodes.forEach(node => {
-                            if (node.matches && node.matches(selector)) {
-                                node.remove();
-                            }
-                        });
-                    });
-                }
-            }
-        });
-
-        // Observer configuration
-        const config = { childList: true, subtree: true };
-
-        // Start observing the body for added nodes
-        observer.observe(document.body, config);
-    }
-});
-</script>
-<!-- /custom-ads entry #3 -->
 <link rel='stylesheet' id='all-css-0' href='https://www.vice.com/wp-content/plugins/savage-membership-chargebee/assets/css/thankyouModal.css?m=1761049866g' type='text/css' media='all' />
 <script id="wp-block-template-skip-link-js-after">
 	( function() {
@@ -1794,7 +1811,7 @@ wp.date.setSettings( {"l10n":{"locale":"en_US","months":["January","February","M
 <script type="text/javascript" src="https://www.vice.com/_static/??/wp-content/plugins/savage-platform/build/core-post-date/index.js,/wp-content/mu-plugins/jetpack-15.1/_inc/blocks/sharing-button/view.js?m=1762462882j" ></script><script src="https://embeds.beehiiv.com/attribution.js" id="savage-platform-beehiiv-form-beehiiv-attribution-js" async data-wp-strategy="async"></script>
 <script type="text/javascript" src="https://www.vice.com/wp-content/plugins/savage-platform/js/google-discover-tracking.js?m=1762424502g" ></script><script id="chargebee-js-js-extra">
 var cbUserData = {"email":"","firstName":"","lastName":"","back_url":"","site_name":"vice","chargebee_api_key":"live_g57HshAMljMgYVLcu4VCK5SgraoUrMMPR"};
-var cbPluginVars = {"pluginUrl":"https:\/\/www.vice.com\/wp-content\/plugins\/savage-membership-chargebee","openidLoginUrl":"https:\/\/identity.vice.com\/application\/o\/authorize\/?response_type=code&scope=email%20profile%20openid%20offline_access&client_id=nfWCqBEvi89lam7B3jNrEpf2zODuUIdrcz9BxyyT&state=f764358a5005a98e81a3268b999eedf9&redirect_uri=https%3A%2F%2Fwww.vice.com%2Fwp-admin%2Fadmin-ajax.php%3Faction%3Dopenid-connect-authorize","siteName":"vice"};
+var cbPluginVars = {"pluginUrl":"https:\/\/www.vice.com\/wp-content\/plugins\/savage-membership-chargebee","openidLoginUrl":"https:\/\/identity.vice.com\/application\/o\/authorize\/?response_type=code&scope=email%20profile%20openid%20offline_access&client_id=nfWCqBEvi89lam7B3jNrEpf2zODuUIdrcz9BxyyT&state=2a62f2f4e25628a73dd18e11c4fdf50f&redirect_uri=https%3A%2F%2Fwww.vice.com%2Fwp-admin%2Fadmin-ajax.php%3Faction%3Dopenid-connect-authorize","siteName":"vice"};
 </script>
 <script src="https://js.chargebee.com/v2/chargebee.js" id="chargebee-js-js"></script>
 <script id="chargebee-js-js-after">
@@ -2146,7 +2163,7 @@ null!=b&&b.addEventListener("click",e=>{m("euconsent-v2");m("__lxG__consent__v2"
 m("cmplz_policy_id");m("cmplz_statistics");m("moove_gdpr_popup");m("real_cookie_banner-blog:1-tcf");m("real_cookie_banner-blog:1");e=document.querySelector("#ai-iab-tcf-status");null!=e&&(e.textContent="CONSENT COOKIES DELETED")})},5)});function da(b){setTimeout(function(){"function"==typeof ai_process_rotations_in_element&&ai_process_rotations_in_element(b);"function"==typeof ai_process_lists&&ai_process_lists();"function"==typeof ai_process_ip_addresses&&ai_process_ip_addresses();"function"==typeof ai_process_filter_hooks&&
 ai_process_filter_hooks();"function"==typeof ai_adb_process_blocks&&ai_adb_process_blocks(b);"function"==typeof ai_process_impressions&&1==ai_tracking_finished&&ai_process_impressions();"function"==typeof ai_install_click_trackers&&1==ai_tracking_finished&&ai_install_click_trackers();"function"==typeof ai_install_close_buttons&&ai_install_close_buttons(document)},5)}function ia(b){var e=b?b.split("?")[1]:window.location.search.slice(1);b={};if(e){e=e.split("#")[0];e=e.split("&");for(var p=0;p<e.length;p++){var z=
 e[p].split("="),C=void 0,x=z[0].replace(/\[\d*\]/,function(L){C=L.slice(1,-1);return""});z="undefined"===typeof z[1]?"":z[1];x=x.toLowerCase();z=z.toLowerCase();b[x]?("string"===typeof b[x]&&(b[x]=[b[x]]),"undefined"===typeof C?b[x].push(z):b[x][C]=z):b[x]=z}}return b}};
-var ai_ip=!0,ai_data_id="f12a11d01c",ai_ajax_url="https://www.vice.com/wp-admin/admin-ajax.php",ai_block_class_def="code-block";
+var ai_ip=!0,ai_data_id="12885ef3da",ai_ajax_url="https://www.vice.com/wp-admin/admin-ajax.php",ai_block_class_def="code-block";
 if("undefined"!=typeof ai_ip){function u(b,g){g||(g=window.location.href);b=b.replace(/[\[\]]/g,"\\$&");return(b=(new RegExp("[?&]"+b+"(=([^&#]*)|&|#|$)")).exec(g))?b[2]?decodeURIComponent(b[2].replace(/\+/g," ")):"":null}function y(){return(new Date).getTime()+"-"+Math.round(1E5*Math.random())}function v(b){b.forEach((a,c)=>{a.classList.remove("ai-ip-data")});var g=!1;if(""!=ai_ip_data){try{var l=JSON.parse(ai_ip_data),f=l[0],r=l[1],p=l[2],q=l[3]}catch(a){return}var t=!1;-1!=f.indexOf("#")&&(t=!0,
 f=f.replace("#",""));var e="";t&&(e="CFP BLOCKED, ");e=e+f+", "+r;null!=p&&null!=q&&(e=e+":"+p+":"+q);null==p&&(p="");null==q&&(q="");null!=l&&b.forEach((a,c)=>{c=a.closest("div."+ai_block_class_def);g=!0;if(a.hasAttribute("ip-addresses")){var h=a.getAttribute("ip-addresses").split(","),m=a.getAttribute("ip-address-list"),k=!1;h.every((d,n)=>{if("*"==d.charAt(0))if("*"==d.charAt(d.length-1)){if(d=d.substr(1,d.length-2),-1!=f.indexOf(d))return k=!0,!1}else{if(d=d.substr(1),f.substr(-d.length)==d)return k=
 !0,!1}else if("*"==d.charAt(d.length-1)){if(d=d.substr(0,d.length-1),0==f.indexOf(d))return k=!0,!1}else if("#"==d){if(""==f)return k=!0,!1}else if("CFP"==d.toUpperCase()){if(t)return k=!0,!1}else if(d==f)return k=!0,!1;return!0});switch(m){case "B":k&&(g=!1);break;case "W":k||(g=!1)}}if(g&&a.hasAttribute("countries"))switch(h=a.getAttribute("countries").split(","),m=a.getAttribute("country-list"),k=!1,h.every((d,n)=>{n=d.trim().split(":");if(null==n[1]||""==p)n[1]="";if(null==n[2]||""==q)n[2]="";
@@ -2159,7 +2176,7 @@ c&&c.classList.remove("ai-list-block-ip")})}}ai_process_ip_addresses=function(b)
 "none";a.style.visibility="";a.style.position="";a.style.width="";a.style.height="";a.style.zIndex="";a.classList.remove("ai-ip-data")})})}};(function(b){"complete"===document.readyState||"loading"!==document.readyState&&!document.documentElement.doScroll?b():document.addEventListener("DOMContentLoaded",b)})(function(){setTimeout(function(){ai_process_ip_addresses()},5)});function z(b){setTimeout(function(){"function"==typeof ai_process_rotations_in_element&&ai_process_rotations_in_element(b);"function"==
 typeof ai_process_lists&&ai_process_lists();"function"==typeof ai_process_ip_addresses&&ai_process_ip_addresses();"function"==typeof ai_process_filter_hooks&&ai_process_filter_hooks();"function"==typeof ai_adb_process_blocks&&ai_adb_process_blocks(b);"function"==typeof ai_process_impressions&&1==ai_tracking_finished&&ai_process_impressions();"function"==typeof ai_install_click_trackers&&1==ai_tracking_finished&&ai_install_click_trackers();"function"==typeof ai_install_close_buttons&&ai_install_close_buttons(document)},
 5)}};
-ai_run_979908449724 = function(){
+ai_run_718328886883 = function(){
 ai_document_write=document.write;document.write=function(a){"interactive"==document.readyState?(console.error("document.write called after page load: ",a),"undefined"!=typeof ai_js_errors&&ai_js_errors.push(["document.write called after page load",a,0])):ai_document_write.call(document,a)};
 ai_insert ('prepend', 'head', b64d ('PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTk2JyBzdHlsZT0nbWFyZ2luOiA4cHggMDsgY2xlYXI6IGJvdGg7Jz4KPHNjcmlwdCBzcmM9Imh0dHBzOi8vbG5ndGQuY29tL3ZpY2UuanMiIGFzeW5jPjwvc2NyaXB0PjwvZGl2Pgo='));
 ai_insert ('prepend', 'head', b64d ('PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTk1JyBzdHlsZT0nbWFyZ2luOiA4cHggMDsgY2xlYXI6IGJvdGg7Jz4KPHNjcmlwdD4Kd2luZG93LmxuZ3RkQWRUYXJnZXRpbmcgPSB7CiAiY2F0ZWdvcnkiOiAiVGVjaCIsCiAiYXV0aG9yIjogImFsbGV5IiwKICJwb3N0X2lkIjogIjY4NzUyIiwKICJ0YWdzIjogImFtYXpvbiBBV1MgQ1lCRVIgTlNPIE5TTyBHcm91cCBTVVJWRUlMTEFOQ0Ugd29ybGQgcHJpdmFjeSB3b3JsZG5ld3MiLAogInRpdGxlIjogIkFtYXpvbiBTaHV0cyBEb3duIE5TTyBHcm91cCBJbmZyYXN0cnVjdHVyZSIsCiAidXJsIjogImh0dHBzOi8vd3d3LnZpY2UuY29tL2VuL2FydGljbGUvYW1hem9uLWF3cy1zaHV0cy1kb3duLW5zby1ncm91cC1pbmZyYXN0cnVjdHVyZS8iLAp9Cjwvc2NyaXB0PjwvZGl2Pgo='));
@@ -2169,18 +2186,18 @@ ai_insert ('prepend', 'head', b64d ('PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2N
 ai_insert ('after', '.entry-footer', b64d ('PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTIzIGFpLWxpc3QtYmxvY2snIHN0eWxlPSdtYXJnaW46IDhweCBhdXRvOyB0ZXh0LWFsaWduOiBjZW50ZXI7IGRpc3BsYXk6IGJsb2NrOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1saXN0LWRhdGEnIHBhcmFtZXRlci1saXN0PSdLaTlsYmk5elpXTjBhVzl1THlvc0lDb3ZaR1V2S2l3Z0tpOXBkQzhxTENBcUwzSjFMeW9zSUNvdlpYTXZLaXdnS2k5emRXSnpZM0pwWW1VdGRHOHRkbWxqWlMxdFlXZGhlbWx1WlMxc2NERXYnIHBhcmFtZXRlci1saXN0LXR5cGU9J0InIHNjaGVkdWxpbmctc3RhcnQ9J01qQXlOUzB3Tmkwd01pQXdNRG93TURvd01BPT0nIHNjaGVkdWxpbmctZW5kPSdNakF5TlMwd05pMHdNeUF3TlRvd01Eb3dNQT09JyBzY2hlZHVsaW5nLWRheXM9J01Dd3hMRElzTXl3MExEVXNOZz09JyBzY2hlZHVsaW5nLXR5cGU9J1cnIGdtdD0nLTE0NDAwMDAwJyBzY2hlZHVsaW5nLWZhbGxiYWNrPScwJyBmYWxsYmFja19sZXZlbD0nJyBmYWxsYmFjay10cmFja2luZz0nJyBkYXRhLWNvZGU9J1BHUnBkaUJqYkdGemN6MG5iRzVuZEdRdFpIbHVZVzFwWXkxcGJtRnlkR2xqYkdVbklITjBlV3hsUFNKdGFXNHRhR1ZwWjJoME9qTXdNSEI0T3lCaGJHbG5iaTFwZEdWdGN6b2dZMlZ1ZEdWeU95QnFkWE4wYVdaNUxXTnZiblJsYm5RNklHTmxiblJsY2pzZ1pHbHpjR3hoZVRvZ1pteGxlRHNpUGp3dlpHbDJQZz09Jz48L2Rpdj4KPC9kaXY+Cg=='));
 ai_insert ('prepend', 'head', b64d ('PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTIwIGFpLWxpc3QtYmxvY2snIHN0eWxlPSdtYXJnaW46IDhweCAwOyBjbGVhcjogYm90aDsnPgoKPGRpdiBjbGFzcz0nYWktZHluYW1pYyBhaS1saXN0LWRhdGEnIHNjaGVkdWxpbmctc3RhcnQ9J01qQXlOUzB3T0MweE9TQXdNem93TURvd01BPT0nIHNjaGVkdWxpbmctZW5kPSdNakF5TlMwd09DMHlNU0F3TXpvd01Eb3dNQT09JyBzY2hlZHVsaW5nLWRheXM9J01Dd3hMRElzTXl3MExEVXNOZz09JyBzY2hlZHVsaW5nLXR5cGU9J0InIGdtdD0nLTE0NDAwMDAwJyBzY2hlZHVsaW5nLWZhbGxiYWNrPScwJyBmYWxsYmFja19sZXZlbD0nJyBmYWxsYmFjay10cmFja2luZz0nJyBkYXRhLWNvZGU9J1BITmpjbWx3ZENCemNtTTlJbWgwZEhCek9pOHZjM1JoYm1SdmRYUXRZMlJ1TG10aGNtZHZMbU52YlM5cWN5OXlhQzV0YVc0dWFuTWlQand2YzJOeWFYQjBQZz09Jz48L2Rpdj4KPC9kaXY+Cg=='));
 ai_insert ('before', '.wp-block-savage-platform-theme-vice-media-group-logo', b64d ('PGRpdiBjbGFzcz0nY29kZS1ibG9jayBjb2RlLWJsb2NrLTExJyBzdHlsZT0nbWFyZ2luOiA4cHggYXV0bzsgdGV4dC1hbGlnbjogY2VudGVyOyBkaXNwbGF5OiBibG9jazsgY2xlYXI6IGJvdGg7Jz4KPGRpdiBpZD0iY29uc2VudC1tb2R1bGUtbXNwYSIgb25jbGljaz0id2luZG93Ll9zcF8udXNuYXQubG9hZFByaXZhY3lNYW5hZ2VyTW9kYWwoJzEwMzgwNjknKSIgaWQ9InBtTGluayIgc3R5bGU9ImZvbnQtc2l6ZToxNXB4OyB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsgZGlzcGxheTpub25lOyBjb2xvcjogI2ZmZmZmZjsiPgpEbyBOb3QgU2VsbCBvciBTaGFyZSBNeSBQZXJzb25hbCBJbmZvcm1hdGlvbgo8L2Rpdj4KCjxkaXYgaWQ9ImNvbnNlbnQtbW9kdWxlLWdkcHIiIG9uY2xpY2s9IndpbmRvdy5fc3BfLmdkcHIubG9hZFByaXZhY3lNYW5hZ2VyTW9kYWwoJzkxMDQ1NScpIiBpZD0icG1MaW5rIiBzdHlsZT0iZm9udC1zaXplOjE1cHg7IHRleHQtZGVjb3JhdGlvbjp1bmRlcmxpbmU7IGRpc3BsYXk6bm9uZTsgY29sb3I6ICNmZmZmZmY7Ij4KRG8gTm90IFNlbGwgb3IgU2hhcmUgTXkgUGVyc29uYWwgSW5mb3JtYXRpb24KPC9kaXY+PC9kaXY+Cg=='));
-ai_insert_viewport_code ('ai-insert-10-79103423');
-ai_insert_viewport_code ('ai-insert-9-61877238');
-ai_insert_viewport_code ('ai-insert-3-30742913');
-ai_insert_viewport_code ('ai-insert-2-28256940');
-ai_insert_viewport_code ('ai-insert-19-16695443');
-ai_insert_viewport_code ('ai-insert-19-45198683');
-ai_insert_viewport_code ('ai-insert-19-82683173');
-ai_insert_viewport_code ('ai-insert-19-55996932');
-ai_insert_viewport_code ('ai-insert-19-53425904');
-ai_insert_viewport_code ('ai-insert-19-14003053');
+ai_insert_viewport_code ('ai-insert-10-78324809');
+ai_insert_viewport_code ('ai-insert-9-96778647');
+ai_insert_viewport_code ('ai-insert-3-53939390');
+ai_insert_viewport_code ('ai-insert-2-81188624');
+ai_insert_viewport_code ('ai-insert-19-60497341');
+ai_insert_viewport_code ('ai-insert-19-35916020');
+ai_insert_viewport_code ('ai-insert-19-86476228');
+ai_insert_viewport_code ('ai-insert-19-29879356');
+ai_insert_viewport_code ('ai-insert-19-62723976');
+ai_insert_viewport_code ('ai-insert-19-27964059');
 };
-if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) ai_run_979908449724 (); else document.addEventListener ('DOMContentLoaded', ai_run_979908449724);
+if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) ai_run_718328886883 (); else document.addEventListener ('DOMContentLoaded', ai_run_718328886883);
 ai_js_code = true;
 </script>
 </body>

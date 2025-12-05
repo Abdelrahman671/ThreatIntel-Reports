@@ -9,9 +9,9 @@
     
     <script>
         window.geoIPCountry = 'US';
-        window.geoIPState = 'VA';
+        window.geoIPState = 'IA';
         window.geoIPCountryName = 'United States';
-        window.geoIPZip = '22747';
+        window.geoIPZip = '50307';
         window.geoPhoneCountryCode = '1'
         window.mktoInitValues = window.mktoInitValues || {};
         window.mktoInitValues['referringURL'] = '';        
@@ -272,24 +272,206 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         <header class="header" data-module="header">
             
 
-    <div class="container header__utility-links-wrapper">
-        <div class="header__utility-links">
-            
 
+<div class="container header__utility-links-wrapper">
+  <div class="header__utility-links">
+    <a class="header__signin-link" href="https://www.connectwise.com/company/trust?ref=utility-nav-www" target="_self">
+      <span>Trust Center</span>
+    </a>
 
+    <a class="header__signin-link" href="https://www.connectwise.com/contact-us?ref=utility-nav-www" target="_self">
+      <span>Contact Us</span>
+    </a>
 
-<a class="header__signin-link" href="https://www.connectwise.com/company/trust?ref=utility-nav-www" target="_self">        <span>Trust Center</span>
-</a>
+    <div class="header__signin-dd">
+      <button class="header__signin-link header__signin-trigger" id="signin-trigger" type="button" aria-haspopup="menu" aria-controls="signin-menu">
+        <span>Sign In</span>
+      </button>
 
+      <ul id="signin-menu" class="header__signin-menu" aria-label="Sign In menu">
+        <li>
+          <a href="https://home.connectwise.com/?ref=utility-nav-www" target="_blank" rel="noopener">
+            ConnectWise Sign In
+          </a>
+        </li>
+        <li>
+          <a href="https://portal.cloudservices.connectwise.com/" target="_blank" rel="noopener">
+            Cloud Services Sign In
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+    <style>
+        /* ================================
+   SIGN IN DROPDOWN (CSS–ONLY)
+   ================================ */
 
-<a class="header__signin-link" href="https://www.connectwise.com/contact-us?ref=utility-nav-www" target="_self">        <span>Contact Us</span>
-</a>
+/* 1) Make sure the utility links are not translucent as a group */
+.header__utility-links {
+  opacity: 1;
+}
 
+/* Slightly fade link text by color instead of container opacity */
+.header__utility-links .header__signin-link,
+.header__utility-links .header__trust-link,
+.header__utility-links .header__signin-dd > .header__signin-link {
+  color: rgba(255, 255, 255, 0.8);
+}
 
-<a class="header__signin-link" href="https://home.connectwise.com?ref=utility-nav-www" rel="noopener noreferrer noindex nofollow " target="_blank">        <span>Sign In</span>
-</a>
-        </div>
-	</div>
+/* Make the Sign In button look like the other header links */
+.header__signin-trigger {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* 2) Sign In dropdown wrapper sits inline with other utility links */
+.header__utility-links .header__signin-dd {
+  position: relative;
+  display: inline-block;
+}
+
+/* 3) Dropdown menu overlays, not pushing content */
+.header__signin-menu {
+  position: absolute;
+  top: 100%;          /* directly under the trigger */
+  right: 0;
+  min-width: 220px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+
+  background: #fff; 
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12), 0 2px 10px rgba(0,0,0,.08);
+
+  display: none;      /* hidden by default */
+  z-index: 1200;      /* above header panels/search */
+}
+
+/* 4) Open menu on hover OR when keyboard focus is inside */
+.header__signin-dd:hover > .header__signin-menu,
+.header__signin-dd:focus-within > .header__signin-menu {
+  display: block;
+}
+
+/* 5) Menu item styling */
+.header__signin-menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: var(--midnight-medium, #111);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.header__signin-menu a:hover,
+.header__signin-menu a:focus {
+  background: #f3f4f6;
+}
+
+/* Visible focus inside the dropdown (dark ring on light bg) */
+.header__signin-menu a:focus,
+.header__signin-menu a:focus-visible {
+  outline: 2px solid #0d1025;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* 6) Make sure the header strip can show the dropdown without clipping */
+.header__utility-links-wrapper {
+  overflow: visible;
+}
+
+/* 7) Optional subtle animation (no layout shift) */
+@media (prefers-reduced-motion: no-preference) {
+  .header__signin-menu {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .14s ease, transform .14s ease;
+  }
+
+  .header__signin-dd:hover > .header__signin-menu,
+  .header__signin-dd:focus-within > .header__signin-menu {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile note: .header__utility-links is display:none under the main header
+   breakpoint in your SCSS, so this dropdown is effectively desktop-only
+   unless you expose it in the mobile panel. */
+
+/* Mobile Styling */
+
+@media (max-width: 1183px) {
+  .header__utility-links .header__signin-link,
+  .header__utility-links .header__trust-link,
+  .header__utility-links .header__signin-dd > .header__signin-link {
+    color: var(--midnight-main);   /* this matches how the live site does it */
+  }
+}
+
+/* MOBILE: make the Sign In dropdown full-width and inline in the menu */
+@media (max-width: 1183px) {
+  /* Let the wrapper behave like a normal block in the vertical menu */
+  .header__utility-links .header__signin-dd {
+    display: block;
+    position: static;
+    margin-bottom: 16px;    /* matches other items' spacing */
+  }
+  
+  /* MOBILE: make the Sign In text match mobile styling */
+  .header__signin-trigger {
+    font-size:14px;
+  }
+
+  /* Dropdown menu becomes a normal block list, full width */
+  .header__signin-menu {
+    position: static;
+    margin-top: 2px;
+    padding: 0px 0 4px 0;
+    width: 100%;
+    min-width: 0;
+
+    background: transparent;        /* inherit mobile panel bg */
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .header__signin-menu li {
+    list-style: none;
+    margin: 0;
+  }
+
+  .header__signin-menu a {
+    padding: 8px 0;
+    border-radius: 0;
+    color: var(--midnight-main);
+    font-size: 14px;
+    display: block;
+  }
+
+  .header__signin-menu a:hover,
+  .header__signin-menu a:focus {
+    background: transparent;        /* or a subtle gray if you want */
+  }
+}
+        </style>
+    <script>
+        
+    </script>
+
 
     <div class="container">
         <div class="header__wrapper">
@@ -303,10 +485,10 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
 
             <nav class="header__main">
                     <ul class="header__main-nav">
-                            <li><a href="#" data-target="tab-45983671"><span>Platform</span></a></li>
-                            <li><a href="#" data-target="tab-16478473"><span>Solutions</span></a></li>
-                            <li><a href="#" data-target="tab-26228702"><span>Community</span></a></li>
-                            <li><a href="#" data-target="tab-28974710"><span>About Us</span></a></li>
+                            <li><a href="#" data-target="tab-58741546"><span>Platform</span></a></li>
+                            <li><a href="#" data-target="tab-34129078"><span>Solutions</span></a></li>
+                            <li><a href="#" data-target="tab-7045139"><span>Community</span></a></li>
+                            <li><a href="#" data-target="tab-13213654"><span>About Us</span></a></li>
                     </ul>
 
                     <a href="#" class="header__search-button"></a>
@@ -353,7 +535,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-45983671" class="header__panel">
+    <div data-id="tab-58741546" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -362,13 +544,13 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-29177680" class="h6 active">PSA and RMM</a></li>
-                            <li><a href="#" data-target="tab-61256564" class="h6 ">Cybersecurity and Data Protection</a></li>
-                            <li><a href="#" data-target="tab-11356827" class="h6 ">Automation and Integrations</a></li>
+                            <li><a href="#" data-target="tab-60182163" class="h6 active">PSA and RMM</a></li>
+                            <li><a href="#" data-target="tab-36648914" class="h6 ">Cybersecurity and Data Protection</a></li>
+                            <li><a href="#" data-target="tab-61263253" class="h6 ">Automation and Integrations</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-29177680" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-60182163" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -491,7 +673,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-61256564" class="header__subpanel ">
+                    <div data-id="tab-36648914" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -614,7 +796,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-11356827" class="header__subpanel ">
+                    <div data-id="tab-61263253" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -690,7 +872,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-16478473" class="header__panel">
+    <div data-id="tab-34129078" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -699,13 +881,13 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-20914533" class="h6 active">By Use Case</a></li>
-                            <li><a href="#" data-target="tab-9973089" class="h6 ">By Market </a></li>
-                            <li><a href="#" data-target="tab-45758048" class="h6 ">By Category</a></li>
+                            <li><a href="#" data-target="tab-6539268" class="h6 active">By Use Case</a></li>
+                            <li><a href="#" data-target="tab-1568581" class="h6 ">By Market </a></li>
+                            <li><a href="#" data-target="tab-56393088" class="h6 ">By Category</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-20914533" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-6539268" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -795,7 +977,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-9973089" class="header__subpanel ">
+                    <div data-id="tab-1568581" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -865,7 +1047,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-45758048" class="header__subpanel ">
+                    <div data-id="tab-56393088" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -938,7 +1120,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-26228702" class="header__panel">
+    <div data-id="tab-7045139" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -947,14 +1129,14 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-59353803" class="h6 active">IT Nation</a></li>
-                            <li><a href="#" data-target="tab-46777120" class="h6 ">Events</a></li>
-                            <li><a href="#" data-target="tab-35396408" class="h6 ">University</a></li>
-                            <li><a href="#" data-target="tab-53511507" class="h6 ">Resources</a></li>
+                            <li><a href="#" data-target="tab-51282916" class="h6 active">IT Nation</a></li>
+                            <li><a href="#" data-target="tab-48162489" class="h6 ">Events</a></li>
+                            <li><a href="#" data-target="tab-9531092" class="h6 ">University</a></li>
+                            <li><a href="#" data-target="tab-53166887" class="h6 ">Resources</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-59353803" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-51282916" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1026,7 +1208,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-46777120" class="header__subpanel ">
+                    <div data-id="tab-48162489" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1119,7 +1301,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-35396408" class="header__subpanel ">
+                    <div data-id="tab-9531092" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1198,7 +1380,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-53511507" class="header__subpanel ">
+                    <div data-id="tab-53166887" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1344,7 +1526,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
         </div>
     </div>
 
-    <div data-id="tab-28974710" class="header__panel">
+    <div data-id="tab-13213654" class="header__panel">
         <div class="header__panel-container container">
             <div class="header__panel-left">
                 <div class="header__mobile-header">
@@ -1353,12 +1535,12 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
                     <a href="#" class="header__close-button" title="Close"></a>
                 </div>
                     <ul>
-                            <li><a href="#" data-target="tab-54419896" class="h6 active">About Us</a></li>
-                            <li><a href="#" data-target="tab-34057198" class="h6 ">News and Press</a></li>
+                            <li><a href="#" data-target="tab-62216887" class="h6 active">About Us</a></li>
+                            <li><a href="#" data-target="tab-20852868" class="h6 ">News and Press</a></li>
                     </ul>
             </div>
 
-                    <div data-id="tab-54419896" class="header__subpanel header__subpanel--active">
+                    <div data-id="tab-62216887" class="header__subpanel header__subpanel--active">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1451,7 +1633,7 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
     </div>
 
                     </div>
-                    <div data-id="tab-34057198" class="header__subpanel ">
+                    <div data-id="tab-20852868" class="header__subpanel ">
                         
     <div class="header__mobile-header">
         <a href="#" class="header__back-button" title="Back"></a>
@@ -1554,6 +1736,13 @@ _iaq = [ ['client', 'e25530bc51364b208d397a38e3e12253'], ['track', 'consume'] ];
 .swiper-slide {
     flex-shrink: 0;
     width: auto;
+}
+
+@media (width < 1200px) {
+    .header__utility-buttons-cta2 {
+        display: none;
+        margin: 0 24px 200px;
+    }
 }
         </style>
     <script>
@@ -1994,60 +2183,60 @@ code {
                                         <a href="#" class="search-results__filter-title">Content Types</a>
                                         <div class="search-results__filter-options">
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_20446273" value="118958" type="checkbox"  />
-                                                    <label for="checkbox_20446273">Calculator</label>
+                                                    <input id="checkbox_55026891" value="118958" type="checkbox"  />
+                                                    <label for="checkbox_55026891">Calculator</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_53816628" value="7996" type="checkbox"  />
-                                                    <label for="checkbox_53816628">Checklist</label>
+                                                    <input id="checkbox_13763432" value="7996" type="checkbox"  />
+                                                    <label for="checkbox_13763432">Checklist</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_51844202" value="7997" type="checkbox"  />
-                                                    <label for="checkbox_51844202">eBook</label>
+                                                    <input id="checkbox_23042686" value="7997" type="checkbox"  />
+                                                    <label for="checkbox_23042686">eBook</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_6710307" value="7998" type="checkbox"  />
-                                                    <label for="checkbox_6710307">Executive Summary</label>
+                                                    <input id="checkbox_37294567" value="7998" type="checkbox"  />
+                                                    <label for="checkbox_37294567">Executive Summary</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_20020895" value="7999" type="checkbox"  />
-                                                    <label for="checkbox_20020895">Feature Sheet</label>
+                                                    <input id="checkbox_64647658" value="7999" type="checkbox"  />
+                                                    <label for="checkbox_64647658">Feature Sheet</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_38827550" value="132313" type="checkbox"  />
-                                                    <label for="checkbox_38827550">Guide</label>
+                                                    <input id="checkbox_37574157" value="132313" type="checkbox"  />
+                                                    <label for="checkbox_37574157">Guide</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_44633312" value="8000" type="checkbox"  />
-                                                    <label for="checkbox_44633312">Industry Reports</label>
+                                                    <input id="checkbox_48137149" value="8000" type="checkbox"  />
+                                                    <label for="checkbox_48137149">Industry Reports</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_24294693" value="8001" type="checkbox"  />
-                                                    <label for="checkbox_24294693">Infographic</label>
+                                                    <input id="checkbox_65971711" value="8001" type="checkbox"  />
+                                                    <label for="checkbox_65971711">Infographic</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_58364205" value="122815" type="checkbox"  />
-                                                    <label for="checkbox_58364205">Kit</label>
+                                                    <input id="checkbox_58129525" value="122815" type="checkbox"  />
+                                                    <label for="checkbox_58129525">Kit</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_57111352" value="8002" type="checkbox"  />
-                                                    <label for="checkbox_57111352">Threat Report</label>
+                                                    <input id="checkbox_44903667" value="8002" type="checkbox"  />
+                                                    <label for="checkbox_44903667">Threat Report</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_16637318" value="8003" type="checkbox"  />
-                                                    <label for="checkbox_16637318">Tool</label>
+                                                    <input id="checkbox_46853088" value="8003" type="checkbox"  />
+                                                    <label for="checkbox_46853088">Tool</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_56885847" value="8004" type="checkbox"  />
-                                                    <label for="checkbox_56885847">Webinar (Upcoming)</label>
+                                                    <input id="checkbox_62253231" value="8004" type="checkbox"  />
+                                                    <label for="checkbox_62253231">Webinar (Upcoming)</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_40223723" value="114747" type="checkbox"  />
-                                                    <label for="checkbox_40223723">Webinar (On Demand)</label>
+                                                    <input id="checkbox_36153501" value="114747" type="checkbox"  />
+                                                    <label for="checkbox_36153501">Webinar (On Demand)</label>
                                                 </div>
                                                 <div class="search-results__filter">
-                                                    <input id="checkbox_45659266" value="8005" type="checkbox"  />
-                                                    <label for="checkbox_45659266">Whitepaper</label>
+                                                    <input id="checkbox_54020874" value="8005" type="checkbox"  />
+                                                    <label for="checkbox_54020874">Whitepaper</label>
                                                 </div>
                                         </div>
                                     </div>
@@ -2342,7 +2531,7 @@ code {
          data-submit-button-text="Submit">
 
 
-        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8E6tR7Knh4ZAiUEXLa_KBlB4ypiU6LRB_DN3lJLA07KbwFVEIbRGUqSGTNKOQFxyj_E0f4XLLn_m23zVt956-xllZZrvmO7Dzz054-Zmwk6LWglBxCoM2Nd3Sn8VWcEFmyc8E0drT9t4_KAaCHQNWiQ" />
+        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8E6tR7Knh4ZAiUEXLa_KBlBrkOsLnXTzQhdhPT_ajTjzOdO2xasdTRAdnRfK1d_pXe42iY5Ipg50af1fJOhHi-w4pEUj5HVnhHGbxJOufxxo0wVVhWsWiojkZREFY4m_K9RXdyNIFX_UUC75JIfnB9E" />
         <form data-form-id="1301" data-form-submit-action="128142" data-form-type="newsletter" data-on-renderer="ConnectWise.GlobalModules.MarketoValidations.DomainValidation.Validate" data-on-success="ConnectWise.GlobalModules.Marketo.FormSuccess.MainSubmitForm" data-on-validate="ConnectWise.GlobalModules.MarketoValidations.DomainValidation.RegisterEmailFieldWarning" data-page-source="Resource Center" id="1301_4244_293">
         </form>
     </div>

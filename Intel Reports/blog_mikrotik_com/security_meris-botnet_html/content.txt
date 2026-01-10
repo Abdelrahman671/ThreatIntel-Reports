@@ -34,7 +34,7 @@
         />
         <meta property="og:image" content="https://mikrotik.com/images/logo/open-graph.png"/>
     
-    <link rel="preload" as="style" href="https://mikrotik.com/build/assets/app-CzqzhZdJ.css" /><link rel="modulepreload" as="script" href="https://mikrotik.com/build/assets/app-BkKtbxRJ.js" /><link rel="stylesheet" href="https://mikrotik.com/build/assets/app-CzqzhZdJ.css" data-navigate-track="reload" /><script type="module" src="https://mikrotik.com/build/assets/app-BkKtbxRJ.js" data-navigate-track="reload"></script>
+    <link rel="preload" as="style" href="https://mikrotik.com/build/assets/app-CP-909Z0.css" /><link rel="modulepreload" as="script" href="https://mikrotik.com/build/assets/app-BkKtbxRJ.js" /><link rel="stylesheet" href="https://mikrotik.com/build/assets/app-CP-909Z0.css" data-navigate-track="reload" /><script type="module" src="https://mikrotik.com/build/assets/app-BkKtbxRJ.js" data-navigate-track="reload"></script>
     <title>
         MikroTik
                     &middot; Mēris botnet
@@ -47,25 +47,22 @@
     Skip to main content
 </a>
 
-<header class="sticky top-0 lg:static z-2000">
-    <div wire:snapshot="{&quot;data&quot;:{&quot;useTransparentBackground&quot;:false},&quot;memo&quot;:{&quot;id&quot;:&quot;vM9pZpdqI8LeuLL3bNbm&quot;,&quot;name&quot;:&quot;components.shared.navigation&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:{&quot;lw-931278869-0&quot;:[&quot;menu&quot;,&quot;6uO0juPRNZSI6poqFSh3&quot;],&quot;lw-931278869-1&quot;:[&quot;div&quot;,&quot;Z6upOs5JE5aXzswMksUt&quot;]},&quot;scripts&quot;:[&quot;931278869-0&quot;],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;295f22a8f489110b924f0dfb59f4843def7caa18b5fa13ac3e99e68ad58414c1&quot;}" wire:effects="{&quot;scripts&quot;:{&quot;931278869-0&quot;:&quot;    &lt;script&gt;\n        Alpine.store(&#039;mobileNavigation&#039;, {\n            open: false,\n            toggle() {\n                this.open = !this.open;\n            }\n        });\n\n        Alpine.store(&#039;navBar&#039;, {\n            visible: false,\n            transparent: false,\n            transparentBorder: false,\n\n            init() {\n                this.transparent = $wire?.useTransparentBackground;\n            }\n        });\n    &lt;\/script&gt;\n        &quot;}}" wire:id="vM9pZpdqI8LeuLL3bNbm"
-    class="absolute inset-x-0 border-gray-4 transition-transform duration-200 lg:transition-none bg-white"
+<header class="sticky top-0 lg:static z-2000" wire:ignore>
+    <div wire:snapshot="{&quot;data&quot;:{&quot;useTransparentBackground&quot;:false},&quot;memo&quot;:{&quot;id&quot;:&quot;ctD2DlXOEJfuQQepvZ8Y&quot;,&quot;name&quot;:&quot;components.shared.navigation&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:{&quot;lw-931278869-0&quot;:[&quot;menu&quot;,&quot;vd5rKsj7CuRxKiQ5KHuO&quot;],&quot;lw-931278869-1&quot;:[&quot;div&quot;,&quot;acun58MCCWE4H4hKtEHq&quot;]},&quot;scripts&quot;:[&quot;931278869-0&quot;],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;33c9e705c5b5acfeaba090230420fa52ba88ba7a7d913a6335359dfce6e1da43&quot;}" wire:effects="{&quot;scripts&quot;:{&quot;931278869-0&quot;:&quot;    &lt;script&gt;\n        Alpine.store(&#039;mobileNavigation&#039;, {\n            open: false,\n            toggle() {\n                this.open = !this.open;\n            }\n        });\n\n        Alpine.store(&#039;navBar&#039;, {\n            visible: false,\n            transparent: false,\n\n            init() {\n                this.transparent = $wire?.useTransparentBackground;\n            }\n        });\n    &lt;\/script&gt;\n        &quot;}}" wire:id="ctD2DlXOEJfuQQepvZ8Y"
+    class="absolute inset-x-0 border-gray-4 border-b bg-white transition-transform duration-200 lg:transition-none bg-white"
     :class="{
         '-translate-y-full lg:translate-y-0': !show && !$store.mobileNavigation.open,
-        'dark dark:bg-transparent': transparent && $store.navBar.transparent,
-        'bg-white border-b': !transparent || !$store.navBar.transparent,
-        'border-b border-b-white/25': transparent && $store.navBar.transparentBorder,
+        'dark dark:bg-transparent border-b border-b-white/25': transparent,
+        'border-b': !transparent,
     }"
     x-data="{
         colorSwitchThreshold: 100,
         alwaysShowMobileNavigationThreshold: 100,
         previousScrollPosition: 0,
         show: true,
-        transparent: $store.navBar.transparent,
+        transparent: $wire?.useTransparentBackground,
         isMobileResolution: false,
         init() {
-            this.transparent = $store.navBar.transparent;
-
             this.$watch('show, isMobileResolution', (value) => {
                 $store.navBar.visible = value && this.isMobileResolution;
             });
@@ -82,7 +79,7 @@
 
             if (this.isMobileResolution) {
                 this.show = currentPosition <= Math.max(this.previousScrollPosition, this.alwaysShowMobileNavigationThreshold) || this.$store.mobileNavigation.open;
-                this.transparent = currentPosition < this.colorSwitchThreshold;
+                this.transparent = currentPosition < this.colorSwitchThreshold && $wire?.useTransparentBackground;
             }
 
             this.previousScrollPosition = currentPosition;
@@ -93,7 +90,7 @@
             if (matches) {
                 this.checkScrollPosition();
             } else {
-                this.transparent = true;
+                this.transparent = $wire?.useTransparentBackground;
                 this.show = true;
             }
         }
@@ -124,7 +121,7 @@
             </a>
         </div>
         <div class="right flex items-center justify-end gap-x-4">
-            <menu wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;6uO0juPRNZSI6poqFSh3&quot;,&quot;name&quot;:&quot;components.shared.navigation.navigation-desktop&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;88d40ef7d55194342e64a19d86e31702fa3a683aa8cba26f28f310c83ce092ca&quot;}" wire:effects="[]" wire:id="6uO0juPRNZSI6poqFSh3"
+            <menu wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;vd5rKsj7CuRxKiQ5KHuO&quot;,&quot;name&quot;:&quot;components.shared.navigation.navigation-desktop&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;9be64ff6cee02e3cae7c9500b251b23115ad325384b13210e8951330beba9dc9&quot;}" wire:effects="[]" wire:id="vd5rKsj7CuRxKiQ5KHuO"
     role="menu"
     class="navigation hidden relative lg:flex gap-8"
     x-data="{
@@ -157,280 +154,299 @@
 >
     <!--[if BLOCK]><![endif]-->        
         <li
-            class="group relative"
+            
+            class="group relative after:content-[''] after:absolute after:top-full after:inset-x-0 after:h-px"
             @mouseenter="updateTargetValues($el); clearTimeout(timeout)"
             @mouseleave="timeout = setTimeout(() => { updateTargetValues(origin) }, 500)"
             role="menuitem"
         >
-            <!--[if BLOCK]><![endif]-->    <a href="/hardware" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-thin" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Hardware'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
+            <!--[if BLOCK]><![endif]-->    <a href="/hardware" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-light" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Hardware'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
                     Hardware
                 </span></a>
-<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <menu
-                    class="absolute w-max flex flex-col shadow-md bg-white text-black invisible has-focus:visible group-hover:visible transition-all delay-50 opacity-0 has-focus:opacity-100 group-hover:opacity-100 -translate-y-4 has-focus:translate-y-0 group-hover:translate-y-0 z-50 font-thin text-xs mt-px"
-                    :class="activeMenu === 'Hardware' ? 'visible opacity-100 translate-y-0' : ''"
+<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <div
+                    class="absolute w-max flex flex-col overflow-hidden mt-px has-focus:transition-shadow group-hover:transition-shadow has-focus:delay-125 group-hover:delay-125 delay-25 invisible has-focus:visible group-hover:visible has-focus:transition-opacity group-hover:transition-opacity opacity-0 has-focus:opacity-100 group-hover:opacity-100 has-focus:ease-out group-hover:ease-out ease-in has-focus:shadow-navigation-menu/5 group-hover:shadow-navigation-menu/5"
+                    :class="activeMenu === 'Hardware' ? 'visible opacity-100 shadow-navigation-menu/5' : ''"
                 >
-                    <!--[if BLOCK]><![endif]-->                        <li role="menuitem">
-                            <a
-                                href="/products/group/new"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.5 15.5c-.55 0-1-.45-1-1v-2c0-.55.45-1 1-1h5c.55 0 1 .45 1 1M4.5 2.5c0 1.1-.9 2-2 2M6.5 4.5c-1.1 0-2-.9-2-2M4.5 6.5c0-1.1.9-2 2-2M2.5 4.5c1.1 0 2 .9 2 2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M8.5 4.5h5c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2h-7c-1.1 0-2-.9-2-2v-5M17.5 8.5v4M2.5 8.5v4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m10.5 11.5-1-4" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                New
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M14.98 13.5H2.5c-.55 0-1-.45-1-1v-5c0-.55.45-1 1-1h4M14.5 6.5h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="10.5" cy="7.5" r="4" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m13.5 10.5 1 1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M13.67 12.5h5.66v2h-5.66z" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round" transform="rotate(45 16.497 13.503)"/><path d="M10.5 9.5c-1.1 0-2-.9-2-2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 8.5v3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Search
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/ethernet-routers"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect width="10" height="4" x="8.5" y="3.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="10.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="12.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><path d="M16.5 5.5v4M14.5 5.5v4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="17" height="4" x="1.5" y="9.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M5.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M7.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Ethernet routers
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/switches"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect width="17" height="4" x="1.5" y="3.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="5.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="7.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="9.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><path d="M11.5 5.5v4M3.5 5.5v4M13.5 5.5v4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="17" height="4" x="1.5" y="9.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 11.5v3c0 1.66 1.34 3 3 3h9" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M7.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M9.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M11.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="13.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="5.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Switches
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/wireless-systems"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m16.5 17.5-3-15h-1l-3 15" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M18.11 2.5h-2c-.49 0-.89.67-.89 1.5s.4 1.5.89 1.5h2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="18.11" cy="4" rx=".89" ry="1.5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M7.11 5.5h2c.49 0 .89.67.89 1.5s-.4 1.5-.89 1.5h-2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="7.11" cy="7" rx=".89" ry="1.5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M16.27 16.35 10.5 12.5l4-3-3-2 2.65-1.76" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M4.25 5.59a4.94 4.94 0 0 0 0 2.8M2.33 4.64a7.08 7.08 0 0 0 0 4.72" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Wireless systems
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/wireless-for-home-and-office"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m14.5 14.5 2-6M5.5 14.5l-2-6" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M13 1.5H7M2.5 18.5v-3c0-.55.45-1 1-1h13c.55 0 1 .45 1 1v3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m4.5 14.5.72 1.45a1 1 0 0 0 .89.55h7.76c.38 0 .73-.21.89-.55l.72-1.45" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M8.36 4.19c1.05.41 2.23.41 3.28 0M7.29 5.9c1.72.79 3.7.79 5.42 0M6.23 7.61a8.5 8.5 0 0 0 7.55 0" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Wireless for home and office
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/lte-5g-products"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.5 4.5v-2M16.5 18.5v-12" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="5.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M14.38 7.62a3 3 0 0 1 0-4.24M12.96 9.04a5.003 5.003 0 0 1 0-7.07" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M1.5 17.5h4c.55 0 1-.45 1-1v-2c0-.55-.45-1-1-1h-4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="4.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><path d="M8.5 14.5c0-1.66-1.34-3-3-3M10.5 14.5c0-2.76-2.24-5-5-5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                LTE/5G products
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/iot-products"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.5 10.45h5.27c1.42 0 2.56-1.15 2.56-2.56s-1.15-2.56-2.56-2.56c-.22 0-.44.03-.64.09v-.09c0-1.42-1.15-2.56-2.56-2.56-.6 0-1.14.2-1.58.54a4.15 4.15 0 0 0-2.91-1.18c-2.3 0-4.16 1.86-4.16 4.16 0 .11 0 .21.02.32h-.02a1.92 1.92 0 0 0 0 3.84H8.5M9.5 11.5v6M4.5 15.5l2-2v-3M14.5 15.5l-2-2v-3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="9.5" cy="10.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M11.29 8.11a2.97 2.97 0 0 0-3.58 0M12.49 6.52a4.965 4.965 0 0 0-5.97 0" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-miterlimit:10"/><path d="M11.29 8.11a2.97 2.97 0 0 0-3.58 0M12.49 6.52a4.965 4.965 0 0 0-5.97 0" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                IoT products
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/60-ghz-products"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.5 4.5v-2M17.5 18.5v-12" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="17.5" cy="5.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M15.38 7.62a3 3 0 0 1 0-4.24M13.96 9.04a5.003 5.003 0 0 1 0-7.07" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M2.5 4.5v-2M2.5 18.5v-12" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="2.5" cy="5.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M4.62 7.62a3 3 0 0 0 0-4.24M6.04 9.04a5.003 5.003 0 0 0 0-7.07" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="2" height="4" x="8.5" y="12.5" rx=".86" ry=".86" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="2" height="2" x="5" y="14.5" rx=".86" ry=".86" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M5 15.5v-2.14c0-.48.39-.86.86-.86h.28c.3 0 .56.15.71.38M12.5 14.5v2M14 14.5v2M15.5 15.5v1" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                60 GHz products
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/routerboard"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3.5 12.5h2M3.5 10.5h2M3.5 14.5h2M10.5 12.5h2M10.5 10.5h2l2-2h4M10.5 14.5h2M5.5 9.5h5v6h-5zM15.5 1.5v2h-7v-2" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M8.5 9.5v-2h3l1-1v-3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M17.5 5.5c0-.55.45-1 1-1v-1c0-1.1-.9-2-2-2h-13c-1.1 0-2 .9-2 2v1c.55 0 1 .45 1 1s-.45 1-1 1v10c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2v-10c-.55 0-1-.45-1-1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="4.5" cy="4.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="15.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                RouterBOARD
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/enclosures"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect width="15" height="4" x="2.5" y="13.5" rx="1" ry="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m8.51 11.51 3.76-3.76M11.45 6.93l1.64 1.64M12.66 8.14 14.3 6.5h.86l2.9-2.9-1.66-1.66-2.9 2.9v.86l-1.64 1.64" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M17.5 7.5v7M2.5 14.5v-9c0-.55.45-1 1-1h8" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="15.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="13.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="11.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="9.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="4.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Enclosures
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/interfaces"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4.5 7.5h11v5h-11z" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 14.5h3v3h-3zM8.5 14.5h8v3h-8zM10.5 14.5v3M12.5 14.5v3M14.5 14.5v3M2.5 2.5h15v12h-15z" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="4.75" cy="5" r=".75" style="fill:var(--icon-color, currentColor)"/><circle cx="15.25" cy="5" r=".75" style="fill:var(--icon-color, currentColor)"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Interfaces
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/accessories"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><circle cx="9.5" cy="16.5" r="2" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="9.44" cy="14.5" rx="3.94" ry="4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M2.5 10.5v1c0 3.77 3.23 7 7 7s7-3.23 7-7v-1" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M1.5 5.5v-3h2v3M1.5 7h2M1.5 8.5h2M14.5 5.5v-3h4v3M14.5 7h4M15.5 8.5h2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Accessories
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/antennas"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.5 14.5v4M3.5 12.5v6M3.5 1.5v2" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M11.38 9.5c-.47 2.87-2.25 5-4.38 5-2.49 0-4.5-2.91-4.5-6.5S4.51 1.5 7 1.5c2.13 0 3.92 2.14 4.38 5.01" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="11.5" cy="8" rx="1" ry="1.5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M10.5 8H7" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M18.94 6.26a2.89 2.89 0 0 0 0 4.09M17.62 4.93a4.77 4.77 0 0 0 0 6.74" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M16.41 3.72a6.464 6.464 0 0 0 0 9.15" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="6.5" cy="9.5" r=".5" style="fill:var(--icon-accent, currentColor)"/><circle cx="6.5" cy="6.5" r=".5" style="fill:var(--icon-accent, currentColor)"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                Antennas
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/products/group/sfp-qsfp"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]-->                                    <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m10.68 5.15 4.42 4.43M5.15 10.68l4.43 4.42" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M13.31 2.26 18 6.95 6.95 18l-1.8-.69 2.21-2.21-2.21-2.21-2.21 2.21-.68-1.79z" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M12.16 5.36h3.13V7.7h-3.13z" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round" transform="rotate(45 13.723 6.534)"/></svg>                                <!--[if ENDBLOCK]><![endif]-->                                SFP/QSFP
-                            </a>
-                        </li>
-                    <!--[if ENDBLOCK]><![endif]-->                </menu>
+                    <menu
+                        class="group-hover:transform-gpu has-focus:transition-transform group-hover:transition-transform -translate-y-[max(100%,500px)] has-focus:translate-y-0 group-hover:translate-y-0 has-focus:delay-75 group-hover:delay-75 delay-25 has-focus:ease-out group-hover:ease-out ease-in z-50 font-light text-xs bg-white text-black"
+                        :class="activeMenu === 'Hardware' ? 'visible translate-y-0' : ''"
+                    >
+                        <!--[if BLOCK]><![endif]-->                            <li role="menuitem">
+                                <a
+                                    href="/products/group/new"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.5 15.5c-.55 0-1-.45-1-1v-2c0-.55.45-1 1-1h5c.55 0 1 .45 1 1M4.5 2.5c0 1.1-.9 2-2 2M6.5 4.5c-1.1 0-2-.9-2-2M4.5 6.5c0-1.1.9-2 2-2M2.5 4.5c1.1 0 2 .9 2 2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M8.5 4.5h5c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2h-7c-1.1 0-2-.9-2-2v-5M17.5 8.5v4M2.5 8.5v4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m10.5 11.5-1-4" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    New
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M14.98 13.5H2.5c-.55 0-1-.45-1-1v-5c0-.55.45-1 1-1h4M14.5 6.5h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="10.5" cy="7.5" r="4" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m13.5 10.5 1 1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M13.67 12.5h5.66v2h-5.66z" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round" transform="rotate(45 16.497 13.503)"/><path d="M10.5 9.5c-1.1 0-2-.9-2-2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 8.5v3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Search
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/ethernet-routers"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect width="10" height="4" x="8.5" y="3.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="10.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="12.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><path d="M16.5 5.5v4M14.5 5.5v4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="17" height="4" x="1.5" y="9.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M5.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M7.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Ethernet routers
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/switches"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect width="17" height="4" x="1.5" y="3.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="5.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="7.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="9.5" cy="5.5" r=".5" style="fill:var(--icon-color, currentColor)"/><path d="M11.5 5.5v4M3.5 5.5v4M13.5 5.5v4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="17" height="4" x="1.5" y="9.5" rx="1.15" ry="1.15" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 11.5v3c0 1.66 1.34 3 3 3h9" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M7.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M9.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M11.5 11.5v3c0 1.66 1.34 3 3 3h3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="13.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="5.5" cy="11.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Switches
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/wireless-systems"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m16.5 17.5-3-15h-1l-3 15" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M18.11 2.5h-2c-.49 0-.89.67-.89 1.5s.4 1.5.89 1.5h2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="18.11" cy="4" rx=".89" ry="1.5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M7.11 5.5h2c.49 0 .89.67.89 1.5s-.4 1.5-.89 1.5h-2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="7.11" cy="7" rx=".89" ry="1.5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M16.27 16.35 10.5 12.5l4-3-3-2 2.65-1.76" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M4.25 5.59a4.94 4.94 0 0 0 0 2.8M2.33 4.64a7.08 7.08 0 0 0 0 4.72" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Wireless systems
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/wireless-for-home-and-office"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m14.5 14.5 2-6M5.5 14.5l-2-6" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M13 1.5H7M2.5 18.5v-3c0-.55.45-1 1-1h13c.55 0 1 .45 1 1v3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m4.5 14.5.72 1.45a1 1 0 0 0 .89.55h7.76c.38 0 .73-.21.89-.55l.72-1.45" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M8.36 4.19c1.05.41 2.23.41 3.28 0M7.29 5.9c1.72.79 3.7.79 5.42 0M6.23 7.61a8.5 8.5 0 0 0 7.55 0" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Wireless for home and office
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/lte-5g-products"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.5 4.5v-2M16.5 18.5v-12" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="16.5" cy="5.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M14.38 7.62a3 3 0 0 1 0-4.24M12.96 9.04a5.003 5.003 0 0 1 0-7.07" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M1.5 17.5h4c.55 0 1-.45 1-1v-2c0-.55-.45-1-1-1h-4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="4.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><path d="M8.5 14.5c0-1.66-1.34-3-3-3M10.5 14.5c0-2.76-2.24-5-5-5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    LTE/5G products
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/iot-products"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.5 10.45h5.27c1.42 0 2.56-1.15 2.56-2.56s-1.15-2.56-2.56-2.56c-.22 0-.44.03-.64.09v-.09c0-1.42-1.15-2.56-2.56-2.56-.6 0-1.14.2-1.58.54a4.15 4.15 0 0 0-2.91-1.18c-2.3 0-4.16 1.86-4.16 4.16 0 .11 0 .21.02.32h-.02a1.92 1.92 0 0 0 0 3.84H8.5M9.5 11.5v6M4.5 15.5l2-2v-3M14.5 15.5l-2-2v-3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="9.5" cy="10.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M11.29 8.11a2.97 2.97 0 0 0-3.58 0M12.49 6.52a4.965 4.965 0 0 0-5.97 0" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-miterlimit:10"/><path d="M11.29 8.11a2.97 2.97 0 0 0-3.58 0M12.49 6.52a4.965 4.965 0 0 0-5.97 0" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    IoT products
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/60-ghz-products"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.5 4.5v-2M17.5 18.5v-12" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="17.5" cy="5.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M15.38 7.62a3 3 0 0 1 0-4.24M13.96 9.04a5.003 5.003 0 0 1 0-7.07" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M2.5 4.5v-2M2.5 18.5v-12" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="2.5" cy="5.5" r="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M4.62 7.62a3 3 0 0 0 0-4.24M6.04 9.04a5.003 5.003 0 0 0 0-7.07" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="2" height="4" x="8.5" y="12.5" rx=".86" ry=".86" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><rect width="2" height="2" x="5" y="14.5" rx=".86" ry=".86" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M5 15.5v-2.14c0-.48.39-.86.86-.86h.28c.3 0 .56.15.71.38M12.5 14.5v2M14 14.5v2M15.5 15.5v1" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    60 GHz products
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/routerboard"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3.5 12.5h2M3.5 10.5h2M3.5 14.5h2M10.5 12.5h2M10.5 10.5h2l2-2h4M10.5 14.5h2M5.5 9.5h5v6h-5zM15.5 1.5v2h-7v-2" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M8.5 9.5v-2h3l1-1v-3" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M17.5 5.5c0-.55.45-1 1-1v-1c0-1.1-.9-2-2-2h-13c-1.1 0-2 .9-2 2v1c.55 0 1 .45 1 1s-.45 1-1 1v10c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2v-10c-.55 0-1-.45-1-1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="4.5" cy="4.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="15.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    RouterBOARD
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/enclosures"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect width="15" height="4" x="2.5" y="13.5" rx="1" ry="1" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="m8.51 11.51 3.76-3.76M11.45 6.93l1.64 1.64M12.66 8.14 14.3 6.5h.86l2.9-2.9-1.66-1.66-2.9 2.9v.86l-1.64 1.64" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M17.5 7.5v7M2.5 14.5v-9c0-.55.45-1 1-1h8" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="15.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="13.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="11.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="9.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/><circle cx="4.5" cy="15.5" r=".5" style="fill:var(--icon-color, currentColor)"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Enclosures
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/interfaces"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4.5 7.5h11v5h-11z" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M3.5 14.5h3v3h-3zM8.5 14.5h8v3h-8zM10.5 14.5v3M12.5 14.5v3M14.5 14.5v3M2.5 2.5h15v12h-15z" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="4.75" cy="5" r=".75" style="fill:var(--icon-color, currentColor)"/><circle cx="15.25" cy="5" r=".75" style="fill:var(--icon-color, currentColor)"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Interfaces
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/accessories"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><circle cx="9.5" cy="16.5" r="2" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="9.44" cy="14.5" rx="3.94" ry="4" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M2.5 10.5v1c0 3.77 3.23 7 7 7s7-3.23 7-7v-1" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M1.5 5.5v-3h2v3M1.5 7h2M1.5 8.5h2M14.5 5.5v-3h4v3M14.5 7h4M15.5 8.5h2" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Accessories
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/antennas"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.5 14.5v4M3.5 12.5v6M3.5 1.5v2" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M11.38 9.5c-.47 2.87-2.25 5-4.38 5-2.49 0-4.5-2.91-4.5-6.5S4.51 1.5 7 1.5c2.13 0 3.92 2.14 4.38 5.01" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><ellipse cx="11.5" cy="8" rx="1" ry="1.5" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M10.5 8H7" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M18.94 6.26a2.89 2.89 0 0 0 0 4.09M17.62 4.93a4.77 4.77 0 0 0 0 6.74" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M16.41 3.72a6.464 6.464 0 0 0 0 9.15" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><circle cx="6.5" cy="9.5" r=".5" style="fill:var(--icon-accent, currentColor)"/><circle cx="6.5" cy="6.5" r=".5" style="fill:var(--icon-accent, currentColor)"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    Antennas
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/products/group/sfp-qsfp"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]-->                                        <svg class="size-[28px] mtk-svg-color-black mtk-svg-accent-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m10.68 5.15 4.42 4.43M5.15 10.68l4.43 4.42" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M13.31 2.26 18 6.95 6.95 18l-1.8-.69 2.21-2.21-2.21-2.21-2.21 2.21-.68-1.79z" style="fill:none;stroke:var(--icon-color, currentColor);stroke-linecap:round;stroke-linejoin:round"/><path d="M12.16 5.36h3.13V7.7h-3.13z" style="fill:none;stroke:var(--icon-accent, currentColor);stroke-linecap:round;stroke-linejoin:round" transform="rotate(45 13.723 6.534)"/></svg>                                    <!--[if ENDBLOCK]><![endif]-->                                    SFP/QSFP
+                                </a>
+                            </li>
+                        <!--[if ENDBLOCK]><![endif]-->                    </menu>
+                </div>
             <!--[if ENDBLOCK]><![endif]-->        </li>
             
         <li
-            class="group relative"
+            
+            class="group relative after:content-[''] after:absolute after:top-full after:inset-x-0 after:h-px"
             @mouseenter="updateTargetValues($el); clearTimeout(timeout)"
             @mouseleave="timeout = setTimeout(() => { updateTargetValues(origin) }, 500)"
             role="menuitem"
         >
-            <!--[if BLOCK]><![endif]-->    <a href="/software/all" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-thin" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Software'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
+            <!--[if BLOCK]><![endif]-->    <a href="/software/all" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-light" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Software'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
                     Software
                 </span></a>
-<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <menu
-                    class="absolute w-max flex flex-col shadow-md bg-white text-black invisible has-focus:visible group-hover:visible transition-all delay-50 opacity-0 has-focus:opacity-100 group-hover:opacity-100 -translate-y-4 has-focus:translate-y-0 group-hover:translate-y-0 z-50 font-thin text-xs mt-px"
-                    :class="activeMenu === 'Software' ? 'visible opacity-100 translate-y-0' : ''"
+<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <div
+                    class="absolute w-max flex flex-col overflow-hidden mt-px has-focus:transition-shadow group-hover:transition-shadow has-focus:delay-125 group-hover:delay-125 delay-25 invisible has-focus:visible group-hover:visible has-focus:transition-opacity group-hover:transition-opacity opacity-0 has-focus:opacity-100 group-hover:opacity-100 has-focus:ease-out group-hover:ease-out ease-in has-focus:shadow-navigation-menu/5 group-hover:shadow-navigation-menu/5"
+                    :class="activeMenu === 'Software' ? 'visible opacity-100 shadow-navigation-menu/5' : ''"
                 >
-                    <!--[if BLOCK]><![endif]-->                        <li role="menuitem">
-                            <a
-                                href="/download"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Downloads
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/download/changelogs"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Changelogs
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/software"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                RouterOS
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/winbox"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                WinBox
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/mobile_app"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Mobile apps
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/bth"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Back to Home
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/connectivity"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Connectivity
-                            </a>
-                        </li>
-                    <!--[if ENDBLOCK]><![endif]-->                </menu>
+                    <menu
+                        class="group-hover:transform-gpu has-focus:transition-transform group-hover:transition-transform -translate-y-[max(100%,500px)] has-focus:translate-y-0 group-hover:translate-y-0 has-focus:delay-75 group-hover:delay-75 delay-25 has-focus:ease-out group-hover:ease-out ease-in z-50 font-light text-xs bg-white text-black"
+                        :class="activeMenu === 'Software' ? 'visible translate-y-0' : ''"
+                    >
+                        <!--[if BLOCK]><![endif]-->                            <li role="menuitem">
+                                <a
+                                    href="/download"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Downloads
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/download/changelogs"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Changelogs
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/software"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    RouterOS
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/winbox"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    WinBox
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/mobile_app"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Mobile apps
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/bth"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Back to Home
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/connectivity"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Connectivity
+                                </a>
+                            </li>
+                        <!--[if ENDBLOCK]><![endif]-->                    </menu>
+                </div>
             <!--[if ENDBLOCK]><![endif]-->        </li>
             
         <li
-            class="group relative"
+            
+            class="group relative after:content-[''] after:absolute after:top-full after:inset-x-0 after:h-px"
             @mouseenter="updateTargetValues($el); clearTimeout(timeout)"
             @mouseleave="timeout = setTimeout(() => { updateTargetValues(origin) }, 500)"
             role="menuitem"
         >
-            <!--[if BLOCK]><![endif]-->    <a href="/buy" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-thin" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Distributors'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
+            <!--[if BLOCK]><![endif]-->    <a href="/buy" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-light" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Distributors'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
                     Distributors
                 </span></a>
-<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <menu
-                    class="absolute w-max flex flex-col shadow-md bg-white text-black invisible has-focus:visible group-hover:visible transition-all delay-50 opacity-0 has-focus:opacity-100 group-hover:opacity-100 -translate-y-4 has-focus:translate-y-0 group-hover:translate-y-0 z-50 font-thin text-xs mt-px"
-                    :class="activeMenu === 'Distributors' ? 'visible opacity-100 translate-y-0' : ''"
+<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <div
+                    class="absolute w-max flex flex-col overflow-hidden mt-px has-focus:transition-shadow group-hover:transition-shadow has-focus:delay-125 group-hover:delay-125 delay-25 invisible has-focus:visible group-hover:visible has-focus:transition-opacity group-hover:transition-opacity opacity-0 has-focus:opacity-100 group-hover:opacity-100 has-focus:ease-out group-hover:ease-out ease-in has-focus:shadow-navigation-menu/5 group-hover:shadow-navigation-menu/5"
+                    :class="activeMenu === 'Distributors' ? 'visible opacity-100 shadow-navigation-menu/5' : ''"
                 >
-                    <!--[if BLOCK]><![endif]-->                        <li role="menuitem">
-                            <a
-                                href="/buy"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Buy something (find a distributor)
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/becoming_distributor"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Sell something (become a distributor)
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/mfm"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Made for MikroTik
-                            </a>
-                        </li>
-                    <!--[if ENDBLOCK]><![endif]-->                </menu>
+                    <menu
+                        class="group-hover:transform-gpu has-focus:transition-transform group-hover:transition-transform -translate-y-[max(100%,500px)] has-focus:translate-y-0 group-hover:translate-y-0 has-focus:delay-75 group-hover:delay-75 delay-25 has-focus:ease-out group-hover:ease-out ease-in z-50 font-light text-xs bg-white text-black"
+                        :class="activeMenu === 'Distributors' ? 'visible translate-y-0' : ''"
+                    >
+                        <!--[if BLOCK]><![endif]-->                            <li role="menuitem">
+                                <a
+                                    href="/buy"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Buy something (find a distributor)
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/becoming_distributor"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Sell something (become a distributor)
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/mfm"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Made for MikroTik
+                                </a>
+                            </li>
+                        <!--[if ENDBLOCK]><![endif]-->                    </menu>
+                </div>
             <!--[if ENDBLOCK]><![endif]-->        </li>
             
         <li
-            class="group relative"
+            
+            class="group relative after:content-[''] after:absolute after:top-full after:inset-x-0 after:h-px"
             @mouseenter="updateTargetValues($el); clearTimeout(timeout)"
             @mouseleave="timeout = setTimeout(() => { updateTargetValues(origin) }, 500)"
             role="menuitem"
@@ -438,191 +454,208 @@
             <!--[if BLOCK]><![endif]-->    <a href="/support" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-bold indicator-origin" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Support'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
                     Support
                 </span></a>
-<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <menu
-                    class="absolute w-max flex flex-col shadow-md bg-white text-black invisible has-focus:visible group-hover:visible transition-all delay-50 opacity-0 has-focus:opacity-100 group-hover:opacity-100 -translate-y-4 has-focus:translate-y-0 group-hover:translate-y-0 z-50 font-thin text-xs mt-px"
-                    :class="activeMenu === 'Support' ? 'visible opacity-100 translate-y-0' : ''"
+<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <div
+                    class="absolute w-max flex flex-col overflow-hidden mt-px has-focus:transition-shadow group-hover:transition-shadow has-focus:delay-125 group-hover:delay-125 delay-25 invisible has-focus:visible group-hover:visible has-focus:transition-opacity group-hover:transition-opacity opacity-0 has-focus:opacity-100 group-hover:opacity-100 has-focus:ease-out group-hover:ease-out ease-in has-focus:shadow-navigation-menu/5 group-hover:shadow-navigation-menu/5"
+                    :class="activeMenu === 'Support' ? 'visible opacity-100 shadow-navigation-menu/5' : ''"
                 >
-                    <!--[if BLOCK]><![endif]-->                        <li role="menuitem">
-                            <a
-                                href="https://help.mikrotik.com/docs/"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Documentation
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/consultants"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Consultants
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="https://forum.mikrotik.com/"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Forum
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/support"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Help
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/supportsec"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Security
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/warranty"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Warranty
-                            </a>
-                        </li>
-                    <!--[if ENDBLOCK]><![endif]-->                </menu>
+                    <menu
+                        class="group-hover:transform-gpu has-focus:transition-transform group-hover:transition-transform -translate-y-[max(100%,500px)] has-focus:translate-y-0 group-hover:translate-y-0 has-focus:delay-75 group-hover:delay-75 delay-25 has-focus:ease-out group-hover:ease-out ease-in z-50 font-light text-xs bg-white text-black"
+                        :class="activeMenu === 'Support' ? 'visible translate-y-0' : ''"
+                    >
+                        <!--[if BLOCK]><![endif]-->                            <li role="menuitem">
+                                <a
+                                    href="https://help.mikrotik.com/docs/"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Documentation
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/consultants"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Consultants
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="https://forum.mikrotik.com/"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Forum
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/support"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Help
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/supportsec"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Security
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/warranty"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Warranty
+                                </a>
+                            </li>
+                        <!--[if ENDBLOCK]><![endif]-->                    </menu>
+                </div>
             <!--[if ENDBLOCK]><![endif]-->        </li>
             
         <li
-            class="group relative"
+            
+            class="group relative after:content-[''] after:absolute after:top-full after:inset-x-0 after:h-px"
             @mouseenter="updateTargetValues($el); clearTimeout(timeout)"
             @mouseleave="timeout = setTimeout(() => { updateTargetValues(origin) }, 500)"
             role="menuitem"
         >
-            <!--[if BLOCK]><![endif]-->    <a href="/training" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-thin" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Training'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
+            <!--[if BLOCK]><![endif]-->    <a href="/training" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-light" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'Training'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
                     Training
                 </span></a>
-<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <menu
-                    class="absolute w-max flex flex-col shadow-md bg-white text-black invisible has-focus:visible group-hover:visible transition-all delay-50 opacity-0 has-focus:opacity-100 group-hover:opacity-100 -translate-y-4 has-focus:translate-y-0 group-hover:translate-y-0 z-50 font-thin text-xs mt-px"
-                    :class="activeMenu === 'Training' ? 'visible opacity-100 translate-y-0' : ''"
+<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <div
+                    class="absolute w-max flex flex-col overflow-hidden mt-px has-focus:transition-shadow group-hover:transition-shadow has-focus:delay-125 group-hover:delay-125 delay-25 invisible has-focus:visible group-hover:visible has-focus:transition-opacity group-hover:transition-opacity opacity-0 has-focus:opacity-100 group-hover:opacity-100 has-focus:ease-out group-hover:ease-out ease-in has-focus:shadow-navigation-menu/5 group-hover:shadow-navigation-menu/5"
+                    :class="activeMenu === 'Training' ? 'visible opacity-100 shadow-navigation-menu/5' : ''"
                 >
-                    <!--[if BLOCK]><![endif]-->                        <li role="menuitem">
-                            <a
-                                href="/training/about"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                About
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/training"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Schedule
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/training/centers"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Training centers &amp; trainers
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/training/academy"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Academies
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/training/train-the-trainer"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Train the trainer
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/certificates"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Certificate Search
-                            </a>
-                        </li>
-                    <!--[if ENDBLOCK]><![endif]-->                </menu>
+                    <menu
+                        class="group-hover:transform-gpu has-focus:transition-transform group-hover:transition-transform -translate-y-[max(100%,500px)] has-focus:translate-y-0 group-hover:translate-y-0 has-focus:delay-75 group-hover:delay-75 delay-25 has-focus:ease-out group-hover:ease-out ease-in z-50 font-light text-xs bg-white text-black"
+                        :class="activeMenu === 'Training' ? 'visible translate-y-0' : ''"
+                    >
+                        <!--[if BLOCK]><![endif]-->                            <li role="menuitem">
+                                <a
+                                    href="/training/about"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    About
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/training"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Schedule
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/training/centers"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Training centers &amp; trainers
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/training/academy"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Academies
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/training/train-the-trainer"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Train the trainer
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/certificates"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Certificate Search
+                                </a>
+                            </li>
+                        <!--[if ENDBLOCK]><![endif]-->                    </menu>
+                </div>
             <!--[if ENDBLOCK]><![endif]-->        </li>
             
         <li
-            class="group relative"
+            
+            class="group relative after:content-[''] after:absolute after:top-full after:inset-x-0 after:h-px"
             @mouseenter="updateTargetValues($el); clearTimeout(timeout)"
             @mouseleave="timeout = setTimeout(() => { updateTargetValues(origin) }, 500)"
             role="menuitem"
         >
-            <!--[if BLOCK]><![endif]-->    <a href="/aboutus/company" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-thin" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'About'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
+            <!--[if BLOCK]><![endif]-->    <a href="/aboutus/company" wire:navigate="" class="flex gap-2 py-8 items-center uppercase uppercase-spacing text-xs dark:text-white cursor-pointer peer group focus:outline-none font-light" @focus="updateTargetValues($el); clearTimeout(timeout)" @blur="timeout = setTimeout(() => { updateTargetValues(origin) }, 200); activeMenu = ''" @keydown.space.prevent="activeMenu = 'About'" tabindex="0"><span class="group-focus-visible:outline-2 outline-black dark:outline-white outline-offset-2">
                     About
                 </span></a>
-<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <menu
-                    class="absolute w-max flex flex-col shadow-md bg-white text-black invisible has-focus:visible group-hover:visible transition-all delay-50 opacity-0 has-focus:opacity-100 group-hover:opacity-100 -translate-y-4 has-focus:translate-y-0 group-hover:translate-y-0 z-50 font-thin text-xs mt-px"
-                    :class="activeMenu === 'About' ? 'visible opacity-100 translate-y-0' : ''"
+<!--[if ENDBLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <div
+                    class="absolute w-max flex flex-col overflow-hidden mt-px has-focus:transition-shadow group-hover:transition-shadow has-focus:delay-125 group-hover:delay-125 delay-25 invisible has-focus:visible group-hover:visible has-focus:transition-opacity group-hover:transition-opacity opacity-0 has-focus:opacity-100 group-hover:opacity-100 has-focus:ease-out group-hover:ease-out ease-in has-focus:shadow-navigation-menu/5 group-hover:shadow-navigation-menu/5"
+                    :class="activeMenu === 'About' ? 'visible opacity-100 shadow-navigation-menu/5' : ''"
                 >
-                    <!--[if BLOCK]><![endif]-->                        <li role="menuitem">
-                            <a
-                                href="/aboutus"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Contacts
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="/aboutus/company"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                wire:navigate
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Company
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="https://mikrotik.com/logo"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Our Logo
-                            </a>
-                        </li>
-                                            <li role="menuitem">
-                            <a
-                                href="https://darbs.mikrotik.com/"
-                                class="flex gap-2 items-center py-2.5 px-4 hover:bg-gray-bright transition-all max-h-9"
-                                
-                            >
-                                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                Vacancies
-                            </a>
-                        </li>
-                    <!--[if ENDBLOCK]><![endif]-->                </menu>
+                    <menu
+                        class="group-hover:transform-gpu has-focus:transition-transform group-hover:transition-transform -translate-y-[max(100%,500px)] has-focus:translate-y-0 group-hover:translate-y-0 has-focus:delay-75 group-hover:delay-75 delay-25 has-focus:ease-out group-hover:ease-out ease-in z-50 font-light text-xs bg-white text-black"
+                        :class="activeMenu === 'About' ? 'visible translate-y-0' : ''"
+                    >
+                        <!--[if BLOCK]><![endif]-->                            <li role="menuitem">
+                                <a
+                                    href="/aboutus"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Contacts
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="/aboutus/company"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    wire:navigate
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Company
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="https://mikrotik.com/logo"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Our Logo
+                                </a>
+                            </li>
+                                                    <li role="menuitem">
+                                <a
+                                    href="https://darbs.mikrotik.com/"
+                                    class="flex gap-2 items-center py-2.5 px-4 max-h-9 focus:-outline-offset-2 hover:bg-gray-bright"
+                                    
+                                >
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                                    Vacancies
+                                </a>
+                            </li>
+                        <!--[if ENDBLOCK]><![endif]-->                    </menu>
+                </div>
             <!--[if ENDBLOCK]><![endif]-->        </li>
     <!--[if ENDBLOCK]><![endif]-->    <!--[if BLOCK]><![endif]-->        <span
-            class="border-b-2 absolute h-px w-16 -bottom-px invisible"
-            x-init="$nextTick(() => $el.classList.add('transition-all', 'duration-300', 'ease-in-out', 'visible'))"
+            class="border-t-2 absolute h-px w-16 -bottom-px invisible pointer-events-none"
+            x-init="$nextTick(() => $el.classList.add('transition-transform', 'duration-125', 'ease-linear', 'visible'))"
             :style="{ transform: `translateX(${indicatorPosition}px)`, width: `${indicatorWidth}px` }"
         ></span>
     <!--[if ENDBLOCK]><![endif]--></menu>
@@ -647,7 +680,7 @@
     </nav>
 
     
-    <div wire:snapshot="{&quot;data&quot;:{&quot;activeSection&quot;:&quot;Support&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;Z6upOs5JE5aXzswMksUt&quot;,&quot;name&quot;:&quot;components.shared.navigation.navigation-mobile&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;8a7a2ce2c70c83ea3011306a19ce222a1aea942d1b7befbd070c9a69bc901c6d&quot;}" wire:effects="[]" wire:id="Z6upOs5JE5aXzswMksUt" class="mobile-navigation fixed top-0 right-0 left-0 h-full z-50 lg:hidden"
+    <div wire:snapshot="{&quot;data&quot;:{&quot;activeSection&quot;:&quot;Support&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;acun58MCCWE4H4hKtEHq&quot;,&quot;name&quot;:&quot;components.shared.navigation.navigation-mobile&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;90200c42267e4e8ad32604db096cb5031f10c13d0f80298b6c050e2b3cf977c3&quot;}" wire:effects="[]" wire:id="acun58MCCWE4H4hKtEHq" class="mobile-navigation fixed top-0 right-0 left-0 h-full z-50 lg:hidden"
      x-data="{
         openSection: $wire?.activeSection ?? '',
         isSectionOpen(sectionLabel) {
@@ -1291,7 +1324,7 @@
 
 <div id="nav-skip"></div>
 <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
-<div wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;OdufKqVPptTPUUh3TPTZ&quot;,&quot;name&quot;:&quot;pages.security-notice-page&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:{&quot;lw-1742588050-0&quot;:[&quot;div&quot;,&quot;SQWQ7BJDnoaZQuw04Ciz&quot;]},&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;ebd3148a9a2ca5c3d576cf82ff9497f3cdaaecce17d9a924e711648b57419567&quot;}" wire:effects="[]" wire:id="OdufKqVPptTPUUh3TPTZ" class="flex flex-col grow" x-bind="CompareProductsListener">
+<div wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;bj1QiWMjVDZkABLTUjuI&quot;,&quot;name&quot;:&quot;pages.security-notice-page&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:{&quot;lw-1742588050-0&quot;:[&quot;div&quot;,&quot;C9VJROjQNmpDMvo6SDp0&quot;]},&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;b7ef7c26ae8d669aa8dcc4df92b077d856b6c31e55c054d759316ca7dd27cb85&quot;}" wire:effects="[]" wire:id="bj1QiWMjVDZkABLTUjuI" class="flex flex-col grow" x-bind="CompareProductsListener">
     <!--[if BLOCK]><![endif]-->        <div class="section grow max-w-full bg-cover bg-center bg-white"
     style=""
     
@@ -1299,8 +1332,8 @@
     <div
         class="flex flex-col dark:text-white mtk-content-container"
     >
-        <!--[if BLOCK]><![endif]-->                <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-20 lg:mt-32&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;mc7TPsscot3CIM48zTb4&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;57d49c2916a9eb8659cac3a3af6e6a4777814f0259efda244dc74e473cd2c07c&quot;}" wire:effects="[]" wire:id="mc7TPsscot3CIM48zTb4" class="mt-20 lg:mt-32"></div>
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;title&quot;:&quot;M\u0113ris botnet&quot;,&quot;description&quot;:&quot;&quot;,&quot;smallerFontSize&quot;:false,&quot;links&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;8yYFOw1ZlU7EMQCNCpiI&quot;,&quot;name&quot;:&quot;widgets.header&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;5de5cdb746f9a936a98adf3542e33f4122118ddf31ae916ba1610fb0adfad26b&quot;}" wire:effects="[]" wire:id="8yYFOw1ZlU7EMQCNCpiI" class="flex flex-col gap-4 max-w-3xl">
+        <!--[if BLOCK]><![endif]-->                <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-20 lg:mt-32&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;EDAzjsj2SAW9Smg4LfHo&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;113ca0e233fc2e86d0b528971ddcb3a0254cccf98a973cd02f02c82b9da35cc1&quot;}" wire:effects="[]" wire:id="EDAzjsj2SAW9Smg4LfHo" class="mt-20 lg:mt-32"></div>
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;title&quot;:&quot;M\u0113ris botnet&quot;,&quot;description&quot;:&quot;&quot;,&quot;smallerFontSize&quot;:false,&quot;links&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;Cuuf0gdZt9J7eUIU5kZC&quot;,&quot;name&quot;:&quot;widgets.header&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;eb6b3221ce61c1ce4f55a7f4e0259c93d0b16f9e11a365d57501da60b09ee9c6&quot;}" wire:effects="[]" wire:id="Cuuf0gdZt9J7eUIU5kZC" class="flex flex-col gap-4 max-w-3xl">
     <div>
     <div class="uppercase uppercase-spacing font-thin mtk-text-xs">
         <!--[if BLOCK]><![endif]-->            <!--[if BLOCK]><![endif]-->                <a class="hover:opacity-50" href="https://mikrotik.com" wire:navigate>
@@ -1320,10 +1353,10 @@
     <!--[if ENDBLOCK]><![endif]-->
     <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
     <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]--></div>
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;cW6v3LyL0xJn1ypJ5KGm&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;9b3307424ed33be28d38e3d2e32ec8e83188cf1a94981f232ea466d61136d834&quot;}" wire:effects="[]" wire:id="cW6v3LyL0xJn1ypJ5KGm" class="mt-8 lg:mt-16"></div>
-                            <hr wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;XJf7gOuwy2rABU8syFxd&quot;,&quot;name&quot;:&quot;widgets.divider&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;700435212ac80ecab96e475442c45d0403feb0d1425ba49c4a25a34a11570064&quot;}" wire:effects="[]" wire:id="XJf7gOuwy2rABU8syFxd" class="border-t border-gray-light w-full" />
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;R2QY0vQaNgJpFispkSTs&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;00aa64972ac586ce2b4e24c17d8189bc68227ab74c19ae0590a0939aca3226a8&quot;}" wire:effects="[]" wire:id="R2QY0vQaNgJpFispkSTs" class="mt-8 lg:mt-16"></div>
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;notice&quot;:[{&quot;title&quot;:&quot;M\u0113ris botnet&quot;,&quot;published&quot;:&quot;2021-09-15 11:24:02&quot;,&quot;modified&quot;:&quot;2021-09-15 11:24:02&quot;,&quot;id&quot;:&quot;https:\/\/mikrotik.com\/supportsec\/meris-botnet\/&quot;,&quot;url&quot;:&quot;\/supportsec\/meris-botnet\/&quot;,&quot;content&quot;:&quot;&lt;p&gt;In early September 2021 QRATOR labs published &lt;a href=\&quot;https:\/\/blog.qrator.net\/en\/meris-botnet-climbing-to-the-record_142\/\&quot;&gt;an article&lt;\/a&gt; about a new wave of DDoS attacks, which are originating from a botnet involving MikroTik devices.&lt;\/p&gt;\n&lt;p&gt;As far as we have seen, these attacks use the same routers that &lt;a href=\&quot;https:\/\/mikrotik.com\/supportsec\/cve-2018-14847-winbox-vulnerability\&quot;&gt;were compromised in 2018&lt;\/a&gt;, when MikroTik RouterOS had a vulnerability, that was quickly patched.&lt;\/p&gt;\n&lt;p&gt;There is no new vulnerability in RouterOS and there is no malware hiding inside the RouterOS filesystem even on the affected devices. The attacker is reconfiguring RouterOS devices for remote access, using commands and features of RouterOS itself.&lt;\/p&gt;\n&lt;p&gt;Unfortunately, closing the old vulnerability does not immediately protect these routers. If somebody got your password in 2018, just an upgrade will not help. You must also change password, re-check your firewall if it does not allow remote access to unknown parties, and look for scripts that you did not create.&lt;\/p&gt;\n&lt;p&gt;We have tried to reach all users of RouterOS about this, but many of them have never been in contact with MikroTik and are not actively monitoring their devices. We are working on other solutions too.&lt;\/p&gt;\n&lt;p&gt;There are no new vulnerabilities in these devices. RouterOS has been recently independently audited by several third parties.&lt;\/p&gt;\n&lt;p&gt;Best course of action:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Keep your MikroTik device up to date with regular upgrades.&lt;\/li&gt;\n&lt;li&gt;Do not open access to your device from the internet side to everyone, if you need remote access, only open a secure VPN service, like IPsec.&lt;\/li&gt;\n&lt;li&gt;Use a strong password and even if you do, change it now!&lt;\/li&gt;\n&lt;li&gt;Don&amp;rsquo;t assume your local network can be trusted. Malware can attempt to connect to your router if you have a weak password or no password.&lt;\/li&gt;\n&lt;li&gt;Inspect your RouterOS configuration for unknown settings (see below).&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;In collaboration with independent security researchers, we have found that there exists malware that attempts to reconfigure your MikroTik device from a Windows computer inside your network. This is why it&amp;rsquo;s important to set a better password now (to avoid passwordless login or a dictionary attack by this malware) and to keep your MikroTik router upgraded (since this malware also attempts to exploit the mentioned\u00a0CVE-2018-14847 vulnerabiliity which has long been fixed).&lt;\/p&gt;\n&lt;p&gt;Configuration to look out for and remove:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;System -&amp;gt; Scheduler rules that execute a Fetch script. Remove these.&lt;\/li&gt;\n&lt;li&gt;IP -&amp;gt; Socks proxy. If you don&amp;rsquo;t use this feature or don&amp;rsquo;t know what it does, it must be disabled.&lt;\/li&gt;\n&lt;li&gt;L2TP client named &amp;ldquo;lvpn&amp;rdquo; or any L2TP client that you don&amp;rsquo;t recognize.&lt;\/li&gt;\n&lt;li&gt;Input firewall rule that allows access for port 5678.&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;You can also work with your ISPs to &lt;strong&gt;block&lt;\/strong&gt; the following addresses, which these malicious scripts are connecting to:&lt;\/p&gt;\n&lt;p&gt;Block these tunnel endpoint domains:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;*.eeongous.com&lt;br&gt;\n*.leappoach.info&lt;br&gt;\n*.mythtime.xyz&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;Block these script download domains:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;1abcnews.xyz&lt;br&gt;\n1awesome.net&lt;br&gt;\n7standby.com&lt;br&gt;\naudiomain.website&lt;br&gt;\nbestony.club&lt;br&gt;\nciskotik.com&lt;br&gt;\ncloudsond.me&lt;br&gt;\ndartspeak.xyz&lt;br&gt;\nfanmusic.xyz&lt;br&gt;\ngamedate.xyz&lt;br&gt;\nglobalmoby.xyz&lt;br&gt;\nhitsmoby.com&lt;br&gt;\nmassgames.space&lt;br&gt;\nmobstore.xyz&lt;br&gt;\nmotinkon.com&lt;br&gt;\nmy1story.xyz&lt;br&gt;\nmyfrance.xyz&lt;br&gt;\nphonemus.net&lt;br&gt;\nportgame.website&lt;br&gt;\nsenourth.com&lt;br&gt;\nsitestory.xyz&lt;br&gt;\nspacewb.tech&lt;br&gt;\nspecialword.xyz&lt;br&gt;\nspgames.site&lt;br&gt;\nstrtbiz.site&lt;br&gt;\ntakebad1.com&lt;br&gt;\ntryphptoday.com&lt;br&gt;\nwchampmuse.pw&lt;br&gt;\nweirdgames.info&lt;br&gt;\nwidechanges.best&lt;br&gt;\nzancetom.com&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;As reported by others on the internet, these domains are also used by the botnet:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;bestmade.xyz&lt;br&gt;\ngamesone.xyz&lt;br&gt;\nmobigifs.xyz&lt;br&gt;\nmyphotos.xyz&lt;br&gt;\nonlinegt.xyz&lt;br&gt;\npicsgifs.xyz&lt;\/li&gt;\n&lt;\/ul&gt;\n&quot;},{&quot;class&quot;:&quot;App\\Domains\\Blog\\Entities\\SecurityNotice&quot;,&quot;s&quot;:&quot;wrbl&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;lI59swpRzeDdi6Djf8bg&quot;,&quot;name&quot;:&quot;widgets.security-notice-article&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;d3ddce5fc3adc91744aab097118fa0ebcda9e80b8aed5597afc03fec875c1812&quot;}" wire:effects="[]" wire:id="lI59swpRzeDdi6Djf8bg" class="max-w-(--breakpoint-lg) mx-auto flex flex-col gap-8 md:gap-16">
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;zg4EW9fJc21lYQIdFYxw&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;95e5f87a2e3e38776ce99d54192075a2fdb75c363b5d58dc9baef502185c26bd&quot;}" wire:effects="[]" wire:id="zg4EW9fJc21lYQIdFYxw" class="mt-8 lg:mt-16"></div>
+                            <hr wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;ld9IaOOPdrBjyoSPnGc3&quot;,&quot;name&quot;:&quot;widgets.divider&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;5ea18174a0618d740b3ba1ed070982926341339abe8350da5f55d88f49171a58&quot;}" wire:effects="[]" wire:id="ld9IaOOPdrBjyoSPnGc3" class="border-t border-gray-light w-full" />
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;6YWehRvVYRlAOrSYDeJT&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;f8247e06c7cbb7d2bcfef4c9f0dadccb919a5dbb9c562cdbe97bc8ac3d2f5f44&quot;}" wire:effects="[]" wire:id="6YWehRvVYRlAOrSYDeJT" class="mt-8 lg:mt-16"></div>
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;notice&quot;:[{&quot;title&quot;:&quot;M\u0113ris botnet&quot;,&quot;published&quot;:&quot;2021-09-15 11:24:02&quot;,&quot;modified&quot;:&quot;2021-09-15 11:24:02&quot;,&quot;id&quot;:&quot;https:\/\/mikrotik.com\/supportsec\/meris-botnet\/&quot;,&quot;url&quot;:&quot;\/supportsec\/meris-botnet\/&quot;,&quot;content&quot;:&quot;&lt;p&gt;In early September 2021 QRATOR labs published &lt;a href=\&quot;https:\/\/blog.qrator.net\/en\/meris-botnet-climbing-to-the-record_142\/\&quot;&gt;an article&lt;\/a&gt; about a new wave of DDoS attacks, which are originating from a botnet involving MikroTik devices.&lt;\/p&gt;\n&lt;p&gt;As far as we have seen, these attacks use the same routers that &lt;a href=\&quot;https:\/\/mikrotik.com\/supportsec\/cve-2018-14847-winbox-vulnerability\&quot;&gt;were compromised in 2018&lt;\/a&gt;, when MikroTik RouterOS had a vulnerability, that was quickly patched.&lt;\/p&gt;\n&lt;p&gt;There is no new vulnerability in RouterOS and there is no malware hiding inside the RouterOS filesystem even on the affected devices. The attacker is reconfiguring RouterOS devices for remote access, using commands and features of RouterOS itself.&lt;\/p&gt;\n&lt;p&gt;Unfortunately, closing the old vulnerability does not immediately protect these routers. If somebody got your password in 2018, just an upgrade will not help. You must also change password, re-check your firewall if it does not allow remote access to unknown parties, and look for scripts that you did not create.&lt;\/p&gt;\n&lt;p&gt;We have tried to reach all users of RouterOS about this, but many of them have never been in contact with MikroTik and are not actively monitoring their devices. We are working on other solutions too.&lt;\/p&gt;\n&lt;p&gt;There are no new vulnerabilities in these devices. RouterOS has been recently independently audited by several third parties.&lt;\/p&gt;\n&lt;p&gt;Best course of action:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Keep your MikroTik device up to date with regular upgrades.&lt;\/li&gt;\n&lt;li&gt;Do not open access to your device from the internet side to everyone, if you need remote access, only open a secure VPN service, like IPsec.&lt;\/li&gt;\n&lt;li&gt;Use a strong password and even if you do, change it now!&lt;\/li&gt;\n&lt;li&gt;Don&amp;rsquo;t assume your local network can be trusted. Malware can attempt to connect to your router if you have a weak password or no password.&lt;\/li&gt;\n&lt;li&gt;Inspect your RouterOS configuration for unknown settings (see below).&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;In collaboration with independent security researchers, we have found that there exists malware that attempts to reconfigure your MikroTik device from a Windows computer inside your network. This is why it&amp;rsquo;s important to set a better password now (to avoid passwordless login or a dictionary attack by this malware) and to keep your MikroTik router upgraded (since this malware also attempts to exploit the mentioned\u00a0CVE-2018-14847 vulnerabiliity which has long been fixed).&lt;\/p&gt;\n&lt;p&gt;Configuration to look out for and remove:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;System -&amp;gt; Scheduler rules that execute a Fetch script. Remove these.&lt;\/li&gt;\n&lt;li&gt;IP -&amp;gt; Socks proxy. If you don&amp;rsquo;t use this feature or don&amp;rsquo;t know what it does, it must be disabled.&lt;\/li&gt;\n&lt;li&gt;L2TP client named &amp;ldquo;lvpn&amp;rdquo; or any L2TP client that you don&amp;rsquo;t recognize.&lt;\/li&gt;\n&lt;li&gt;Input firewall rule that allows access for port 5678.&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;You can also work with your ISPs to &lt;strong&gt;block&lt;\/strong&gt; the following addresses, which these malicious scripts are connecting to:&lt;\/p&gt;\n&lt;p&gt;Block these tunnel endpoint domains:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;*.eeongous.com&lt;br&gt;\n*.leappoach.info&lt;br&gt;\n*.mythtime.xyz&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;Block these script download domains:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;1abcnews.xyz&lt;br&gt;\n1awesome.net&lt;br&gt;\n7standby.com&lt;br&gt;\naudiomain.website&lt;br&gt;\nbestony.club&lt;br&gt;\nciskotik.com&lt;br&gt;\ncloudsond.me&lt;br&gt;\ndartspeak.xyz&lt;br&gt;\nfanmusic.xyz&lt;br&gt;\ngamedate.xyz&lt;br&gt;\nglobalmoby.xyz&lt;br&gt;\nhitsmoby.com&lt;br&gt;\nmassgames.space&lt;br&gt;\nmobstore.xyz&lt;br&gt;\nmotinkon.com&lt;br&gt;\nmy1story.xyz&lt;br&gt;\nmyfrance.xyz&lt;br&gt;\nphonemus.net&lt;br&gt;\nportgame.website&lt;br&gt;\nsenourth.com&lt;br&gt;\nsitestory.xyz&lt;br&gt;\nspacewb.tech&lt;br&gt;\nspecialword.xyz&lt;br&gt;\nspgames.site&lt;br&gt;\nstrtbiz.site&lt;br&gt;\ntakebad1.com&lt;br&gt;\ntryphptoday.com&lt;br&gt;\nwchampmuse.pw&lt;br&gt;\nweirdgames.info&lt;br&gt;\nwidechanges.best&lt;br&gt;\nzancetom.com&lt;\/li&gt;\n&lt;\/ul&gt;\n&lt;p&gt;As reported by others on the internet, these domains are also used by the botnet:&lt;\/p&gt;\n&lt;ul&gt;\n&lt;li&gt;bestmade.xyz&lt;br&gt;\ngamesone.xyz&lt;br&gt;\nmobigifs.xyz&lt;br&gt;\nmyphotos.xyz&lt;br&gt;\nonlinegt.xyz&lt;br&gt;\npicsgifs.xyz&lt;\/li&gt;\n&lt;\/ul&gt;\n&quot;},{&quot;class&quot;:&quot;App\\Domains\\Blog\\Entities\\SecurityNotice&quot;,&quot;s&quot;:&quot;wrbl&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;TCBsAOsiKuoawPjTPb3Y&quot;,&quot;name&quot;:&quot;widgets.security-notice-article&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;03ee98f2c00170c1175e0bb8b89ec24eac204a658ff1d6d84e01044da1677a99&quot;}" wire:effects="[]" wire:id="TCBsAOsiKuoawPjTPb3Y" class="max-w-(--breakpoint-lg) mx-auto flex flex-col gap-8 md:gap-16">
     <div class="flex justify-between">
         <div class="mtk-text-sm font-thin">
             Sep 15, 2021 | Security
@@ -1414,10 +1447,10 @@ picsgifs.xyz</li>
 </ul>
 </div></div>
 </div>
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;823f1FzFEO8W1baSTYqC&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;bd10870aa6402ba9abf049eb22d94a7a05cb72ae36b692417c91e027ed644886&quot;}" wire:effects="[]" wire:id="823f1FzFEO8W1baSTYqC" class="mt-8 lg:mt-16"></div>
-                            <hr wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;KoCiUa8UX0kkyWfj9ZID&quot;,&quot;name&quot;:&quot;widgets.divider&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;755c868e68bc111fe2037e1d9531405f644ecbfc53dadac9b13571b2fb855acb&quot;}" wire:effects="[]" wire:id="KoCiUa8UX0kkyWfj9ZID" class="border-t border-gray-light w-full" />
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;pjvZqwLabigBXQoQoXGv&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;44055b51b7e33189d3f4ff87952898cb63b11e2faccb70ca1c75f9d6257609a3&quot;}" wire:effects="[]" wire:id="pjvZqwLabigBXQoQoXGv" class="mt-8 lg:mt-16"></div>
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;title&quot;:&quot;Contact us about vulnerabilities&quot;,&quot;description&quot;:&quot;&quot;,&quot;contacts&quot;:[[[{&quot;icon&quot;:&quot;shield&quot;,&quot;email&quot;:&quot;security@mikrotik.com&quot;},{&quot;s&quot;:&quot;arr&quot;}]],{&quot;s&quot;:&quot;arr&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;mZyr9tC3Mh6zVQbkOeKZ&quot;,&quot;name&quot;:&quot;widgets.contacts-list&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;2cd9f0c36e90f3bcf2e1dde55dc0922071a386dbd5223ab8dcffe38dd8f49260&quot;}" wire:effects="[]" wire:id="mZyr9tC3Mh6zVQbkOeKZ" class="mx-auto max-w-fit text-center flex flex-col gap-2">
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;avb0LXrGeLQgGT4WwLCv&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;8aa47b35f1c5870dc5d64b6e6124d0a06817b8b64616710d89046d15e4ac9a6a&quot;}" wire:effects="[]" wire:id="avb0LXrGeLQgGT4WwLCv" class="mt-8 lg:mt-16"></div>
+                            <hr wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;kbh7PpxrF8WsJemsCg86&quot;,&quot;name&quot;:&quot;widgets.divider&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;ab3b0bac920cf0f4ecd33bb3ae28a46e5612d66b4f2f0a36b01e807b49c4e6a8&quot;}" wire:effects="[]" wire:id="kbh7PpxrF8WsJemsCg86" class="border-t border-gray-light w-full" />
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;mqlC8iUejkbtTJLg6QqT&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;b92a93786f1f7daaa43a147781a47513135ce36cc9ae29062969f22a63ae574b&quot;}" wire:effects="[]" wire:id="mqlC8iUejkbtTJLg6QqT" class="mt-8 lg:mt-16"></div>
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;title&quot;:&quot;Contact us about vulnerabilities&quot;,&quot;description&quot;:&quot;&quot;,&quot;contacts&quot;:[[[{&quot;icon&quot;:&quot;shield&quot;,&quot;email&quot;:&quot;security@mikrotik.com&quot;},{&quot;s&quot;:&quot;arr&quot;}]],{&quot;s&quot;:&quot;arr&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;rVy9fCrdRBbITXq0KoDn&quot;,&quot;name&quot;:&quot;widgets.contacts-list&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;650cf18a4a29613a6c54c14b6fda71b649f394b77a4e5af2c5ae07d1d7438381&quot;}" wire:effects="[]" wire:id="rVy9fCrdRBbITXq0KoDn" class="mx-auto max-w-fit text-center flex flex-col gap-2">
     <!--[if BLOCK]><![endif]-->        <p class="mtk-h3 font-bold uppercase uppercase-spacing mb-6">Contact us about vulnerabilities</p>
     <!--[if ENDBLOCK]><![endif]-->
     <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
@@ -1437,7 +1470,7 @@ picsgifs.xyz</li>
             </a>
         <!--[if ENDBLOCK]><![endif]-->    </div>
 </div>
-                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;SQWQ7BJDnoaZQuw04Ciz&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;2a43c4038c4684480a0f1371d64b6f95591bb733eaf90bfe0bd7298e4fffd09e&quot;}" wire:effects="[]" wire:id="SQWQ7BJDnoaZQuw04Ciz" class="mt-8 lg:mt-16"></div>
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;spaces&quot;:&quot;mt-8 lg:mt-16&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;C9VJROjQNmpDMvo6SDp0&quot;,&quot;name&quot;:&quot;widgets.spacer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;6413d51813d262c23a12cded3cd40048aa4b00a9ec6f8100217b8fe1144b2319&quot;}" wire:effects="[]" wire:id="C9VJROjQNmpDMvo6SDp0" class="mt-8 lg:mt-16"></div>
             <!--[if ENDBLOCK]><![endif]-->
     </div>
 </div>
@@ -1512,7 +1545,7 @@ picsgifs.xyz</li>
 </div>
 
 <div class="mt-auto">
-    <footer wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;n0S6MvDndq1740LaR8lA&quot;,&quot;name&quot;:&quot;components.shared.footer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;6c20516d98dda3ed48e5336e2b6e1711039693b0e8495682e0207790bf86e9f4&quot;}" wire:effects="[]" wire:id="n0S6MvDndq1740LaR8lA" class="dark bg-gray text-white">
+    <footer wire:snapshot="{&quot;data&quot;:[],&quot;memo&quot;:{&quot;id&quot;:&quot;4GWzoXAgRUSugouQba1q&quot;,&quot;name&quot;:&quot;components.shared.footer&quot;,&quot;path&quot;:&quot;supportsec\/meris-botnet&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;},&quot;checksum&quot;:&quot;87260306cecf11a9a6d546912fd4b8556eed2e4cd4d11b097b4d86f222b4e71e&quot;}" wire:effects="[]" wire:id="4GWzoXAgRUSugouQba1q" class="dark bg-gray text-white">
     <div class="mtk-content-container flex flex-col gap-16 py-12 sm:py-16 lg:py-24">
         <div class="flex justify-between">
             <a href="/" aria-label="Go to home page" wire:navigate>
@@ -2024,6 +2057,6 @@ picsgifs.xyz</li>
     }
     
 </script>
-<!-- PWA scripts --><script src="/livewire/livewire.min.js?id=0f6341c0"   data-csrf="CnS5ZaAEQjFpxXdebT1bzw2SF3ywHJ9HywXaKztC" data-update-uri="/livewire/update" data-navigate-once="true"></script>
+<!-- PWA scripts --><script src="/livewire/livewire.min.js?id=0f6341c0"   data-csrf="iQanVmNqosISzjh8DLGxBTpPWVOvWhwvd8U1Flh1" data-update-uri="/livewire/update" data-navigate-once="true"></script>
 </body>
 </html>

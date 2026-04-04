@@ -24,6 +24,59 @@
     <link rel="icon" href="https://securityscorecard.com/wp-content/themes/securityscorecard/resources/images/favicon/cropped-Securityscorecard_favicon-192x192.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="https://securityscorecard.com/wp-content/themes/securityscorecard/resources/images/favicon/cropped-Securityscorecard_favicon-180x180.png" />
     <meta name="msapplication-TileImage" content="https://securityscorecard.com/wp-content/themes/securityscorecard/resources/images/favicon/cropped-Securityscorecard_favicon-270x270.png" />
+    <script>
+(function () {
+  var config = {"managed":["zh-tw","fr","ja","ko","pt","es"],"allowed":[],"basePath":""};
+
+  if (!config.managed || !config.managed.length) {
+    return;
+  }
+
+  var pathname = window.location.pathname;
+  var basePath = config.basePath || '';
+
+  if (basePath) {
+    if (pathname === basePath || pathname === basePath + '/') {
+      pathname = '/';
+    } else if (pathname.indexOf(basePath + '/') === 0) {
+      pathname = pathname.slice(basePath.length) || '/';
+    } else {
+      return;
+    }
+  }
+
+  var segments = pathname.split('/').filter(function (segment) {
+    return segment.length > 0;
+  });
+  if (!segments.length) {
+    return;
+  }
+
+  var firstSegment = segments[0].toLowerCase();
+  if (config.managed.indexOf(firstSegment) === -1) {
+    return;
+  }
+  if (config.allowed.indexOf(firstSegment) !== -1) {
+    return;
+  }
+
+  var tailSegments = segments.slice(1);
+  var newPath = tailSegments.length ? '/' + tailSegments.join('/') : '/';
+  if (pathname.endsWith('/') && newPath !== '/' && !newPath.endsWith('/')) {
+    newPath += '/';
+  }
+  if (basePath) {
+    newPath = newPath === '/' ? basePath + '/' : basePath + newPath;
+  }
+
+  var targetUrl =
+    window.location.origin +
+    newPath +
+    window.location.search +
+    window.location.hash;
+  window.location.replace(targetUrl);
+})();
+</script>
     <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
 	<!-- This site is optimized with the Yoast SEO plugin v27.1.1 - https://yoast.com/product/yoast-seo-wordpress/ -->
@@ -93,7 +146,7 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
 
 <link rel="https://api.w.org/" href="https://securityscorecard.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://securityscorecard.com/wp-json/wp/v2/pages/14844" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://securityscorecard.com/xmlrpc.php?rsd" />
 <link rel='shortlink' href='https://securityscorecard.com/?p=14844' />
-<script type="module" crossorigin src="https://securityscorecard.com/wp-content/themes/securityscorecard/dist/CTzRVSAQ.js"></script><link rel="stylesheet" href="https://securityscorecard.com/wp-content/themes/securityscorecard/dist/D8V4Mzyy.css"><link rel="stylesheet" href="https://securityscorecard.com/wp-content/themes/securityscorecard/dist/BOijFLqZ.css">
+<script type="module" crossorigin src="https://securityscorecard.com/wp-content/themes/securityscorecard/dist/DuJ3hqIs.js"></script><link rel="stylesheet" href="https://securityscorecard.com/wp-content/themes/securityscorecard/dist/D8V4Mzyy.css"><link rel="stylesheet" href="https://securityscorecard.com/wp-content/themes/securityscorecard/dist/CXVPd0I_.css">
 			</head>
 
 	<body class="wp-singular page-template-default page page-id-14844 wp-theme-securityscorecard notranslate" data-template="base.twig">

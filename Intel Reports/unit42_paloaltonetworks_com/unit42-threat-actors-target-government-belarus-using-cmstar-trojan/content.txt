@@ -26,6 +26,11 @@ function getParameterByName(name, url) {
 	var container_q = getParameterByName('container');
 	var d_lang = 'en';	
 </script>
+<style type="text/css">
+.productNav2021Component[data-type="idira"] .product-2021-nav .product-2021-nav-main .nav-logo img {
+    height: 23px;
+}    
+</style>    
 
 
 <link rel="preload" href="https://www.paloaltonetworks.com/etc.clientlibs/panClean/components/mainNavigationComp/clientlibs/panClean/criticalTop.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -88,7 +93,7 @@ globalConfig.buildName = "UniqueResourceAssetsID_DEC022022";
 </script>
 <meta property="og:likes" content="4"/>
 <meta property="og:readtime" content="12"/>
-<meta property="og:views" content="86,692"/>
+<meta property="og:views" content="86,705"/>
 <meta property="og:date_created" content="September 28, 2017 at 1:00 PM"/>
 <meta property="og:post_length" content="3783"/>
 <meta property="og:category" content="Malware"/>
@@ -135,7 +140,7 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 </script>
 <script src="https://unit42.paloaltonetworks.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta" id="crayon_js-js"></script>
 <script id="post-views-counter-frontend-js-before">
-var pvcArgsFrontend = {"mode":"js","postID":43929,"requestURL":"https:\/\/unit42.paloaltonetworks.com\/wp-admin\/admin-ajax.php","nonce":"79115b47f5","dataStorage":"cookies","multisite":false,"path":"\/","domain":""};
+var pvcArgsFrontend = {"mode":"js","postID":43929,"requestURL":"https:\/\/unit42.paloaltonetworks.com\/wp-admin\/admin-ajax.php","nonce":"8c25c7897d","dataStorage":"cookies","multisite":false,"path":"\/","domain":""};
 
 //# sourceURL=post-views-counter-frontend-js-before
 </script>
@@ -315,7 +320,7 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
 <li id="menu-item-121229" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-121229"><a href="https://start.paloaltonetworks.com/contact-unit42.html"><b style="color:#C84727">Under Attack?</b></a></li>
 </ul>  </div>
 </nav>
-<div class="panClean pan-template-home" id="main-nav-menu-cont" style="display:none;">
+<div class="panClean pan-template-dynamicAllComponents" id="main-nav-menu-cont" style="display:none;">
     <div class="cleanHeader mainNavigationComp baseComponent parbase">
         <div class="productNav2021Component dark default" id="PAN_2021_NAV_ASYNC">
         </div>
@@ -364,6 +369,9 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
 	else if(((pcontainer) && pcontainer.indexOf('Ngfw')!=-1)){
 	    referer = 'Ngfw' ;
 	}
+        else if(((pcontainer) && pcontainer.indexOf('Idira')!=-1)){
+	    referer = 'Idira' ;
+	}
         var fromRef = document.referrer;
         var nContainer = getCookie("navContainer");
         if(nContainer){//If user is coming from main site, we need to reset the container		
@@ -397,10 +405,14 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
                             referer = 'Ngfw' ;
                             sessionStorage.setItem("container","Ngfw");
                         }
+                        if(nContainer.indexOf('Idira') != -1){
+                            referer = 'Idira' ;
+                            sessionStorage.setItem("container","Idira");
+                        }
 			document.cookie = 'navContainer=; path=/; domain=.paloaltonetworks.com; expires=' + new Date(0).toUTCString();
 		}
 	}
-if(referer != "Prisma" && referer != "CloudCortex" && referer != "Cortex" && referer != "Sase" && referer != "Unit" && referer != "Ngfw") {
+if(referer != "Prisma" && referer != "CloudCortex" && referer != "Cortex" && referer != "Sase" && referer != "Unit" && referer != "Ngfw" && referer != "Idira") {
     referer = 'Unit' ;
     sessionStorage.setItem("container","Unit");
 }
@@ -436,6 +448,11 @@ function callMainSitePrismaNavHTML(){
         var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/unit-nav-renderer.php?type=ngfw&domain=en'; 
         searchResultsPagePath = referrer_domain+"/search/ngfwcdsssearch";
     }
+    if(referer == 'Idira'){
+        //var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/ngfw-cdss-nav-renderer.php';
+        var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/unit-nav-renderer.php?type=idira&domain=en'; 
+        searchResultsPagePath = referrer_domain+"/search/idirasearch";
+    }
     httpGet(menu_url,'menu_html');
     document.getElementById('main-nav-menu-cont').removeAttribute("style");
 }
@@ -465,6 +482,7 @@ function httpGet(theUrl,req_type) {
             if(req_type == 'menu_html'){
             var nav_text = xmlhttp.responseText.replaceAll('https://static.cloud.coveo.com/searchui/v2.9159/js/CoveoJsSearch.Lazy.min.js', '');
             nav_text = nav_text.replaceAll('src="/', 'src="'+maindomain_lang+'/');
+            nav_text = nav_text.replaceAll("src='/", "src='"+maindomain_lang+"/");
             nav_text = nav_text.replaceAll("'/content", "'"+maindomain_lang+"/content");
                         
             document.getElementById("PAN_2021_NAV_ASYNC").innerHTML = nav_text.replaceAll('href="/', 'href="'+maindomain_lang+'/');
@@ -496,7 +514,7 @@ function httpGet(theUrl,req_type) {
     xmlhttp.send();    
 }    
     
-if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || referer == 'Sase' || referer == 'Unit' || referer == 'Ngfw'){
+if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || referer == 'Sase' || referer == 'Unit' || referer == 'Ngfw' || referer == 'Idira'){
     const article = document.querySelector('#PAN_2021_NAV_ASYNC');
     if(referer == 'Prisma'){
         article.dataset.type = 'prisma';
@@ -516,6 +534,9 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
     }
     else if(referer == 'Ngfw'){
         article.dataset.type = 'ngfw';
+    }
+    else if(referer == 'Idira'){
+        article.dataset.type = 'idira';
     }
     //set class to default
     if(referer == 'Unit' || referer == 'Ngfw'){
@@ -559,8 +580,8 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
 		</li>                </ul>
                 <div class="ab__options">
                   <ul role="list">
-                                        <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-threat-actors-target-government-belarus-using-cmstar-trojan/?pdf=download&#038;lg=en&#038;_wpnonce=e412ef5ec3" role="link" target="_blank"  title="Click here to download" data-page-track="true" data-page-track-value="unit42-threat-actors-target-government-belarus-using-cmstar-trojan:hero:pdfdownload"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-download.svg" alt="Download Icon"></a></li>
-                    <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-threat-actors-target-government-belarus-using-cmstar-trojan/?pdf=print&#038;lg=en&#038;_wpnonce=e412ef5ec3" target="_blank" role="link" title="Click here to print" data-page-track="true" data-page-track-value="unit42-threat-actors-target-government-belarus-using-cmstar-trojan:hero:pdfprint"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-print.svg" alt="Print Icon"></a></li>
+                                        <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-threat-actors-target-government-belarus-using-cmstar-trojan/?pdf=download&#038;lg=en&#038;_wpnonce=082ad74565" role="link" target="_blank"  title="Click here to download" data-page-track="true" data-page-track-value="unit42-threat-actors-target-government-belarus-using-cmstar-trojan:hero:pdfdownload"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-download.svg" alt="Download Icon"></a></li>
+                    <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-threat-actors-target-government-belarus-using-cmstar-trojan/?pdf=print&#038;lg=en&#038;_wpnonce=082ad74565" target="_blank" role="link" title="Click here to print" data-page-track="true" data-page-track-value="unit42-threat-actors-target-government-belarus-using-cmstar-trojan:hero:pdfprint"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-print.svg" alt="Print Icon"></a></li>
                   </ul>
                   
 	<div class="ab__share" id="shareDropdown" role="button" aria-expanded="false">
@@ -731,7 +752,7 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
 <p>These strings will be used at the end of the macro’s execution to ensure persistence via the Run registry key.</p>
 <p>The malware proceeds to read an included overlay within the original Word document from a given offset. This data is decoded using and XOR operation, as well as an addition operation. It can be represented in Python as follows:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-6a02c8106af0a494619014" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-6a041b125ac31211920726" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
@@ -753,9 +774,9 @@ def decrypt_xor(data, key, key_offset):
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a02c8106af0a494619014-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af0a494619014-2">2</div><div class="crayon-num" data-line="crayon-6a02c8106af0a494619014-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af0a494619014-4">4</div><div class="crayon-num" data-line="crayon-6a02c8106af0a494619014-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af0a494619014-6">6</div><div class="crayon-num" data-line="crayon-6a02c8106af0a494619014-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af0a494619014-8">8</div><div class="crayon-num" data-line="crayon-6a02c8106af0a494619014-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af0a494619014-10">10</div><div class="crayon-num" data-line="crayon-6a02c8106af0a494619014-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af0a494619014-12">12</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a041b125ac31211920726-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac31211920726-2">2</div><div class="crayon-num" data-line="crayon-6a041b125ac31211920726-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac31211920726-4">4</div><div class="crayon-num" data-line="crayon-6a041b125ac31211920726-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac31211920726-6">6</div><div class="crayon-num" data-line="crayon-6a041b125ac31211920726-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac31211920726-8">8</div><div class="crayon-num" data-line="crayon-6a041b125ac31211920726-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac31211920726-10">10</div><div class="crayon-num" data-line="crayon-6a041b125ac31211920726-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac31211920726-12">12</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a02c8106af0a494619014-1"><span class="crayon-e">def </span><span class="crayon-e">decrypt_xor</span><span class="crayon-sy">(</span><span class="crayon-i">data</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">key</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">key_offset</span><span class="crayon-sy">)</span><span class="crayon-sy">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af0a494619014-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">output</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">""</span></div><div class="crayon-line" id="crayon-6a02c8106af0a494619014-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">seed</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">key</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af0a494619014-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">d</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">data</span><span class="crayon-sy">:</span></div><div class="crayon-line" id="crayon-6a02c8106af0a494619014-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">d</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af0a494619014-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span><span class="crayon-sy">!</span>=<span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span><span class="crayon-sy">!</span>=<span class="crayon-h"> </span><span class="crayon-i">seed</span><span class="crayon-sy">:</span></div><div class="crayon-line" id="crayon-6a02c8106af0a494619014-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">nvalue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span>^<span class="crayon-h"> </span><span class="crayon-e">seed</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af0a494619014-8"><span class="crayon-e">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">seed</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">seed</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">key_offset</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">%</span><span class="crayon-h"> </span><span class="crayon-cn">0x100</span></div><div class="crayon-line" id="crayon-6a02c8106af0a494619014-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">output</span><span class="crayon-h"> </span>+=<span class="crayon-h"> </span><span class="crayon-e">chr</span><span class="crayon-sy">(</span><span class="crayon-i">nvalue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af0a494619014-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-sy">:</span></div><div class="crayon-line" id="crayon-6a02c8106af0a494619014-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">output</span><span class="crayon-h"> </span>+=<span class="crayon-h"> </span><span class="crayon-i">d</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af0a494619014-12"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-i">output</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a041b125ac31211920726-1"><span class="crayon-e">def </span><span class="crayon-e">decrypt_xor</span><span class="crayon-sy">(</span><span class="crayon-i">data</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">key</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">key_offset</span><span class="crayon-sy">)</span><span class="crayon-sy">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac31211920726-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">output</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">""</span></div><div class="crayon-line" id="crayon-6a041b125ac31211920726-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">seed</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">key</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac31211920726-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">d</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">data</span><span class="crayon-sy">:</span></div><div class="crayon-line" id="crayon-6a041b125ac31211920726-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">d</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac31211920726-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span><span class="crayon-sy">!</span>=<span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span><span class="crayon-sy">!</span>=<span class="crayon-h"> </span><span class="crayon-i">seed</span><span class="crayon-sy">:</span></div><div class="crayon-line" id="crayon-6a041b125ac31211920726-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">nvalue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">ord_d</span><span class="crayon-h"> </span>^<span class="crayon-h"> </span><span class="crayon-e">seed</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac31211920726-8"><span class="crayon-e">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">seed</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">seed</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">key_offset</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">%</span><span class="crayon-h"> </span><span class="crayon-cn">0x100</span></div><div class="crayon-line" id="crayon-6a041b125ac31211920726-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">output</span><span class="crayon-h"> </span>+=<span class="crayon-h"> </span><span class="crayon-e">chr</span><span class="crayon-sy">(</span><span class="crayon-i">nvalue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac31211920726-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-sy">:</span></div><div class="crayon-line" id="crayon-6a041b125ac31211920726-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">output</span><span class="crayon-h"> </span>+=<span class="crayon-h"> </span><span class="crayon-i">d</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac31211920726-12"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-i">output</span></div></div></td>
 					</tr>
 				</table>
 			</div>
@@ -831,7 +852,7 @@ def decrypt_xor(data, key, key_offset):
 </ul>
 <p>PYLOT continues to load and decode an embedded resource file. This file contains configuration information that is used by the malware throughout its execution. The following script, written in Python, may be used to decode this embedded resource object:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-6a02c8106af15724935719" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-6a041b125ac3d309811752" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
@@ -859,9 +880,9 @@ hexdump.hexdump(fdata)</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-2">2</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-4">4</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-6">6</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-8">8</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-10">10</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-12">12</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-14">14</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-16">16</div><div class="crayon-num" data-line="crayon-6a02c8106af15724935719-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02c8106af15724935719-18">18</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-2">2</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-4">4</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-6">6</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-8">8</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-10">10</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-12">12</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-14">14</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-16">16</div><div class="crayon-num" data-line="crayon-6a041b125ac3d309811752-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a041b125ac3d309811752-18">18</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a02c8106af15724935719-1"><span class="crayon-e">import </span><span class="crayon-e">sys</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-2"><span class="crayon-e">import </span><span class="crayon-e">hexdump</span></div><div class="crayon-line" id="crayon-6a02c8106af15724935719-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-4"><span class="crayon-i">file</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">sys</span><span class="crayon-sy">.</span><span class="crayon-i">argv</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-6a02c8106af15724935719-5"><span class="crayon-i">fh</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-i">file</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'rb'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-6"><span class="crayon-i">fdata</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">list</span><span class="crayon-sy">(</span><span class="crayon-i">fh</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-6a02c8106af15724935719-7"><span class="crayon-i">fh</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-8">&nbsp;</div><div class="crayon-line" id="crayon-6a02c8106af15724935719-9"><span class="crayon-i">fdata_len</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-10"><span class="crayon-i">c</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">fdata_len</span>-<span class="crayon-cn">1</span></div><div class="crayon-line" id="crayon-6a02c8106af15724935719-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-12"><span class="crayon-i">output</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">""</span></div><div class="crayon-line" id="crayon-6a02c8106af15724935719-13"><span class="crayon-st">while</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-h"> </span><span class="crayon-sy">&amp;gt;</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-14"><span class="crayon-h">	</span><span class="crayon-i">fdata</span><span class="crayon-sy">[</span><span class="crayon-i">c</span><span class="crayon-sy">]</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">chr</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">[</span><span class="crayon-i">c</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-h"> </span>^<span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">[</span><span class="crayon-i">c</span>-<span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-6a02c8106af15724935719-15"><span class="crayon-h">	</span><span class="crayon-i">c</span><span class="crayon-h"> </span>-=<span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-16">&nbsp;</div><div class="crayon-line" id="crayon-6a02c8106af15724935719-17"><span class="crayon-i">fdata</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-sy">.</span><span class="crayon-e">join</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02c8106af15724935719-18"><span class="crayon-i">hexdump</span><span class="crayon-sy">.</span><span class="crayon-e">hexdump</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">)</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a041b125ac3d309811752-1"><span class="crayon-e">import </span><span class="crayon-e">sys</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-2"><span class="crayon-e">import </span><span class="crayon-e">hexdump</span></div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-4"><span class="crayon-i">file</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">sys</span><span class="crayon-sy">.</span><span class="crayon-i">argv</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-5"><span class="crayon-i">fh</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-i">file</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'rb'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-6"><span class="crayon-i">fdata</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">list</span><span class="crayon-sy">(</span><span class="crayon-i">fh</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-7"><span class="crayon-i">fh</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-8">&nbsp;</div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-9"><span class="crayon-i">fdata_len</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-10"><span class="crayon-i">c</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">fdata_len</span>-<span class="crayon-cn">1</span></div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-12"><span class="crayon-i">output</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">""</span></div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-13"><span class="crayon-st">while</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-h"> </span><span class="crayon-sy">&amp;gt;</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-14"><span class="crayon-h">	</span><span class="crayon-i">fdata</span><span class="crayon-sy">[</span><span class="crayon-i">c</span><span class="crayon-sy">]</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-e">chr</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">[</span><span class="crayon-i">c</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-h"> </span>^<span class="crayon-h"> </span><span class="crayon-e">ord</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">[</span><span class="crayon-i">c</span>-<span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-15"><span class="crayon-h">	</span><span class="crayon-i">c</span><span class="crayon-h"> </span>-=<span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-16">&nbsp;</div><div class="crayon-line" id="crayon-6a041b125ac3d309811752-17"><span class="crayon-i">fdata</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-sy">.</span><span class="crayon-e">join</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a041b125ac3d309811752-18"><span class="crayon-i">hexdump</span><span class="crayon-sy">.</span><span class="crayon-e">hexdump</span><span class="crayon-sy">(</span><span class="crayon-i">fdata</span><span class="crayon-sy">)</span></div></div></td>
 					</tr>
 				</table>
 			</div>
@@ -892,7 +913,7 @@ hexdump.hexdump(fdata)</textarea></div>
 <p><em>Figure 15 Response from remote C2 server</em></p>
 <p>The decoded data at the end of the response contains various URIs to be used by the malware to receive commands, as well as other information that has yet to be fully researched.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-6a02c8106af18365670226" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-6a041b125ac40766336409" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
@@ -903,9 +924,9 @@ hexdump.hexdump(fdata)</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a02c8106af18365670226-1">1</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a041b125ac40766336409-1">1</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a02c8106af18365670226-1">/<span class="crayon-i">duakzu</span>/<span class="crayon-i">furs</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">ugvrf</span>/<span class="crayon-i">pvoi</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">tydfw</span>/<span class="crayon-i">pld</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">bpnij</span>/<span class="crayon-i">syau</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">plugin</span>/<span class="crayon-i">plugin</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span><span class="crayon-i">eycHhHKVQUnuAwtNchvYjScGYMtVMzMqYmxBmCEwieQpKgsokpvrxknPQRvnkOHDywCImVZxHxRdvlePjgnbPXsyTzreBEckVVFbuUHHcvLPGmqxHUNWondMIntBiVVO</span><span class="crayon-sy">|</span><span class="crayon-i">CgpQxWOeTAbOLpOCdWtesymHSqjeSUYPQFBeUnbhXElorlcjqldwEMVucaDwJRhuzZjprKkZEPvLEWUbkEQxFUqzqIRQwyuTaBmOZSOpfJRByRvyTHjSVdVeihtkbcnG</span><span class="crayon-sy">|</span><span class="crayon-i">GqPfDIAHOik</span>/</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a041b125ac40766336409-1">/<span class="crayon-i">duakzu</span>/<span class="crayon-i">furs</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">ugvrf</span>/<span class="crayon-i">pvoi</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">tydfw</span>/<span class="crayon-i">pld</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">bpnij</span>/<span class="crayon-i">syau</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span>/<span class="crayon-i">plugin</span>/<span class="crayon-i">plugin</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-sy">|</span><span class="crayon-i">eycHhHKVQUnuAwtNchvYjScGYMtVMzMqYmxBmCEwieQpKgsokpvrxknPQRvnkOHDywCImVZxHxRdvlePjgnbPXsyTzreBEckVVFbuUHHcvLPGmqxHUNWondMIntBiVVO</span><span class="crayon-sy">|</span><span class="crayon-i">CgpQxWOeTAbOLpOCdWtesymHSqjeSUYPQFBeUnbhXElorlcjqldwEMVucaDwJRhuzZjprKkZEPvLEWUbkEQxFUqzqIRQwyuTaBmOZSOpfJRByRvyTHjSVdVeihtkbcnG</span><span class="crayon-sy">|</span><span class="crayon-i">GqPfDIAHOik</span>/</div></div></td>
 					</tr>
 				</table>
 			</div>
@@ -2416,31 +2437,97 @@ By submitting this form, you agree to our <a title="Terms of Use" href="https://
                     
                         <ul class="list-unstyled nav-list mb-0">
                             <li class="sub-title nav-subheader">
-                                <a href="https://www.paloaltonetworks.com/unit42" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-0:threat intel and incident response services" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/idira" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-0:next-generation identity security" rel="noopener">
+                                    Next-Generation Identity Security
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/privileged-access-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-1:privileged access management" rel="noopener">
+                                    Privileged Access Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/identity-and-access-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-2:identity and access management " rel="noopener">
+                                    Identity and Access Management 
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/endpoint-privilege-manager" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-3:endpoint privilege manager" rel="noopener">
+                                    Endpoint Privilege Manager
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/identity-governance" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-4:identity governance" rel="noopener">
+                                    Identity Governance
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/workforce-password-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-5:workforce password management" rel="noopener">
+                                    Workforce Password Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/agentic" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-6:agentic identities" rel="noopener">
+                                    Agentic Identities
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/secrets-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-7:secrets management" rel="noopener">
+                                    Secrets Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/unified-secrets-governance" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-8:unified secrets governance" rel="noopener">
+                                    Unified Secrets Governance
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/application-credentials-delivery" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-9:application credentials delivery" rel="noopener">
+                                    Application Credentials Delivery
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/vendor-privileged-access" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-10:vendor privileged access" rel="noopener">
+                                    Vendor Privileged Access
+                                </a>
+                            </li>
+                        
+                            <li class="sub-title nav-subheader">
+                                <a href="https://www.paloaltonetworks.com/unit42" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-11:threat intel and incident response services" rel="noopener">
                                     Threat Intel and Incident Response Services
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/assess" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-1:proactive assessments" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/assess" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-12:proactive assessments" rel="noopener">
                                     Proactive Assessments
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/respond" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-2:incident response" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/respond" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-13:incident response" rel="noopener">
                                     Incident Response
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/transform" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-3:transform your security strategy" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/transform" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-14:transform your security strategy" rel="noopener">
                                     Transform Your Security Strategy
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/threat-intelligence-partners" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-4:discover threat intelligence" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/threat-intelligence-partners" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-15:discover threat intelligence" rel="noopener">
                                     Discover Threat Intelligence
                                 </a>
                             </li>
@@ -2599,7 +2686,7 @@ By submitting this form, you agree to our <a title="Terms of Use" href="https://
             <div class="row align-items-center">
                 <div class="col-12 col-md-6 order-md-1 col-xxl-12">
                     <div class="pan-logo d-flex">
-                        <img data-src="https://www.paloaltonetworks.com/etc/clientlibs/clean/imgs/pan-logo-dark.svg" alt="Palo Alto Networks Logo" class="lozad "/>
+                        <img data-src="https://www.paloaltonetworks.com/etc/clientlibs/clean/imgs/pan-logo-dark.svg" alt="PAN logo" class="lozad "/>
                     </div>
                 </div>
                 <div class="col-12 col-md-12 order-md-3 col-xxl-8 order-xxl-2">
@@ -3086,7 +3173,7 @@ window.PAN_Clean_Util = {
    window.PAN_Clean_Util.yieldToMain = yieldToMain
 })();
 
-if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw"){
+if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw" || referer == "Idira"){
   var Coveo_organizationId = "paloaltonetworksintranet";        
   var techDocsPagePath = "https://docs.paloaltonetworks.com/search.html#hd=All%20Prisma%20Cloud%20Documentation&hq=%40panproductcategory%3D%3D(%22Prisma%20Cloud%22)&sort=relevancy&layout=card&numberOfResults=25";
   var languageFromPath="en_US";
@@ -3145,7 +3232,7 @@ function loadScript1(url, callback){
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
 }
-if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw"){
+if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw" || referer == "Idira"){
 	if(referer == "Unit"){
     setTimeout(function(){
       loadScript(main_site_criticalTopBase, false);

@@ -26,6 +26,11 @@ function getParameterByName(name, url) {
 	var container_q = getParameterByName('container');
 	var d_lang = 'en';	
 </script>
+<style type="text/css">
+.productNav2021Component[data-type="idira"] .product-2021-nav .product-2021-nav-main .nav-logo img {
+    height: 23px;
+}    
+</style>    
 
 
 <link rel="preload" href="https://www.paloaltonetworks.com/etc.clientlibs/panClean/components/mainNavigationComp/clientlibs/panClean/criticalTop.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -88,7 +93,7 @@ globalConfig.buildName = "UniqueResourceAssetsID_DEC022022";
 </script>
 <meta property="og:likes" content="4"/>
 <meta property="og:readtime" content="8"/>
-<meta property="og:views" content="76,498"/>
+<meta property="og:views" content="76,507"/>
 <meta property="og:date_created" content="July 24, 2017 at 6:00 PM"/>
 <meta property="og:post_length" content="2330"/>
 <meta property="og:category" content="Malware"/>
@@ -132,7 +137,7 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 </script>
 <script src="https://unit42.paloaltonetworks.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta" id="crayon_js-js"></script>
 <script id="post-views-counter-frontend-js-before">
-var pvcArgsFrontend = {"mode":"js","postID":38605,"requestURL":"https:\/\/unit42.paloaltonetworks.com\/wp-admin\/admin-ajax.php","nonce":"79115b47f5","dataStorage":"cookies","multisite":false,"path":"\/","domain":""};
+var pvcArgsFrontend = {"mode":"js","postID":38605,"requestURL":"https:\/\/unit42.paloaltonetworks.com\/wp-admin\/admin-ajax.php","nonce":"8c25c7897d","dataStorage":"cookies","multisite":false,"path":"\/","domain":""};
 
 //# sourceURL=post-views-counter-frontend-js-before
 </script>
@@ -312,7 +317,7 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
 <li id="menu-item-121229" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-121229"><a href="https://start.paloaltonetworks.com/contact-unit42.html"><b style="color:#C84727">Under Attack?</b></a></li>
 </ul>  </div>
 </nav>
-<div class="panClean pan-template-home" id="main-nav-menu-cont" style="display:none;">
+<div class="panClean pan-template-dynamicAllComponents" id="main-nav-menu-cont" style="display:none;">
     <div class="cleanHeader mainNavigationComp baseComponent parbase">
         <div class="productNav2021Component dark default" id="PAN_2021_NAV_ASYNC">
         </div>
@@ -361,6 +366,9 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
 	else if(((pcontainer) && pcontainer.indexOf('Ngfw')!=-1)){
 	    referer = 'Ngfw' ;
 	}
+        else if(((pcontainer) && pcontainer.indexOf('Idira')!=-1)){
+	    referer = 'Idira' ;
+	}
         var fromRef = document.referrer;
         var nContainer = getCookie("navContainer");
         if(nContainer){//If user is coming from main site, we need to reset the container		
@@ -394,10 +402,14 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
                             referer = 'Ngfw' ;
                             sessionStorage.setItem("container","Ngfw");
                         }
+                        if(nContainer.indexOf('Idira') != -1){
+                            referer = 'Idira' ;
+                            sessionStorage.setItem("container","Idira");
+                        }
 			document.cookie = 'navContainer=; path=/; domain=.paloaltonetworks.com; expires=' + new Date(0).toUTCString();
 		}
 	}
-if(referer != "Prisma" && referer != "CloudCortex" && referer != "Cortex" && referer != "Sase" && referer != "Unit" && referer != "Ngfw") {
+if(referer != "Prisma" && referer != "CloudCortex" && referer != "Cortex" && referer != "Sase" && referer != "Unit" && referer != "Ngfw" && referer != "Idira") {
     referer = 'Unit' ;
     sessionStorage.setItem("container","Unit");
 }
@@ -433,6 +445,11 @@ function callMainSitePrismaNavHTML(){
         var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/unit-nav-renderer.php?type=ngfw&domain=en'; 
         searchResultsPagePath = referrer_domain+"/search/ngfwcdsssearch";
     }
+    if(referer == 'Idira'){
+        //var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/ngfw-cdss-nav-renderer.php';
+        var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/unit-nav-renderer.php?type=idira&domain=en'; 
+        searchResultsPagePath = referrer_domain+"/search/idirasearch";
+    }
     httpGet(menu_url,'menu_html');
     document.getElementById('main-nav-menu-cont').removeAttribute("style");
 }
@@ -462,6 +479,7 @@ function httpGet(theUrl,req_type) {
             if(req_type == 'menu_html'){
             var nav_text = xmlhttp.responseText.replaceAll('https://static.cloud.coveo.com/searchui/v2.9159/js/CoveoJsSearch.Lazy.min.js', '');
             nav_text = nav_text.replaceAll('src="/', 'src="'+maindomain_lang+'/');
+            nav_text = nav_text.replaceAll("src='/", "src='"+maindomain_lang+"/");
             nav_text = nav_text.replaceAll("'/content", "'"+maindomain_lang+"/content");
                         
             document.getElementById("PAN_2021_NAV_ASYNC").innerHTML = nav_text.replaceAll('href="/', 'href="'+maindomain_lang+'/');
@@ -493,7 +511,7 @@ function httpGet(theUrl,req_type) {
     xmlhttp.send();    
 }    
     
-if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || referer == 'Sase' || referer == 'Unit' || referer == 'Ngfw'){
+if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || referer == 'Sase' || referer == 'Unit' || referer == 'Ngfw' || referer == 'Idira'){
     const article = document.querySelector('#PAN_2021_NAV_ASYNC');
     if(referer == 'Prisma'){
         article.dataset.type = 'prisma';
@@ -513,6 +531,9 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
     }
     else if(referer == 'Ngfw'){
         article.dataset.type = 'ngfw';
+    }
+    else if(referer == 'Idira'){
+        article.dataset.type = 'idira';
     }
     //set class to default
     if(referer == 'Unit' || referer == 'Ngfw'){
@@ -573,8 +594,8 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
 		</li>                </ul>
                 <div class="ab__options">
                   <ul role="list">
-                                        <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-tick-group-continues-attacks/?pdf=download&#038;lg=en&#038;_wpnonce=e412ef5ec3" role="link" target="_blank"  title="Click here to download" data-page-track="true" data-page-track-value="unit42-tick-group-continues-attacks:hero:pdfdownload"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-download.svg" alt="Download Icon"></a></li>
-                    <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-tick-group-continues-attacks/?pdf=print&#038;lg=en&#038;_wpnonce=e412ef5ec3" target="_blank" role="link" title="Click here to print" data-page-track="true" data-page-track-value="unit42-tick-group-continues-attacks:hero:pdfprint"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-print.svg" alt="Print Icon"></a></li>
+                                        <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-tick-group-continues-attacks/?pdf=download&#038;lg=en&#038;_wpnonce=082ad74565" role="link" target="_blank"  title="Click here to download" data-page-track="true" data-page-track-value="unit42-tick-group-continues-attacks:hero:pdfdownload"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-download.svg" alt="Download Icon"></a></li>
+                    <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-tick-group-continues-attacks/?pdf=print&#038;lg=en&#038;_wpnonce=082ad74565" target="_blank" role="link" title="Click here to print" data-page-track="true" data-page-track-value="unit42-tick-group-continues-attacks:hero:pdfprint"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-print.svg" alt="Print Icon"></a></li>
                   </ul>
                   
 	<div class="ab__share" id="shareDropdown" role="button" aria-expanded="false">
@@ -677,7 +698,7 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
 <p><em>Table 1 Substitution Table used in Gh0st Downloader</em></p>
 <p>The following Python script can decipher the encoded string.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-6a02bebb1d0e3694206610" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-6a0411c809c5b687220597" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
@@ -697,18 +718,18 @@ print dec_strings</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a02bebb1d0e3694206610-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bebb1d0e3694206610-2">2</div><div class="crayon-num" data-line="crayon-6a02bebb1d0e3694206610-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bebb1d0e3694206610-4">4</div><div class="crayon-num" data-line="crayon-6a02bebb1d0e3694206610-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bebb1d0e3694206610-6">6</div><div class="crayon-num" data-line="crayon-6a02bebb1d0e3694206610-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bebb1d0e3694206610-8">8</div><div class="crayon-num" data-line="crayon-6a02bebb1d0e3694206610-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bebb1d0e3694206610-10">10</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a0411c809c5b687220597-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411c809c5b687220597-2">2</div><div class="crayon-num" data-line="crayon-6a0411c809c5b687220597-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411c809c5b687220597-4">4</div><div class="crayon-num" data-line="crayon-6a0411c809c5b687220597-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411c809c5b687220597-6">6</div><div class="crayon-num" data-line="crayon-6a0411c809c5b687220597-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411c809c5b687220597-8">8</div><div class="crayon-num" data-line="crayon-6a0411c809c5b687220597-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411c809c5b687220597-10">10</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a02bebb1d0e3694206610-1"><span class="crayon-i">plaintext</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"KhL9V1ds5Z\"QnfNC&amp;amp;Fb8xGr-()&amp;lt;&amp;gt;[]{}|+THce;0%7Oiz#W DE6qS?aw./BJlk,yUPjgI\`^@$*tumYA'p2RoX=v_:M43"</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bebb1d0e3694206610-2"><span class="crayon-i">ciphertext</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"5j2Cnx\`^@$*(]{}|+mX k3DK'LGchHNPgZ,z0T8_sRU7)&amp;lt;&amp;gt;\"[lBpdfI#%bu;yt-YeoW?4vAMQVa.6qJi:=wFO9&amp;amp;/1ESr"</span></div><div class="crayon-line" id="crayon-6a02bebb1d0e3694206610-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a02bebb1d0e3694206610-4"><span class="crayon-i">enc_string</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"zF((0za"</span></div><div class="crayon-line" id="crayon-6a02bebb1d0e3694206610-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a02bebb1d0e3694206610-6"><span class="crayon-i">dec_strings</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">''</span></div><div class="crayon-line" id="crayon-6a02bebb1d0e3694206610-7"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">enc_string</span><span class="crayon-sy">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bebb1d0e3694206610-8"><span class="crayon-h">	</span><span class="crayon-i">dec_strings</span><span class="crayon-h"> </span>+=<span class="crayon-h"> </span><span class="crayon-i">plaintext</span><span class="crayon-sy">[</span><span class="crayon-i">ciphertext</span><span class="crayon-sy">.</span><span class="crayon-e">find</span><span class="crayon-sy">(</span><span class="crayon-i">c</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-6a02bebb1d0e3694206610-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a02bebb1d0e3694206610-10"><span class="crayon-e">print </span><span class="crayon-i">dec_strings</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a0411c809c5b687220597-1"><span class="crayon-i">plaintext</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"KhL9V1ds5Z\"QnfNC&amp;amp;Fb8xGr-()&amp;lt;&amp;gt;[]{}|+THce;0%7Oiz#W DE6qS?aw./BJlk,yUPjgI\`^@$*tumYA'p2RoX=v_:M43"</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411c809c5b687220597-2"><span class="crayon-i">ciphertext</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"5j2Cnx\`^@$*(]{}|+mX k3DK'LGchHNPgZ,z0T8_sRU7)&amp;lt;&amp;gt;\"[lBpdfI#%bu;yt-YeoW?4vAMQVa.6qJi:=wFO9&amp;amp;/1ESr"</span></div><div class="crayon-line" id="crayon-6a0411c809c5b687220597-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a0411c809c5b687220597-4"><span class="crayon-i">enc_string</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"zF((0za"</span></div><div class="crayon-line" id="crayon-6a0411c809c5b687220597-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a0411c809c5b687220597-6"><span class="crayon-i">dec_strings</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">''</span></div><div class="crayon-line" id="crayon-6a0411c809c5b687220597-7"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">enc_string</span><span class="crayon-sy">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411c809c5b687220597-8"><span class="crayon-h">	</span><span class="crayon-i">dec_strings</span><span class="crayon-h"> </span>+=<span class="crayon-h"> </span><span class="crayon-i">plaintext</span><span class="crayon-sy">[</span><span class="crayon-i">ciphertext</span><span class="crayon-sy">.</span><span class="crayon-e">find</span><span class="crayon-sy">(</span><span class="crayon-i">c</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-6a0411c809c5b687220597-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-6a0411c809c5b687220597-10"><span class="crayon-e">print </span><span class="crayon-i">dec_strings</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0002 seconds] -->
+<!-- [Format Time: 0.0001 seconds] -->
 <p>The exact same table for simple substitution cipher is used in a variant of Daserf (SHA256: 01d681c51ad0c7c3d4b320973c61c28a353624ac665fd390553b364d17911f46). We also found a very similar table in other Tick tools. Since the strings are unique to these threats, we believe a developer linked to the group built these tools. Because of the shared domains and code, we believe the incident reported by Cyphort have ties to Tick. The following tables were identified for their associated malware samples:</p>
 <p>Minzen (SHA256:26727d139b593486237b975e7bdf93a8148c52d5fb48d5fe540a634a16a6ba82):</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-6a02bebb1d0ee916211317" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-6a0411c809c66049868522" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
@@ -720,9 +741,9 @@ cipher text = "KhL9V1ds5Z"QnfNC&amp;amp;Fb8xGr-()&amp;lt;&amp;gt;[]{}|+THce;0%7O
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a02bebb1d0ee916211317-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bebb1d0ee916211317-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a0411c809c66049868522-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411c809c66049868522-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a02bebb1d0ee916211317-1"><span class="crayon-e">plain </span><span class="crayon-i">text</span><span class="crayon-h">&nbsp;&nbsp;</span>=<span class="crayon-h"> </span><span class="crayon-s">"5j2Cnx`^@$*(]{}|+mX k3DK'LGc!hHNPgZ,z0T8_sRU7)&amp;lt;&amp;gt;"</span><span class="crayon-sy">[</span><span class="crayon-i">lBpdfI</span><span class="crayon-p">#%bu;yt-YeoW?4vAMQVa.6qJi:=wFO9&amp;amp;/1ESr"</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bebb1d0ee916211317-2"><span class="crayon-e">cipher </span><span class="crayon-i">text</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"KhL9V1ds5Z"</span><span class="crayon-i">QnfNC</span><span class="crayon-sy">&amp;amp;</span><span class="crayon-i">Fb8xGr</span>-<span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">&amp;lt;</span><span class="crayon-sy">&amp;gt;</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">{</span><span class="crayon-sy">}</span><span class="crayon-sy">|</span>+<span class="crayon-i">THce</span><span class="crayon-sy">;</span><span class="crayon-cn">0</span><span class="crayon-sy">%</span><span class="crayon-cn">7O</span><span class="crayon-sy">!</span><span class="crayon-i">iz</span><span class="crayon-p">#W DE6qS?aw./BJlk,yUPjgI`^@$*tumYA'p2RoX=v_:M43"</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a0411c809c66049868522-1"><span class="crayon-e">plain </span><span class="crayon-i">text</span><span class="crayon-h">&nbsp;&nbsp;</span>=<span class="crayon-h"> </span><span class="crayon-s">"5j2Cnx`^@$*(]{}|+mX k3DK'LGc!hHNPgZ,z0T8_sRU7)&amp;lt;&amp;gt;"</span><span class="crayon-sy">[</span><span class="crayon-i">lBpdfI</span><span class="crayon-p">#%bu;yt-YeoW?4vAMQVa.6qJi:=wFO9&amp;amp;/1ESr"</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411c809c66049868522-2"><span class="crayon-e">cipher </span><span class="crayon-i">text</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"KhL9V1ds5Z"</span><span class="crayon-i">QnfNC</span><span class="crayon-sy">&amp;amp;</span><span class="crayon-i">Fb8xGr</span>-<span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">&amp;lt;</span><span class="crayon-sy">&amp;gt;</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">{</span><span class="crayon-sy">}</span><span class="crayon-sy">|</span>+<span class="crayon-i">THce</span><span class="crayon-sy">;</span><span class="crayon-cn">0</span><span class="crayon-sy">%</span><span class="crayon-cn">7O</span><span class="crayon-sy">!</span><span class="crayon-i">iz</span><span class="crayon-p">#W DE6qS?aw./BJlk,yUPjgI`^@$*tumYA'p2RoX=v_:M43"</span></div></div></td>
 					</tr>
 				</table>
 			</div>
@@ -730,7 +751,7 @@ cipher text = "KhL9V1ds5Z"QnfNC&amp;amp;Fb8xGr-()&amp;lt;&amp;gt;[]{}|+THce;0%7O
 <!-- [Format Time: 0.0001 seconds] -->
 <p>Datper (SHA256: 7d70d659c421b50604ce3e0a1bf423ab7e54b9df361360933bac3bb852a31849):</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-6a02bebb1d0f1753767123" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-6a0411c809c68908151381" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
@@ -742,14 +763,14 @@ cipher text = "5j2Cnx`^@$*(]{}|+mX k3DK'LGc!hHNPgZ,z0T8_sRU7)&amp;lt;&amp;gt;"[l
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a02bebb1d0f1753767123-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bebb1d0f1753767123-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a0411c809c68908151381-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411c809c68908151381-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a02bebb1d0f1753767123-1"><span class="crayon-e">plain </span><span class="crayon-i">text</span><span class="crayon-h">&nbsp;&nbsp;</span>=<span class="crayon-h"> </span><span class="crayon-s">"KhL9V1ds5Z"</span><span class="crayon-i">QnfNC</span><span class="crayon-sy">&amp;amp;</span><span class="crayon-i">Fb8xGr</span>-<span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">&amp;lt;</span><span class="crayon-sy">&amp;gt;</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">{</span><span class="crayon-sy">}</span><span class="crayon-sy">|</span>+<span class="crayon-i">THce</span><span class="crayon-sy">;</span><span class="crayon-cn">0</span><span class="crayon-sy">%</span><span class="crayon-cn">7O</span><span class="crayon-sy">!</span><span class="crayon-i">iz</span><span class="crayon-p">#W DE6qS?aw./BJlk,yUPjgI`^@$*tumYA'p2RoX=v_:M43"</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bebb1d0f1753767123-2"><span class="crayon-e">cipher </span><span class="crayon-i">text</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"5j2Cnx`^@$*(]{}|+mX k3DK'LGc!hHNPgZ,z0T8_sRU7)&amp;lt;&amp;gt;"</span><span class="crayon-sy">[</span><span class="crayon-i">lBpdfI</span><span class="crayon-p">#%bu;yt-YeoW?4vAMQVa.6qJi:=wFO9&amp;amp;/1ESr"</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a0411c809c68908151381-1"><span class="crayon-e">plain </span><span class="crayon-i">text</span><span class="crayon-h">&nbsp;&nbsp;</span>=<span class="crayon-h"> </span><span class="crayon-s">"KhL9V1ds5Z"</span><span class="crayon-i">QnfNC</span><span class="crayon-sy">&amp;amp;</span><span class="crayon-i">Fb8xGr</span>-<span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">&amp;lt;</span><span class="crayon-sy">&amp;gt;</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">{</span><span class="crayon-sy">}</span><span class="crayon-sy">|</span>+<span class="crayon-i">THce</span><span class="crayon-sy">;</span><span class="crayon-cn">0</span><span class="crayon-sy">%</span><span class="crayon-cn">7O</span><span class="crayon-sy">!</span><span class="crayon-i">iz</span><span class="crayon-p">#W DE6qS?aw./BJlk,yUPjgI`^@$*tumYA'p2RoX=v_:M43"</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411c809c68908151381-2"><span class="crayon-e">cipher </span><span class="crayon-i">text</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"5j2Cnx`^@$*(]{}|+mX k3DK'LGc!hHNPgZ,z0T8_sRU7)&amp;lt;&amp;gt;"</span><span class="crayon-sy">[</span><span class="crayon-i">lBpdfI</span><span class="crayon-p">#%bu;yt-YeoW?4vAMQVa.6qJi:=wFO9&amp;amp;/1ESr"</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0002 seconds] -->
+<!-- [Format Time: 0.0001 seconds] -->
 <p></p>
 <h3>Spearphishing Email with Patched File Encryption Program</h3>
 <p>We also identified another malware family, HomamDownloader, sharing some servers with Daserf. An overview of the connections among these threats is discussed in below.</p>
@@ -2149,31 +2170,97 @@ By submitting this form, you agree to our <a title="Terms of Use" href="https://
                     
                         <ul class="list-unstyled nav-list mb-0">
                             <li class="sub-title nav-subheader">
-                                <a href="https://www.paloaltonetworks.com/unit42" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-0:threat intel and incident response services" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/idira" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-0:next-generation identity security" rel="noopener">
+                                    Next-Generation Identity Security
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/privileged-access-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-1:privileged access management" rel="noopener">
+                                    Privileged Access Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/identity-and-access-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-2:identity and access management " rel="noopener">
+                                    Identity and Access Management 
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/endpoint-privilege-manager" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-3:endpoint privilege manager" rel="noopener">
+                                    Endpoint Privilege Manager
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/identity-governance" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-4:identity governance" rel="noopener">
+                                    Identity Governance
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/workforce-password-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-5:workforce password management" rel="noopener">
+                                    Workforce Password Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/agentic" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-6:agentic identities" rel="noopener">
+                                    Agentic Identities
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/secrets-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-7:secrets management" rel="noopener">
+                                    Secrets Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/unified-secrets-governance" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-8:unified secrets governance" rel="noopener">
+                                    Unified Secrets Governance
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/application-credentials-delivery" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-9:application credentials delivery" rel="noopener">
+                                    Application Credentials Delivery
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/vendor-privileged-access" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-10:vendor privileged access" rel="noopener">
+                                    Vendor Privileged Access
+                                </a>
+                            </li>
+                        
+                            <li class="sub-title nav-subheader">
+                                <a href="https://www.paloaltonetworks.com/unit42" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-11:threat intel and incident response services" rel="noopener">
                                     Threat Intel and Incident Response Services
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/assess" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-1:proactive assessments" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/assess" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-12:proactive assessments" rel="noopener">
                                     Proactive Assessments
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/respond" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-2:incident response" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/respond" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-13:incident response" rel="noopener">
                                     Incident Response
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/transform" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-3:transform your security strategy" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/transform" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-14:transform your security strategy" rel="noopener">
                                     Transform Your Security Strategy
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/threat-intelligence-partners" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-4:discover threat intelligence" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/threat-intelligence-partners" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-15:discover threat intelligence" rel="noopener">
                                     Discover Threat Intelligence
                                 </a>
                             </li>
@@ -2822,7 +2909,7 @@ window.PAN_Clean_Util = {
    window.PAN_Clean_Util.yieldToMain = yieldToMain
 })();
 
-if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw"){
+if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw" || referer == "Idira"){
   var Coveo_organizationId = "paloaltonetworksintranet";        
   var techDocsPagePath = "https://docs.paloaltonetworks.com/search.html#hd=All%20Prisma%20Cloud%20Documentation&hq=%40panproductcategory%3D%3D(%22Prisma%20Cloud%22)&sort=relevancy&layout=card&numberOfResults=25";
   var languageFromPath="en_US";
@@ -2881,7 +2968,7 @@ function loadScript1(url, callback){
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
 }
-if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw"){
+if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw" || referer == "Idira"){
 	if(referer == "Unit"){
     setTimeout(function(){
       loadScript(main_site_criticalTopBase, false);

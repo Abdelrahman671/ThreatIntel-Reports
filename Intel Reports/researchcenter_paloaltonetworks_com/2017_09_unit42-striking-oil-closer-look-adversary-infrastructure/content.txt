@@ -26,6 +26,11 @@ function getParameterByName(name, url) {
 	var container_q = getParameterByName('container');
 	var d_lang = 'en';	
 </script>
+<style type="text/css">
+.productNav2021Component[data-type="idira"] .product-2021-nav .product-2021-nav-main .nav-logo img {
+    height: 23px;
+}    
+</style>    
 
 
 <link rel="preload" href="https://www.paloaltonetworks.com/etc.clientlibs/panClean/components/mainNavigationComp/clientlibs/panClean/criticalTop.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -88,7 +93,7 @@ globalConfig.buildName = "UniqueResourceAssetsID_DEC022022";
 </script>
 <meta property="og:likes" content="3"/>
 <meta property="og:readtime" content="8"/>
-<meta property="og:views" content="51,003"/>
+<meta property="og:views" content="51,020"/>
 <meta property="og:date_created" content="September 26, 2017 at 1:00 PM"/>
 <meta property="og:post_length" content="2319"/>
 <meta property="og:category" content="Malware"/>
@@ -135,7 +140,7 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 </script>
 <script src="https://unit42.paloaltonetworks.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta" id="crayon_js-js"></script>
 <script id="post-views-counter-frontend-js-before">
-var pvcArgsFrontend = {"mode":"js","postID":43395,"requestURL":"https:\/\/unit42.paloaltonetworks.com\/wp-admin\/admin-ajax.php","nonce":"79115b47f5","dataStorage":"cookies","multisite":false,"path":"\/","domain":""};
+var pvcArgsFrontend = {"mode":"js","postID":43395,"requestURL":"https:\/\/unit42.paloaltonetworks.com\/wp-admin\/admin-ajax.php","nonce":"8c25c7897d","dataStorage":"cookies","multisite":false,"path":"\/","domain":""};
 
 //# sourceURL=post-views-counter-frontend-js-before
 </script>
@@ -315,7 +320,7 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
 <li id="menu-item-121229" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-121229"><a href="https://start.paloaltonetworks.com/contact-unit42.html"><b style="color:#C84727">Under Attack?</b></a></li>
 </ul>  </div>
 </nav>
-<div class="panClean pan-template-home" id="main-nav-menu-cont" style="display:none;">
+<div class="panClean pan-template-dynamicAllComponents" id="main-nav-menu-cont" style="display:none;">
     <div class="cleanHeader mainNavigationComp baseComponent parbase">
         <div class="productNav2021Component dark default" id="PAN_2021_NAV_ASYNC">
         </div>
@@ -364,6 +369,9 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
 	else if(((pcontainer) && pcontainer.indexOf('Ngfw')!=-1)){
 	    referer = 'Ngfw' ;
 	}
+        else if(((pcontainer) && pcontainer.indexOf('Idira')!=-1)){
+	    referer = 'Idira' ;
+	}
         var fromRef = document.referrer;
         var nContainer = getCookie("navContainer");
         if(nContainer){//If user is coming from main site, we need to reset the container		
@@ -397,10 +405,14 @@ u=-1===u.indexOf("url(")?"url("+u+")":u,1===d.length?t.style.backgroundImage=u:t
                             referer = 'Ngfw' ;
                             sessionStorage.setItem("container","Ngfw");
                         }
+                        if(nContainer.indexOf('Idira') != -1){
+                            referer = 'Idira' ;
+                            sessionStorage.setItem("container","Idira");
+                        }
 			document.cookie = 'navContainer=; path=/; domain=.paloaltonetworks.com; expires=' + new Date(0).toUTCString();
 		}
 	}
-if(referer != "Prisma" && referer != "CloudCortex" && referer != "Cortex" && referer != "Sase" && referer != "Unit" && referer != "Ngfw") {
+if(referer != "Prisma" && referer != "CloudCortex" && referer != "Cortex" && referer != "Sase" && referer != "Unit" && referer != "Ngfw" && referer != "Idira") {
     referer = 'Unit' ;
     sessionStorage.setItem("container","Unit");
 }
@@ -436,6 +448,11 @@ function callMainSitePrismaNavHTML(){
         var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/unit-nav-renderer.php?type=ngfw&domain=en'; 
         searchResultsPagePath = referrer_domain+"/search/ngfwcdsssearch";
     }
+    if(referer == 'Idira'){
+        //var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/ngfw-cdss-nav-renderer.php';
+        var menu_url = 'https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/unit-nav-renderer.php?type=idira&domain=en'; 
+        searchResultsPagePath = referrer_domain+"/search/idirasearch";
+    }
     httpGet(menu_url,'menu_html');
     document.getElementById('main-nav-menu-cont').removeAttribute("style");
 }
@@ -465,6 +482,7 @@ function httpGet(theUrl,req_type) {
             if(req_type == 'menu_html'){
             var nav_text = xmlhttp.responseText.replaceAll('https://static.cloud.coveo.com/searchui/v2.9159/js/CoveoJsSearch.Lazy.min.js', '');
             nav_text = nav_text.replaceAll('src="/', 'src="'+maindomain_lang+'/');
+            nav_text = nav_text.replaceAll("src='/", "src='"+maindomain_lang+"/");
             nav_text = nav_text.replaceAll("'/content", "'"+maindomain_lang+"/content");
                         
             document.getElementById("PAN_2021_NAV_ASYNC").innerHTML = nav_text.replaceAll('href="/', 'href="'+maindomain_lang+'/');
@@ -496,7 +514,7 @@ function httpGet(theUrl,req_type) {
     xmlhttp.send();    
 }    
     
-if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || referer == 'Sase' || referer == 'Unit' || referer == 'Ngfw'){
+if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || referer == 'Sase' || referer == 'Unit' || referer == 'Ngfw' || referer == 'Idira'){
     const article = document.querySelector('#PAN_2021_NAV_ASYNC');
     if(referer == 'Prisma'){
         article.dataset.type = 'prisma';
@@ -516,6 +534,9 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
     }
     else if(referer == 'Ngfw'){
         article.dataset.type = 'ngfw';
+    }
+    else if(referer == 'Idira'){
+        article.dataset.type = 'idira';
     }
     //set class to default
     if(referer == 'Unit' || referer == 'Ngfw'){
@@ -559,8 +580,8 @@ if(referer == 'Prisma' || referer == 'CloudCortex' || referer == 'Cortex' || ref
 		</li>                </ul>
                 <div class="ab__options">
                   <ul role="list">
-                                        <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-striking-oil-closer-look-adversary-infrastructure/?pdf=download&#038;lg=en&#038;_wpnonce=e412ef5ec3" role="link" target="_blank"  title="Click here to download" data-page-track="true" data-page-track-value="unit42-striking-oil-closer-look-adversary-infrastructure:hero:pdfdownload"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-download.svg" alt="Download Icon"></a></li>
-                    <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-striking-oil-closer-look-adversary-infrastructure/?pdf=print&#038;lg=en&#038;_wpnonce=e412ef5ec3" target="_blank" role="link" title="Click here to print" data-page-track="true" data-page-track-value="unit42-striking-oil-closer-look-adversary-infrastructure:hero:pdfprint"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-print.svg" alt="Print Icon"></a></li>
+                                        <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-striking-oil-closer-look-adversary-infrastructure/?pdf=download&#038;lg=en&#038;_wpnonce=082ad74565" role="link" target="_blank"  title="Click here to download" data-page-track="true" data-page-track-value="unit42-striking-oil-closer-look-adversary-infrastructure:hero:pdfdownload"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-download.svg" alt="Download Icon"></a></li>
+                    <li role="listitem"><a href="https://unit42.paloaltonetworks.com/unit42-striking-oil-closer-look-adversary-infrastructure/?pdf=print&#038;lg=en&#038;_wpnonce=082ad74565" target="_blank" role="link" title="Click here to print" data-page-track="true" data-page-track-value="unit42-striking-oil-closer-look-adversary-infrastructure:hero:pdfprint"> <img src="https://unit42.paloaltonetworks.com/wp-content/themes/unit42-v6/dist/images/icons/icon-print.svg" alt="Print Icon"></a></li>
                   </ul>
                   
 	<div class="ab__share" id="shareDropdown" role="button" aria-expanded="false">
@@ -778,7 +799,7 @@ Table 1 Post-exploitation tools found on RunningBee</em></p>
 <p>As we reported in our TwoFace blog, the TwoFace shell was unique in that it was actually two webshells, where after initial authentication to a loader webshell, a secondary webshell with additional functionality was unpacked and made accessible to the operator. After gathering additional TwoFace loader shells, we noticed that some of these TwoFace loaders contained an embedded shell that differed from the TwoFace payload we originally found and published in our <a href="https://blog.paloaltonetworks.com/2017/07/unit42-twoface-webshell-persistent-access-point-lateral-movement/">previous blog</a>. This different shell, which we call LittleFace, contains much less functionality and is relatively simple compared to its TwoFace payload counterpart. LittleFace also differs from the previous TwoFace payloads as once it is saved to the system, it no longer requires authentication.</p>
 <p>The LittleFace shell does not display a web-based user interface like most webshells. Instead, it is a webshell that allows the threat actor to pass commands to Windows command prompt by issuing HTTP POST requests with the desired command within the “c” field of the posted data, as seen in the following code block that is the command handler on the webshell. The webshell will receive the commands embedded in the HTTP POST requests and hand them off to another function (“r” function in the following code block) for processing.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-6a02bed15384e627142553" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-6a0411dd832d7007899621" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover wrap" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
 			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
@@ -799,9 +820,9 @@ void Page_Load(object sender, EventArgs e)
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums " data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a02bed15384e627142553-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bed15384e627142553-2">2</div><div class="crayon-num" data-line="crayon-6a02bed15384e627142553-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bed15384e627142553-4">4</div><div class="crayon-num" data-line="crayon-6a02bed15384e627142553-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bed15384e627142553-6">6</div><div class="crayon-num" data-line="crayon-6a02bed15384e627142553-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bed15384e627142553-8">8</div><div class="crayon-num" data-line="crayon-6a02bed15384e627142553-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a02bed15384e627142553-10">10</div><div class="crayon-num" data-line="crayon-6a02bed15384e627142553-11">11</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-6a0411dd832d7007899621-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411dd832d7007899621-2">2</div><div class="crayon-num" data-line="crayon-6a0411dd832d7007899621-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411dd832d7007899621-4">4</div><div class="crayon-num" data-line="crayon-6a0411dd832d7007899621-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411dd832d7007899621-6">6</div><div class="crayon-num" data-line="crayon-6a0411dd832d7007899621-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411dd832d7007899621-8">8</div><div class="crayon-num" data-line="crayon-6a0411dd832d7007899621-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-6a0411dd832d7007899621-10">10</div><div class="crayon-num" data-line="crayon-6a0411dd832d7007899621-11">11</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a02bed15384e627142553-1"><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">Page_Load</span><span class="crayon-sy">(</span><span class="crayon-t">object</span><span class="crayon-h"> </span><span class="crayon-i">sender</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">EventArgs</span><span class="crayon-h"> </span><span class="crayon-i">e</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bed15384e627142553-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-6a02bed15384e627142553-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bed15384e627142553-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-6a02bed15384e627142553-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">string</span><span class="crayon-h"> </span><span class="crayon-i">cmd</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">Request</span><span class="crayon-sy">[</span><span class="crayon-s">"c"</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bed15384e627142553-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">r</span><span class="crayon-sy">(</span><span class="crayon-i">cmd</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-6a02bed15384e627142553-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bed15384e627142553-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">catch</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">Exception</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-6a02bed15384e627142553-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a02bed15384e627142553-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-6a02bed15384e627142553-11"><span class="crayon-sy">}</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-6a0411dd832d7007899621-1"><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">Page_Load</span><span class="crayon-sy">(</span><span class="crayon-t">object</span><span class="crayon-h"> </span><span class="crayon-i">sender</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">EventArgs</span><span class="crayon-h"> </span><span class="crayon-i">e</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411dd832d7007899621-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-6a0411dd832d7007899621-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411dd832d7007899621-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-6a0411dd832d7007899621-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">string</span><span class="crayon-h"> </span><span class="crayon-i">cmd</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">Request</span><span class="crayon-sy">[</span><span class="crayon-s">"c"</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411dd832d7007899621-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">r</span><span class="crayon-sy">(</span><span class="crayon-i">cmd</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-6a0411dd832d7007899621-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411dd832d7007899621-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">catch</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">Exception</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-6a0411dd832d7007899621-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-6a0411dd832d7007899621-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-6a0411dd832d7007899621-11"><span class="crayon-sy">}</span></div></div></td>
 					</tr>
 				</table>
 			</div>
@@ -2153,31 +2174,97 @@ By submitting this form, you agree to our <a title="Terms of Use" href="https://
                     
                         <ul class="list-unstyled nav-list mb-0">
                             <li class="sub-title nav-subheader">
-                                <a href="https://www.paloaltonetworks.com/unit42" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-0:threat intel and incident response services" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/idira" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-0:next-generation identity security" rel="noopener">
+                                    Next-Generation Identity Security
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/privileged-access-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-1:privileged access management" rel="noopener">
+                                    Privileged Access Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/identity-and-access-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-2:identity and access management " rel="noopener">
+                                    Identity and Access Management 
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/endpoint-privilege-manager" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-3:endpoint privilege manager" rel="noopener">
+                                    Endpoint Privilege Manager
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/identity-governance" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-4:identity governance" rel="noopener">
+                                    Identity Governance
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/workforce-password-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-5:workforce password management" rel="noopener">
+                                    Workforce Password Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/agentic" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-6:agentic identities" rel="noopener">
+                                    Agentic Identities
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/secrets-management" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-7:secrets management" rel="noopener">
+                                    Secrets Management
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/unified-secrets-governance" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-8:unified secrets governance" rel="noopener">
+                                    Unified Secrets Governance
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/machine/application-credentials-delivery" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-9:application credentials delivery" rel="noopener">
+                                    Application Credentials Delivery
+                                </a>
+                            </li>
+                        
+                            <li class="link">
+                                <a href="https://www.paloaltonetworks.com/idira/human/vendor-privileged-access" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-10:vendor privileged access" rel="noopener">
+                                    Vendor Privileged Access
+                                </a>
+                            </li>
+                        
+                            <li class="sub-title nav-subheader">
+                                <a href="https://www.paloaltonetworks.com/unit42" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-11:threat intel and incident response services" rel="noopener">
                                     Threat Intel and Incident Response Services
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/assess" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-1:proactive assessments" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/assess" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-12:proactive assessments" rel="noopener">
                                     Proactive Assessments
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/respond" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-2:incident response" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/respond" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-13:incident response" rel="noopener">
                                     Incident Response
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/transform" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-3:transform your security strategy" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/transform" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-14:transform your security strategy" rel="noopener">
                                     Transform Your Security Strategy
                                 </a>
                             </li>
                         
                             <li class="link">
-                                <a href="https://www.paloaltonetworks.com/unit42/threat-intelligence-partners" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-4:discover threat intelligence" rel="noopener">
+                                <a href="https://www.paloaltonetworks.com/unit42/threat-intelligence-partners" class="d-flex d-md-inline text-black" target="_self" data-page-track="true" data-page-track-value="en_us:mainfootercomp:col-0:link-15:discover threat intelligence" rel="noopener">
                                     Discover Threat Intelligence
                                 </a>
                             </li>
@@ -2823,7 +2910,7 @@ window.PAN_Clean_Util = {
    window.PAN_Clean_Util.yieldToMain = yieldToMain
 })();
 
-if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw"){
+if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw" || referer == "Idira"){
   var Coveo_organizationId = "paloaltonetworksintranet";        
   var techDocsPagePath = "https://docs.paloaltonetworks.com/search.html#hd=All%20Prisma%20Cloud%20Documentation&hq=%40panproductcategory%3D%3D(%22Prisma%20Cloud%22)&sort=relevancy&layout=card&numberOfResults=25";
   var languageFromPath="en_US";
@@ -2882,7 +2969,7 @@ function loadScript1(url, callback){
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
 }
-if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw"){
+if(referer == "CloudCortex" || referer == "Prisma" || referer == "Cortex" || referer == "Sase" || referer == "Unit" || referer == "Ngfw" || referer == "Idira"){
 	if(referer == "Unit"){
     setTimeout(function(){
       loadScript(main_site_criticalTopBase, false);

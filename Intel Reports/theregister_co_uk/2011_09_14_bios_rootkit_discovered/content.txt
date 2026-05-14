@@ -64,8 +64,15 @@
                 <link rel="alternate" type="application/json+oembed" href="https://www.theregister.com/security/2011/09/14/malware-burrows-deep-into-computer-bios-to-escape-av/885013?lab_viewport=oembed">
 
                 
-                <script >window.googletag = window.googletag || { cmd: [] };
+                <script >// OOPS slot definition v2 — same code on all sites, only SITE_KEY changes:
+//   theregister.com    → 'thereg'
+//   blocksandfiles.com → 'bandf'
+//   devclass.com       → 'devclass'
+//   nextplatform.com   → 'nextplatform'
+
+window.googletag = window.googletag || { cmd: [] };
 googletag.cmd.push(function () {
+    const SITE_KEY = 'thereg'; // CHANGE PER SITE
     const context = document.querySelector('meta[property="og:type"]')?.content === "article" ? "article" : "front";
     const device = window.Dac.clientData.labDevice === "mobile" ? "mobile" : "desktop";
     const bwidth = window.innerWidth || 0;
@@ -73,7 +80,6 @@ googletag.cmd.push(function () {
     const author = document.querySelector('meta[property="article:author"]')?.content;
     const canonicalUrl = document.querySelector("link[rel=canonical]")?.getAttribute("href");
     const articleId = canonicalUrl?.split("/").pop();
-
     googletag.setConfig({
         targeting: {
             device,
@@ -84,27 +90,22 @@ googletag.cmd.push(function () {
             ...(articleId && { articleId }),
         }
     });
-
-    googletag.defineOutOfPageSlot('/6978/labrador/thereg/' + context + '/' + device + '/oops', 'oops')
+    function createOops() {
+        if (document.getElementById('oops')) return;
+        const oopsDiv = document.createElement('div');
+        oopsDiv.id = 'oops';
+        oopsDiv.style.cssText = 'width:0;height:0;overflow:hidden;';
+        document.body.prepend(oopsDiv);
+    }
+    if (document.body) {
+        createOops();
+    } else {
+        document.addEventListener('DOMContentLoaded', createOops);
+    }
+    googletag.defineOutOfPageSlot('/6978/labrador/' + SITE_KEY + '/' + context + '/' + device + '/oops', 'oops')
         .addService(googletag.pubads())
         .setConfig({ targeting: { is_oops: '1' } });
-});
-
-
-(function() {
-  function addOops() {
-    if (document.getElementById('oops')) return;
-    var d = document.createElement('div');
-    d.id = 'oops';
-    d.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;';
-    document.body.appendChild(d);
-  }
-  if (document.body) {
-    addOops();
-  } else {
-    document.addEventListener('DOMContentLoaded', addOops);
-  }
-})();</script><script type="module">import { setArticlePagePostCount } from "https://cdn.theregister.com/assets/javascript/forum_post_counts.b8a1a47b.js";
+});</script><script type="module">import { setArticlePagePostCount } from "https://cdn.theregister.com/assets/javascript/forum_post_counts.b8a1a47b.js";
 setArticlePagePostCount();</script><script type="module" src="https://cdn.theregister.com/assets/javascript/article.2d9d928c.js"></script><script >window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
 
@@ -1362,8 +1363,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
         <section id="mainArticleSection" class="main article">
-            <div data-element-guid="c1621f50-f571-4343-eecd-adc32d7f17f8" class="placeholder placement-top">
-<div data-element-guid="37d37e57-b71b-4f9c-bb7a-425a7647718c" class="column google-ad small-12 large-12 small-abs-12 large-abs-12"  style="">
+            <div data-element-guid="492142e6-254b-41d5-ed7f-1f5708e0f0c6" class="placeholder placement-top">
+<div data-element-guid="fbeabb28-a547-41da-f322-a80f1f91e7d7" class="column google-ad small-12 large-12 small-abs-12 large-abs-12"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/a" style="min-height:90px;"></div>
@@ -1433,7 +1434,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
 
     <div class="bylines">
-        <div data-element-guid="c9f40c9a-52f3-433c-ddcc-624d69d7a460" class="byline column" itemscope itemtype="http://schema.org/Person">
+        <div data-element-guid="215a011a-89eb-45aa-e6a2-68cddc610269" class="byline column" itemscope itemtype="http://schema.org/Person">
     
     <div class="content">
             
@@ -1491,7 +1492,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Researchers have discovered one of the first pieces of malware ever used in the wild that modifies the software on the motherboard of infected computers to ensure the infection can't be easily eradicated.</p>
 <p>Known as Trojan.Mebromi, the rootkit reflashes the BIOS of computers it attacks to add malicious instructions that are executed early in a computer's boot-up sequence. The instructions, in turn, alter a computer's MBR, or master boot record, another system component that gets executed prior to the loading of the operating system of an infected machine. By corrupting the processes that run immediately after a PC starts, the malware stands a better chance of surviving attempts by antivirus programs to remove it.</p>
 <p>In addition to posing a threat to end users, Mebroot could create serious obstacles to antivirus developers in producing products that scrub computers clean of detected threats without harming the underlying system.</p>
-<div data-element-guid="37c5b2ac-4266-416f-d152-9157c209f541" class="column google-ad widthFull"  style="">
+<div data-element-guid="01cfea78-34d2-408a-a844-045f1069dbf8" class="column google-ad widthFull"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/b" ></div>
@@ -1501,7 +1502,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             });
         </script>
 </div>
-<figure data-element-guid="c9dab8f1-cadb-4c24-d77e-a499472ffeb5" data-zoomable="1" class="column desktop-floatRight mobile-floatRight small-6 large-2 small-abs-6 large-abs-2">
+<figure data-element-guid="f2165b72-de19-4e66-ab5d-aae8b5f31262" data-zoomable="1" class="column desktop-floatRight mobile-floatRight small-6 large-2 small-abs-6 large-abs-2">
     
     <div class="content " style="">
 
@@ -1542,7 +1543,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>    </div>
 </figure>
 <p>"Storing the malicious code inside the BIOS ROM could actually become more than just a problem for security software, giv[en] the fact that even if antivirus detect[s] and clean[s] the MBR infection, it will be restored at the next system startup when the malicious BIOS payload would overwrite the MBR code again," Webroot researcher Marco Giuliani wrote in a <a href="http://blog.webroot.com/2011/09/13/mebromi-the-first-bios-rootkit-in-the-wild/" target="_blank">blog post</a> published Tuesday. "Developing an antivirus utility able to clean the BIOS code is a challenge, because it needs to be totally error-proof, to avoid rendering the system unbootable at all."</p>
-<div data-element-guid="1ff212f2-e0fe-4da1-e861-12b20e79e324" class="column google-ad floatRight widthAuto"  style="">
+<div data-element-guid="17ea86b8-e58b-4e42-afc2-a3e7c27aaeff" class="column google-ad floatRight widthAuto"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/c" ></div>
@@ -1594,7 +1595,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                 </article>
                 <section class="related desktop-fullWidth mobile-fullWidth fullwidthTarget">
-                <div data-element-guid="b11523ac-e688-4f14-a580-adaecf344fc7" class="page-content"><div data-element-guid="1c56a994-03f4-434b-e574-78395a98200b" class="row small-12 large-12" style=""><div data-element-guid="631866d2-0e8e-43e1-f2fe-e762e56e8efd" class="column google-ad small-12 large-12 small-abs-12 large-abs-12 large-12 small-12"  style="">
+                <div data-element-guid="b11523ac-e688-4f14-a580-adaecf344fc7" class="page-content"><div data-element-guid="236d7cd5-499a-4bfe-fe53-34dc2399e90d" class="row small-12 large-12" style=""><div data-element-guid="938e5907-0d41-448f-ce69-4af6a8ff0d00" class="column google-ad small-12 large-12 small-abs-12 large-abs-12 large-12 small-12"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/f" ></div>
@@ -1605,17 +1606,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </script>
 </div>
 </div>
-<div data-element-guid="0b65ff31-5742-4fc0-99da-9ab3ef7b79ad" class="row small-12 large-12" style="">
+<div data-element-guid="0e337419-0041-4851-e671-f8b2a1e97728" class="row small-12 large-12" style="">
 <!-- placeholder(#1) -->
-<div data-element-guid="511823b5-aa84-4021-9831-40611f6d774e" class="front_rows small-12 large-12 small-abs-12 large-abs-12 large-6 small-12 large-12 small-12">
+<div data-element-guid="fba6bda8-6c48-4a4a-89d9-8ad4c0496016" class="front_rows small-12 large-12 small-abs-12 large-abs-12 large-6 small-12 large-12 small-12">
     
     <div class="content fullwidthTarget" style="">
             
-            <div data-element-guid="dded4ff1-0ea4-4a27-b8d8-56ec272c4421" class="row small-12 large-12 desktop-space-outsideTop-small mobile-space-outsideTop-small desktop-space-outsideBottom-medium mobile-space-outsideBottom-medium bg-tertiary color_mobile_bg-tertiary op-bg_80 color_mobile_op-bg_80 hasContentPadding mobile-hasContentPadding" style=""><div data-element-guid="ae5f0302-a193-4e8f-9e85-93b27e868d57" class="columns small-12 large-4 small-abs-12 large-abs-4"><div data-element-guid="e9a1091c-d2b2-433e-8416-0411d47a581f" class="row small-12 large-12" style=""><article data-element-guid="925d16ff-041b-4794-8272-495c0f78d292" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="offbeat" data-instance="104372" itemscope>
+            <div data-element-guid="dded4ff1-0ea4-4a27-b8d8-56ec272c4421" class="row small-12 large-12 desktop-space-outsideTop-small mobile-space-outsideTop-small desktop-space-outsideBottom-medium mobile-space-outsideBottom-medium bg-tertiary color_mobile_bg-tertiary op-bg_80 color_mobile_op-bg_80 hasContentPadding mobile-hasContentPadding" style=""><div data-element-guid="ae5f0302-a193-4e8f-9e85-93b27e868d57" class="columns small-12 large-4 small-abs-12 large-abs-4"><div data-element-guid="e9a1091c-d2b2-433e-8416-0411d47a581f" class="row small-12 large-12" style=""><article data-element-guid="925d16ff-041b-4794-8272-495c0f78d292" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="off-prem" data-instance="104372" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_40 color_mobile_op-bg_40 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/offbeat/2026/05/13/man-jailed-for-packing-printer-with-something-more-expensive-than-toner-cocaine/5239293" data-k5a-url="https://www.theregister.com/a/5239293" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/off-prem/2026/05/14/tencent-admits-gpus-only-pay-for-themselves-when-powering-personalized-ads/5240150" data-k5a-url="https://www.theregister.com/a/5240150" rel="">
 
 
         <div class="media ">
@@ -1623,27 +1624,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <figure data-element-guid="5be50f62-a621-495a-8a90-cec89141c20b" class="" >
     <div class="img fullwidthTarget">
         <picture>
-            <source srcset="https://image.theregister.com/5239315.jpg?imageId=5239315&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5222020.jpg?imageId=5222020&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=webp" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/5239315.jpg?imageId=5239315&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5222020.jpg?imageId=5222020&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/jpeg">    
-            <source srcset="https://image.theregister.com/5239315.jpg?imageId=5239315&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5222020.jpg?imageId=5222020&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=webp" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/5239315.jpg?imageId=5239315&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5222020.jpg?imageId=5222020&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/jpeg">    
-            <img src="https://image.theregister.com/5239315.jpg?imageId=5239315&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg"
+            <img src="https://image.theregister.com/5222020.jpg?imageId=5222020&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg"
                 width="480"
                 height="216"
                 alt="" 
@@ -1667,7 +1668,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div 
 style=""
 class="kicker floating bg-primary color_mobile_bg-primary secondary color_mobile_secondary hasTextPadding mobile-hasTextPadding hasTextColor hasTextColorMobile">
-Offbeat
+Off-Prem
 </div>
 
                 <div class="labels">
@@ -1682,13 +1683,13 @@ Offbeat
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >Man jailed for packing printer with something more expensive than toner: Cocaine
+    >Tencent admits GPUs only pay for themselves when powering personalized ads
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    Class A drugs loaded instead of A4
+    Chinese web giant says accelerator shortage is over as local hardware arrives in volume
 </p>
 
 
@@ -1699,62 +1700,14 @@ Offbeat
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-05-13T07:22:04+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-05-14T06:40:43+02:00"></time>
     </div>
 </article>
-<article data-element-guid="a65e9cbc-52ec-4774-af70-5521a9aea9b4" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="public sector" data-instance="104492" itemscope>
+<article data-element-guid="a65e9cbc-52ec-4774-af70-5521a9aea9b4" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="networks" data-instance="104492" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/public-sector/2026/05/13/vietnam-to-develop-domestic-cloud-so-it-can-ditch-risky-overseas-operators-for-government-workloads/5239269" data-k5a-url="https://www.theregister.com/a/5239269" rel="">
-
-
-        <div class="media ">
-
-            <div class="floatingText">
-
-                <div class="labels">
-                </div>
-            </div>
-            
-
-        </div>
-
-
-        
-                <div 
-style=""
-class="kicker below t14">
-Public Sector
-</div>
-                <h2 itemprop="headline" 
-    class="headline t19"
-    style=""
-    >Vietnam to develop domestic cloud so it can ditch risky overseas operators for government workloads
-</h2>
-                <p itemprop="description" 
-    class="subtitle t14"
-    style=""
-    >
-    Communist government plans personalized ‘data-driven decision-making based on real-time information’ by 2035
-</p>
-
-
-        
-
-
-
-
-        </a>
-
-        <time itemprop="datePublished" datetime="2026-05-13T05:44:46+02:00"></time>
-    </div>
-</article>
-<article data-element-guid="e85a8110-19d6-404f-a5ec-12b7903ba4d7" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="networks" data-instance="5218398" itemscope>
-    
-    <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-septenary mobile_border-bg-septenary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
-        
-        <a itemprop="url" class="" href="https://www.theregister.com/networks/2026/05/12/zte-and-claro-launch-next-generation-4k-ultra-hd-ip-stb-in-brazil/5238584" data-k5a-url="https://www.theregister.com/a/5238584" rel="sponsored ">
+        <a itemprop="url" class="" href="https://www.theregister.com/networks/2026/05/14/cisco-to-fire-4000-staff-and-generously-give-them-free-training-on-cisco/5240125" data-k5a-url="https://www.theregister.com/a/5240125" rel="">
 
 
         <div class="media ">
@@ -1778,13 +1731,13 @@ Networks
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >ZTE and Claro launch next-generation 4K Ultra HD IP STB in Brazil
+    >Cisco to fire 4,000 staff and generously give them free training – on Cisco
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    Device delivers smoother streaming and simpler interaction, elevating home entertainment
+    Reducing memory requirements to control costs in a new wave of kit
 </p>
 
 
@@ -1795,7 +1748,50 @@ Networks
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-05-12T11:22:00+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-05-14T05:32:53+02:00"></time>
+    </div>
+</article>
+<article data-element-guid="e85a8110-19d6-404f-a5ec-12b7903ba4d7" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="networks" data-instance="5218398" itemscope>
+    
+    <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-septenary mobile_border-bg-septenary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
+        
+        <a itemprop="url" class="" href="https://www.theregister.com/networks/2026/05/13/zte-advances-intelligent-network-monetization-strategy-at-agc2026-empowering-isps-for-sustainable-growth/5239443" data-k5a-url="https://www.theregister.com/a/5239443" rel="sponsored ">
+
+
+        <div class="media ">
+
+            <div class="floatingText">
+
+                <div class="labels">
+                </div>
+            </div>
+            
+
+        </div>
+
+
+        
+                <h2 itemprop="headline" 
+    class="headline t19"
+    style=""
+    >ZTE advances intelligent network monetization strategy at AGC2026, empowering ISPs for sustainable growth
+</h2>
+                <p itemprop="description" 
+    class="subtitle t14"
+    style=""
+    >
+    Leveraging 10G PON, light OTN, and Wi-Fi 7 to modernize infrastructure and reduce operational costs for local operators
+</p>
+
+
+        
+
+
+
+
+        </a>
+
+        <time itemprop="datePublished" datetime="2026-05-13T10:33:13+02:00"></time>
     </div>
 </article>
 </div>
@@ -1803,7 +1799,7 @@ Networks
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/patches/2026/05/13/doozy-of-a-patch-tuesday-includes-30-critical-microsoft-cves/5239224" data-k5a-url="https://www.theregister.com/a/5239224" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/patches/2026/05/14/welcome-to-the-vulnpocalypse-as-vendors-use-ai-to-find-bugs-and-patches-multiply-like-rabbits/5240027" data-k5a-url="https://www.theregister.com/a/5240027" rel="">
 
 
         <div class="media ">
@@ -1822,18 +1818,18 @@ Networks
                 <div 
 style=""
 class="kicker below t14">
-Security
+patches
 </div>
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >Doozy of a Patch Tuesday includes 30 critical Microsoft CVEs
+    >Welcome to the vulnpocalypse, as vendors use AI to find bugs and patches multiply like rabbits
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    The good news: no 0-days. The bad news: busy week ahead for Microsoft admins
+    Palo Alto Networks found and fixed 75 flaws this month, up from its usual five
 </p>
 
 
@@ -1844,14 +1840,14 @@ Security
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-05-13T01:51:20+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-05-14T01:27:50+02:00"></time>
     </div>
 </article>
-<article data-element-guid="a9566c78-d7e9-416e-bb25-70daa2efb1b2" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="columnists" data-instance="5218400" itemscope>
+<article data-element-guid="a9566c78-d7e9-416e-bb25-70daa2efb1b2" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="ai + ml" data-instance="5218400" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_40 color_mobile_op-bg_40 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/columnists/2026/05/08/trump-jumps-from-anything-goes-to-strict-regulation-ai-policy/5234687" data-k5a-url="https://www.theregister.com/a/5234687" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/ai-ml/2026/05/13/ai-will-soon-be-capable-of-telling-convincing-lies/5239349" data-k5a-url="https://www.theregister.com/a/5239349" rel="">
 
 
         <div class="media ">
@@ -1859,30 +1855,30 @@ Security
                 <figure data-element-guid="9238bb39-3bbf-4e4d-822d-9ebcbf8e8b83" class="" >
     <div class="img fullwidthTarget">
         <picture>
-            <source srcset="https://image.theregister.com/5234720.jpg?imageId=5234720&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5239897.jpg?imageId=5239897&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=webp" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/5234720.jpg?imageId=5234720&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5239897.jpg?imageId=5239897&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/jpeg">    
-            <source srcset="https://image.theregister.com/5234720.jpg?imageId=5234720&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5239897.jpg?imageId=5239897&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=webp" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/5234720.jpg?imageId=5234720&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5239897.jpg?imageId=5239897&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/jpeg">    
-            <img src="https://image.theregister.com/5234720.jpg?imageId=5234720&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg"
+            <img src="https://image.theregister.com/5239897.jpg?imageId=5239897&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg"
                 width="480"
                 height="216"
-                alt="Stylized black-and-white portrait of Donald Trump on a dark background." 
+                alt="" 
                 loading="lazy"
                 style=""    
                 >
@@ -1903,7 +1899,7 @@ Security
                     <div 
 style=""
 class="kicker floating bg-primary color_mobile_bg-primary secondary color_mobile_secondary hasTextPadding mobile-hasTextPadding hasTextColor hasTextColorMobile">
-Columnists
+AI + ML
 </div>
 
                 <div class="labels">
@@ -1918,13 +1914,13 @@ Columnists
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >Trump jumps from 'anything goes' to 'strict regulation' AI policy
+    >AI will soon be capable of telling convincing lies
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    In a word, 'Huh?'
+    That's fine when playing poker, but less useful when we trust LLMs with serious work like finding software flaws
 </p>
 
 
@@ -1935,14 +1931,14 @@ Columnists
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-05-08T14:56:00+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-05-13T09:29:00+02:00"></time>
     </div>
 </article>
-<article data-element-guid="8a43081b-f6b1-4452-89c3-2d9ceb5007aa" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="ai + ml" data-instance="104494" itemscope>
+<article data-element-guid="8a43081b-f6b1-4452-89c3-2d9ceb5007aa" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="paas and iaas" data-instance="104494" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/ai-ml/2026/05/13/google-users-fight-for-refunds-as-unauthorized-api-usage-bills-soar/5239160" data-k5a-url="https://www.theregister.com/a/5239160" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/paas-and-iaas/2026/05/13/aws-patched-quick-auth-bypass-says-customers-werent-using-control/5240041" data-k5a-url="https://www.theregister.com/a/5240041" rel="">
 
 
         <div class="media ">
@@ -1961,18 +1957,18 @@ Columnists
                 <div 
 style=""
 class="kicker below t14">
-AI + ML
+PaaS + IaaS
 </div>
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >Google users fight for refunds as unauthorized API usage bills soar
+    >AWS to Quick admins: The access control didn't work, but you weren't using it anyway, so what's the problem?
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    'What the hell is going on? It's just draining my money'
+    If a setting fails in the forest and nobody hears it ...
 </p>
 
 
@@ -1983,7 +1979,7 @@ AI + ML
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-05-13T01:03:33+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-05-14T00:56:41+02:00"></time>
     </div>
 </article>
 </div>
@@ -2074,29 +2070,6 @@ AI + ML
                     </div>
                 </li>
                 <li
-                data-section="software"
-                data-tags="ai,ai and ml,software"
-                data-hostname="www.theregister.com"
-                data-source-display-name="www.theregister.com" 
-                data-tab-content="">
-                    <figure class="media paywall-position-hidePaywallLabel">
-                        <a href="/software/2026/05/05/british-mathematician-hands-openclaw-agent-a-credit-card/5228654">
-                            <img src="//image.theregister.com/5229005.jpg?imageId=5229005&panox=0&panoy=0&panow=0&panoh=0&width=70&height=60" alt="">
-                        </a>
-                    </figure>
-                    <div class="text kicker-position-aboveTitle paywall-position-hidePaywallLabel">
-                        <a href="/software/2026/05/05/british-mathematician-hands-openclaw-agent-a-credit-card/5228654">
-                            <div class="kicker-paywall-container">
-                                <span class="kicker">AI + ML</span>
-                            </div>
-                            <h4>Brit mathematician lets AI agent loose with credit card – cue password leaks, CAPTCHA chaos and more</h4>
-                            
-                        </a>
-                        <p>
-                        </p>
-                    </div>
-                </li>
-                <li
                 data-section="security"
                 data-tags="ai,anthropic,cybersecurity,security,software"
                 data-hostname="www.theregister.com"
@@ -2113,6 +2086,29 @@ AI + ML
                                 <span class="kicker">Security</span>
                             </div>
                             <h4>Anthropic’s bug-hunting Mythos was greatest marketing stunt ever, says cURL creator</h4>
+                            
+                        </a>
+                        <p>
+                        </p>
+                    </div>
+                </li>
+                <li
+                data-section="ai + ml"
+                data-tags="ai,ai + ml,developer,devops"
+                data-hostname="www.theregister.com"
+                data-source-display-name="www.theregister.com" 
+                data-tab-content="">
+                    <figure class="media paywall-position-hidePaywallLabel">
+                        <a href="/ai-ml/2026/05/13/google-users-fight-for-refunds-as-unauthorized-api-usage-bills-soar/5239160">
+                            <img src="//image.theregister.com/5239198.jpg?imageId=5239198&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=70&height=60" alt="">
+                        </a>
+                    </figure>
+                    <div class="text kicker-position-aboveTitle paywall-position-hidePaywallLabel">
+                        <a href="/ai-ml/2026/05/13/google-users-fight-for-refunds-as-unauthorized-api-usage-bills-soar/5239160">
+                            <div class="kicker-paywall-container">
+                                <span class="kicker">AI + ML</span>
+                            </div>
+                            <h4>Google users fight for refunds as unauthorized API usage bills soar</h4>
                             
                         </a>
                         <p>
@@ -2357,47 +2353,47 @@ AI + ML
         </p>
             <ul>
                     <li>
-                        <a href="/patches/2026/05/13/doozy-of-a-patch-tuesday-includes-30-critical-microsoft-cves/5239224">
+                        <a href="/patches/2026/05/14/welcome-to-the-vulnpocalypse-as-vendors-use-ai-to-find-bugs-and-patches-multiply-like-rabbits/5240027">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">Security</p>
-                                    <h4 class="abt-title">Doozy of a Patch Tuesday includes 30 critical Microsoft CVEs</h4>
-                                    <p class="abt-subtitle">The good news: no 0-days. The bad news: busy week ahead for Microsoft admins</p>
+                                    <p class="abt-kicker">patches</p>
+                                    <h4 class="abt-title">Welcome to the vulnpocalypse, as vendors use AI to find bugs and patches multiply like rabbits</h4>
+                                    <p class="abt-subtitle">Palo Alto Networks found and fixed 75 flaws this month, up from its usual five</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/ai-ml/2026/05/13/google-users-fight-for-refunds-as-unauthorized-api-usage-bills-soar/5239160">
+                        <a href="/paas-and-iaas/2026/05/13/aws-patched-quick-auth-bypass-says-customers-werent-using-control/5240041">
+                            <div class="text-container">                    
+                                    <p class="abt-kicker">PaaS + IaaS</p>
+                                    <h4 class="abt-title">AWS to Quick admins: The access control didn't work, but you weren't using it anyway, so what's the problem?</h4>
+                                    <p class="abt-subtitle">If a setting fails in the forest and nobody hears it ...</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/software/2026/05/13/googles-ai-enabled-mouse-pointer-understands-this-and-that/5240005">
+                            <div class="text-container">                    
+                                    <p class="abt-kicker">software</p>
+                                    <h4 class="abt-title">Google's AI-enabled mouse pointer understands 'this' and 'that'</h4>
+                                    <p class="abt-subtitle">Right-clicking could go the way of the 3.5-inch floppy at the Chocolate Factory</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/on-prem/2026/05/13/datacenters-are-having-fewer-but-bigger-failures/5239951">
+                            <div class="text-container">                    
+                                    <p class="abt-kicker">On-Prem</p>
+                                    <h4 class="abt-title">Datacenters are having fewer, but bigger failures</h4>
+                                    <p class="abt-subtitle">And neither AI nor international conflict are helping</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/ai-ml/2026/05/13/anthropic-butts-in-to-small-business-promises-help-with-payroll-and-other-core-tasks/5239967">
                             <div class="text-container">                    
                                     <p class="abt-kicker">AI + ML</p>
-                                    <h4 class="abt-title">Google users fight for refunds as unauthorized API usage bills soar</h4>
-                                    <p class="abt-subtitle">'What the hell is going on? It's just draining my money'</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/cyber-crime/2026/05/12/foxconn-confirms-cyberattack-after-nitrogen-claims-apple-nvidia-data-theft/5239144">
-                            <div class="text-container">                    
-                                    <p class="abt-kicker">cyber-crime</p>
-                                    <h4 class="abt-title">Foxconn confirms cyberattack after ransomware crew claims it stole confidential Apple, Nvidia files</h4>
-                                    <p class="abt-subtitle">Affected factories back up and running, we're told</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/personal-tech/2026/05/12/google-launches-line-of-android-laptops-festooned-with-gemini-ai/5239091">
-                            <div class="text-container">                    
-                                    <p class="abt-kicker">Personal Tech</p>
-                                    <h4 class="abt-title">Google launches line of Android laptops festooned with Gemini AI</h4>
-                                    <p class="abt-subtitle">If you're not a fan of having AI baked into your OS, look elsewhere</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/ai-ml/2026/05/12/actors-new-spec-aims-to-defeat-attack-of-the-ai-clones/5239115">
-                            <div class="text-container">                    
-                                    <p class="abt-kicker">aI + ML</p>
-                                    <h4 class="abt-title">Hollywood A-listers back proposed standard that would pay them when AI uses their likeness or work</h4>
-                                    <p class="abt-subtitle">RSL Media expands machine-readable licensing rules to cover AI use of identities and creative works</p>
+                                    <h4 class="abt-title">Anthropic butts in to small business, promises help with payroll and other core tasks</h4>
+                                    <p class="abt-subtitle">But Pro or Max biz users should know that the company may train its AI on your data</p>
                             </div>
                         </a>
                     </li>
@@ -2415,47 +2411,47 @@ AI + ML
         </p>
             <ul>
                     <li>
-                        <a href="/public-sector/2026/05/13/vietnam-to-develop-domestic-cloud-so-it-can-ditch-risky-overseas-operators-for-government-workloads/5239269">
+                        <a href="/patches/2026/05/14/welcome-to-the-vulnpocalypse-as-vendors-use-ai-to-find-bugs-and-patches-multiply-like-rabbits/5240027">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">Public Sector</p>
-                                    <h4 class="abt-title">Vietnam to develop domestic cloud so it can ditch risky overseas operators for government workloads</h4>
-                                    <p class="abt-subtitle">Communist government plans personalized ‘data-driven decision-making based on real-time information’ by 2035</p>
+                                    <p class="abt-kicker">patches</p>
+                                    <h4 class="abt-title">Welcome to the vulnpocalypse, as vendors use AI to find bugs and patches multiply like rabbits</h4>
+                                    <p class="abt-subtitle">Palo Alto Networks found and fixed 75 flaws this month, up from its usual five</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/ai-ml/2026/05/13/execs-admit-ai-makes-them-value-human-workers-less/5239201">
+                        <a href="/paas-and-iaas/2026/05/13/aws-patched-quick-auth-bypass-says-customers-werent-using-control/5240041">
+                            <div class="text-container">                    
+                                    <p class="abt-kicker">PaaS + IaaS</p>
+                                    <h4 class="abt-title">AWS to Quick admins: The access control didn't work, but you weren't using it anyway, so what's the problem?</h4>
+                                    <p class="abt-subtitle">If a setting fails in the forest and nobody hears it ...</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/software/2026/05/13/googles-ai-enabled-mouse-pointer-understands-this-and-that/5240005">
+                            <div class="text-container">                    
+                                    <p class="abt-kicker">software</p>
+                                    <h4 class="abt-title">Google's AI-enabled mouse pointer understands 'this' and 'that'</h4>
+                                    <p class="abt-subtitle">Right-clicking could go the way of the 3.5-inch floppy at the Chocolate Factory</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/on-prem/2026/05/13/datacenters-are-having-fewer-but-bigger-failures/5239951">
+                            <div class="text-container">                    
+                                    <p class="abt-kicker">On-Prem</p>
+                                    <h4 class="abt-title">Datacenters are having fewer, but bigger failures</h4>
+                                    <p class="abt-subtitle">And neither AI nor international conflict are helping</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/ai-ml/2026/05/13/anthropic-butts-in-to-small-business-promises-help-with-payroll-and-other-core-tasks/5239967">
                             <div class="text-container">                    
                                     <p class="abt-kicker">AI + ML</p>
-                                    <h4 class="abt-title">Execs admit AI makes them value human workers less</h4>
-                                    <p class="abt-subtitle">As suits say they're burning cash on brainboxes without seeing results</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/patches/2026/05/13/doozy-of-a-patch-tuesday-includes-30-critical-microsoft-cves/5239224">
-                            <div class="text-container">                    
-                                    <p class="abt-kicker">Security</p>
-                                    <h4 class="abt-title">Doozy of a Patch Tuesday includes 30 critical Microsoft CVEs</h4>
-                                    <p class="abt-subtitle">The good news: no 0-days. The bad news: busy week ahead for Microsoft admins</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/ai-ml/2026/05/13/google-users-fight-for-refunds-as-unauthorized-api-usage-bills-soar/5239160">
-                            <div class="text-container">                    
-                                    <p class="abt-kicker">AI + ML</p>
-                                    <h4 class="abt-title">Google users fight for refunds as unauthorized API usage bills soar</h4>
-                                    <p class="abt-subtitle">'What the hell is going on? It's just draining my money'</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/cyber-crime/2026/05/12/foxconn-confirms-cyberattack-after-nitrogen-claims-apple-nvidia-data-theft/5239144">
-                            <div class="text-container">                    
-                                    <p class="abt-kicker">cyber-crime</p>
-                                    <h4 class="abt-title">Foxconn confirms cyberattack after ransomware crew claims it stole confidential Apple, Nvidia files</h4>
-                                    <p class="abt-subtitle">Affected factories back up and running, we're told</p>
+                                    <h4 class="abt-title">Anthropic butts in to small business, promises help with payroll and other core tasks</h4>
+                                    <p class="abt-subtitle">But Pro or Max biz users should know that the company may train its AI on your data</p>
                             </div>
                         </a>
                     </li>
@@ -2473,50 +2469,50 @@ AI + ML
         </p>
             <ul>
                     <li>
-                        <a href="/public-sector/2026/05/13/vietnam-to-develop-domestic-cloud-so-it-can-ditch-risky-overseas-operators-for-government-workloads/5239269">
+                        <a href="/off-prem/2026/05/14/tencent-admits-gpus-only-pay-for-themselves-when-powering-personalized-ads/5240150">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Vietnam to develop domestic cloud so it can ditch risky overseas operators for government workloads</h4>
-                                    <p class="abt-subtitle">Communist government plans personalized ‘data-driven decision-making based on real-time information’ by 2035</p>
+                                    <h4 class="abt-title">Tencent admits GPUs only pay for themselves when powering personalized ads</h4>
+                                    <p class="abt-subtitle">Chinese web giant says accelerator shortage is over as local hardware arrives in volume</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/ai-ml/2026/05/13/execs-admit-ai-makes-them-value-human-workers-less/5239201">
+                        <a href="/networks/2026/05/14/cisco-to-fire-4000-staff-and-generously-give-them-free-training-on-cisco/5240125">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Execs admit AI makes them value human workers less</h4>
-                                    <p class="abt-subtitle">As suits say they're burning cash on brainboxes without seeing results</p>
+                                    <h4 class="abt-title">Cisco to fire 4,000 staff and generously give them free training – on Cisco</h4>
+                                    <p class="abt-subtitle">Reducing memory requirements to control costs in a new wave of kit</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/patches/2026/05/13/doozy-of-a-patch-tuesday-includes-30-critical-microsoft-cves/5239224">
+                        <a href="/patches/2026/05/14/welcome-to-the-vulnpocalypse-as-vendors-use-ai-to-find-bugs-and-patches-multiply-like-rabbits/5240027">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Doozy of a Patch Tuesday includes 30 critical Microsoft CVEs</h4>
-                                    <p class="abt-subtitle">The good news: no 0-days. The bad news: busy week ahead for Microsoft admins</p>
+                                    <h4 class="abt-title">Welcome to the vulnpocalypse, as vendors use AI to find bugs and patches multiply like rabbits</h4>
+                                    <p class="abt-subtitle">Palo Alto Networks found and fixed 75 flaws this month, up from its usual five</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/ai-ml/2026/05/13/google-users-fight-for-refunds-as-unauthorized-api-usage-bills-soar/5239160">
+                        <a href="/paas-and-iaas/2026/05/13/aws-patched-quick-auth-bypass-says-customers-werent-using-control/5240041">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Google users fight for refunds as unauthorized API usage bills soar</h4>
-                                    <p class="abt-subtitle">'What the hell is going on? It's just draining my money'</p>
+                                    <h4 class="abt-title">AWS to Quick admins: The access control didn't work, but you weren't using it anyway, so what's the problem?</h4>
+                                    <p class="abt-subtitle">If a setting fails in the forest and nobody hears it ...</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/cyber-crime/2026/05/12/foxconn-confirms-cyberattack-after-nitrogen-claims-apple-nvidia-data-theft/5239144">
+                        <a href="/software/2026/05/13/googles-ai-enabled-mouse-pointer-understands-this-and-that/5240005">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Foxconn confirms cyberattack after ransomware crew claims it stole confidential Apple, Nvidia files</h4>
-                                    <p class="abt-subtitle">Affected factories back up and running, we're told</p>
+                                    <h4 class="abt-title">Google's AI-enabled mouse pointer understands 'this' and 'that'</h4>
+                                    <p class="abt-subtitle">Right-clicking could go the way of the 3.5-inch floppy at the Chocolate Factory</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/personal-tech/2026/05/12/google-launches-line-of-android-laptops-festooned-with-gemini-ai/5239091">
+                        <a href="/on-prem/2026/05/13/datacenters-are-having-fewer-but-bigger-failures/5239951">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Google launches line of Android laptops festooned with Gemini AI</h4>
-                                    <p class="abt-subtitle">If you're not a fan of having AI baked into your OS, look elsewhere</p>
+                                    <h4 class="abt-title">Datacenters are having fewer, but bigger failures</h4>
+                                    <p class="abt-subtitle">And neither AI nor international conflict are helping</p>
                             </div>
                         </a>
                     </li>

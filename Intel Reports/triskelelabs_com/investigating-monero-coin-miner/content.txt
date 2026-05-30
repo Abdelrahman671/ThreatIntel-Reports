@@ -207,6 +207,377 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PM6PVGLP');</script>
 <!-- End Google Tag Manager -->
+
+<!-- Custom style overrides -->
+<style>
+  /* ------------------------------------------------------------- */
+  /* HEADER STYLES */
+  /* ------------------------------------------------------------- */
+
+  /* Frosted Glass Header — desktop/tablet only.
+    backdrop-filter creates a containing block for fixed descendants,
+    which breaks the mobile nav drawer (position: fixed; inset: 0).
+    Scope it to >767px so the mobile mega menu works correctly. */
+  .gen-header-row-1-force-full-width-section {
+    border-top: 1px solid rgba(202, 207, 216, 0.5);
+    border-bottom: 1px solid rgba(202, 207, 216, 0.5);
+  }
+
+  @media (min-width: 768px) {
+    .gen-header-row-1-force-full-width-section {
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+  }
+
+  /* Ensure the header logo has some padding */
+  .gen-header__logo {
+    padding-right: 30px;
+  }
+
+  /* Ensure the header menu is centered */
+  .gen-header__nav-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Ensure the header CTA has no padding */
+  .gen-header__button {
+    padding: 0;
+  }
+
+  /* Ensure the header font is Lab Grotesque */
+  .gen-header__wrapper,
+  .gen-header__wrapper * {
+    font-family: "Lab Grotesque", sans-serif;
+  }
+
+  /* ------------------------------------------------------------- */
+  /* EYEBROW STYLES */
+  /* ------------------------------------------------------------- */
+
+  .eyebrow__icon {
+    --eyebrow-icon-size: 5px;
+    --eyebrow-icon-scale: 1;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    line-height: 0;
+  }
+
+  .eyebrow__icon .hs_cos_wrapper_type_icon {
+    display: inline-flex;
+    line-height: 0;
+  }
+
+  .eyebrow__icon svg {
+    width: var(--eyebrow-icon-size);
+    height: var(--eyebrow-icon-size);
+    display: block;
+    flex-shrink: 0;
+    transform: scale(var(--eyebrow-icon-scale));
+    transform-origin: center center;
+  }
+
+  .eyebrow__pill {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .eyebrow__text {
+    white-space: normal;
+    min-width: 0;
+  }
+
+  /* ------------------------------------------------------------- */
+  /* VIDEO STYLES */
+  /* ------------------------------------------------------------- */
+
+  .oembed_container {
+    position: relative;
+  }
+
+  .oembed_custom-thumbnail::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(72, 207, 160, 0.302);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .oembed_custom-thumbnail_icon {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ------------------------------------------------------------- */
+  /* FORM STYLES */
+  /* ------------------------------------------------------------- */
+
+  /* Design tokens */
+  .hsfc-Form,
+  .widget-type-form {
+    --tl-font: "Lab Grotesque", sans-serif;
+    --tl-text: #FFFFFF;
+    --tl-text-dark: #181B25;
+    --tl-underline: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ---------- Outer card ---------- */
+  .hs_cos_wrapper_type_module.widget-type-form,
+  .widget-type-form {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(202, 207, 216, 0.5);
+    padding: 0 !important;
+  }
+
+  /* ---------- Neutralise inner wrappers ---------- */
+  .hsfc-FormWrapper,
+  .hsfc-Renderer,
+  .hsfc-Form,
+  .hsfc-Step,
+  .hsfc-Step__Content,
+  .hsfc-Row,
+  .hsfc-TextField,
+  .hsfc-EmailField,
+  .hsfc-PhoneField,
+  .hsfc-DropdownField,
+  .hsfc-TextareaField {
+    background: transparent !important;
+  }
+
+  /* ---------- Spacing ---------- */
+  .hsfc-Step__Content {
+    padding: 32px !important;
+  }
+
+  .hsfc-Row {
+    margin: 0 0 16px !important;
+    gap: 24px !important;
+  }
+
+  .hsfc-Row:last-of-type {
+    margin-bottom: 0 !important;
+  }
+
+  .hsfc-NavigationRow {
+    margin: 16px 0 0 !important;
+  }
+
+  /* ---------- Heading / intro text ---------- */
+  .hsfc-RichText,
+  .hsfc-RichText * {
+    color: var(--tl-text) !important;
+  }
+
+  /* ---------- Field labels ---------- */
+  .hsfc-FieldLabel,
+  .hsfc-FieldLabel span {
+    color: var(--tl-text) !important;
+    font-family: var(--tl-font) !important;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    line-height: normal !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    display: inline-block;
+  }
+
+  .hsfc-FieldLabel__RequiredIndicator {
+    color: var(--tl-text) !important;
+    opacity: 0.8;
+    margin-left: 2px;
+  }
+
+  /* ---------- Inputs (text, email, textarea) ---------- */
+  .hsfc-TextInput,
+  .hsfc-TextareaInput {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--tl-underline) !important;
+    border-radius: 0 !important;
+    padding: 10px 0 !important;
+    color: var(--tl-text) !important;
+    font-family: var(--tl-font) !important;
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .hsfc-TextareaInput {
+    min-height: 96px !important;
+    resize: vertical;
+  }
+
+  /* ---------- Composite fields (phone + dropdown wrappers) ---------- */
+  .hsfc-PhoneField .hsfc-PhoneInput,
+  .hsfc-DropdownField .hsfc-DropdownInput {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--tl-underline) !important;
+    border-radius: 0 !important;
+    padding: 10px 0 !important;
+  }
+
+  /* Strip the inner input border so the underline isn't drawn twice */
+  .hsfc-PhoneField .hsfc-PhoneInput input.hsfc-TextInput,
+  .hsfc-DropdownField input.hsfc-TextInput,
+  .hsfc-DropdownField input.hsfc-TextInput--button {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .hsfc-PhoneInput__FlagAndCaret {
+    background: transparent !important;
+    border: none !important;
+    color: var(--tl-text) !important;
+  }
+
+  /* ---------- Caret triangles (white) ---------- */
+  .hsfc-DropdownInput__Caret,
+  .hsfc-DropdownInput__Caret span,
+  .hsfc-PhoneInput__FlagAndCaret__Caret,
+  .hsfc-DropdownInput__Caret svg,
+  .hsfc-DropdownInput__Caret svg path,
+  .hsfc-PhoneInput__FlagAndCaret__Caret svg,
+  .hsfc-PhoneInput__FlagAndCaret__Caret svg path {
+    color: var(--tl-text) !important;
+    fill: var(--tl-text) !important;
+    stroke: var(--tl-text) !important;
+    border-top-color: var(--tl-text) !important;
+  }
+
+  /* ---------- Dropdown search bar ---------- */
+  .hsfc-DropdownOptions__Search {
+    padding: 10px 12px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: transparent !important;
+  }
+
+  .hsfc-DropdownOptions__Search .hsfc-TextInput,
+  .hsfc-DropdownOptions__Search .hsfc-TextInput:focus {
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 3px !important;
+    padding: 8px 12px !important;
+    color: var(--tl-text-dark) !important;
+    -webkit-text-fill-color: var(--tl-text-dark) !important;
+    font-family: var(--tl-font) !important;
+    font-size: 14px !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .hsfc-DropdownOptions__Search .hsfc-TextInput::placeholder {
+    color: #717784 !important;
+    opacity: 1 !important;
+  }
+
+  /* ---------- Submit button ---------- */
+  .hsfc-Button,
+  .hsfc-Button:hover,
+  .hsfc-Button:focus,
+  .hsfc-Button:disabled,
+  .hsfc-Button[disabled] {
+    background-color: #FFFFFF !important;
+    color: var(--tl-text-dark) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-family: var(--tl-font) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .hsfc-Button {
+    padding: 12px 28px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+
+  .hsfc-Button:hover,
+  .hsfc-Button:focus {
+    opacity: 0.85;
+  }
+
+  .hsfc-Button:disabled,
+  .hsfc-Button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ---------- File input ("No file chosen" text only) ---------- */
+  .hsfc-FileInput {
+    color: var(--tl-text) !important;
+    -webkit-text-fill-color: var(--tl-text) !important;
+  }
+
+  /* Keep the native "Choose file" button text at its default color */
+  .hsfc-FileInput::file-selector-button {
+    color: #000000;
+    -webkit-text-fill-color: #000000;
+  }
+
+  .hsfc-FileInput::-webkit-file-upload-button {
+    color: #000000;
+    -webkit-text-fill-color: #000000;
+  }
+
+  /* ------------------------------------------------------------- */
+  /* LIST STYLES */
+  /* ------------------------------------------------------------- */
+
+  ul {
+    list-style-type: square;
+  }
+
+  li::marker {
+    color: #48cfa0;
+  }
+
+  /* ------------------------------------------------------------- */
+  /* CARD GROUP IMAGE STYLES */
+  /* ------------------------------------------------------------- */
+
+  .card-group__image {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card-group__image img {
+    display: block;
+    width: calc(100% - 48px);
+    max-width: none;
+    height: auto;
+    margin: 24px;
+  }
+
+  /* ------------------------------------------------------------- */
+  /* BLOG POST STYLES */
+  /* ------------------------------------------------------------- */
+
+  .blog-listing__post-image {
+    padding: 16px;
+  }
+
+  /* ------------------------------------------------------------- */
+  /* FOOTER FIX */
+  /* ------------------------------------------------------------- */
+
+  footer .eyebrow__text,
+  [data-hs-cell-id="footer"] .eyebrow__text {
+    color: #48cfa0;
+  }
+</style>
 <meta property="og:image" content="https://www.triskelelabs.com/hubfs/Hero_CyberWonderland_Monero%20Coin%20Miner.png">
 <meta property="og:image:width" content="1900">
 <meta property="og:image:height" content="900">
@@ -767,9 +1138,9 @@ B0748B57A8D9B22EEEC43422CE6CB5FDE27C26AB6620EC2E992660CB2698CBE0 xmrig.exe</code
         
         
         
-        <span id="hs_cos_wrapper_widget_1630295129250_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form" style="" data-hs-cos-general-type="widget" data-hs-cos-type="form"><h3 id="hs_cos_wrapper_form_496304333_title" class="hs_cos_wrapper form-title" data-hs-cos-general-type="widget_field" data-hs-cos-type="text"></h3>
+        <span id="hs_cos_wrapper_widget_1630295129250_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form" style="" data-hs-cos-general-type="widget" data-hs-cos-type="form"><h3 id="hs_cos_wrapper_form_290130782_title" class="hs_cos_wrapper form-title" data-hs-cos-general-type="widget_field" data-hs-cos-type="text"></h3>
 
-<div id="hs_form_target_form_496304333"></div>
+<div id="hs_form_target_form_290130782"></div>
 
 
 
@@ -905,7 +1276,7 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en';
 <script src="https://www.triskelelabs.com/hubfs/hub_generated/template_assets/1/52806009187/1778109231322/template_anime.min.js"></script>
 
     <!--[if lte IE 8]>
-    <script charset="utf-8" src="https://js.hsforms.net/forms/v2-legacy.js"></script>
+    <script charset="utf-8" src="https://js-ap1.hsforms.net/forms/v2-legacy.js"></script>
     <![endif]-->
 
 <script data-hs-allowed="true" src="/_hcms/forms/v2.js"></script>
@@ -914,11 +1285,11 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en';
         var options = {
             portalId: '19911083',
             formId: 'dc0bcc7f-e678-4129-8d05-7be92c7c6571',
-            formInstanceId: '8039',
+            formInstanceId: '8279',
             
             pageId: '78942196274',
             
-            region: 'na1',
+            region: 'ap1',
             
             
             
@@ -933,11 +1304,11 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en';
             rawInlineMessage: "Thanks for submitting the form.",
             
             
-            hsFormKey: "4920aecdd7b9dfe378ecf67a954995d1",
+            hsFormKey: "fcd378c8efd82b44550e3ab1aad2fef9",
             
             
             css: '',
-            target: '#hs_form_target_form_496304333',
+            target: '#hs_form_target_form_290130782',
             
             
             
@@ -1011,14 +1382,14 @@ _hsq.push(["setContentMetadata", {
 
 <script type="text/javascript">
 var hsVars = {
-    render_id: "96850820-aedf-4e50-8dc5-2bbd911a6613",
-    ticks: 1780037672307,
+    render_id: "5f6d2a10-d8eb-4aac-8222-7c87d159ff91",
+    ticks: 1780122959169,
     page_id: 78942196274,
     
     content_group_id: 0,
     portal_id: 19911083,
-    app_hs_base_url: "https://app.hubspot.com",
-    cp_hs_base_url: "https://cp.hubspot.com",
+    app_hs_base_url: "https://app-ap1.hubspot.com",
+    cp_hs_base_url: "https://cp-ap1.hubspot.com",
     language: "en",
     analytics_page_type: "standard-page",
     scp_content_type: "",

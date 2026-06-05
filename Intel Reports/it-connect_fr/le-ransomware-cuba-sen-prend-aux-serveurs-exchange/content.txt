@@ -5,7 +5,7 @@
 window.ezCookieQueue=window.ezCookieQueue||[];if(typeof addEzCookies!=='function'){function addEzCookies(arr){window.ezCookieQueue=[...window.ezCookieQueue,...arr];}}
 addEzCookies([]);if(window.ezTcfConsent&&window.ezTcfConsent.loaded){_setEzCookies(window.ezTcfConsent);}else if(typeof getEzConsentData==="function"){getEzConsentData().then(function(ezTcfConsent){if(ezTcfConsent&&ezTcfConsent.loaded){_setEzCookies(window.ezTcfConsent);}else{console.error("cannot get ez consent data");_setEzCookies(window.ezTcfConsent);}});}else{console.error("getEzConsentData is not a function");_setEzCookies(window.ezTcfConsent);}</script>
 <script data-ezscrex='false' data-cfasync='false' data-pagespeed-no-defer>var __ez=__ez||{};__ez.stms=Date.now();__ez.evt={};__ez.script={};__ez.ck=__ez.ck||{};__ez.template={};__ez.template.isOrig=true;__ez.queue=__ez.queue||function(){var e=0,i=0,t=[],n=!1,o=[],r=[],s=!0,a=function(e,i,n,o,r,s,a){var l=arguments.length>7&&void 0!==arguments[7]?arguments[7]:window,d=this;this.name=e,this.funcName=i,this.parameters=null===n?null:w(n)?n:[n],this.isBlock=o,this.blockedBy=r,this.deleteWhenComplete=s,this.isError=!1,this.isComplete=!1,this.isInitialized=!1,this.proceedIfError=a,this.fWindow=l,this.isTimeDelay=!1,this.process=function(){f("... func = "+e),d.isInitialized=!0,d.isComplete=!0,f("... func.apply: "+e);var i=d.funcName.split("."),n=null,o=this.fWindow||window;i.length>3||(n=3===i.length?o[i[0]][i[1]][i[2]]:2===i.length?o[i[0]][i[1]]:o[d.funcName]),null!=n&&n.apply(null,this.parameters),!0===d.deleteWhenComplete&&delete t[e],!0===d.isBlock&&(f("----- F'D: "+d.name),p())}},l=function(e,i,t,n,o,r,s){var a=arguments.length>7&&void 0!==arguments[7]?arguments[7]:window,l=this;this.name=e,this.path=i,this.async=o,this.defer=r,this.isBlock=t,this.blockedBy=n,this.isInitialized=!1,this.isError=!1,this.isComplete=!1,this.proceedIfError=s,this.fWindow=a,this.isTimeDelay=!1,this.isPath=function(e){return"/"===e[0]&&"/"!==e[1]},this.getSrc=function(e){return void 0!==window.__ezScriptHost&&this.isPath(e)?window.__ezScriptHost+e:e},this.process=function(){l.isInitialized=!0,f("... file = "+e);var i=this.fWindow?this.fWindow.document:document,t=i.createElement("script");t.src=this.getSrc(this.path),!0===o?t.async=!0:!0===r&&(t.defer=!0),t.onerror=function(){var e={url:window.location.href,name:l.name,path:l.path,user_agent:window.navigator.userAgent};"undefined"!=typeof _ezaq&&(e.pageview_id=_ezaq.page_view_id);var i=encodeURIComponent(JSON.stringify(e)),t=new XMLHttpRequest;t.open("GET","//g.ezoic.net/ezqlog?d="+i,!0),t.send(),f("----- ERR'D: "+l.name),l.isError=!0,!0===l.isBlock&&p()},t.onreadystatechange=t.onload=function(){var e=t.readyState;f("----- F'D: "+l.name),e&&!/loaded|complete/.test(e)||(l.isComplete=!0,!0===l.isBlock&&p())},i.getElementsByTagName("head")[0].appendChild(t)}},d=function(e,i){this.name=e,this.path="",this.async=!1,this.defer=!1,this.isBlock=!1,this.blockedBy=[],this.isInitialized=!0,this.isError=!1,this.isComplete=i,this.proceedIfError=!1,this.isTimeDelay=!1,this.process=function(){}};function c(e,i,n,s,a,d,c,u,f){var p=new l(e,i,n,s,a,d,c,f);!0===u?o[e]=p:r[e]=p,t[e]=p,h(p)}function h(e){!0!==u(e)&&0!=s&&e.process()}function u(e){if(!0===e.isTimeDelay&&!1===n)return f(e.name+" blocked = TIME DELAY!"),!0;if(w(e.blockedBy))for(var i=0;i<e.blockedBy.length;i++){var o=e.blockedBy[i];if(!1===t.hasOwnProperty(o))return f(e.name+" blocked = "+o),!0;if(!0===e.proceedIfError&&!0===t[o].isError)return!1;if(!1===t[o].isComplete)return f(e.name+" blocked = "+o),!0}return!1}function f(e){var i=window.location.href,t=new RegExp("[?&]ezq=([^&#]*)","i").exec(i);"1"===(t?t[1]:null)&&console.debug(e)}function p(){++e>200||(f("let's go"),m(o),m(r))}function m(e){for(var i in e)if(!1!==e.hasOwnProperty(i)){var t=e[i];!0===t.isComplete||u(t)||!0===t.isInitialized||!0===t.isError?!0===t.isError?f(t.name+": error"):!0===t.isComplete?f(t.name+": complete already"):!0===t.isInitialized&&f(t.name+": initialized already"):t.process()}}function w(e){return"[object Array]"==Object.prototype.toString.call(e)}return window.addEventListener("load",(function(){setTimeout((function(){n=!0,f("TDELAY -----"),p()}),5e3)}),!1),{addFile:c,addFileOnce:function(e,i,n,o,r,s,a,l,d){t[e]||c(e,i,n,o,r,s,a,l,d)},addDelayFile:function(e,i){var n=new l(e,i,!1,[],!1,!1,!0);n.isTimeDelay=!0,f(e+" ...  FILE! TDELAY"),r[e]=n,t[e]=n,h(n)},addFunc:function(e,n,s,l,d,c,u,f,p,m){!0===c&&(e=e+"_"+i++);var w=new a(e,n,s,l,d,u,f,m);!0===p?o[e]=w:r[e]=w,t[e]=w,h(w)},addDelayFunc:function(e,i,n){var o=new a(e,i,n,!1,[],!0,!0);o.isTimeDelay=!0,f(e+" ...  FUNCTION! TDELAY"),r[e]=o,t[e]=o,h(o)},items:t,processAll:p,setallowLoad:function(e){s=e},markLoaded:function(e){if(e&&0!==e.length){if(e in t){var i=t[e];!0===i.isComplete?f(i.name+" "+e+": error loaded duplicate"):(i.isComplete=!0,i.isInitialized=!0)}else t[e]=new d(e,!0);f("markLoaded dummyfile: "+t[e].name)}},logWhatsBlocked:function(){for(var e in t)!1!==t.hasOwnProperty(e)&&u(t[e])}}}();__ez.evt.add=function(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n()},__ez.evt.remove=function(e,t,n){e.removeEventListener?e.removeEventListener(t,n,!1):e.detachEvent?e.detachEvent("on"+t,n):delete e["on"+t]};__ez.script.add=function(e){var t=document.createElement("script");t.src=e,t.async=!0,t.type="text/javascript",document.getElementsByTagName("head")[0].appendChild(t)};__ez.dot=__ez.dot||{};__ez.queue.addFileOnce('/detroitchicago/boise.js', '/detroitchicago/boise.js?gcb=195-3&cb=5', true, [], true, false, true, false);__ez.queue.addFileOnce('/parsonsmaize/abilene.js', '/parsonsmaize/abilene.js?gcb=195-3&cb=37cb48c9b5', true, [], true, false, true, false);__ez.queue.addFileOnce('/parsonsmaize/mulvane.js', '/parsonsmaize/mulvane.js?gcb=195-3&cb=e75e48eec0', true, ['/parsonsmaize/abilene.js'], true, false, true, false);__ez.queue.addFileOnce('/detroitchicago/birmingham.js', '/detroitchicago/birmingham.js?gcb=195-3&cb=539c47377c', true, ['/parsonsmaize/abilene.js'], true, false, true, false);</script>
-<script data-ezscrex="false" type="text/javascript" data-cfasync="false">window._ezaq = Object.assign({"ad_cache_level":0,"adpicker_placement_cnt":0,"ai_placeholder_cache_level":0,"ai_placeholder_placement_cnt":-1,"article_category":"Actu Cybersécurité, Entreprise","author":"Florian BURNEL","domain":"it-connect.fr","domain_id":122228,"ezcache_level":1,"ezcache_skip_code":0,"has_bad_image":0,"has_bad_words":0,"is_sitespeed":0,"lt_cache_level":0,"publish_date":"2022-02-25","response_size":273947,"response_size_orig":268214,"response_time_orig":1687,"template_id":5,"url":"https://www.it-connect.fr/le-ransomware-cuba-sen-prend-aux-serveurs-exchange/","word_count":0,"worst_bad_word_level":0}, typeof window._ezaq !== "undefined" ? window._ezaq : {});__ez.queue.markLoaded('ezaqBaseReady');</script>
+<script data-ezscrex="false" type="text/javascript" data-cfasync="false">window._ezaq = Object.assign({"ad_cache_level":0,"adpicker_placement_cnt":0,"ai_placeholder_cache_level":0,"ai_placeholder_placement_cnt":-1,"article_category":"Actu Cybersécurité, Entreprise","author":"Florian BURNEL","domain":"it-connect.fr","domain_id":122228,"ezcache_level":1,"ezcache_skip_code":0,"has_bad_image":0,"has_bad_words":0,"is_sitespeed":0,"lt_cache_level":0,"publish_date":"2022-02-25","response_size":274155,"response_size_orig":268422,"response_time_orig":1550,"template_id":5,"url":"https://www.it-connect.fr/le-ransomware-cuba-sen-prend-aux-serveurs-exchange/","word_count":0,"worst_bad_word_level":0}, typeof window._ezaq !== "undefined" ? window._ezaq : {});__ez.queue.markLoaded('ezaqBaseReady');</script>
 <script type='text/javascript' data-ezscrex='false' data-cfasync='false'>
 window.ezAnalyticsStatic = true;
 
@@ -37,7 +37,7 @@ function getCookiesWithPrefix() {
     return cookiesWithPrefix;
 }
 function productAnalytics() {
-	var d = {"pr":[3,6],"omd5":"7190ec9fc840fd254c713f7cca053848","nar":"fastresponse"};
+	var d = {"pr":[6,3],"omd5":"c0ffd2d420dda3d69824e9597b83bd46","nar":"fastresponse"};
 	d.u = _ezaq.url;
 	d.p = _ezaq.page_view_id;
 	d.v = _ezaq.visit_uuid;
@@ -168,15 +168,15 @@ __ez.queue.addFunc("productAnalytics", "productAnalytics", null, true, ['ezaqBas
 </style>
 <script type="text/javascript" src="https://www.it-connect.fr/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
 <script type="text/javascript" src="https://www.it-connect.fr/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
-<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/wp-youtube-video-optimizer/assets/js/yt-script.js?ver=1780550679" id="ib-youtube-script-js"></script>
+<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/wp-youtube-video-optimizer/assets/js/yt-script.js?ver=1780636146" id="ib-youtube-script-js"></script>
 <script type="text/javascript" id="sib-front-js-js-extra">
 /* <![CDATA[ */
 var sibErrMsg = {"invalidMail":"Veuillez entrer une adresse e-mail valide.","requiredField":"Veuillez compl\u00e9ter les champs obligatoires.","invalidDateFormat":"Veuillez entrer une date valide.","invalidSMSFormat":"Veuillez entrer une num\u00e9ro de t\u00e9l\u00e9phone valide."};
-var ajax_sib_front_object = {"ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"1dc9a577b0","flag_url":"https://www.it-connect.fr/wp-content-itc/plugins/mailin/img/flags/"};
+var ajax_sib_front_object = {"ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"c68815a831","flag_url":"https://www.it-connect.fr/wp-content-itc/plugins/mailin/img/flags/"};
 //# sourceURL=sib-front-js-js-extra
 /* ]]> */
 </script>
-<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/mailin/js/mailin-front.js?ver=1780550679" id="sib-front-js-js"></script>
+<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/mailin/js/mailin-front.js?ver=1780636146" id="sib-front-js-js"></script>
 <link rel="https://api.w.org/" href="https://www.it-connect.fr/wp-json/"/><link rel="alternate" title="JSON" type="application/json" href="https://www.it-connect.fr/wp-json/wp/v2/posts/50710"/>
 <link rel="shortlink" href="https://www.it-connect.fr/?p=50710"/>
 <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
@@ -210,7 +210,7 @@ _paq.push([function() {
   })();
 </script><meta name="author" content="Florian BURNEL"/>  <script type="text/rocketlazyloadscript" async="" data-rocket-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6710043783164792" crossorigin="anonymous"></script>
   <link rel="alternate" hreflang="fr" href="https://www.it-connect.fr/le-ransomware-cuba-sen-prend-aux-serveurs-exchange/"/>
-<link rel="pingback" href="https://www.it-connect.fr/xmlrpc.php"/><script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/sdk/1.1/wonderpush-loader.min.js?ver=1780550679" async=""></script>
+<link rel="pingback" href="https://www.it-connect.fr/xmlrpc.php"/><script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/sdk/1.1/wonderpush-loader.min.js?ver=1780636146" async=""></script>
 <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
   window.WonderPush = window.WonderPush || [];
   window.WonderPush.push(['init', {"customDomain":"https:\/\/www.it-connect.fr\/wp-content-itc\/plugins\/mailin\/","serviceWorkerUrl":"wonderpush-worker-loader.min.js?webKey=1beeb260e9d2d8d3c4be37b25eae4a41b5a22c080928357084ae7731c1ec61d2","frameUrl":"wonderpush.min.html","webKey":"1beeb260e9d2d8d3c4be37b25eae4a41b5a22c080928357084ae7731c1ec61d2"}]);
@@ -246,7 +246,7 @@ var ezoicSearchable = 1;
 							<div class="cm-top-bar__1">
 				
 		<div class="date-in-header">
-			04/06/2026		</div>
+			05/06/2026		</div>
 
 									</div>
 
@@ -472,7 +472,7 @@ var ezoicSearchable = 1;
 	                	<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.it-connect.fr/le-ransomware-cuba-sen-prend-aux-serveurs-exchange/&amp;title=Le ransomware Cuba s’en prend aux serveurs Exchange" target="_blank">
 	                        	<img width="100" height="100" class="class_rs_share" alt="Partager sur Linkedin" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20100%20100&#39;%3E%3C/svg%3E" data-lazy-src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_linkedin.png"/><noscript><img width="100" height="100" class="class_rs_share" alt="Partager sur Linkedin" src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_linkedin.png" /></noscript>
 	                	</a>
-        	        	<a href="/cdn-cgi/l/email-protection#417e3234232b2422357c6108156c022e2f2f242235617b61342f612d28242f61282f3582e833243232202f35616067202c317a232e25387c610d246133202f322e2c3620332461023423206132a3c1d8242f613133242f25612034396132243337243433326104392229202f26246129353531327b6e6e3636366f28356c222e2f2f2422356f27336e2d246c33202f322e2c362033246c223423206c32242f6c3133242f256c2034396c32243337243433326c24392229202f26246e67202c317a3528352d247c0d246133202f322e2c3620332461023423206132a3c1d8242f613133242f25612034396132243337243433326104392229202f26246f">
+        	        	<a href="/cdn-cgi/l/email-protection#b48bc7c1d6ded1d7c08994fde099f7dbdadad1d7c0948e94c1da94d8ddd1da94dddac0771dc6d1c7c7d5dac0949592d5d9c48fd6dbd0cd8994f8d194c6d5dac7dbd9c3d5c6d194f7c1d6d594c756342dd1da94c4c6d1dad094d5c1cc94c7d1c6c2d1c1c6c794f1ccd7dcd5dad3d194dcc0c0c4c78e9b9bc3c3c39addc099d7dbdadad1d7c09ad2c69bd8d199c6d5dac7dbd9c3d5c6d199d7c1d6d599c7d1da99c4c6d1dad099d5c1cc99c7d1c6c2d1c1c6c799d1ccd7dcd5dad3d19b92d5d9c48fc0ddc0d8d189f8d194c6d5dac7dbd9c3d5c6d194f7c1d6d594c756342dd1da94c4c6d1dad094d5c1cc94c7d1c6c2d1c1c6c794f1ccd7dcd5dad3d19a">
 	                        	<img width="100" height="100" class="class_rs_share" alt="Envoyer par mail" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20100%20100&#39;%3E%3C/svg%3E" data-lazy-src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_email.png"/><noscript><img width="100" height="100" class="class_rs_share" alt="Envoyer par mail" src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_email.png" /></noscript>
 	                	</a>
 	        	</div>
@@ -499,24 +499,24 @@ var ezoicSearchable = 1;
 							<div class="single-related-posts">
 
 											<div class="related-posts-thumbnail">
-							<a href="https://www.it-connect.fr/patchez-vmware-vcenter-server-pour-vous-proteger-de-la-faille-critique-cve-2023-34048/" title="Patchez VMware vCenter Server pour vous protéger de la faille critique CVE-2023-34048">
-								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="VMware vCenter Server CVE-2023-34048" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2023/10/VMware-vCenter-Server-CVE-2023-34048-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2023/10/VMware-vCenter-Server-CVE-2023-34048-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="VMware vCenter Server CVE-2023-34048" decoding="async" /></noscript>							</a>
+							<a href="https://www.it-connect.fr/un-correctif-non-officiel-a-ete-publie-pour-cette-faille-zero-day-decouverte-dans-windows-themes/" title="Un correctif non officiel a été publié pour cette faille zero-day découverte dans Windows Themes !">
+								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2024/10/Zero-Day-dans-Windows-Themes-Correctif-de-securite-non-officiel-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2024/10/Zero-Day-dans-Windows-Themes-Correctif-de-securite-non-officiel-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" /></noscript>							</a>
 						</div>
 					
 					<div class="cm-post-content">
 						<h3 class="cm-entry-title">
-							<a href="https://www.it-connect.fr/patchez-vmware-vcenter-server-pour-vous-proteger-de-la-faille-critique-cve-2023-34048/" rel="bookmark" title="Patchez VMware vCenter Server pour vous protéger de la faille critique CVE-2023-34048">
-								Patchez VMware vCenter Server pour vous protéger de la faille critique CVE-2023-34048							</a>
+							<a href="https://www.it-connect.fr/un-correctif-non-officiel-a-ete-publie-pour-cette-faille-zero-day-decouverte-dans-windows-themes/" rel="bookmark" title="Un correctif non officiel a été publié pour cette faille zero-day découverte dans Windows Themes !">
+								Un correctif non officiel a été publié pour cette faille zero-day découverte dans Windows Themes !							</a>
 						</h3><!--/.post-title-->
 
-						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/patchez-vmware-vcenter-server-pour-vous-proteger-de-la-faille-critique-cve-2023-34048/" title="13:18" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2023-10-25T13:18:08+02:00">25/10/2023</time></a></span>		<span class="cm-author cm-vcard">
+						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/un-correctif-non-officiel-a-ete-publie-pour-cette-faille-zero-day-decouverte-dans-windows-themes/" title="08:37" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2024-10-31T08:37:28+02:00">31/10/2024</time></a></span>		<span class="cm-author cm-vcard">
 			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
 				Florian BURNEL			</a>
 		</span>
 
 		
 			<span class="cm-comments-link">
-				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/patchez-vmware-vcenter-server-pour-vous-proteger-de-la-faille-critique-cve-2023-34048/#respond">0</a>			</span>
+				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/un-correctif-non-officiel-a-ete-publie-pour-cette-faille-zero-day-decouverte-dans-windows-themes/#respond">0</a>			</span>
 
 			</div>					</div>
 
@@ -524,24 +524,24 @@ var ezoicSearchable = 1;
 							<div class="single-related-posts">
 
 											<div class="related-posts-thumbnail">
-							<a href="https://www.it-connect.fr/les-serveurs-goanywhere-mft-a-la-merci-dune-faille-zero-day/" title="Les serveurs GoAnywhere MFT à la merci d’une faille zero-day !">
-								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="GoAnywhere MFT - Faille 0-Day - 2023" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2023/02/GoAnywhere-MFT-Faille-0-Day-2023-390x205.jpg"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2023/02/GoAnywhere-MFT-Faille-0-Day-2023-390x205.jpg" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="GoAnywhere MFT - Faille 0-Day - 2023" decoding="async" /></noscript>							</a>
+							<a href="https://www.it-connect.fr/phishing-lastpass-janvier-2026-mot-de-passe-maitre/" title="Phishing : les pirates ciblent le mot de passe principal des utilisateurs de LastPass">
+								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Phishing LastPass - Janvier 2026" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/01/Phishing-LastPass-Janvier-2026-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/01/Phishing-LastPass-Janvier-2026-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Phishing LastPass - Janvier 2026" decoding="async" /></noscript>							</a>
 						</div>
 					
 					<div class="cm-post-content">
 						<h3 class="cm-entry-title">
-							<a href="https://www.it-connect.fr/les-serveurs-goanywhere-mft-a-la-merci-dune-faille-zero-day/" rel="bookmark" title="Les serveurs GoAnywhere MFT à la merci d’une faille zero-day !">
-								Les serveurs GoAnywhere MFT à la merci d’une faille zero-day !							</a>
+							<a href="https://www.it-connect.fr/phishing-lastpass-janvier-2026-mot-de-passe-maitre/" rel="bookmark" title="Phishing : les pirates ciblent le mot de passe principal des utilisateurs de LastPass">
+								Phishing : les pirates ciblent le mot de passe principal des utilisateurs de LastPass							</a>
 						</h3><!--/.post-title-->
 
-						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/les-serveurs-goanywhere-mft-a-la-merci-dune-faille-zero-day/" title="04:57" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2023-02-06T04:57:49+02:00">06/02/2023</time></a></span>		<span class="cm-author cm-vcard">
+						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/phishing-lastpass-janvier-2026-mot-de-passe-maitre/" title="08:48" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-01-22T08:48:42+02:00">22/01/2026</time></a></span>		<span class="cm-author cm-vcard">
 			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
 				Florian BURNEL			</a>
 		</span>
 
 		
 			<span class="cm-comments-link">
-				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/les-serveurs-goanywhere-mft-a-la-merci-dune-faille-zero-day/#respond">0</a>			</span>
+				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/phishing-lastpass-janvier-2026-mot-de-passe-maitre/#respond">0</a>			</span>
 
 			</div>					</div>
 
@@ -549,24 +549,24 @@ var ezoicSearchable = 1;
 							<div class="single-related-posts">
 
 											<div class="related-posts-thumbnail">
-							<a href="https://www.it-connect.fr/une-faille-dans-les-reseaux-wi-fi-permet-aux-pirates-de-detourner-le-trafic-reseau/" title="Une faille dans les réseaux Wi-Fi permet aux pirates de détourner le trafic réseau !">
-								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="MacStealer Wi-Fi - CVE-2022-47522" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2023/03/MacStealer-Wi-Fi-CVE-2022-47522-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2023/03/MacStealer-Wi-Fi-CVE-2022-47522-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="MacStealer Wi-Fi - CVE-2022-47522" decoding="async" /></noscript>							</a>
+							<a href="https://www.it-connect.fr/une-fuite-de-donnees-chez-match-group-le-geant-derriere-tinder-okcupid-ou-encore-match-com/" title="Une fuite de données chez Match Group : le géant derrière Tinder, OkCupid ou encore Match.com">
+								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="fuite de données match group tinder meetic 2026" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/01/fuite-de-donnees-match-group-tinder-meetic-2026-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/01/fuite-de-donnees-match-group-tinder-meetic-2026-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="fuite de données match group tinder meetic 2026" decoding="async" /></noscript>							</a>
 						</div>
 					
 					<div class="cm-post-content">
 						<h3 class="cm-entry-title">
-							<a href="https://www.it-connect.fr/une-faille-dans-les-reseaux-wi-fi-permet-aux-pirates-de-detourner-le-trafic-reseau/" rel="bookmark" title="Une faille dans les réseaux Wi-Fi permet aux pirates de détourner le trafic réseau !">
-								Une faille dans les réseaux Wi-Fi permet aux pirates de détourner le trafic réseau !							</a>
+							<a href="https://www.it-connect.fr/une-fuite-de-donnees-chez-match-group-le-geant-derriere-tinder-okcupid-ou-encore-match-com/" rel="bookmark" title="Une fuite de données chez Match Group : le géant derrière Tinder, OkCupid ou encore Match.com">
+								Une fuite de données chez Match Group : le géant derrière Tinder, OkCupid ou encore Match.com							</a>
 						</h3><!--/.post-title-->
 
-						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/une-faille-dans-les-reseaux-wi-fi-permet-aux-pirates-de-detourner-le-trafic-reseau/" title="08:14" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2023-03-30T08:14:40+02:00">30/03/2023</time></a></span>		<span class="cm-author cm-vcard">
+						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/une-fuite-de-donnees-chez-match-group-le-geant-derriere-tinder-okcupid-ou-encore-match-com/" title="08:53" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-01-30T08:53:10+02:00">30/01/2026</time></a></span>		<span class="cm-author cm-vcard">
 			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
 				Florian BURNEL			</a>
 		</span>
 
 		
 			<span class="cm-comments-link">
-				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/une-faille-dans-les-reseaux-wi-fi-permet-aux-pirates-de-detourner-le-trafic-reseau/#respond">0</a>			</span>
+				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/une-fuite-de-donnees-chez-match-group-le-geant-derriere-tinder-okcupid-ou-encore-match-com/#respond">0</a>			</span>
 
 			</div>					</div>
 
@@ -587,7 +587,7 @@ var ezoicSearchable = 1;
 <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"/> <label for="wp-comment-cookies-consent">Enregistrer mon nom, mon e-mail et mon site dans le navigateur pour mon prochain commentaire.</label></p>
 <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Laisser un commentaire"/> <input type="hidden" name="comment_post_ID" value="50710" id="comment_post_ID"/>
 <input type="hidden" name="comment_parent" id="comment_parent" value="0"/>
-</p> <p class="comment-form-aios-antibot-keys"><input type="hidden" name="xz20ckyb" value="umzybykc6j7x"/><input type="hidden" name="xo2i7r1a" value="sezca8f9z0a8"/><input type="hidden" name="71m58z0o" value="fzyk4uj79n4v"/><input type="hidden" name="aios_antibot_keys_expiry" id="aios_antibot_keys_expiry" value="1780617600"/></p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="fec329b873"/></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="64"/><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+</p> <p class="comment-form-aios-antibot-keys"><input type="hidden" name="hn9g2wul" value="29ouji3k4hxp"/><input type="hidden" name="muu1xuz9" value="zcc7gj3mgdeq"/><input type="hidden" name="7684o0qk" value="6sis3p2l1m9r"/><input type="hidden" name="aios_antibot_keys_expiry" id="aios_antibot_keys_expiry" value="1781049600"/></p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="cf308de942"/></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="203"/><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
 /* <![CDATA[ */
 document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
 /* ]]> */
@@ -631,7 +631,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 				<input type="hidden" name="sib_form_id" value="1"/>
                 <input type="hidden" name="sib_form_alert_notice" value="Remplissez ce champ s’il vous plaît"/>
                 <input type="hidden" name="sib_form_invalid_email_notice" value="Cette adresse email n&#39;est pas valide !"/>
-                <input type="hidden" name="sib_security" value="1dc9a577b0"/>
+                <input type="hidden" name="sib_security" value="c68815a831"/>
 				<div class="sib_signup_box_inside_1">
 					<div style="/*display:none*/" class="sib_msg_disp">
 					</div>
@@ -711,7 +711,29 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 			</div></aside><aside id="colormag_featured_posts_vertical_widget-2" class="widget cm-featured-posts cm-featured-posts--style-2">
 		<h3 class="cm-widget-title"><span>⭐ Veille IT &amp; Bons Plans</span></h3><div class="cm-first-post">
 			<div class="cm-post">
-				<a href="https://www.it-connect.fr/microsoft-devoile-wsl-3-et-les-conteneurs-wsl-pour-windows/" title="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows"><img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" title="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" title="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" decoding="async" /></noscript></a>
+				<a href="https://www.it-connect.fr/http-2-bomb-moins-dune-minute-suffit-pour-mettre-ko-les-serveurs-nginx-apache-et-iis/" title="HTTP/2 Bomb : moins d’une minute suffit pour mettre KO les serveurs NGINX, Apache et IIS"><img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Attaque HTTP 2 BOMB met KO les serveurs Web Apache Nginx IIS" title="HTTP/2 Bomb : moins d’une minute suffit pour mettre KO les serveurs NGINX, Apache et IIS" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Attaque-HTTP-2-BOMB-met-KO-les-serveurs-Web-Apache-Nginx-IIS-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Attaque-HTTP-2-BOMB-met-KO-les-serveurs-Web-Apache-Nginx-IIS-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Attaque HTTP 2 BOMB met KO les serveurs Web Apache Nginx IIS" title="HTTP/2 Bomb : moins d&rsquo;une minute suffit pour mettre KO les serveurs NGINX, Apache et IIS" decoding="async" /></noscript></a>
+				<div class="cm-post-content">
+					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-securite/" style="background:#dd0000" rel="category tag">Actu Cybersécurité</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/http-2-bomb-moins-dune-minute-suffit-pour-mettre-ko-les-serveurs-nginx-apache-et-iis/" title="HTTP/2 Bomb : moins d’une minute suffit pour mettre KO les serveurs NGINX, Apache et IIS">
+			HTTP/2 Bomb : moins d’une minute suffit pour mettre KO les serveurs NGINX, Apache et IIS			</a>
+		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/http-2-bomb-moins-dune-minute-suffit-pour-mettre-ko-les-serveurs-nginx-apache-et-iis/" title="07:08" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-05T07:08:49+02:00">05/06/2026</time></a></span>		<span class="cm-author cm-vcard">
+			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
+				Florian BURNEL			</a>
+		</span>
+
+		
+			<span class="cm-comments-link">
+				<a href="https://www.it-connect.fr/http-2-bomb-moins-dune-minute-suffit-pour-mettre-ko-les-serveurs-nginx-apache-et-iis/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+
+			</div>
+											<div class="cm-entry-summary">
+							<p>HTTP/2 Bomb, c’est le nom d’une nouvelle attaque capable de faire planter un serveur Web en moins d’une minute en saturant la RAM de la machine cible. </p>
+						</div>
+									</div>
+			</div>
+
+			</div><div class="cm-posts">
+			<div class="cm-post">
+				<a href="https://www.it-connect.fr/microsoft-devoile-wsl-3-et-les-conteneurs-wsl-pour-windows/" title="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" title="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" title="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-devoile-WSL-3-et-les-conteneurs-WSL-pour-Windows-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
 				<div class="cm-post-content">
 					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-logiciel-os/" rel="category tag">Logiciel - OS</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/microsoft-devoile-wsl-3-et-les-conteneurs-wsl-pour-windows/" title="Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows">
 			Microsoft dévoile WSL 3 et les conteneurs WSL pour Windows			</a>
@@ -725,13 +747,10 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 				<a href="https://www.it-connect.fr/microsoft-devoile-wsl-3-et-les-conteneurs-wsl-pour-windows/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
 
 			</div>
-											<div class="cm-entry-summary">
-							<p>Microsoft dévoile WSL 3 à la Build 2026 : une refonte d’architecture pour un accès quasi-natif aux GPU et NPU sur Windows, et l’arrivée des conteneurs WSL !</p>
-						</div>
 									</div>
 			</div>
 
-			</div><div class="cm-posts">
+			
 			<div class="cm-post">
 				<a href="https://www.it-connect.fr/vs-code-un-chercheur-publie-une-faille-zero-day-pour-punir-microsoft/" title="VS Code : un chercheur publie une faille zero-day pour punir Microsoft"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="VS Code - un chercheur publie une faille zero-day pour punir Microsoft" title="VS Code : un chercheur publie une faille zero-day pour punir Microsoft" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/VS-Code-un-chercheur-publie-une-faille-zero-day-pour-punir-Microsoft-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/VS-Code-un-chercheur-publie-une-faille-zero-day-pour-punir-Microsoft-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/VS-Code-un-chercheur-publie-une-faille-zero-day-pour-punir-Microsoft-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/VS-Code-un-chercheur-publie-une-faille-zero-day-pour-punir-Microsoft-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="VS Code - un chercheur publie une faille zero-day pour punir Microsoft" title="VS Code : un chercheur publie une faille zero-day pour punir Microsoft" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/VS-Code-un-chercheur-publie-une-faille-zero-day-pour-punir-Microsoft-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/VS-Code-un-chercheur-publie-une-faille-zero-day-pour-punir-Microsoft-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
 				<div class="cm-post-content">
@@ -807,25 +826,6 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 									</div>
 			</div>
 
-			
-			<div class="cm-post">
-				<a href="https://www.it-connect.fr/windows-developer-configurations-lidee-de-microsoft-pour-preparer-rapidement-un-environnement-de-code/" title="Windows Developer Configurations : l’idée de Microsoft pour préparer rapidement un environnement de code"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Windows 11 - Windows Developer Configuration" title="Windows Developer Configurations : l’idée de Microsoft pour préparer rapidement un environnement de code" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-11-Windows-Developer-Configuration-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-11-Windows-Developer-Configuration-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-11-Windows-Developer-Configuration-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-11-Windows-Developer-Configuration-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Windows 11 - Windows Developer Configuration" title="Windows Developer Configurations : l&rsquo;idée de Microsoft pour préparer rapidement un environnement de code" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-11-Windows-Developer-Configuration-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-11-Windows-Developer-Configuration-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
-				<div class="cm-post-content">
-					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-logiciel-os/" rel="category tag">Logiciel - OS</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/windows-developer-configurations-lidee-de-microsoft-pour-preparer-rapidement-un-environnement-de-code/" title="Windows Developer Configurations : l’idée de Microsoft pour préparer rapidement un environnement de code">
-			Windows Developer Configurations : l’idée de Microsoft pour préparer rapidement un environnement de code			</a>
-		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/windows-developer-configurations-lidee-de-microsoft-pour-preparer-rapidement-un-environnement-de-code/" title="22:09" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-03T22:09:43+02:00">03/06/2026</time></a></span>		<span class="cm-author cm-vcard">
-			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
-				Florian BURNEL			</a>
-		</span>
-
-		
-			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/windows-developer-configurations-lidee-de-microsoft-pour-preparer-rapidement-un-environnement-de-code/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
-
-			</div>
-									</div>
-			</div>
-
 			</div></aside><aside id="block-11" class="widget widget_block">
 <h2 class="wp-block-heading">📚 Nos derniers cours gratuits</h2>
 </aside><aside id="block-9" class="widget widget_block"><p>  </p><div class="itc-courses-side-bar post-type__sfwd-courses">
@@ -845,7 +845,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 			<div class="course-informations__steps-count">
 				16 chapitres			</div>
 			<div class="course-informations__star-rating">
-				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-3fabe9dd-6668-4c2e-93ea-967769a83e76" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
+				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-6af48677-2760-42ae-b44e-489aa9299345" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
 		</div>
 
 	    <header class="cm-entry-header">
@@ -882,7 +882,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 			<div class="course-informations__steps-count">
 				18 chapitres			</div>
 			<div class="course-informations__star-rating">
-				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-f9c7552c-42a6-4aa1-9458-e146a7a505b2" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
+				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-b5533b29-52c1-4769-9f90-742b35fe4de0" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
 		</div>
 
 	    <header class="cm-entry-header">
@@ -1032,7 +1032,7 @@ var sfwd_data = {"json":"{\"ajaxurl\":\"https:\\/\\/www.it-connect.fr\\/wp-admin
 <script type="text/javascript" id="colormag-custom-js-extra">
 /* <![CDATA[ */
 var colormag_progress_bar_indicator_color = {"bg_color":"#222222"};
-var colormag_load_more = {"tg_nonce":"cfb615b8c0","ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php"};
+var colormag_load_more = {"tg_nonce":"04ac1224cc","ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php"};
 //# sourceURL=colormag-custom-js-extra
 /* ]]> */
 </script>
@@ -1050,7 +1050,7 @@ var ldVars = {"postID":"50710","videoReqMsg":"Vous devez regarder la vid\u00e9o 
 //# sourceURL=learndash-front-js-extra
 /* ]]> */
 </script>
-<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/sfwd-lms/themes/ld30/assets/js/learndash.js?ver=1780550679" id="learndash-front-js"></script>
+<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/sfwd-lms/themes/ld30/assets/js/learndash.js?ver=1780636146" id="learndash-front-js"></script>
 <script type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/plugins/easy-fancybox/vendor/purify.min.js" id="fancybox-purify-js"></script>
 <script type="text/javascript" id="jquery-fancybox-js-extra">
 /* <![CDATA[ */
@@ -1082,12 +1082,12 @@ jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_hand
 <script type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/plugins/easy-fancybox/vendor/jquery.mousewheel.min.js" id="jquery-mousewheel-js"></script>
 <script type="text/javascript" id="aios-front-js-js-extra">
 /* <![CDATA[ */
-var AIOS_FRONT = {"ajaxurl":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"749cd5b6a6"};
+var AIOS_FRONT = {"ajaxurl":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"112273e954"};
 //# sourceURL=aios-front-js-js-extra
 /* ]]> */
 </script>
-<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/all-in-one-wp-security-and-firewall/js/wp-security-front-script.js?ver=1780550679" id="aios-front-js-js"></script>
-<script data-minify="1" defer="" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/akismet/_inc/akismet-frontend.js?ver=1780550679" id="akismet-frontend-js"></script>
+<script data-minify="1" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/all-in-one-wp-security-and-firewall/js/wp-security-front-script.js?ver=1780636146" id="aios-front-js-js"></script>
+<script data-minify="1" defer="" type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/cache/min/1/wp-content-itc/plugins/akismet/_inc/akismet-frontend.js?ver=1780636146" id="akismet-frontend-js"></script>
 <script>window.lazyLoadOptions=[{elements_selector:"[loading=lazy],img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}},use_native:1},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
 if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
 images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}

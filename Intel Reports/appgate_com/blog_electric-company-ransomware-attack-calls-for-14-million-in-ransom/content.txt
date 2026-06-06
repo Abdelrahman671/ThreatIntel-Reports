@@ -374,11 +374,11 @@
             id="a"><path
             fill="#fff" d="M0 0h88v252H0z"/></clipPath></defs></svg>
             </div>
-        </div>    <div class="dots-container"><div class="dot dot-1" style="--posx: 39;--posy: 3;"></div><div class="dot dot-2" style="--posx: 84;--posy: 5;"></div><div class="dot dot-3" style="--posx: 53;--posy: 11;"></div><div class="dot dot-4" style="--posx: 39;--posy: 2;"></div><div class="dot dot-5" style="--posx: 86;--posy: 12;"></div><div class="dot dot-6" style="--posx: 49;--posy: 14;"></div><div class="dot dot-7" style="--posx: 77;--posy: 1;"></div><div class="dot dot-8" style="--posx: 14;--posy: 12;"></div><div class="dot dot-9" style="--posx: 75;--posy: 1;"></div><div class="dot dot-10" style="--posx: 14;--posy: 11;"></div><div class="dot dot-11" style="--posx: 74;--posy: 9;"></div><div class="dot dot-12" style="--posx: 61;--posy: 11;"></div></div>
+        </div>    <div class="dots-container"><div class="dot dot-1" style="--posx: 56;--posy: 5;"></div><div class="dot dot-2" style="--posx: 32;--posy: 14;"></div><div class="dot dot-3" style="--posx: 54;--posy: 4;"></div><div class="dot dot-4" style="--posx: 41;--posy: 12;"></div><div class="dot dot-5" style="--posx: 30;--posy: 10;"></div><div class="dot dot-6" style="--posx: 41;--posy: 1;"></div><div class="dot dot-7" style="--posx: 6;--posy: 10;"></div><div class="dot dot-8" style="--posx: 10;--posy: 2;"></div><div class="dot dot-9" style="--posx: 54;--posy: 4;"></div><div class="dot dot-10" style="--posx: 34;--posy: 2;"></div><div class="dot dot-11" style="--posx: 34;--posy: 2;"></div><div class="dot dot-12" style="--posx: 25;--posy: 5;"></div></div>
 </section>
 
 
-            <div id="component-ojaptd" class="flow" data-hx-target="this" data-hx-include="this" data-hx-trigger="refresh" data-hx-get="https://www.appgate.com/index.php/actions/sprig-core/components/render" data-hx-vals="{&quot;sprig:config&quot;:&quot;88f34ea982e359b94611f05a3c5d9767e76845edd97df57b74221635b0cc860b{\u0022id\u0022:\u0022component-ojaptd\u0022,\u0022siteId\u0022:6,\u0022template\u0022:\u0022_partials\\\/_sprig\\\/blogListing.twig\u0022,\u0022variables\u0022:{\u0022entryId\u0022:7709}}&quot;}">
+            <div id="component-csgpfw" class="flow" data-hx-target="this" data-hx-include="this" data-hx-trigger="refresh" data-hx-get="https://www.appgate.com/index.php/actions/sprig-core/components/render" data-hx-vals="{&quot;sprig:config&quot;:&quot;9dceb1e4f54b67b3106e2bfb692b079fd5abfcaf02181e782ed8f74d28698c73{\u0022id\u0022:\u0022component-csgpfw\u0022,\u0022siteId\u0022:6,\u0022template\u0022:\u0022_partials\\\/_sprig\\\/blogListing.twig\u0022,\u0022variables\u0022:{\u0022entryId\u0022:7709}}&quot;}">
 
 
 <section id="results" class="s-into-view relative py-20 bg-brand-neutral-lightest">
@@ -1240,5 +1240,77 @@ function appendCurrentQueryString(url) {
     const iframe = document.querySelector('#iframe-to-resize');
     if (iframe) {
         iframe.src = appendCurrentQueryString('https://ww3.appgate.com/l/863411/2024-07-16/c11793');
-    };</script></body>
+    }
+
+    (function () {
+        // Form (iframe) origins we will answer.
+        var FORM_ORIGIN_ALLOWLIST = ['https://ww3.appgate.com'];
+
+        var UTM_KEYS = [
+            {param: 'utm_source', sticky: 'sticky_utm_source'},
+            {param: 'utm_medium', sticky: 'sticky_utm_medium'},
+            {param: 'utm_campaign', sticky: 'sticky_utm_campaign'},
+            {param: 'utm_content', sticky: 'sticky_utm_content'},
+            {param: 'utm_term', sticky: 'sticky_utm_term'},
+            {param: 'gclid', sticky: 'sticky_gclid'}
+        ];
+
+        function decodeSafe(raw) {
+            if (raw == null || raw === '') return '';
+            try {
+                return decodeURIComponent(String(raw).replace(/\+/g, ' '));
+            } catch (e) {
+                return String(raw);
+            }
+        }
+
+        function getCookie(name) {
+            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (!match) return '';
+            return decodeSafe(match[2]);
+        }
+
+        function getLocalStorage(name) {
+            try {
+                return window.localStorage.getItem(name) || '';
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function getAttribution(param, stickyKey) {
+            var fromUrl = '';
+            try {
+                fromUrl = new URLSearchParams(window.location.search).get(param) || '';
+            } catch (e) {
+                var m = new RegExp('[?&]' + param + '=([^&#]*)').exec(window.location.href);
+                fromUrl = m ? decodeSafe(m[1]) : '';
+            }
+            if (fromUrl) return fromUrl;
+            var fromCookie = getCookie(stickyKey);
+            if (fromCookie) return fromCookie;
+            return getLocalStorage(stickyKey) || '';
+        }
+
+        // Returns {utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid}
+        function collectAttribution() {
+            var out = {};
+            for (var i = 0; i < UTM_KEYS.length; i++) {
+                out[UTM_KEYS[i].param] = getAttribution(UTM_KEYS[i].param, UTM_KEYS[i].sticky);
+            }
+            return out;
+        }
+
+
+        function onMessage(event) {
+            if (FORM_ORIGIN_ALLOWLIST.indexOf(event.origin) === -1) return;
+            if (!event.data || event.data.type !== 'REQUEST_UTM') return;
+            if (!event.source) return;
+            // Reply only to the exact frame/origin that asked.
+            event.source.postMessage({type: 'UTM_RESPONSE', utm: collectAttribution()}, event.origin);
+        }
+
+        // Persistent: must stay registered to serve late/repeat/multi-iframe requests.
+        window.addEventListener('message', onMessage);
+    })();</script></body>
 </html>

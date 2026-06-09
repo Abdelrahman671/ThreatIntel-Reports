@@ -14,13 +14,14 @@
                     });
                 </script>
                 <script type="module">
-                    import { ClientAPI } from '/view-resources/baseview/public/common/ClientAPI/index.js?v=1780552425-L4';
+                    import { ClientAPI } from '/view-resources/baseview/public/common/ClientAPI/index.js?v=1780919420-L4';
                     window.labClientAPI = new ClientAPI({
                         pageData: {
                             url: 'https://www.theregister.com/security/2022/03/18/cyclops-blink-malware-sets-up-shop-in-asus-routers/813307',
                             pageType: 'article',
                             pageId: '813307',
                             section: 'security',
+                            subsection: '',
                             title: 'Cyclops Blink malware sets up shop in ASUS routers',
                             seotitle: 'Cyclops Blink malware sets up shop in ASUS routers',
                             sometitle: 'Cyclops Blink malware sets up shop in ASUS routers',
@@ -37,8 +38,9 @@
                                 domain: 'https://www.theregister.com',
                                 id: '2',
                                 alias: 'theregister'
-                            }
-                            // Todo: Add paywall info ...
+                            },
+                            paid: 0,
+                            paywall: 'internal'
                         },
                         debug: false
                     });
@@ -47,14 +49,12 @@
                 <title>Cyclops Blink malware sets up shop in ASUS routers</title>
                 <meta name="title" content="Cyclops Blink malware sets up shop in ASUS routers">
                 <meta name="description" content="Kremlin-backed Sandworm has its VPNFilter replacement, it seems">
-                <link rel="canonical" href="https://www.theregister.com/security/2022/03/18/cyclops-blink-malware-sets-up-shop-in-asus-routers/813307">
-                
+                    <link rel="canonical" href="https://www.theregister.com/security/2022/03/18/cyclops-blink-malware-sets-up-shop-in-asus-routers/813307">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                
                 <meta property="og:type" content="article">
                 <meta property="og:title" content="Cyclops Blink malware sets up shop in ASUS routers">
                 <meta property="og:description" content="Kremlin-backed Sandworm has its VPNFilter replacement, it seems">
-                <meta property="og:locale" content="en-US">
+                    <meta property="og:locale" content="en-US">
                 <meta property="og:site_name" content="theregister">
                 <meta property="article:published_time" content="2022-03-18T19:02:40.000Z">
                 <meta property="article:modified_time" content="2022-03-18T19:52:33.000Z">
@@ -161,6 +161,48 @@ body {
 }</style>
                 <link rel="stylesheet" href="https://cdn.theregister.com/assets/css/forum_post_counts.4501b489.css"><link rel="stylesheet" href="https://cdn.theregister.com/assets/css/article.8855f7fa.css"><link rel="stylesheet" href="https://cdn.theregister.com/assets/css/account_link.74f9c2bd.css"><link rel="stylesheet" href="https://cdn.theregister.com/assets/css/labrador_overrides.c9e9a0ef.css">
                 
+<script>
+const PROVIDER_CONFIG = null
+;
+
+if (PROVIDER_CONFIG && !window.__labradorPaywallClientAPIInitialized) {
+    window.__labradorPaywallClientAPIInitialized = true;
+
+    const LOG_PREFIX = '[Paywall:' + PROVIDER_CONFIG.provider + ']';
+
+    function checkAuthState() {
+        if (!window.userStatus) {
+            return;
+        }
+        window.userStatus.verify().then(function() {
+            var status = window.userStatus.getStatus(PROVIDER_CONFIG.right);
+            var engagentlyToken = window.userStatus.getEngagently();
+
+            if (status >= 2) {
+                window.labClientAPI.emit('accessGranted', {
+                    provider: PROVIDER_CONFIG.provider,
+                    paid: status,
+                    engagentlyToken: engagentlyToken
+                });
+            } else {
+                var data = { provider: PROVIDER_CONFIG.provider, paid: status || 0 };
+                if (engagentlyToken) data.engagentlyToken = engagentlyToken;
+                window.labClientAPI.emit('accessDenied', data);
+            }
+        }).catch(function(err) {
+            window.labClientAPI.emit('accessDenied', { provider: PROVIDER_CONFIG.provider, paid: 0 });
+        });
+    }
+
+    window.labClientAPIReady.then(function(api) {
+        api.set(PROVIDER_CONFIG.provider + 'PaywallHelper', {
+            checkNow: function() { return (window.userStatus && window.userStatus.getStatus(PROVIDER_CONFIG.right)) || 0; },
+            getStatus: checkAuthState
+        });
+        checkAuthState();
+    });
+}
+</script>
                 <meta property="og:url" content="https://www.theregister.com/security/2022/03/18/cyclops-blink-malware-sets-up-shop-in-asus-routers/813307">
                         <link type="image/x-icon" rel="icon" href="/view-resources/dachser2/public/theregister/favicons/favicon.ico">
                         <link type="image/svg+xml" rel="icon" href="/view-resources/dachser2/public/theregister/favicons/favicon.svg">
@@ -173,12 +215,12 @@ body {
                         <link type="image/png" rel="apple-touch-icon" sizes="180x180" href="/view-resources/dachser2/public/theregister/favicons/apple-touch-icon.png">
                     <link rel="manifest" href=/view-resources/dachser2/public/theregister/favicons/manifest.json />
                 <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900" rel="stylesheet"  media="print" onload="this.media='all'" >
-                <link rel="stylesheet" href="/view-resources/view/css/grid.css?v=1780552425-L4">
-                <link rel="stylesheet" href="/view-resources/view/css/main.css?v=1780552425-L4">
-                <link rel="stylesheet" href="/view-resources/view/css/colors.css?v=1780552425-L4">
-                <link rel="stylesheet" href="/view-resources/view/css/print.css?v=1780552425-L4" media="print">
-                <link rel="stylesheet" href="/view-resources/view/css/foundation-icons/foundation-icons.css?v=1780552425-L4">
-                <link rel="stylesheet" href="/view-resources/view/css/site/theregister.css?v=1780552425-L4">
+                <link rel="stylesheet" href="/view-resources/view/css/grid.css?v=1780919420-L4">
+                <link rel="stylesheet" href="/view-resources/view/css/main.css?v=1780919420-L4">
+                <link rel="stylesheet" href="/view-resources/view/css/colors.css?v=1780919420-L4">
+                <link rel="stylesheet" href="/view-resources/view/css/print.css?v=1780919420-L4" media="print">
+                <link rel="stylesheet" href="/view-resources/view/css/foundation-icons/foundation-icons.css?v=1780919420-L4">
+                <link rel="stylesheet" href="/view-resources/view/css/site/theregister.css?v=1780919420-L4">
                 <style data-key="custom_properties">
                     :root{--primary: rgba(0,0,0,1);--secondary: rgba(255,255,255,1);--tertiary: rgba(214,0,0,1);--quaternary: rgba(0,0,0,1);--bg-secondary: rgba(255,255,255,1);--bg-tertiary: rgba(239,239,239,1);--bg-quaternary: rgba(0,0,0,1);--bg-quinary: rgba(22,22,22,1);--bg-senary: rgba(255,235,235,1);--bg-septenary: rgba(214,0,0,1);--bg-octonary: rgba(248,248,248,1);--bg-nonary: rgba(208, 200, 200, 1);--bg-primary: rgba(255,0,0,1);--bg-septenary-light: rgba(230,102,102,1);--bg-septenary-dark: rgba(150,0,0,1);--bg-nonary-light: rgba(227,222,222,1);--bg-nonary-dark: rgba(146,140,140,1);}
                 </style>
@@ -217,8 +259,8 @@ body {
                     }
                 }
                 </style>
-<script src="/view-resources/public/common/JWTCookie.js?v=1780552425-L4"></script>
-<script src="/view-resources/public/common/Paywall.js?v=1780552425-L4"></script>
+<script src="/view-resources/public/common/JWTCookie.js?v=1780919420-L4"></script>
+<script src="/view-resources/public/common/Paywall.js?v=1780919420-L4"></script>
                 <script>
                 window.Dac = window.Dac || {};
                 (function () {
@@ -276,7 +318,7 @@ body {
                 }());
                 </script>
 
-                    <script type="module" src="/view-resources/baseview/public/common/baseview/moduleHandlers.js?v=1780552425-L4" data-cookieconsent="ignore"></script>
+                    <script type="module" src="/view-resources/baseview/public/common/baseview/moduleHandlers.js?v=1780919420-L4" data-cookieconsent="ignore"></script>
 <!-- DataLayer -->
 <script>
 
@@ -650,7 +692,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						<a href="/devops" target="_self">DevOps</a>
 					</li>
 					<li class="">
-						<a href="/oses" target="_self">OSes</a>
+						<a href="/tag/os%20platforms" target="_self">OS Platforms</a>
 					</li>
 					<li class="">
 						<a href="/virtualization" target="_self">Virtualization</a>
@@ -1396,8 +1438,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
         <section id="mainArticleSection" class="main article">
-            <div data-element-guid="de441251-2215-4961-bb88-1001adfdb1d7" class="placeholder placement-top">
-<div data-element-guid="712f2864-fd85-441b-aaee-256920b33267" class="column google-ad small-12 large-12 small-abs-12 large-abs-12"  style="">
+            <div data-element-guid="96e1b8f9-3f00-46c5-cd7c-7270e508ad43" class="placeholder placement-top">
+<div data-element-guid="41600a6e-ce9a-45c9-8028-8a0bc2f29d6b" class="column google-ad small-12 large-12 small-abs-12 large-abs-12"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/a" style="min-height:90px;"></div>
@@ -1467,7 +1509,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
 
     <div class="bylines">
-        <div data-element-guid="c01d4910-c6bd-446d-aae8-d7e049389f2b" class="byline column" itemscope itemtype="http://schema.org/Person">
+        <div data-element-guid="7a4a0894-8d18-4306-80ac-37855140de5b" class="byline column" itemscope itemtype="http://schema.org/Person">
     
     <div class="content">
             
@@ -1526,7 +1568,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Cyclops Blink malware has infected ASUS routers in what Trend Micro says looks like an attempt to turn these compromised devices into command-and-control servers for future attacks.</p>
 <p>ASUS says it's <a href="https://www.asus.com/content/ASUS-Product-Security-Advisory/" rel="nofollow">working on a remediation</a> for Cyclops Blink and will post software updates if necessary. The hardware maker recommends users reset their gateways to factory settings to flush away any configurations added by an intruder, change the login password, make sure remote management access from the WAN is disabled, and ensure the latest firmware is installed to be safe.</p>
 <p>Cyclops Blink has ties to Kremlin-backed Sandworm, the criminal gang behind the nasty <a href="https://www.theregister.com/2018/09/27/fancy_bear_modules/">VPNFilter malware</a> that in 2018 targeted routers and storage devices. The crew also carried out several high-profile attacks including the 2015 and 2016 cyber-assaults on Ukraine's electrical grid, NotPetya in 2017, and the French presidential campaign email leak that same year.</p>
-<div data-element-guid="1c6b05eb-ca5e-4c44-e034-839ffd864a3b" class="column google-ad widthFull"  style="">
+<div data-element-guid="1def38b9-20e0-4030-f46f-c24ff5cbcba8" class="column google-ad widthFull"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/b" ></div>
@@ -1537,7 +1579,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </script>
 </div>
 <p>A Trend Micro <a href="https://www.trendmicro.com/en_us/research/22/c/cyclops-blink-sets-sights-on-asus-routers--.html" rel="nofollow">warning</a> about the router hijackings follows a <a href="https://www.cisa.gov/uscert/ncas/current-activity/2022/02/23/new-sandworm-malware-cyclops-blink-replaces-vpnfilter" rel="nofollow">joint advisory</a> last month from the FBI, CISA, the US Department of Justice, and the UK National Cyber Security Centre about Cyclops Blink, which the agencies said looked to be Sandworm's replacement for VPNFilter. At the time, the botnet had its sights set on <a href="https://www.watchguard.com/wgrd-news/blog/important-detection-and-remediation-actions-cyclops-blink-state-sponsored-botnet" rel="nofollow">WatchGuard</a> firewall appliances.</p>
-<div data-element-guid="f1ab2ddb-c4d4-4a09-a048-88834f80f2d2" class="column google-ad floatRight widthAuto"  style="">
+<div data-element-guid="e0b2a2ab-fa2b-4311-90fe-c1afbd24d4b0" class="column google-ad floatRight widthAuto"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/c" ></div>
@@ -1549,7 +1591,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <p>"Our data also shows that although Cyclops Blink is a state-sponsored botnet, its C&amp;C servers and bots affect WatchGuard Firebox and Asus devices that do not belong to critical organizations, or those that have an evident value on economic, political, or military espionage," Trend Micro said. "Hence, we believe that it is possible that the Cyclops Blink botnet's main purpose is to build an infrastructure for further attacks on high-value targets."</p>
 <p>And while Cyclops Blink has infected routers from these two hardware providers, "we have evidence that the routers of at least one vendor other than Asus and WatchGuard are connecting to Cyclops Blink C&amp;Cs as well, but so far we have been unable to collect malware samples for this router brand," the security shop said.  </p>
-<div data-element-guid="d540fcda-9f25-4171-ee84-3fab21705955" class="lab4 column articleList layout_vertical imageLayout_left small-12 large-8 small-abs-12 large-abs-8 abs_grid_8 desktop-floatLeft mobile-floatLeft" style="--articleList-columnsDesktop: repeat(2, 1fr); --articleList-columnsMobile: repeat(1, 1fr); ">
+<div data-element-guid="9affc4b5-7cd2-4a7d-a580-b3048665571f" class="lab4 column articleList layout_vertical imageLayout_left small-12 large-8 small-abs-12 large-abs-8 abs_grid_8 desktop-floatLeft mobile-floatLeft" style="--articleList-columnsDesktop: repeat(2, 1fr); --articleList-columnsMobile: repeat(1, 1fr); ">
     
     <div class="content ">
         <h2 class="article-list-title " style="">MORE CONTEXT</h2>
@@ -1620,7 +1662,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                 </article>
                 <section class="related desktop-fullWidth mobile-fullWidth fullwidthTarget">
-                <div data-element-guid="b11523ac-e688-4f14-a580-adaecf344fc7" class="page-content"><div data-element-guid="04186acf-c113-4bea-ab93-16bda66c1dd6" class="row small-12 large-12" style=""><div data-element-guid="fa741455-16c5-45f6-c7fc-4e1fc7232a31" class="column google-ad small-12 large-12 small-abs-12 large-abs-12 large-12 small-12"  style="">
+                <div data-element-guid="b11523ac-e688-4f14-a580-adaecf344fc7" class="page-content"><div data-element-guid="a2bbf75f-2ee9-4c2a-db1e-0e3059211543" class="row small-12 large-12" style=""><div data-element-guid="c9902aac-f525-48e7-f54b-d22a99fe6119" class="column google-ad small-12 large-12 small-abs-12 large-abs-12 large-12 small-12"  style="">
 
         <span class="ad-label">REG AD</span>
         <div class="adunit" id="labrador/thereg/article/desktop/f" ></div>
@@ -1631,9 +1673,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </script>
 </div>
 </div>
-<div data-element-guid="8defda64-224d-418c-b00e-73b60a6b5546" class="row small-12 large-12" style="">
+<div data-element-guid="25ee1cba-db61-4cb8-9293-d4064bc59c51" class="row small-12 large-12" style="">
 <!-- placeholder(#1) -->
-<div data-element-guid="e5880e10-f33c-4d82-ef4b-d53bb74b94fd" class="front_rows small-12 large-12 small-abs-12 large-abs-12 large-6 small-12 large-12 small-12">
+<div data-element-guid="b1603989-43f1-4dfb-b4ff-22f679a94e75" class="front_rows small-12 large-12 small-abs-12 large-abs-12 large-6 small-12 large-12 small-12">
     
     <div class="content fullwidthTarget" style="">
             
@@ -1653,11 +1695,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </div>
 </div>
-<div data-element-guid="4bbed283-a2c5-4166-9180-f14b373db0ee" class="row small-12 large-12 desktop-space-outsideTop-small mobile-space-outsideTop-small desktop-space-outsideBottom-medium mobile-space-outsideBottom-medium bg-tertiary color_mobile_bg-tertiary op-bg_80 color_mobile_op-bg_80 hasContentPadding mobile-hasContentPadding" style=""><div data-element-guid="c613a685-236f-4105-8a50-8126cec1f926" class="columns small-12 large-4 small-abs-12 large-abs-4"><div data-element-guid="0ab19c22-f064-4243-94db-ad9523462ffe" class="row small-12 large-12" style=""><article data-element-guid="a9be01e0-5084-4618-a6e5-bc5051e67bc3" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="software" data-instance="5248919" itemscope>
+<div data-element-guid="4bbed283-a2c5-4166-9180-f14b373db0ee" class="row small-12 large-12 desktop-space-outsideTop-small mobile-space-outsideTop-small desktop-space-outsideBottom-medium mobile-space-outsideBottom-medium bg-tertiary color_mobile_bg-tertiary op-bg_80 color_mobile_op-bg_80 hasContentPadding mobile-hasContentPadding" style=""><div data-element-guid="c613a685-236f-4105-8a50-8126cec1f926" class="columns small-12 large-4 small-abs-12 large-abs-4"><div data-element-guid="0ab19c22-f064-4243-94db-ad9523462ffe" class="row small-12 large-12" style=""><article data-element-guid="a9be01e0-5084-4618-a6e5-bc5051e67bc3" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="ai and ml" data-instance="5248919" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_40 color_mobile_op-bg_40 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/software/2026/06/08/consultant-mistakenly-deleted-a-ton-of-data-but-reported-it-as-a-bug/5245952" data-k5a-url="https://www.theregister.com/a/5245952" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/ai-and-ml/2026/06/09/uncle-sam-considers-buying-a-seat-on-the-titanic/5252598" data-k5a-url="https://www.theregister.com/a/5252598" rel="">
 
 
         <div class="media ">
@@ -1665,27 +1707,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <figure data-element-guid="0ee86205-d05f-412e-8463-ef472188c588" class="" >
     <div class="img fullwidthTarget">
         <picture>
-            <source srcset="https://image.theregister.com/250181.jpg?imageId=250181&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5252625.jpg?imageId=5252625&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=webp" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/250181.jpg?imageId=250181&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5252625.jpg?imageId=5252625&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/jpeg">    
-            <source srcset="https://image.theregister.com/250181.jpg?imageId=250181&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5252625.jpg?imageId=5252625&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=webp" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/250181.jpg?imageId=250181&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5252625.jpg?imageId=5252625&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/jpeg">    
-            <img src="https://image.theregister.com/250181.jpg?imageId=250181&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg"
+            <img src="https://image.theregister.com/5252625.jpg?imageId=5252625&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg"
                 width="480"
                 height="216"
                 alt="" 
@@ -1709,7 +1751,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div 
 style=""
 class="kicker floating bg-primary color_mobile_bg-primary secondary color_mobile_secondary hasTextPadding mobile-hasTextPadding hasTextColor hasTextColorMobile">
-Software
+AI + ML
 </div>
 
                 <div class="labels">
@@ -1724,13 +1766,13 @@ Software
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >Consultant mistakenly deleted a ton of data – but reported it as a bug
+    >Uncle Sam considers buying a seat on the Titanic
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    And he got away with it too!
+    L'etat, c'est AI
 </p>
 
 
@@ -1741,14 +1783,14 @@ Software
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-06-08T08:30:00+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-06-09T03:17:57+02:00"></time>
     </div>
 </article>
-<article data-element-guid="d5752714-6923-482a-acff-6c7be1ba49a1" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="systems" data-instance="5248921" itemscope>
+<article data-element-guid="d5752714-6923-482a-acff-6c7be1ba49a1" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="devops" data-instance="5248921" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/systems/2026/06/08/our-systems-editor-flew-all-the-way-to-taiwan-and-still-couldnt-get-away-from-ai/5251877" data-k5a-url="https://www.theregister.com/a/5251877" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/devops/2026/06/09/apple-courts-developers-with-privacy-and-context-in-ai-comeback-bid/5252564" data-k5a-url="https://www.theregister.com/a/5252564" rel="">
 
 
         <div class="media ">
@@ -1767,18 +1809,18 @@ Software
                 <div 
 style=""
 class="kicker below t14">
-systems
+DEVOPS
 </div>
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >Our systems editor flew all the way to Taiwan and still couldn't get away from AI
+    >Apple courts developers with privacy and context in AI comeback bid
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    Every show now is an AI show, and that included this year's Computex
+    Apple Intelligence stumbled through 2024 and 2025. It's starting to look respectable
 </p>
 
 
@@ -1789,14 +1831,14 @@ systems
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-06-08T01:00:00+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-06-09T01:25:19+02:00"></time>
     </div>
 </article>
-<article data-element-guid="bb22098e-9b3c-4782-b74c-7711294fcf2a" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="networks" data-instance="5248923" itemscope>
+<article data-element-guid="bb22098e-9b3c-4782-b74c-7711294fcf2a" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="ai and ml" data-instance="5248923" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-septenary mobile_border-bg-septenary mobile_no_border_side border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/networks/2026/06/05/zte-showcases-ai-driven-project-management-innovations-at-the-14th-ipma-research-conference-2026/5251809" data-k5a-url="https://www.theregister.com/a/5251809" rel="sponsored ">
+        <a itemprop="url" class="" href="https://www.theregister.com/ai-and-ml/2026/06/08/zte-demonstrates-integrated-ai-connectivity-and-digital-utility-technologies-at-tnb-energy-transition-conference/5252434" data-k5a-url="https://www.theregister.com/a/5252434" rel="sponsored ">
 
 
         <div class="media ">
@@ -1815,13 +1857,13 @@ systems
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >ZTE showcases AI-driven project management innovations at the 14th IPMA Research Conference 2026
+    >ZTE Demonstrates Integrated AI, Connectivity and Digital Utility Technologies at TNB Energy Transition Conference
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    PARTNER CONTENT: Integrating AI into the iEPMS platform to achieve a 98% quality review accuracy rate and slash report generation times, leveraging experience from 240,000 global projects
+    PARTNER CONTENT: Driving Grid Modernization and Energy Transition in Malaysia Through Advanced AI and Smart Infrastructure Solutions
 </p>
 
 
@@ -1832,15 +1874,15 @@ systems
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-06-05T17:09:17+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-06-08T18:25:02+02:00"></time>
     </div>
 </article>
 </div>
-</div><div data-element-guid="f6ddbf86-659e-49fc-a8b1-49335cdab812" class="columns small-12 large-4 small-abs-12 large-abs-4"><div data-element-guid="0bc148e8-a10f-48d0-a80c-9cb123d20afe" class="row small-12 large-12" style=""><article data-element-guid="757c9104-16dd-484d-b68d-5426da1adfef" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="offbeat" data-instance="5248925" itemscope>
+</div><div data-element-guid="f6ddbf86-659e-49fc-a8b1-49335cdab812" class="columns small-12 large-4 small-abs-12 large-abs-4"><div data-element-guid="0bc148e8-a10f-48d0-a80c-9cb123d20afe" class="row small-12 large-12" style=""><article data-element-guid="757c9104-16dd-484d-b68d-5426da1adfef" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="security" data-instance="5248925" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/offbeat/2026/06/07/brit-maritime-agency-heralds-fresh-global-rules-for-crewless-cargo-ships/5251616" data-k5a-url="https://www.theregister.com/a/5251616" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/security/2026/06/08/suspected-norks-send-250-fake-dev-job-pitches-to-steal-crypto/5252526" data-k5a-url="https://www.theregister.com/a/5252526" rel="">
 
 
         <div class="media ">
@@ -1859,18 +1901,18 @@ systems
                 <div 
 style=""
 class="kicker below t14">
-offbeat
+Security
 </div>
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >Brit maritime agency heralds fresh global rules for crewless cargo ships
+    >Norks blast 250+ fake job offers to developers over 6 weeks to try and snarf creds and crypto
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    If you thought driverless cars were bad, imagine a 200,000 ton container ship
+    When an unsolicited job offer sounds too good to be true …
 </p>
 
 
@@ -1881,14 +1923,14 @@ offbeat
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-06-07T13:00:00+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-06-09T00:13:20+02:00"></time>
     </div>
 </article>
-<article data-element-guid="9e6258d2-802b-484c-8eee-51bc92196816" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="saas" data-instance="5248927" itemscope>
+<article data-element-guid="9e6258d2-802b-484c-8eee-51bc92196816" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="os platforms" data-instance="5248927" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_40 color_mobile_op-bg_40 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/saas/2026/05/29/aws-reportedly-to-tuck-elon-musks-grok-into-bedrock-despite-zero-enterprise-demand/5248832" data-k5a-url="https://www.theregister.com/a/5248832" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/os-platforms/2026/06/08/yes-its-true-windows-11-is-an-agentic-platform/5251541" data-k5a-url="https://www.theregister.com/a/5251541" rel="">
 
 
         <div class="media ">
@@ -1896,30 +1938,30 @@ offbeat
                 <figure data-element-guid="1958528f-18fc-4f52-8a68-18ef1aa447d8" class="" >
     <div class="img fullwidthTarget">
         <picture>
-            <source srcset="https://image.theregister.com/4093846.jpg?imageId=4093846&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=51.43&heighty=0.00&heightw=37.14&heighth=100.00&width=706&height=318&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5251567.jpg?imageId=5251567&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=webp" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/4093846.jpg?imageId=4093846&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=51.43&heighty=0.00&heightw=37.14&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5251567.jpg?imageId=5251567&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=706&height=318&format=webp&format=jpg" 
                 width="353"
                 height="159"
                 media="(min-width: 768px)"
                 type="image/jpeg">    
-            <source srcset="https://image.theregister.com/4093846.jpg?imageId=4093846&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=51.43&heighty=0.00&heightw=37.14&heighth=100.00&width=960&height=432&format=webp&format=webp" 
+            <source srcset="https://image.theregister.com/5251567.jpg?imageId=5251567&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=webp" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/webp">    
-            <source srcset="https://image.theregister.com/4093846.jpg?imageId=4093846&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=51.43&heighty=0.00&heightw=37.14&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
+            <source srcset="https://image.theregister.com/5251567.jpg?imageId=5251567&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg" 
                 width="480"
                 height="216"
                 media="(max-width: 767px)"
                 type="image/jpeg">    
-            <img src="https://image.theregister.com/4093846.jpg?imageId=4093846&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=51.43&heighty=0.00&heightw=37.14&heighth=100.00&width=960&height=432&format=webp&format=jpg"
+            <img src="https://image.theregister.com/5251567.jpg?imageId=5251567&panox=0.00&panoy=0.00&panow=100.00&panoh=100.00&heightx=0.00&heighty=0.00&heightw=100.00&heighth=100.00&width=960&height=432&format=webp&format=jpg"
                 width="480"
                 height="216"
-                alt="" 
+                alt="HP laptop showing the Windows 11 desktop and taskbar on screen." 
                 loading="lazy"
                 style=""    
                 >
@@ -1940,7 +1982,7 @@ offbeat
                     <div 
 style=""
 class="kicker floating bg-primary color_mobile_bg-primary secondary color_mobile_secondary hasTextPadding mobile-hasTextPadding hasTextColor hasTextColorMobile">
-SaaS
+os platforms
 </div>
 
                 <div class="labels">
@@ -1955,13 +1997,13 @@ SaaS
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >AWS reportedly to tuck Elon Musk's Grok into Bedrock, despite zero enterprise demand
+    >Yes! It’s true! Windows 11 is an agentic platform
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    The energy drink of frontier models
+    It always has been, but Microsoft didn’t realize it
 </p>
 
 
@@ -1972,14 +2014,14 @@ SaaS
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-05-30T00:23:25+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-06-08T10:30:00+02:00"></time>
     </div>
 </article>
 <article data-element-guid="b8d1c518-25f5-4e1e-b9b0-92bec0bde645" class="column small-12 large-12 small-abs-12 large-abs-4 " data-site-alias="theregister" data-section="personal tech" data-instance="5248929" itemscope>
     
     <div class="content bg-nonary-light color_mobile_bg-nonary-light op-bg_60 color_mobile_op-bg_60 border-bg-octonary mobile_border-bg-octonary border-side-bottom mobile_border-side-bottom border_width_2 border_width_mobile_2 hasContentPadding mobile-hasContentPadding hasBorder mobile-hasBorder" style="">
         
-        <a itemprop="url" class="" href="https://www.theregister.com/personal-tech/2026/06/07/uk-exam-watchdog-frets-over-smart-specs-turning-gcses-into-google-searches/5251365" data-k5a-url="https://www.theregister.com/a/5251365" rel="">
+        <a itemprop="url" class="" href="https://www.theregister.com/personal-tech/2026/06/08/apples-orwellian-device-controls-for-tots-also-mean-more-work-for-parents/5252515" data-k5a-url="https://www.theregister.com/a/5252515" rel="">
 
 
         <div class="media ">
@@ -1995,21 +2037,16 @@ SaaS
 
 
         
-                <div 
-style=""
-class="kicker below t14">
-Personal Tech
-</div>
                 <h2 itemprop="headline" 
     class="headline t19"
     style=""
-    >UK exam watchdog frets over smart specs turning GCSEs into Google searches
+    >Apple’s Orwellian device controls for tots also mean more work for parents 
 </h2>
                 <p itemprop="description" 
     class="subtitle t14"
     style=""
     >
-    Ofqual says smart glasses, hidden earpieces, and AI tools are creating a new generation of cheating headaches
+    The new features ignore the argument that if parents wanted to spend more time on their kids, they wouldn't have supplied them with an iPad or iPhone in the first place.
 </p>
 
 
@@ -2020,7 +2057,7 @@ Personal Tech
 
         </a>
 
-        <time itemprop="datePublished" datetime="2026-06-07T10:30:00+02:00"></time>
+        <time itemprop="datePublished" datetime="2026-06-08T23:28:59+02:00"></time>
     </div>
 </article>
 </div>
@@ -2060,31 +2097,6 @@ Personal Tech
                             <h4>All the passwords were stored in Active Directory description fields</h4>
                             
                         </a>
-                        <p>
-                        </p>
-                    </div>
-                </li>
-                <li
-                data-section="ai + ml"
-                data-tags="ai,ai + ml,ai and ml,foss,netflix,open source"
-                data-hostname="www.theregister.com"
-                data-source-display-name="www.theregister.com" 
-                data-tab-content="">
-                    <figure class="media paywall-position-hidePaywallLabel">
-                        <a href="/ai-ml/2026/05/31/netflix-wiz-creates-app-to-slash-ai-bills-then-open-sources-it/5248702">
-                            <img src="//image.theregister.com/5248730.jpg?imageId=5248730&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=70&height=60" alt="">
-                        </a>
-                    </figure>
-                    <div class="text kicker-position-aboveTitle paywall-position-hidePaywallLabel">
-                        <a href="/ai-ml/2026/05/31/netflix-wiz-creates-app-to-slash-ai-bills-then-open-sources-it/5248702">
-                            <div class="kicker-paywall-container">
-                                <span class="kicker">AI and ML</span>
-                            </div>
-                            <h4>Netflix wiz creates app to slash AI bills, then open sources it</h4>
-                            
-                        </a>
-                        <p>
-                        </p>
                     </div>
                 </li>
                 <li
@@ -2106,31 +2118,6 @@ Personal Tech
                             <h4>GOV.UK goes Dutch on payments as it dumps Stripe</h4>
                             
                         </a>
-                        <p>
-                        </p>
-                    </div>
-                </li>
-                <li
-                data-section="personal tech"
-                data-tags="personal tech"
-                data-hostname="www.theregister.com"
-                data-source-display-name="www.theregister.com" 
-                data-tab-content="">
-                    <figure class="media paywall-position-hidePaywallLabel">
-                        <a href="/personal-tech/2026/06/01/california-passes-ban-on-3d-printed-firearms/5249148">
-                            <img src="//image.theregister.com/163911.jpg?imageId=163911&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=70&height=60" alt="">
-                        </a>
-                    </figure>
-                    <div class="text kicker-position-aboveTitle paywall-position-hidePaywallLabel">
-                        <a href="/personal-tech/2026/06/01/california-passes-ban-on-3d-printed-firearms/5249148">
-                            <div class="kicker-paywall-container">
-                                <span class="kicker">Personal tech</span>
-                            </div>
-                            <h4>California passes bill declaring death-by-algorithm to 3D-printed ghost guns</h4>
-                            
-                        </a>
-                        <p>
-                        </p>
                     </div>
                 </li>
                 <li
@@ -2152,8 +2139,48 @@ Personal Tech
                             <h4>Angry devs vow to flee GitHub Copilot as metered billing takes hold</h4>
                             
                         </a>
-                        <p>
-                        </p>
+                    </div>
+                </li>
+                <li
+                data-section="personal tech"
+                data-tags="personal tech"
+                data-hostname="www.theregister.com"
+                data-source-display-name="www.theregister.com" 
+                data-tab-content="">
+                    <figure class="media paywall-position-hidePaywallLabel">
+                        <a href="/personal-tech/2026/06/01/california-passes-ban-on-3d-printed-firearms/5249148">
+                            <img src="//image.theregister.com/163911.jpg?imageId=163911&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=70&height=60" alt="">
+                        </a>
+                    </figure>
+                    <div class="text kicker-position-aboveTitle paywall-position-hidePaywallLabel">
+                        <a href="/personal-tech/2026/06/01/california-passes-ban-on-3d-printed-firearms/5249148">
+                            <div class="kicker-paywall-container">
+                                <span class="kicker">Personal tech</span>
+                            </div>
+                            <h4>California passes bill declaring death-by-algorithm to 3D-printed ghost guns</h4>
+                            
+                        </a>
+                    </div>
+                </li>
+                <li
+                data-section="security"
+                data-tags="github,microsoft,security,worm"
+                data-hostname="www.theregister.com"
+                data-source-display-name="www.theregister.com" 
+                data-tab-content="">
+                    <figure class="media paywall-position-hidePaywallLabel">
+                        <a href="/security/2026/06/08/github-nukes-70-microsoft-repos-amid-suspected-worm-attack/5252169">
+                            <img src="//image.theregister.com/5249823.jpg?imageId=5249823&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=70&height=60" alt="">
+                        </a>
+                    </figure>
+                    <div class="text kicker-position-aboveTitle paywall-position-hidePaywallLabel">
+                        <a href="/security/2026/06/08/github-nukes-70-microsoft-repos-amid-suspected-worm-attack/5252169">
+                            <div class="kicker-paywall-container">
+                                <span class="kicker">security</span>
+                            </div>
+                            <h4>GitHub nukes 70+ Microsoft repos, breaks CI/CD pipelines, following suspected worm infections</h4>
+                            
+                        </a>
                     </div>
                 </li>
         </ul>
@@ -2406,47 +2433,47 @@ Personal Tech
         </p>
             <ul>
                     <li>
-                        <a href="/software/2026/06/08/consultant-mistakenly-deleted-a-ton-of-data-but-reported-it-as-a-bug/5245952">
+                        <a href="/ai-and-ml/2026/06/09/uncle-sam-considers-buying-a-seat-on-the-titanic/5252598">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">Software</p>
-                                    <h4 class="abt-title">Consultant mistakenly deleted a ton of data – but reported it as a bug</h4>
-                                    <p class="abt-subtitle">And he got away with it too!</p>
+                                    <p class="abt-kicker">AI + ML</p>
+                                    <h4 class="abt-title">Uncle Sam considers buying a seat on the Titanic</h4>
+                                    <p class="abt-subtitle">L'etat, c'est AI</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/systems/2026/06/08/our-systems-editor-flew-all-the-way-to-taiwan-and-still-couldnt-get-away-from-ai/5251877">
+                        <a href="/devops/2026/06/09/apple-courts-developers-with-privacy-and-context-in-ai-comeback-bid/5252564">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">systems</p>
-                                    <h4 class="abt-title">Our systems editor flew all the way to Taiwan and still couldn't get away from AI</h4>
-                                    <p class="abt-subtitle">Every show now is an AI show, and that included this year's Computex</p>
+                                    <p class="abt-kicker">DEVOPS</p>
+                                    <h4 class="abt-title">Apple courts developers with privacy and context in AI comeback bid</h4>
+                                    <p class="abt-subtitle">Apple Intelligence stumbled through 2024 and 2025. It's starting to look respectable</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/offbeat/2026/06/07/brit-maritime-agency-heralds-fresh-global-rules-for-crewless-cargo-ships/5251616">
+                        <a href="/security/2026/06/08/suspected-norks-send-250-fake-dev-job-pitches-to-steal-crypto/5252526">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">offbeat</p>
-                                    <h4 class="abt-title">Brit maritime agency heralds fresh global rules for crewless cargo ships</h4>
-                                    <p class="abt-subtitle">If you thought driverless cars were bad, imagine a 200,000 ton container ship</p>
+                                    <p class="abt-kicker">Security</p>
+                                    <h4 class="abt-title">Norks blast 250+ fake job offers to developers over 6 weeks to try and snarf creds and crypto</h4>
+                                    <p class="abt-subtitle">When an unsolicited job offer sounds too good to be true …</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/public-sector/2026/06/07/home-office-ditches-legacy-asylum-database-keeps-the-spreadsheets/5251780">
+                        <a href="/personal-tech/2026/06/08/apples-orwellian-device-controls-for-tots-also-mean-more-work-for-parents/5252515">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">Public sector</p>
-                                    <h4 class="abt-title">Home Office ditches legacy asylum database, keeps the spreadsheets</h4>
-                                    <p class="abt-subtitle">Years into a major IT overhaul, MPs say the department still lacks reliable view of what is happening across the asylum system</p>
+                                    <p class="abt-kicker"></p>
+                                    <h4 class="abt-title">Apple’s Orwellian device controls for tots also mean more work for parents </h4>
+                                    <p class="abt-subtitle">The new features ignore the argument that if parents wanted to spend more time on their kids, they wouldn't have supplied them with an iPad or iPhone in the first place.</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/personal-tech/2026/06/07/uk-exam-watchdog-frets-over-smart-specs-turning-gcses-into-google-searches/5251365">
+                        <a href="/ai-and-ml/2026/06/08/its-do-or-die-for-apple-ai/5252479">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">personal tech</p>
-                                    <h4 class="abt-title">UK exam watchdog frets over smart specs turning GCSEs into Google searches</h4>
-                                    <p class="abt-subtitle">Ofqual says smart glasses, hidden earpieces, and AI tools are creating a new generation of cheating headaches</p>
+                                    <p class="abt-kicker">ai + ml</p>
+                                    <h4 class="abt-title">It's do or die for Apple AI</h4>
+                                    <p class="abt-subtitle">WWDC announcements earned tempered praise from analysts, with an emphasis on the word 'if'</p>
                             </div>
                         </a>
                     </li>
@@ -2464,47 +2491,47 @@ Personal Tech
         </p>
             <ul>
                     <li>
-                        <a href="/software/2026/06/08/consultant-mistakenly-deleted-a-ton-of-data-but-reported-it-as-a-bug/5245952">
+                        <a href="/ai-and-ml/2026/06/09/uncle-sam-considers-buying-a-seat-on-the-titanic/5252598">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">Software</p>
-                                    <h4 class="abt-title">Consultant mistakenly deleted a ton of data – but reported it as a bug</h4>
-                                    <p class="abt-subtitle">And he got away with it too!</p>
+                                    <p class="abt-kicker">AI + ML</p>
+                                    <h4 class="abt-title">Uncle Sam considers buying a seat on the Titanic</h4>
+                                    <p class="abt-subtitle">L'etat, c'est AI</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/systems/2026/06/08/our-systems-editor-flew-all-the-way-to-taiwan-and-still-couldnt-get-away-from-ai/5251877">
+                        <a href="/devops/2026/06/09/apple-courts-developers-with-privacy-and-context-in-ai-comeback-bid/5252564">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">systems</p>
-                                    <h4 class="abt-title">Our systems editor flew all the way to Taiwan and still couldn't get away from AI</h4>
-                                    <p class="abt-subtitle">Every show now is an AI show, and that included this year's Computex</p>
+                                    <p class="abt-kicker">DEVOPS</p>
+                                    <h4 class="abt-title">Apple courts developers with privacy and context in AI comeback bid</h4>
+                                    <p class="abt-subtitle">Apple Intelligence stumbled through 2024 and 2025. It's starting to look respectable</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/offbeat/2026/06/07/brit-maritime-agency-heralds-fresh-global-rules-for-crewless-cargo-ships/5251616">
+                        <a href="/security/2026/06/08/suspected-norks-send-250-fake-dev-job-pitches-to-steal-crypto/5252526">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">offbeat</p>
-                                    <h4 class="abt-title">Brit maritime agency heralds fresh global rules for crewless cargo ships</h4>
-                                    <p class="abt-subtitle">If you thought driverless cars were bad, imagine a 200,000 ton container ship</p>
+                                    <p class="abt-kicker">Security</p>
+                                    <h4 class="abt-title">Norks blast 250+ fake job offers to developers over 6 weeks to try and snarf creds and crypto</h4>
+                                    <p class="abt-subtitle">When an unsolicited job offer sounds too good to be true …</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/public-sector/2026/06/07/home-office-ditches-legacy-asylum-database-keeps-the-spreadsheets/5251780">
+                        <a href="/personal-tech/2026/06/08/apples-orwellian-device-controls-for-tots-also-mean-more-work-for-parents/5252515">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">Public sector</p>
-                                    <h4 class="abt-title">Home Office ditches legacy asylum database, keeps the spreadsheets</h4>
-                                    <p class="abt-subtitle">Years into a major IT overhaul, MPs say the department still lacks reliable view of what is happening across the asylum system</p>
+                                    <p class="abt-kicker"></p>
+                                    <h4 class="abt-title">Apple’s Orwellian device controls for tots also mean more work for parents </h4>
+                                    <p class="abt-subtitle">The new features ignore the argument that if parents wanted to spend more time on their kids, they wouldn't have supplied them with an iPad or iPhone in the first place.</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/personal-tech/2026/06/07/uk-exam-watchdog-frets-over-smart-specs-turning-gcses-into-google-searches/5251365">
+                        <a href="/ai-and-ml/2026/06/08/its-do-or-die-for-apple-ai/5252479">
                             <div class="text-container">                    
-                                    <p class="abt-kicker">personal tech</p>
-                                    <h4 class="abt-title">UK exam watchdog frets over smart specs turning GCSEs into Google searches</h4>
-                                    <p class="abt-subtitle">Ofqual says smart glasses, hidden earpieces, and AI tools are creating a new generation of cheating headaches</p>
+                                    <p class="abt-kicker">ai + ml</p>
+                                    <h4 class="abt-title">It's do or die for Apple AI</h4>
+                                    <p class="abt-subtitle">WWDC announcements earned tempered praise from analysts, with an emphasis on the word 'if'</p>
                             </div>
                         </a>
                     </li>
@@ -2522,50 +2549,50 @@ Personal Tech
         </p>
             <ul>
                     <li>
-                        <a href="/software/2026/06/08/consultant-mistakenly-deleted-a-ton-of-data-but-reported-it-as-a-bug/5245952">
+                        <a href="/ai-and-ml/2026/06/09/uncle-sam-considers-buying-a-seat-on-the-titanic/5252598">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Consultant mistakenly deleted a ton of data – but reported it as a bug</h4>
-                                    <p class="abt-subtitle">And he got away with it too!</p>
+                                    <h4 class="abt-title">Uncle Sam considers buying a seat on the Titanic</h4>
+                                    <p class="abt-subtitle">L'etat, c'est AI</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/systems/2026/06/08/our-systems-editor-flew-all-the-way-to-taiwan-and-still-couldnt-get-away-from-ai/5251877">
+                        <a href="/devops/2026/06/09/apple-courts-developers-with-privacy-and-context-in-ai-comeback-bid/5252564">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Our systems editor flew all the way to Taiwan and still couldn't get away from AI</h4>
-                                    <p class="abt-subtitle">Every show now is an AI show, and that included this year's Computex</p>
+                                    <h4 class="abt-title">Apple courts developers with privacy and context in AI comeback bid</h4>
+                                    <p class="abt-subtitle">Apple Intelligence stumbled through 2024 and 2025. It's starting to look respectable</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/offbeat/2026/06/07/brit-maritime-agency-heralds-fresh-global-rules-for-crewless-cargo-ships/5251616">
+                        <a href="/security/2026/06/08/suspected-norks-send-250-fake-dev-job-pitches-to-steal-crypto/5252526">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Brit maritime agency heralds fresh global rules for crewless cargo ships</h4>
-                                    <p class="abt-subtitle">If you thought driverless cars were bad, imagine a 200,000 ton container ship</p>
+                                    <h4 class="abt-title">Norks blast 250+ fake job offers to developers over 6 weeks to try and snarf creds and crypto</h4>
+                                    <p class="abt-subtitle">When an unsolicited job offer sounds too good to be true …</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/public-sector/2026/06/07/home-office-ditches-legacy-asylum-database-keeps-the-spreadsheets/5251780">
+                        <a href="/personal-tech/2026/06/08/apples-orwellian-device-controls-for-tots-also-mean-more-work-for-parents/5252515">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Home Office ditches legacy asylum database, keeps the spreadsheets</h4>
-                                    <p class="abt-subtitle">Years into a major IT overhaul, MPs say the department still lacks reliable view of what is happening across the asylum system</p>
+                                    <h4 class="abt-title">Apple’s Orwellian device controls for tots also mean more work for parents </h4>
+                                    <p class="abt-subtitle">The new features ignore the argument that if parents wanted to spend more time on their kids, they wouldn't have supplied them with an iPad or iPhone in the first place.</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/personal-tech/2026/06/07/uk-exam-watchdog-frets-over-smart-specs-turning-gcses-into-google-searches/5251365">
+                        <a href="/ai-and-ml/2026/06/08/its-do-or-die-for-apple-ai/5252479">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">UK exam watchdog frets over smart specs turning GCSEs into Google searches</h4>
-                                    <p class="abt-subtitle">Ofqual says smart glasses, hidden earpieces, and AI tools are creating a new generation of cheating headaches</p>
+                                    <h4 class="abt-title">It's do or die for Apple AI</h4>
+                                    <p class="abt-subtitle">WWDC announcements earned tempered praise from analysts, with an emphasis on the word 'if'</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/security/2026/06/06/oxford-university-data-pwned-again-by-career-platform-breach/5251754">
+                        <a href="/cyber-crime/2026/06/08/attackers-had-month-long-head-start-on-patched-check-point-vpn-zero-day/5252438">
                             <div class="text-container">                    
-                                    <h4 class="abt-title">Oxford Uni student data pwned yet again - this time via career platform breach</h4>
-                                    <p class="abt-subtitle">Totally different attack from the break-in last month. Oh so that's OK then </p>
+                                    <h4 class="abt-title">Ransomware crims got a month-long head start on Check Point VPN 0-day that now has a fix</h4>
+                                    <p class="abt-subtitle">Scumbags, including a Qilin ransomware affiliate, began hitting this hole May 7</p>
                             </div>
                         </a>
                     </li>
@@ -2884,7 +2911,7 @@ Personal Tech
 
 
 
-<script src="/view-resources/baseview/public/common/build/baseview_dependencies_dom.js?v=1780552425-L4" data-cookieconsent="ignore"></script>
+<script src="/view-resources/baseview/public/common/build/baseview_dependencies_dom.js?v=1780919420-L4" data-cookieconsent="ignore"></script>
 
         <script>
             window.dachserData.handlers = {

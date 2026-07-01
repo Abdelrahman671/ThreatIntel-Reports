@@ -5,7 +5,7 @@
 window.ezCookieQueue=window.ezCookieQueue||[];if(typeof addEzCookies!=='function'){function addEzCookies(arr){window.ezCookieQueue=[...window.ezCookieQueue,...arr];}}
 addEzCookies([]);if(window.ezTcfConsent&&window.ezTcfConsent.loaded){_setEzCookies(window.ezTcfConsent);}else if(typeof getEzConsentData==="function"){getEzConsentData().then(function(ezTcfConsent){if(ezTcfConsent&&ezTcfConsent.loaded){_setEzCookies(window.ezTcfConsent);}else{console.error("cannot get ez consent data");_setEzCookies(window.ezTcfConsent);}});}else{console.error("getEzConsentData is not a function");_setEzCookies(window.ezTcfConsent);}</script>
 <script data-ezscrex='false' data-cfasync='false' data-pagespeed-no-defer>var __ez=__ez||{};__ez.stms=Date.now();__ez.evt={};__ez.script={};__ez.ck=__ez.ck||{};__ez.template={};__ez.template.isOrig=true;__ez.queue=__ez.queue||function(){var e=0,i=0,t=[],n=!1,o=[],r=[],s=!0,a=function(e,i,n,o,r,s,a){var l=arguments.length>7&&void 0!==arguments[7]?arguments[7]:window,d=this;this.name=e,this.funcName=i,this.parameters=null===n?null:w(n)?n:[n],this.isBlock=o,this.blockedBy=r,this.deleteWhenComplete=s,this.isError=!1,this.isComplete=!1,this.isInitialized=!1,this.proceedIfError=a,this.fWindow=l,this.isTimeDelay=!1,this.process=function(){f("... func = "+e),d.isInitialized=!0,d.isComplete=!0,f("... func.apply: "+e);var i=d.funcName.split("."),n=null,o=this.fWindow||window;i.length>3||(n=3===i.length?o[i[0]][i[1]][i[2]]:2===i.length?o[i[0]][i[1]]:o[d.funcName]),null!=n&&n.apply(null,this.parameters),!0===d.deleteWhenComplete&&delete t[e],!0===d.isBlock&&(f("----- F'D: "+d.name),p())}},l=function(e,i,t,n,o,r,s){var a=arguments.length>7&&void 0!==arguments[7]?arguments[7]:window,l=this;this.name=e,this.path=i,this.async=o,this.defer=r,this.isBlock=t,this.blockedBy=n,this.isInitialized=!1,this.isError=!1,this.isComplete=!1,this.proceedIfError=s,this.fWindow=a,this.isTimeDelay=!1,this.isPath=function(e){return"/"===e[0]&&"/"!==e[1]},this.getSrc=function(e){return void 0!==window.__ezScriptHost&&this.isPath(e)?window.__ezScriptHost+e:e},this.process=function(){l.isInitialized=!0,f("... file = "+e);var i=this.fWindow?this.fWindow.document:document,t=i.createElement("script");t.src=this.getSrc(this.path),!0===o?t.async=!0:!0===r&&(t.defer=!0),t.onerror=function(){var e={url:window.location.href,name:l.name,path:l.path,user_agent:window.navigator.userAgent};"undefined"!=typeof _ezaq&&(e.pageview_id=_ezaq.page_view_id);var i=encodeURIComponent(JSON.stringify(e)),t=new XMLHttpRequest;t.open("GET","//g.ezoic.net/ezqlog?d="+i,!0),t.send(),f("----- ERR'D: "+l.name),l.isError=!0,!0===l.isBlock&&p()},t.onreadystatechange=t.onload=function(){var e=t.readyState;f("----- F'D: "+l.name),e&&!/loaded|complete/.test(e)||(l.isComplete=!0,!0===l.isBlock&&p())},i.getElementsByTagName("head")[0].appendChild(t)}},d=function(e,i){this.name=e,this.path="",this.async=!1,this.defer=!1,this.isBlock=!1,this.blockedBy=[],this.isInitialized=!0,this.isError=!1,this.isComplete=i,this.proceedIfError=!1,this.isTimeDelay=!1,this.process=function(){}};function c(e,i,n,s,a,d,c,u,f){var p=new l(e,i,n,s,a,d,c,f);!0===u?o[e]=p:r[e]=p,t[e]=p,h(p)}function h(e){!0!==u(e)&&0!=s&&e.process()}function u(e){if(!0===e.isTimeDelay&&!1===n)return f(e.name+" blocked = TIME DELAY!"),!0;if(w(e.blockedBy))for(var i=0;i<e.blockedBy.length;i++){var o=e.blockedBy[i];if(!1===t.hasOwnProperty(o))return f(e.name+" blocked = "+o),!0;if(!0===e.proceedIfError&&!0===t[o].isError)return!1;if(!1===t[o].isComplete)return f(e.name+" blocked = "+o),!0}return!1}function f(e){var i=window.location.href,t=new RegExp("[?&]ezq=([^&#]*)","i").exec(i);"1"===(t?t[1]:null)&&console.debug(e)}function p(){++e>200||(f("let's go"),m(o),m(r))}function m(e){for(var i in e)if(!1!==e.hasOwnProperty(i)){var t=e[i];!0===t.isComplete||u(t)||!0===t.isInitialized||!0===t.isError?!0===t.isError?f(t.name+": error"):!0===t.isComplete?f(t.name+": complete already"):!0===t.isInitialized&&f(t.name+": initialized already"):t.process()}}function w(e){return"[object Array]"==Object.prototype.toString.call(e)}return window.addEventListener("load",(function(){setTimeout((function(){n=!0,f("TDELAY -----"),p()}),5e3)}),!1),{addFile:c,addFileOnce:function(e,i,n,o,r,s,a,l,d){t[e]||c(e,i,n,o,r,s,a,l,d)},addDelayFile:function(e,i){var n=new l(e,i,!1,[],!1,!1,!0);n.isTimeDelay=!0,f(e+" ...  FILE! TDELAY"),r[e]=n,t[e]=n,h(n)},addFunc:function(e,n,s,l,d,c,u,f,p,m){!0===c&&(e=e+"_"+i++);var w=new a(e,n,s,l,d,u,f,m);!0===p?o[e]=w:r[e]=w,t[e]=w,h(w)},addDelayFunc:function(e,i,n){var o=new a(e,i,n,!1,[],!0,!0);o.isTimeDelay=!0,f(e+" ...  FUNCTION! TDELAY"),r[e]=o,t[e]=o,h(o)},items:t,processAll:p,setallowLoad:function(e){s=e},markLoaded:function(e){if(e&&0!==e.length){if(e in t){var i=t[e];!0===i.isComplete?f(i.name+" "+e+": error loaded duplicate"):(i.isComplete=!0,i.isInitialized=!0)}else t[e]=new d(e,!0);f("markLoaded dummyfile: "+t[e].name)}},logWhatsBlocked:function(){for(var e in t)!1!==t.hasOwnProperty(e)&&u(t[e])}}}();__ez.evt.add=function(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n()},__ez.evt.remove=function(e,t,n){e.removeEventListener?e.removeEventListener(t,n,!1):e.detachEvent?e.detachEvent("on"+t,n):delete e["on"+t]};__ez.script.add=function(e){var t=document.createElement("script");t.src=e,t.async=!0,t.type="text/javascript",document.getElementsByTagName("head")[0].appendChild(t)};__ez.dot=__ez.dot||{};__ez.queue.addFileOnce('/detroitchicago/boise.js', '/detroitchicago/boise.js?gcb=195-3&cb=5', true, [], true, false, true, false);__ez.queue.addFileOnce('/parsonsmaize/abilene.js', '/parsonsmaize/abilene.js?gcb=195-3&cb=37cb48c9b5', true, [], true, false, true, false);__ez.queue.addFileOnce('/parsonsmaize/mulvane.js', '/parsonsmaize/mulvane.js?gcb=195-3&cb=e75e48eec0', true, ['/parsonsmaize/abilene.js'], true, false, true, false);__ez.queue.addFileOnce('/detroitchicago/birmingham.js', '/detroitchicago/birmingham.js?gcb=195-3&cb=539c47377c', true, ['/parsonsmaize/abilene.js'], true, false, true, false);</script>
-<script data-ezscrex="false" type="text/javascript" data-cfasync="false">window._ezaq = Object.assign({"ad_cache_level":0,"adpicker_placement_cnt":0,"ai_placeholder_cache_level":0,"ai_placeholder_placement_cnt":-1,"article_category":"Actu Cybersécurité","author":"Florian BURNEL","domain":"it-connect.fr","domain_id":122228,"ezcache_level":1,"ezcache_skip_code":0,"has_bad_image":0,"has_bad_words":0,"is_sitespeed":0,"lt_cache_level":0,"publish_date":"2022-02-25","response_size":274161,"response_size_orig":268428,"response_time_orig":1681,"template_id":5,"url":"https://www.it-connect.fr/le-ransomware-cuba-sen-prend-aux-serveurs-exchange/","word_count":0,"worst_bad_word_level":0}, typeof window._ezaq !== "undefined" ? window._ezaq : {});__ez.queue.markLoaded('ezaqBaseReady');</script>
+<script data-ezscrex="false" type="text/javascript" data-cfasync="false">window._ezaq = Object.assign({"ad_cache_level":0,"adpicker_placement_cnt":0,"ai_placeholder_cache_level":0,"ai_placeholder_placement_cnt":-1,"article_category":"Actu Cybersécurité","author":"Florian BURNEL","domain":"it-connect.fr","domain_id":122228,"ezcache_level":1,"ezcache_skip_code":0,"has_bad_image":0,"has_bad_words":0,"is_sitespeed":0,"lt_cache_level":0,"publish_date":"2022-02-25","response_size":273434,"response_size_orig":267701,"response_time_orig":1584,"template_id":5,"url":"https://www.it-connect.fr/le-ransomware-cuba-sen-prend-aux-serveurs-exchange/","word_count":0,"worst_bad_word_level":0}, typeof window._ezaq !== "undefined" ? window._ezaq : {});__ez.queue.markLoaded('ezaqBaseReady');</script>
 <script type='text/javascript' data-ezscrex='false' data-cfasync='false'>
 window.ezAnalyticsStatic = true;
 
@@ -37,7 +37,7 @@ function getCookiesWithPrefix() {
     return cookiesWithPrefix;
 }
 function productAnalytics() {
-	var d = {"pr":[6,3],"omd5":"a9fefaad14450624599bb83906fba75f","nar":"fastresponse"};
+	var d = {"pr":[6,3],"omd5":"ce4630e6bbc4c5dbfd48c2194cdb06db","nar":"fastresponse"};
 	d.u = _ezaq.url;
 	d.p = _ezaq.page_view_id;
 	d.v = _ezaq.visit_uuid;
@@ -172,7 +172,7 @@ __ez.queue.addFunc("productAnalytics", "productAnalytics", null, true, ['ezaqBas
 <script type="text/javascript" id="sib-front-js-js-extra">
 /* <![CDATA[ */
 var sibErrMsg = {"invalidMail":"Veuillez entrer une adresse e-mail valide.","requiredField":"Veuillez compl\u00e9ter les champs obligatoires.","invalidDateFormat":"Veuillez entrer une date valide.","invalidSMSFormat":"Veuillez entrer une num\u00e9ro de t\u00e9l\u00e9phone valide."};
-var ajax_sib_front_object = {"ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"2763a6943d","flag_url":"https://www.it-connect.fr/wp-content-itc/plugins/mailin/img/flags/"};
+var ajax_sib_front_object = {"ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"4260317f7f","flag_url":"https://www.it-connect.fr/wp-content-itc/plugins/mailin/img/flags/"};
 //# sourceURL=sib-front-js-js-extra
 /* ]]> */
 </script>
@@ -246,7 +246,7 @@ var ezoicSearchable = 1;
 							<div class="cm-top-bar__1">
 				
 		<div class="date-in-header">
-			30/06/2026		</div>
+			01/07/2026		</div>
 
 									</div>
 
@@ -480,7 +480,7 @@ var ezoicSearchable = 1;
 	                	<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.it-connect.fr/le-ransomware-cuba-sen-prend-aux-serveurs-exchange/&amp;title=Le ransomware Cuba s’en prend aux serveurs Exchange" target="_blank">
 	                        	<img width="100" height="100" class="class_rs_share" alt="Partager sur Linkedin" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20100%20100&#39;%3E%3C/svg%3E" data-lazy-src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_linkedin.png"/><noscript><img width="100" height="100" class="class_rs_share" alt="Partager sur Linkedin" src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_linkedin.png" /></noscript>
 	                	</a>
-        	        	<a href="/cdn-cgi/l/email-protection#7f400c0a1d151a1c0b425f362b523c1011111a1c0b5f455f0a115f13161a115f16110bbcd60d1a0c0c1e110b5f5e591e120f441d101b06425f331a5f0d1e110c1012081e0d1a5f3c0a1d1e5f0c9dffe61a115f0f0d1a111b5f1e0a075f0c1a0d091a0a0d0c5f3a071c171e11181a5f170b0b0f0c45505008080851160b521c1011111a1c0b51190d50131a520d1e110c1012081e0d1a521c0a1d1e520c1a11520f0d1a111b521e0a07520c1a0d091a0a0d0c521a071c171e11181a50591e120f440b160b131a42331a5f0d1e110c1012081e0d1a5f3c0a1d1e5f0c9dffe61a115f0f0d1a111b5f1e0a075f0c1a0d091a0a0d0c5f3a071c171e11181a51">
+        	        	<a href="/cdn-cgi/l/email-protection#dfe0acaabdb5babcabe2ff968bf29cb0b1b1babcabffe5ffaab1ffb3b6bab1ffb6b1ab1c76adbaacacbeb1abfffef9beb2afe4bdb0bba6e2ff93baffadbeb1acb0b2a8beadbaff9caabdbeffac3d5f46bab1ffafadbab1bbffbeaaa7ffacbaada9baaaadacff9aa7bcb7beb1b8baffb7ababaface5f0f0a8a8a8f1b6abf2bcb0b1b1babcabf1b9adf0b3baf2adbeb1acb0b2a8beadbaf2bcaabdbef2acbab1f2afadbab1bbf2beaaa7f2acbaada9baaaadacf2baa7bcb7beb1b8baf0f9beb2afe4abb6abb3bae293baffadbeb1acb0b2a8beadbaff9caabdbeffac3d5f46bab1ffafadbab1bbffbeaaa7ffacbaada9baaaadacff9aa7bcb7beb1b8baf1">
 	                        	<img width="100" height="100" class="class_rs_share" alt="Envoyer par mail" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20100%20100&#39;%3E%3C/svg%3E" data-lazy-src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_email.png"/><noscript><img width="100" height="100" class="class_rs_share" alt="Envoyer par mail" src="https://www.it-connect.fr/wp-content-itc/themes/itc-2017-child/images/flat_email.png" /></noscript>
 	                	</a>
 	        	</div>
@@ -507,24 +507,24 @@ var ezoicSearchable = 1;
 							<div class="single-related-posts">
 
 											<div class="related-posts-thumbnail">
-							<a href="https://www.it-connect.fr/caddywiper-un-nouveau-malware-destructeur-qui-sen-prend-a-lukraine/" title="CaddyWiper, un nouveau malware destructeur qui s’en prend à l’Ukraine">
-								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2022/03/cyberguerre-ukraine-malware-caddywipper-390x205.jpg"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2022/03/cyberguerre-ukraine-malware-caddywipper-390x205.jpg" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" /></noscript>							</a>
+							<a href="https://www.it-connect.fr/internet-36-millions-de-serveurs-mysql-sont-accessibles-sur-le-port-par-defaut/" title="Internet : 3,6 millions de serveurs MySQL sont accessibles sur le port par défaut">
+								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2022/06/internet-serveurs-expose-carte-2022-06-01-390x205.jpg"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2022/06/internet-serveurs-expose-carte-2022-06-01-390x205.jpg" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" /></noscript>							</a>
 						</div>
 					
 					<div class="cm-post-content">
 						<h3 class="cm-entry-title">
-							<a href="https://www.it-connect.fr/caddywiper-un-nouveau-malware-destructeur-qui-sen-prend-a-lukraine/" rel="bookmark" title="CaddyWiper, un nouveau malware destructeur qui s’en prend à l’Ukraine">
-								CaddyWiper, un nouveau malware destructeur qui s’en prend à l’Ukraine							</a>
+							<a href="https://www.it-connect.fr/internet-36-millions-de-serveurs-mysql-sont-accessibles-sur-le-port-par-defaut/" rel="bookmark" title="Internet : 3,6 millions de serveurs MySQL sont accessibles sur le port par défaut">
+								Internet : 3,6 millions de serveurs MySQL sont accessibles sur le port par défaut							</a>
 						</h3><!--/.post-title-->
 
-						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/caddywiper-un-nouveau-malware-destructeur-qui-sen-prend-a-lukraine/" title="07:55" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2022-03-15T07:55:24+02:00">15/03/2022</time></a></span>		<span class="cm-author cm-vcard">
+						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/internet-36-millions-de-serveurs-mysql-sont-accessibles-sur-le-port-par-defaut/" title="08:21" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2022-06-01T08:21:13+02:00">01/06/2022</time></a></span>		<span class="cm-author cm-vcard">
 			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
 				Florian BURNEL			</a>
 		</span>
 
 		
 			<span class="cm-comments-link">
-				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/caddywiper-un-nouveau-malware-destructeur-qui-sen-prend-a-lukraine/#respond">0</a>			</span>
+				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/internet-36-millions-de-serveurs-mysql-sont-accessibles-sur-le-port-par-defaut/#respond">0</a>			</span>
 
 			</div>					</div>
 
@@ -532,24 +532,24 @@ var ezoicSearchable = 1;
 							<div class="single-related-posts">
 
 											<div class="related-posts-thumbnail">
-							<a href="https://www.it-connect.fr/ovhcloud-des-millions-de-sites-indisponibles-un-onduleur-en-cause/" title="OVHcloud : des millions de sites indisponibles, un onduleur en cause ?">
-								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2021/03/slide-ovh-20210312-390x205.jpg"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2021/03/slide-ovh-20210312-390x205.jpg" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" /></noscript>							</a>
+							<a href="https://www.it-connect.fr/ce-ransomware-redoutable-cible-active-directory-avant-de-detruire-les-donnees-azure/" title="Ce ransomware redoutable cible Active Directory avant de détruire les données Azure !">
+								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2025/08/Storm-0501-ransomware-redoutable-cible-Active-Directory-avant-de-detruire-les-donnees-Azure-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2025/08/Storm-0501-ransomware-redoutable-cible-Active-Directory-avant-de-detruire-les-donnees-Azure-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="" decoding="async" /></noscript>							</a>
 						</div>
 					
 					<div class="cm-post-content">
 						<h3 class="cm-entry-title">
-							<a href="https://www.it-connect.fr/ovhcloud-des-millions-de-sites-indisponibles-un-onduleur-en-cause/" rel="bookmark" title="OVHcloud : des millions de sites indisponibles, un onduleur en cause ?">
-								OVHcloud : des millions de sites indisponibles, un onduleur en cause ?							</a>
+							<a href="https://www.it-connect.fr/ce-ransomware-redoutable-cible-active-directory-avant-de-detruire-les-donnees-azure/" rel="bookmark" title="Ce ransomware redoutable cible Active Directory avant de détruire les données Azure !">
+								Ce ransomware redoutable cible Active Directory avant de détruire les données Azure !							</a>
 						</h3><!--/.post-title-->
 
-						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/ovhcloud-des-millions-de-sites-indisponibles-un-onduleur-en-cause/" title="09:35" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2021-03-12T09:35:28+02:00">12/03/2021</time></a></span>		<span class="cm-author cm-vcard">
+						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/ce-ransomware-redoutable-cible-active-directory-avant-de-detruire-les-donnees-azure/" title="08:36" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2025-08-28T08:36:11+02:00">28/08/2025</time></a></span>		<span class="cm-author cm-vcard">
 			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
 				Florian BURNEL			</a>
 		</span>
 
 		
 			<span class="cm-comments-link">
-				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/ovhcloud-des-millions-de-sites-indisponibles-un-onduleur-en-cause/#comments">1</a>			</span>
+				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/ce-ransomware-redoutable-cible-active-directory-avant-de-detruire-les-donnees-azure/#respond">0</a>			</span>
 
 			</div>					</div>
 
@@ -557,24 +557,24 @@ var ezoicSearchable = 1;
 							<div class="single-related-posts">
 
 											<div class="related-posts-thumbnail">
-							<a href="https://www.it-connect.fr/cette-nouvelle-zero-day-dans-windows-laisse-fuiter-vos-identifiants-un-correctif-non-officiel-est-disponible/" title="Cette nouvelle zero-day dans Windows laisse fuiter vos identifiants : un correctif non officiel est disponible !">
-								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Nouvelle zero-day dans Windows - Fuite identifiants NTLM - Décembre 2024" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2024/12/Nouvelle-zero-day-dans-Windows-Fuite-identifiants-NTLM-Decembre-2024-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2024/12/Nouvelle-zero-day-dans-Windows-Fuite-identifiants-NTLM-Decembre-2024-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Nouvelle zero-day dans Windows - Fuite identifiants NTLM - Décembre 2024" decoding="async" /></noscript>							</a>
+							<a href="https://www.it-connect.fr/grapheneos-quitte-la-france-et-ovhcloud-pourquoi/" title="GrapheneOS, l’alternative sécurisée à Android, quitte la France et OVHcloud : pourquoi ?">
+								<img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="GrapheneOS quitte la France : pourquoi ?" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2025/11/GrapheneOS-quitte-la-France-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2025/11/GrapheneOS-quitte-la-France-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="GrapheneOS quitte la France : pourquoi ?" decoding="async" /></noscript>							</a>
 						</div>
 					
 					<div class="cm-post-content">
 						<h3 class="cm-entry-title">
-							<a href="https://www.it-connect.fr/cette-nouvelle-zero-day-dans-windows-laisse-fuiter-vos-identifiants-un-correctif-non-officiel-est-disponible/" rel="bookmark" title="Cette nouvelle zero-day dans Windows laisse fuiter vos identifiants : un correctif non officiel est disponible !">
-								Cette nouvelle zero-day dans Windows laisse fuiter vos identifiants : un correctif non officiel est disponible !							</a>
+							<a href="https://www.it-connect.fr/grapheneos-quitte-la-france-et-ovhcloud-pourquoi/" rel="bookmark" title="GrapheneOS, l’alternative sécurisée à Android, quitte la France et OVHcloud : pourquoi ?">
+								GrapheneOS, l’alternative sécurisée à Android, quitte la France et OVHcloud : pourquoi ?							</a>
 						</h3><!--/.post-title-->
 
-						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/cette-nouvelle-zero-day-dans-windows-laisse-fuiter-vos-identifiants-un-correctif-non-officiel-est-disponible/" title="06:52" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2024-12-09T06:52:53+02:00">09/12/2024</time></a></span>		<span class="cm-author cm-vcard">
+						<div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/grapheneos-quitte-la-france-et-ovhcloud-pourquoi/" title="10:08" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2025-11-28T10:08:51+02:00">28/11/2025</time></a></span>		<span class="cm-author cm-vcard">
 			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
 				Florian BURNEL			</a>
 		</span>
 
 		
 			<span class="cm-comments-link">
-				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/cette-nouvelle-zero-day-dans-windows-laisse-fuiter-vos-identifiants-un-correctif-non-officiel-est-disponible/#comments">1</a>			</span>
+				<svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg><a href="https://www.it-connect.fr/grapheneos-quitte-la-france-et-ovhcloud-pourquoi/#comments">11</a>			</span>
 
 			</div>					</div>
 
@@ -595,7 +595,7 @@ var ezoicSearchable = 1;
 <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"/> <label for="wp-comment-cookies-consent">Enregistrer mon nom, mon e-mail et mon site dans le navigateur pour mon prochain commentaire.</label></p>
 <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Laisser un commentaire"/> <input type="hidden" name="comment_post_ID" value="50710" id="comment_post_ID"/>
 <input type="hidden" name="comment_parent" id="comment_parent" value="0"/>
-</p> <p class="comment-form-aios-antibot-keys"><input type="hidden" name="hn639m8e" value="h8g1v3fcewnf"/><input type="hidden" name="fkn16u8f" value="pkeksv4m3rn5"/><input type="hidden" name="aios_antibot_keys_expiry" id="aios_antibot_keys_expiry" value="1783209600"/></p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="58b299d501"/></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="98"/><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+</p> <p class="comment-form-aios-antibot-keys"><input type="hidden" name="hn639m8e" value="h8g1v3fcewnf"/><input type="hidden" name="fkn16u8f" value="pkeksv4m3rn5"/><input type="hidden" name="aios_antibot_keys_expiry" id="aios_antibot_keys_expiry" value="1783209600"/></p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="baed89c4e6"/></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="168"/><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
 /* <![CDATA[ */
 document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
 /* ]]> */
@@ -639,7 +639,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 				<input type="hidden" name="sib_form_id" value="1"/>
                 <input type="hidden" name="sib_form_alert_notice" value="Remplissez ce champ s’il vous plaît"/>
                 <input type="hidden" name="sib_form_invalid_email_notice" value="Cette adresse email n&#39;est pas valide !"/>
-                <input type="hidden" name="sib_security" value="2763a6943d"/>
+                <input type="hidden" name="sib_security" value="4260317f7f"/>
 				<div class="sib_signup_box_inside_1">
 					<div style="/*display:none*/" class="sib_msg_disp">
 					</div>
@@ -658,7 +658,48 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 <p><a href="https://ko-fi.com/it_connectfr" target="_blank" rel="nofollow noopener"><img decoding="async" style="display:block;margin-left:auto;margin-right:auto;height:auto;aspect-ratio:342/171" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/02/soutenez-itconnect-2026.jpg" alt="" width="342" height="171"/></a></p></aside><aside id="colormag_featured_posts_vertical_widget-5" class="widget cm-featured-posts cm-featured-posts--style-2">
 		<h3 class="cm-widget-title"><span>📄 Guides &amp; Tutos</span></h3><div class="cm-first-post">
 			<div class="cm-post">
-				<a href="https://www.it-connect.fr/euro-office-lalternative-open-source-a-microsoft-office/" title="Euro-Office : l’alternative open source à Microsoft Office"><img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Banner promoting Euro-Office Decryptage + Demo, featuring an EU flag circle and a document editor screenshot." title="Euro-Office : l’alternative open source à Microsoft Office" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Banner promoting Euro-Office Decryptage + Demo, featuring an EU flag circle and a document editor screenshot." title="Euro-Office : l&rsquo;alternative open source à Microsoft Office" decoding="async" /></noscript></a>
+				<a href="https://www.it-connect.fr/conteneurs-macos-apple-container/" title="Apple Container : bien débuter avec les conteneurs macOS"><img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="guide complet Apple Container sur Mac" title="Apple Container : bien débuter avec les conteneurs macOS" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/guide-complet-Apple-Container-sur-Mac-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/guide-complet-Apple-Container-sur-Mac-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="guide complet Apple Container sur Mac" title="Apple Container : bien débuter avec les conteneurs macOS" decoding="async" /></noscript></a>
+				<div class="cm-post-content">
+					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/cours-tutoriels/virtualisation-conteneurs-devops/" rel="category tag">Virtualisation, Conteneurs &amp; DevOps</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/conteneurs-macos-apple-container/" title="Apple Container : bien débuter avec les conteneurs macOS">
+			Apple Container : bien débuter avec les conteneurs macOS			</a>
+		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/conteneurs-macos-apple-container/" title="16:13" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-30T16:13:36+02:00">30/06/2026</time></a></span>		<span class="cm-author cm-vcard">
+			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
+				Florian BURNEL			</a>
+		</span>
+
+		
+			<span class="cm-comments-link">
+				<a href="https://www.it-connect.fr/conteneurs-macos-apple-container/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+
+			</div>
+											<div class="cm-entry-summary">
+							<p>Découvrez Apple Container, l’outil open source pour exécuter des conteneurs Linux sur macOS : installation, commandes, équivalent Compose et clients GUI.</p>
+						</div>
+									</div>
+			</div>
+
+			</div><div class="cm-posts">
+			<div class="cm-post">
+				<a href="https://www.it-connect.fr/container-machine-linux-sur-mac/" title="container machine : un environnement Linux sur Mac, façon WSL"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="container machine linux sur mac tuto" title="container machine : un environnement Linux sur Mac, façon WSL" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/container-machine-linux-sur-mac-tuto-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/container-machine-linux-sur-mac-tuto-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/container-machine-linux-sur-mac-tuto-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/container-machine-linux-sur-mac-tuto-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="container machine linux sur mac tuto" title="container machine : un environnement Linux sur Mac, façon WSL" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/container-machine-linux-sur-mac-tuto-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/container-machine-linux-sur-mac-tuto-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
+				<div class="cm-post-content">
+					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/cours-tutoriels/virtualisation-conteneurs-devops/" rel="category tag">Virtualisation, Conteneurs &amp; DevOps</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/container-machine-linux-sur-mac/" title="container machine : un environnement Linux sur Mac, façon WSL">
+			container machine : un environnement Linux sur Mac, façon WSL			</a>
+		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/container-machine-linux-sur-mac/" title="16:13" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-30T16:13:22+02:00">30/06/2026</time></a></span>		<span class="cm-author cm-vcard">
+			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
+				Florian BURNEL			</a>
+		</span>
+
+		
+			<span class="cm-comments-link">
+				<a href="https://www.it-connect.fr/container-machine-linux-sur-mac/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+
+			</div>
+									</div>
+			</div>
+
+			
+			<div class="cm-post">
+				<a href="https://www.it-connect.fr/euro-office-lalternative-open-source-a-microsoft-office/" title="Euro-Office : l’alternative open source à Microsoft Office"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Banner promoting Euro-Office Decryptage + Demo, featuring an EU flag circle and a document editor screenshot." title="Euro-Office : l’alternative open source à Microsoft Office" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Banner promoting Euro-Office Decryptage + Demo, featuring an EU flag circle and a document editor screenshot." title="Euro-Office : l&rsquo;alternative open source à Microsoft Office" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/euro-office-tuto-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
 				<div class="cm-post-content">
 					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/cours-tutoriels/self-hosting-open-source/" rel="category tag">Self-Hosting &amp; Open Source</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/euro-office-lalternative-open-source-a-microsoft-office/" title="Euro-Office : l’alternative open source à Microsoft Office">
 			Euro-Office : l’alternative open source à Microsoft Office			</a>
@@ -669,48 +710,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 
 		
 			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/euro-office-lalternative-open-source-a-microsoft-office/#comments"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>1 commentaire</a>			</span>
-
-			</div>
-											<div class="cm-entry-summary">
-							<p>Euro-Office, la suite bureautique open source européenne : ce que c’est, le conflit de licence et comment l’installer sur Nextcloud ou Sync-in.</p>
-						</div>
-									</div>
-			</div>
-
-			</div><div class="cm-posts">
-			<div class="cm-post">
-				<a href="https://www.it-connect.fr/verifier-authenticite-image-iso-windows-office-microsoft/" title="Vérifier l’authenticité des sources d’installation Microsoft et Linux avec CheckISO"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="checkiso Vérifier l&#39;authenticité des sources d&#39;installation" title="Vérifier l’authenticité des sources d’installation Microsoft et Linux avec CheckISO" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2024/05/checkiso-Verifier-lauthenticite-des-sources-dinstallation-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2024/05/checkiso-Verifier-lauthenticite-des-sources-dinstallation-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2024/05/checkiso-Verifier-lauthenticite-des-sources-dinstallation-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2024/05/checkiso-Verifier-lauthenticite-des-sources-dinstallation-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="checkiso Vérifier l&#039;authenticité des sources d&#039;installation" title="Vérifier l&rsquo;authenticité des sources d&rsquo;installation Microsoft et Linux avec CheckISO" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2024/05/checkiso-Verifier-lauthenticite-des-sources-dinstallation-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2024/05/checkiso-Verifier-lauthenticite-des-sources-dinstallation-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
-				<div class="cm-post-content">
-					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/cours-tutoriels/securite-informatique/" style="background:#b70000" rel="category tag">Cybersécurité</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/verifier-authenticite-image-iso-windows-office-microsoft/" title="Vérifier l’authenticité des sources d’installation Microsoft et Linux avec CheckISO">
-			Vérifier l’authenticité des sources d’installation Microsoft et Linux avec CheckISO			</a>
-		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/verifier-authenticite-image-iso-windows-office-microsoft/" title="11:35" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-29T11:35:12+02:00">29/06/2026</time></a></span>		<span class="cm-author cm-vcard">
-			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/mehdi-dakhama/" title="Mehdi DAKHAMA">
-				Mehdi DAKHAMA			</a>
-		</span>
-
-		
-			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/verifier-authenticite-image-iso-windows-office-microsoft/#comments"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg> 2 commentaires</a>			</span>
-
-			</div>
-									</div>
-			</div>
-
-			
-			<div class="cm-post">
-				<a href="https://www.it-connect.fr/configurer-doh-windows-server-dns/" title="Windows Server 2025 : comment configurer le DNS-over-HTTPS sur le serveur DNS ?"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="windows server configurer DoH serveur DNS" title="Windows Server 2025 : comment configurer le DNS-over-HTTPS sur le serveur DNS ?" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/windows-server-configurer-DoH-serveur-DNS-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/windows-server-configurer-DoH-serveur-DNS-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/windows-server-configurer-DoH-serveur-DNS-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/windows-server-configurer-DoH-serveur-DNS-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="windows server configurer DoH serveur DNS" title="Windows Server 2025 : comment configurer le DNS-over-HTTPS sur le serveur DNS ?" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/windows-server-configurer-DoH-serveur-DNS-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/windows-server-configurer-DoH-serveur-DNS-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
-				<div class="cm-post-content">
-					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/cours-tutoriels/microsoft-infra-on-premise/windows-server/" style="background:#780de2" rel="category tag">Windows Server</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/configurer-doh-windows-server-dns/" title="Windows Server 2025 : comment configurer le DNS-over-HTTPS sur le serveur DNS ?">
-			Windows Server 2025 : comment configurer le DNS-over-HTTPS sur le serveur DNS ?			</a>
-		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/configurer-doh-windows-server-dns/" title="18:00" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-25T18:00:00+02:00">25/06/2026</time></a></span>		<span class="cm-author cm-vcard">
-			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
-				Florian BURNEL			</a>
-		</span>
-
-		
-			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/configurer-doh-windows-server-dns/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+				<a href="https://www.it-connect.fr/euro-office-lalternative-open-source-a-microsoft-office/#comments"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg> 2 commentaires</a>			</span>
 
 			</div>
 									</div>
@@ -719,7 +719,86 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 			</div></aside><aside id="colormag_featured_posts_vertical_widget-2" class="widget cm-featured-posts cm-featured-posts--style-2">
 		<h3 class="cm-widget-title"><span>⭐ Veille IT &amp; Bons Plans</span></h3><div class="cm-first-post">
 			<div class="cm-post">
-				<a href="https://www.it-connect.fr/windows-server-2022-le-hotpatching-prolonge-jusquen-octobre-2027/" title="Windows Server 2022 : le Hotpatching prolongé jusqu’en octobre 2027"><img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Windows Server 2022 Hotpatching - Octobre 2027" title="Windows Server 2022 : le Hotpatching prolongé jusqu’en octobre 2027" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Windows Server 2022 Hotpatching - Octobre 2027" title="Windows Server 2022 : le Hotpatching prolongé jusqu&rsquo;en octobre 2027" decoding="async" /></noscript></a>
+				<a href="https://www.it-connect.fr/intune-nouveautes-de-juin-2026/" title="Intune : gestion des vulnérabilités et mises à jour des apps, découvrez les nouveautés de juin 2026"><img width="390" height="205" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20390%20205&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Microsoft Intune - Nouveautés Juin 2026" title="Intune : gestion des vulnérabilités et mises à jour des apps, découvrez les nouveautés de juin 2026" decoding="async" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/07/Microsoft-Intune-Nouveautes-Juin-2026-390x205.jpg.webp"/><noscript><img width="390" height="205" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/07/Microsoft-Intune-Nouveautes-Juin-2026-390x205.jpg.webp" class="attachment-colormag-featured-post-medium size-colormag-featured-post-medium wp-post-image" alt="Microsoft Intune - Nouveautés Juin 2026" title="Intune : gestion des vulnérabilités et mises à jour des apps, découvrez les nouveautés de juin 2026" decoding="async" /></noscript></a>
+				<div class="cm-post-content">
+					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/entreprise/" rel="category tag">Entreprise</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/intune-nouveautes-de-juin-2026/" title="Intune : gestion des vulnérabilités et mises à jour des apps, découvrez les nouveautés de juin 2026">
+			Intune : gestion des vulnérabilités et mises à jour des apps, découvrez les nouveautés de juin 2026			</a>
+		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/intune-nouveautes-de-juin-2026/" title="06:52" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-07-01T06:52:09+02:00">01/07/2026</time></a></span>		<span class="cm-author cm-vcard">
+			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
+				Florian BURNEL			</a>
+		</span>
+
+		
+			<span class="cm-comments-link">
+				<a href="https://www.it-connect.fr/intune-nouveautes-de-juin-2026/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+
+			</div>
+											<div class="cm-entry-summary">
+							<p>Microsoft détaille les nouveautés Intune de juin 2026 : un agent IA pour hiérarchiser les CVE et des mises à jour d’applications automatiques.</p>
+						</div>
+									</div>
+			</div>
+
+			</div><div class="cm-posts">
+			<div class="cm-post">
+				<a href="https://www.it-connect.fr/exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source/" title="Exploitarium : un chercheur dévoile des failles zero-day dans 15 logiciels open source"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Exploitarium - un chercheur dévoile des failles zero-day dans 15 logiciels open source" title="Exploitarium : un chercheur dévoile des failles zero-day dans 15 logiciels open source" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Exploitarium - un chercheur dévoile des failles zero-day dans 15 logiciels open source" title="Exploitarium : un chercheur dévoile des failles zero-day dans 15 logiciels open source" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
+				<div class="cm-post-content">
+					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-securite/" style="background:#dd0000" rel="category tag">Actu Cybersécurité</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source/" title="Exploitarium : un chercheur dévoile des failles zero-day dans 15 logiciels open source">
+			Exploitarium : un chercheur dévoile des failles zero-day dans 15 logiciels open source			</a>
+		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source/" title="14:02" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-30T14:02:15+02:00">30/06/2026</time></a></span>		<span class="cm-author cm-vcard">
+			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
+				Florian BURNEL			</a>
+		</span>
+
+		
+			<span class="cm-comments-link">
+				<a href="https://www.it-connect.fr/exploitarium-un-chercheur-devoile-des-failles-zero-day-dans-15-logiciels-open-source/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+
+			</div>
+									</div>
+			</div>
+
+			
+			<div class="cm-post">
+				<a href="https://www.it-connect.fr/docky-le-dock-de-macos-reinvente-gratuit-et-open-source/" title="Docky : le Dock de macOS réinventé, gratuit et open source"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Docky - le Dock de macOS réinventé, gratuit et open source" title="Docky : le Dock de macOS réinventé, gratuit et open source" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Docky-le-Dock-de-macOS-reinvente-gratuit-et-open-source-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Docky-le-Dock-de-macOS-reinvente-gratuit-et-open-source-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Docky-le-Dock-de-macOS-reinvente-gratuit-et-open-source-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Docky-le-Dock-de-macOS-reinvente-gratuit-et-open-source-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Docky - le Dock de macOS réinventé, gratuit et open source" title="Docky : le Dock de macOS réinventé, gratuit et open source" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Docky-le-Dock-de-macOS-reinvente-gratuit-et-open-source-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Docky-le-Dock-de-macOS-reinvente-gratuit-et-open-source-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
+				<div class="cm-post-content">
+					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-logiciel-os/" rel="category tag">Logiciel - OS</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/docky-le-dock-de-macos-reinvente-gratuit-et-open-source/" title="Docky : le Dock de macOS réinventé, gratuit et open source">
+			Docky : le Dock de macOS réinventé, gratuit et open source			</a>
+		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/docky-le-dock-de-macos-reinvente-gratuit-et-open-source/" title="09:51" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-30T09:51:49+02:00">30/06/2026</time></a></span>		<span class="cm-author cm-vcard">
+			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
+				Florian BURNEL			</a>
+		</span>
+
+		
+			<span class="cm-comments-link">
+				<a href="https://www.it-connect.fr/docky-le-dock-de-macos-reinvente-gratuit-et-open-source/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+
+			</div>
+									</div>
+			</div>
+
+			
+			<div class="cm-post">
+				<a href="https://www.it-connect.fr/stegoad-un-malware-cache-dans-119-extensions-microsoft-edge/" title="StegoAd : un malware caché dans 119 extensions Microsoft Edge"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Microsoft Edge - 119 extensions cachaient un malware dans des images" title="StegoAd : un malware caché dans 119 extensions Microsoft Edge" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-Edge-119-extensions-cachaient-un-malware-dans-des-images-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-Edge-119-extensions-cachaient-un-malware-dans-des-images-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-Edge-119-extensions-cachaient-un-malware-dans-des-images-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-Edge-119-extensions-cachaient-un-malware-dans-des-images-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Microsoft Edge - 119 extensions cachaient un malware dans des images" title="StegoAd : un malware caché dans 119 extensions Microsoft Edge" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-Edge-119-extensions-cachaient-un-malware-dans-des-images-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Microsoft-Edge-119-extensions-cachaient-un-malware-dans-des-images-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
+				<div class="cm-post-content">
+					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-securite/" style="background:#dd0000" rel="category tag">Actu Cybersécurité</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/stegoad-un-malware-cache-dans-119-extensions-microsoft-edge/" title="StegoAd : un malware caché dans 119 extensions Microsoft Edge">
+			StegoAd : un malware caché dans 119 extensions Microsoft Edge			</a>
+		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/stegoad-un-malware-cache-dans-119-extensions-microsoft-edge/" title="08:53" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-30T08:53:35+02:00">30/06/2026</time></a></span>		<span class="cm-author cm-vcard">
+			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
+				Florian BURNEL			</a>
+		</span>
+
+		
+			<span class="cm-comments-link">
+				<a href="https://www.it-connect.fr/stegoad-un-malware-cache-dans-119-extensions-microsoft-edge/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
+
+			</div>
+									</div>
+			</div>
+
+			
+			<div class="cm-post">
+				<a href="https://www.it-connect.fr/windows-server-2022-le-hotpatching-prolonge-jusquen-octobre-2027/" title="Windows Server 2022 : le Hotpatching prolongé jusqu’en octobre 2027"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Windows Server 2022 Hotpatching - Octobre 2027" title="Windows Server 2022 : le Hotpatching prolongé jusqu’en octobre 2027" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Windows Server 2022 Hotpatching - Octobre 2027" title="Windows Server 2022 : le Hotpatching prolongé jusqu&rsquo;en octobre 2027" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Windows-Server-2022-Hotpatching-Octobre-2027-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
 				<div class="cm-post-content">
 					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-logiciel-os/" rel="category tag">Logiciel - OS</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/windows-server-2022-le-hotpatching-prolonge-jusquen-octobre-2027/" title="Windows Server 2022 : le Hotpatching prolongé jusqu’en octobre 2027">
 			Windows Server 2022 : le Hotpatching prolongé jusqu’en octobre 2027			</a>
@@ -733,13 +812,10 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 				<a href="https://www.it-connect.fr/windows-server-2022-le-hotpatching-prolonge-jusquen-octobre-2027/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
 
 			</div>
-											<div class="cm-entry-summary">
-							<p>Microsoft prolonge d’un an le Hotpatching de Windows Server 2022 Datacenter: Azure Edition, jusqu’en octobre 2027. À une condition près.</p>
-						</div>
 									</div>
 			</div>
 
-			</div><div class="cm-posts">
+			
 			<div class="cm-post">
 				<a href="https://www.it-connect.fr/plugins-glpi-15-failles-patchees-dont-une-rce-critique/" title="Plugins GLPI : 15 failles patchées, dont une RCE critique !"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Patchs plugins GLPI juin 2026" title="Plugins GLPI : 15 failles patchées, dont une RCE critique !" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Patchs-plugins-GLPI-juin-2026-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Patchs-plugins-GLPI-juin-2026-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Patchs-plugins-GLPI-juin-2026-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Patchs-plugins-GLPI-juin-2026-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Patchs plugins GLPI juin 2026" title="Plugins GLPI : 15 failles patchées, dont une RCE critique !" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Patchs-plugins-GLPI-juin-2026-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Patchs-plugins-GLPI-juin-2026-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
 				<div class="cm-post-content">
@@ -753,82 +829,6 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 		
 			<span class="cm-comments-link">
 				<a href="https://www.it-connect.fr/plugins-glpi-15-failles-patchees-dont-une-rce-critique/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
-
-			</div>
-									</div>
-			</div>
-
-			
-			<div class="cm-post">
-				<a href="https://www.it-connect.fr/bon-plan-godeal24-licences-microsoft-logiciels-os/" title="Soldes d’été 2026 GoDeal24 : Office 2024 Pro Plus à vie à 16.99€ et Windows 11 Pro à 12.25€"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Promotional summer-sale image featuring Office 2024 Pro and Windows 11 Pro boxes on a beach, with prices €16.99 and €12.25 visible." title="Soldes d’été 2026 GoDeal24 : Office 2024 Pro Plus à vie à 16.99€ et Windows 11 Pro à 12.25€" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/05/Soldes-ete-2026-GoDeal24-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/05/Soldes-ete-2026-GoDeal24-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/05/Soldes-ete-2026-GoDeal24-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/05/Soldes-ete-2026-GoDeal24-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Promotional summer-sale image featuring Office 2024 Pro and Windows 11 Pro boxes on a beach, with prices €16.99 and €12.25 visible." title="Soldes d&rsquo;été 2026 GoDeal24 : Office 2024 Pro Plus à vie à 16.99€ et Windows 11 Pro à 12.25€" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/05/Soldes-ete-2026-GoDeal24-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/05/Soldes-ete-2026-GoDeal24-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
-				<div class="cm-post-content">
-					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/bons-plans-high-tech/" rel="category tag">Bons Plans</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/bon-plan-godeal24-licences-microsoft-logiciels-os/" title="Soldes d’été 2026 GoDeal24 : Office 2024 Pro Plus à vie à 16.99€ et Windows 11 Pro à 12.25€">
-			Soldes d’été 2026 GoDeal24 : Office 2024 Pro Plus à vie à 16.99€ et Windows 11 Pro à 12.25€			</a>
-		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/bon-plan-godeal24-licences-microsoft-logiciels-os/" title="20:34" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-29T20:34:53+02:00">29/06/2026</time></a></span>		<span class="cm-author cm-vcard">
-			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/equipe-itconnect/" title="La Rédaction">
-				La Rédaction			</a>
-		</span>
-
-		
-			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/bon-plan-godeal24-licences-microsoft-logiciels-os/#comments"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>1 commentaire</a>			</span>
-
-			</div>
-									</div>
-			</div>
-
-			
-			<div class="cm-post">
-				<a href="https://www.it-connect.fr/cartes-gouv-fr-la-france-defie-google-maps-et-street-view/" title="Cartes.gouv.fr : la France défie Google Maps et Street View"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Cartes.gouv.fr - la France défie Google Maps et Street View" title="Cartes.gouv.fr : la France défie Google Maps et Street View" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Cartes.gouv_.fr-la-France-defie-Google-Maps-et-Street-View-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Cartes.gouv_.fr-la-France-defie-Google-Maps-et-Street-View-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Cartes.gouv_.fr-la-France-defie-Google-Maps-et-Street-View-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Cartes.gouv_.fr-la-France-defie-Google-Maps-et-Street-View-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Cartes.gouv.fr - la France défie Google Maps et Street View" title="Cartes.gouv.fr : la France défie Google Maps et Street View" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Cartes.gouv_.fr-la-France-defie-Google-Maps-et-Street-View-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Cartes.gouv_.fr-la-France-defie-Google-Maps-et-Street-View-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
-				<div class="cm-post-content">
-					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-internet/" rel="category tag">Web</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/cartes-gouv-fr-la-france-defie-google-maps-et-street-view/" title="Cartes.gouv.fr : la France défie Google Maps et Street View">
-			Cartes.gouv.fr : la France défie Google Maps et Street View			</a>
-		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/cartes-gouv-fr-la-france-defie-google-maps-et-street-view/" title="16:24" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-29T16:24:54+02:00">29/06/2026</time></a></span>		<span class="cm-author cm-vcard">
-			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
-				Florian BURNEL			</a>
-		</span>
-
-		
-			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/cartes-gouv-fr-la-france-defie-google-maps-et-street-view/#comments"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>1 commentaire</a>			</span>
-
-			</div>
-									</div>
-			</div>
-
-			
-			<div class="cm-post">
-				<a href="https://www.it-connect.fr/adblock-for-youtube-11-millions-dinstallations-et-une-grave-faille-a-corriger/" title="Adblock for YouTube : 11 millions d’installations et une grave faille à corriger !"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Adblock for YouTube - 11 millions d&#39;installations et une grave faille à corriger" title="Adblock for YouTube : 11 millions d’installations et une grave faille à corriger !" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Adblock-for-YouTube-11-millions-dinstallations-et-une-grave-faille-a-corriger-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Adblock-for-YouTube-11-millions-dinstallations-et-une-grave-faille-a-corriger-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Adblock-for-YouTube-11-millions-dinstallations-et-une-grave-faille-a-corriger-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Adblock-for-YouTube-11-millions-dinstallations-et-une-grave-faille-a-corriger-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="Adblock for YouTube - 11 millions d&#039;installations et une grave faille à corriger" title="Adblock for YouTube : 11 millions d&rsquo;installations et une grave faille à corriger !" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Adblock-for-YouTube-11-millions-dinstallations-et-une-grave-faille-a-corriger-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/Adblock-for-YouTube-11-millions-dinstallations-et-une-grave-faille-a-corriger-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
-				<div class="cm-post-content">
-					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-securite/" style="background:#dd0000" rel="category tag">Actu Cybersécurité</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/adblock-for-youtube-11-millions-dinstallations-et-une-grave-faille-a-corriger/" title="Adblock for YouTube : 11 millions d’installations et une grave faille à corriger !">
-			Adblock for YouTube : 11 millions d’installations et une grave faille à corriger !			</a>
-		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/adblock-for-youtube-11-millions-dinstallations-et-une-grave-faille-a-corriger/" title="09:37" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-29T09:37:27+02:00">29/06/2026</time></a></span>		<span class="cm-author cm-vcard">
-			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
-				Florian BURNEL			</a>
-		</span>
-
-		
-			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/adblock-for-youtube-11-millions-dinstallations-et-une-grave-faille-a-corriger/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
-
-			</div>
-									</div>
-			</div>
-
-			
-			<div class="cm-post">
-				<a href="https://www.it-connect.fr/dirtyclone-la-faille-linux-qui-donne-un-acces-root-en-silence/" title="DirtyClone : la faille Linux qui donne un accès root en silence"><img width="130" height="90" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20130%2090&#39;%3E%3C/svg%3E" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="DirtyClone - Faille Linux CVE-2026-43503" title="DirtyClone : la faille Linux qui donne un accès root en silence" decoding="async" data-lazy-srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/DirtyClone-Faille-Linux-CVE-2026-43503-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/DirtyClone-Faille-Linux-CVE-2026-43503-392x272.jpg.webp 392w" data-lazy-sizes="(max-width: 130px) 100vw, 130px" data-lazy-src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/DirtyClone-Faille-Linux-CVE-2026-43503-130x90.jpg.webp"/><noscript><img width="130" height="90" src="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/DirtyClone-Faille-Linux-CVE-2026-43503-130x90.jpg.webp" class="attachment-colormag-featured-post-small size-colormag-featured-post-small wp-post-image" alt="DirtyClone - Faille Linux CVE-2026-43503" title="DirtyClone : la faille Linux qui donne un accès root en silence" decoding="async" srcset="https://www.it-connect.fr/wp-content-itc/uploads/2026/06/DirtyClone-Faille-Linux-CVE-2026-43503-130x90.jpg.webp 130w,https://www.it-connect.fr/wp-content-itc/uploads/2026/06/DirtyClone-Faille-Linux-CVE-2026-43503-392x272.jpg.webp 392w" sizes="(max-width: 130px) 100vw, 130px" /></noscript></a>
-				<div class="cm-post-content">
-					<div class="cm-entry-header-meta"><div class="cm-post-categories"><a href="https://www.it-connect.fr/actualites/actu-securite/" style="background:#dd0000" rel="category tag">Actu Cybersécurité</a></div></div><h3 class="cm-entry-title">			<a href="https://www.it-connect.fr/dirtyclone-la-faille-linux-qui-donne-un-acces-root-en-silence/" title="DirtyClone : la faille Linux qui donne un accès root en silence">
-			DirtyClone : la faille Linux qui donne un accès root en silence			</a>
-		</h3><div class="cm-below-entry-meta "><span class="cm-post-date"><a href="https://www.it-connect.fr/dirtyclone-la-faille-linux-qui-donne-un-acces-root-en-silence/" title="08:53" rel="bookmark"><svg class="cm-icon cm-icon--calendar-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.1 6.6v1.6c0 .6-.4 1-1 1H3.9c-.6 0-1-.4-1-1V6.6c0-1.5 1.3-2.8 2.8-2.8h1.7V3c0-.6.4-1 1-1s1 .4 1 1v.8h5.2V3c0-.6.4-1 1-1s1 .4 1 1v.8h1.7c1.5 0 2.8 1.3 2.8 2.8zm-1 4.6H3.9c-.6 0-1 .4-1 1v7c0 1.5 1.3 2.8 2.8 2.8h12.6c1.5 0 2.8-1.3 2.8-2.8v-7c0-.6-.4-1-1-1z"></path></svg> <time class="entry-date published updated" datetime="2026-06-29T08:53:48+02:00">29/06/2026</time></a></span>		<span class="cm-author cm-vcard">
-			<svg class="cm-icon cm-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5zm9 7H8c-2.8 0-5 2.2-5 5v2c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-2c0-2.8-2.2-5-5-5z"></path></svg>			<a class="url fn n" href="https://www.it-connect.fr/author/florian/" title="Florian BURNEL">
-				Florian BURNEL			</a>
-		</span>
-
-		
-			<span class="cm-comments-link">
-				<a href="https://www.it-connect.fr/dirtyclone-la-faille-linux-qui-donne-un-acces-root-en-silence/#respond"><svg class="cm-icon cm-icon--comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 5v10c0 1.7-1.3 3-3 3H7.4l-3.7 3.7c-.2.2-.4.3-.7.3-.1 0-.3 0-.4-.1-.4-.1-.6-.5-.6-.9V5c0-1.7 1.3-3 3-3h14c1.7 0 3 1.3 3 3z"></path></svg>0 commentaire</a>			</span>
 
 			</div>
 									</div>
@@ -853,7 +853,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 			<div class="course-informations__steps-count">
 				16 chapitres			</div>
 			<div class="course-informations__star-rating">
-				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-6a1b6bda-8018-4049-a314-5a7626c2c6a5" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
+				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-8ef79d7e-864c-4cf5-a12b-53d07300dac3" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
 		</div>
 
 	    <header class="cm-entry-header">
@@ -890,7 +890,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
 			<div class="course-informations__steps-count">
 				18 chapitres			</div>
 			<div class="course-informations__star-rating">
-				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-4be3e27d-7368-4973-88b7-b54d1b16f294" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
+				<style type="text/css"></style><div class="learndash-course-reviews-review-stars" id="review-stars-240d52d7-8c87-4196-a998-1dd3d22241e9" aria-label="	0 out of 5 stars	">★★★★★</div>			</div>
 		</div>
 
 	    <header class="cm-entry-header">
@@ -1040,7 +1040,7 @@ var sfwd_data = {"json":"{\"ajaxurl\":\"https:\\/\\/www.it-connect.fr\\/wp-admin
 <script type="text/javascript" id="colormag-custom-js-extra">
 /* <![CDATA[ */
 var colormag_progress_bar_indicator_color = {"bg_color":"#222222"};
-var colormag_load_more = {"tg_nonce":"98de6d6e9b","ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php"};
+var colormag_load_more = {"tg_nonce":"d1f6349fab","ajax_url":"https://www.it-connect.fr/wp-admin/admin-ajax.php"};
 //# sourceURL=colormag-custom-js-extra
 /* ]]> */
 </script>
@@ -1090,7 +1090,7 @@ jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_hand
 <script type="text/javascript" src="https://www.it-connect.fr/wp-content-itc/plugins/easy-fancybox/vendor/jquery.mousewheel.min.js" id="jquery-mousewheel-js"></script>
 <script type="text/javascript" id="aios-front-js-js-extra">
 /* <![CDATA[ */
-var AIOS_FRONT = {"ajaxurl":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"d52fd7969b"};
+var AIOS_FRONT = {"ajaxurl":"https://www.it-connect.fr/wp-admin/admin-ajax.php","ajax_nonce":"9639206bb9"};
 //# sourceURL=aios-front-js-js-extra
 /* ]]> */
 </script>

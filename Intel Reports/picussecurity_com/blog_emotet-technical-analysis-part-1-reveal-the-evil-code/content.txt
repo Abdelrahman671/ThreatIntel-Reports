@@ -812,7 +812,7 @@ a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-b
 	 width: 26%;
 	}
 	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper{
-		max-width: 59%;
+		max-width: 59%; /* base kept at 59% to match live-compiled CSS (source was 52%) — no regression */
 		display: flex;
 		flex-wrap: wrap;
 	}
@@ -821,6 +821,43 @@ a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-b
 	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper .menu3,
 	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper .menu4{
 		width: calc(50% - 30px);
+	}
+	/* ── Configurable first-column width (responsive) ─────────────────────
+	   Editor sets "Column 1 width (px)" on a menu item → --menu1-width on
+	   .menus-wrapper. The first column grows toward that width so long product
+	   names fit on one line, and the divider (.menu1 border-right) follows it.
+	   Guardrails so the right-hand resource cards are NEVER pushed off / clipped:
+	   • the two-column block reserves a fixed strip for the 400px cards, so
+	     widening the first column can't overflow the dropdown;
+	   • the first column may shrink on narrow viewports (the long name then
+	     wraps gracefully instead of clipping the cards);
+	   • the "I WANT TO" column keeps a fixed, comfortable width.
+	   When the field is empty the fallback = the original calc(50% - 30px),
+	   so every other menu renders exactly as before. */
+	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper .menu1{
+		width: var(--menu1-width, calc(50% - 30px));
+		flex: 0 0 var(--menu1-width, calc(50% - 30px));
+	}
+	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper[style*="--menu1-width"]{
+		max-width: calc(100% - 430px); /* reserve the 400px cards + gap so they never clip */
+	}
+	/* keep the two columns side-by-side (don't let the 2nd wrap under the wider 1st).
+	   Excludes the 4-category "two-rows" layout, which legitimately needs to wrap. */
+	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper[style*="--menu1-width"]:not(.two-rows){
+		flex-wrap: nowrap;
+	}
+	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper[style*="--menu1-width"] .menu1{
+		flex: 0 1 var(--menu1-width); /* aim for the set width, but shrink when space is tight */
+		width: auto;
+		min-width: 0;
+	}
+	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper[style*="--menu1-width"] .menu2{
+		flex: 0 0 180px; /* "I WANT TO" — fixed, comfortable width */
+		width: 180px;
+	}
+	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper[style*="--menu1-width"] .menu1 li.hs-menu-depth-1,
+	body div.custom-menu-primary-mega div.dropdown .dropdown-content .menus-wrapper[style*="--menu1-width"] .menu2 li.hs-menu-depth-1{
+		width: 100%; /* both columns' items use the full column width (drop the 80% cap) */
 	}
 	div.custom-menu-primary-mega div.dropdown .dropdown-content .overview{
 	 flex-grow: 1;
@@ -4370,9 +4407,9 @@ hxxp://yesimsatirli.com/baby/HsWjaCfoR/</code></pre>
 	</div>
 	<div class="subscribe-banner-w-form">
 	 <section class="form-step-1 blog-banner">
-		<span id="hs_cos_wrapper_module_16904584048193_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form" style="" data-hs-cos-general-type="widget" data-hs-cos-type="form"><h3 id="hs_cos_wrapper_form_604204110_title" class="hs_cos_wrapper form-title" data-hs-cos-general-type="widget_field" data-hs-cos-type="text"></h3>
+		<span id="hs_cos_wrapper_module_16904584048193_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form" style="" data-hs-cos-general-type="widget" data-hs-cos-type="form"><h3 id="hs_cos_wrapper_form_323082558_title" class="hs_cos_wrapper form-title" data-hs-cos-general-type="widget_field" data-hs-cos-type="text"></h3>
 
-<div id="hs_form_target_form_604204110"></div>
+<div id="hs_form_target_form_323082558"></div>
 
 
 
@@ -4460,9 +4497,9 @@ hxxp://yesimsatirli.com/baby/HsWjaCfoR/</code></pre>
    <div class="footer-col">
 	<p class="title">Subscribe to Our Newsletter</p>
 	<div id="hs_cos_wrapper_module_17059152999988" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><div class="subscribe-col">
- <span id="hs_cos_wrapper_module_17059152999988_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form" style="" data-hs-cos-general-type="widget" data-hs-cos-type="form"><h3 id="hs_cos_wrapper_form_552282217_title" class="hs_cos_wrapper form-title" data-hs-cos-general-type="widget_field" data-hs-cos-type="text"></h3>
+ <span id="hs_cos_wrapper_module_17059152999988_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form" style="" data-hs-cos-general-type="widget" data-hs-cos-type="form"><h3 id="hs_cos_wrapper_form_975899247_title" class="hs_cos_wrapper form-title" data-hs-cos-general-type="widget_field" data-hs-cos-type="text"></h3>
 
-<div id="hs_form_target_form_552282217"></div>
+<div id="hs_form_target_form_975899247"></div>
 
 
 
@@ -5024,7 +5061,7 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en-us';
 </script>
 
 <script src="https://www.picussecurity.com/hubfs/slick.min.js"></script>
-<script src="https://www.picussecurity.com/hubfs/hub_generated/module_assets/1/161965429884/1782479764618/module_Mega_Menu_24.min.js"></script>
+<script src="https://www.picussecurity.com/hubfs/hub_generated/module_assets/1/161965429884/1782932370778/module_Mega_Menu_24.min.js"></script>
 <!-- Start of Web Interactives Embed Code -->
 <script defer src="https://js.hubspot.com/web-interactives-embed.js" type="text/javascript" id="hubspot-web-interactives-loader" data-loader="hs-previewer" data-hsjs-portal="7048931" data-hsjs-env="prod" data-hsjs-hublet="na1"></script>
 <!-- End of Web Interactives Embed Code -->
@@ -5350,7 +5387,7 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en-us';
         var options = {
             portalId: '7048931',
             formId: '10a2d0b0-9f91-4cd7-a1e0-1cff39706638',
-            formInstanceId: '6727',
+            formInstanceId: '1720',
             
             pageId: '35193312585',
             
@@ -5367,7 +5404,7 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en-us';
             
             
             css: '',
-            target: '#hs_form_target_form_604204110',
+            target: '#hs_form_target_form_323082558',
             
             
             
@@ -5421,7 +5458,7 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en-us';
         var options = {
             portalId: '7048931',
             formId: '10a2d0b0-9f91-4cd7-a1e0-1cff39706638',
-            formInstanceId: '9605',
+            formInstanceId: '1629',
             
             pageId: '35193312585',
             
@@ -5440,11 +5477,11 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en-us';
             rawInlineMessage: "<p>Thank you.<\/p>",
             
             
-            hsFormKey: "0bfddd5510a7f67440080634b8281b04",
+            hsFormKey: "209f46d2e7852f8c69a85d4d58b67ced",
             
             
             css: '',
-            target: '#hs_form_target_form_552282217',
+            target: '#hs_form_target_form_975899247',
             
             
             
@@ -5533,8 +5570,8 @@ _hsq.push(["setTargetedContentMetadata", hbspt.targetedContentMetadata]);
 
 <script type="text/javascript">
 var hsVars = {
-    render_id: "bf045c0b-8aaa-441f-9585-f22362c012e4",
-    ticks: 1782887343069,
+    render_id: "6c226ac3-eeb1-4e15-b13d-1e5e993846d5",
+    ticks: 1782971811075,
     page_id: 35193312585,
     
     content_group_id: 35190412163,

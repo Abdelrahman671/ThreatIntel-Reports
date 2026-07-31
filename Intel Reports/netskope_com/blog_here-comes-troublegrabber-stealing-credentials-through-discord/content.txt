@@ -156,7 +156,7 @@
         <!-- End VWO Async SmartCode -->
 
         
-	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.0) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.1) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
 	<title>Here Comes TroubleGrabber: Stealing Credentials Through Discord - Netskope</title>
 	<meta name="description" content="“TroubleGrabber” is a new credential stealer that is being spread through Discord attachments and uses Discord messages to communicate stolen credentials" />
 	<link rel="canonical" href="https://www.netskope.com/blog/here-comes-troublegrabber-stealing-credentials-through-discord" />
@@ -527,7 +527,7 @@ window.addEventListener("load", function() {
         "width": 1200,
         "height": 628
     },
-    "inLanguage": "pt",
+    "inLanguage": "en",
     "blogPost": [{
         "@type": "BlogPosting",
         "headline": "Here Comes TroubleGrabber: Stealing Credentials Through Discord",
@@ -581,7 +581,7 @@ window.addEventListener("load", function() {
 
                 <div class="hero-two-column__text-container no-image">
                     <div
-                        class=" hero-two-column__title  hero-two-column__title--pt ">
+                        class=" hero-two-column__title  hero-two-column__title--en ">
                         <h1>Here Comes TroubleGrabber: Stealing Credentials Through Discord</h1>
                     </div>
 
@@ -650,7 +650,7 @@ window.addEventListener("load", function() {
         </div>
 
         <div class="blog-page-lens__social-icon blog-page-lens__social-icon--email ">
-            <a href="/cdn-cgi/l/email-protection#7c430f091e16191f084134190e19573f1311190f57280e13091e10193b0e1d1e1e190e594f3d572f08191d1015121b573f0e1918191208151d100f5728140e13091b145738150f1f130e185a1e131805411408080c0f4653530b0b0b521219080f17130c19521f1311531e10131b5314190e19511f1311190f51080e13091e10191b0e1d1e1e190e510f08191d1015121b511f0e1918191208151d100f5108140e13091b145118150f1f130e185b">
+            <a href="/cdn-cgi/l/email-protection#c6f9b5b3a4aca3a5b2fb8ea3b4a3ed85a9aba3b5ed92b4a9b3a4aaa381b4a7a4a4a3b4e3f587ed95b2a3a7aaafa8a1ed85b4a3a2a3a8b2afa7aab5ed92aeb4a9b3a1aeed82afb5a5a9b4a2e0a4a9a2bffbaeb2b2b6b5fce9e9b1b1b1e8a8a3b2b5ada9b6a3e8a5a9abe9a4aaa9a1e9aea3b4a3eba5a9aba3b5ebb2b4a9b3a4aaa3a1b4a7a4a4a3b4ebb5b2a3a7aaafa8a1eba5b4a3a2a3a8b2afa7aab5ebb2aeb4a9b3a1aeeba2afb5a5a9b4a2e1">
                 <img class="no_hover" src="https://www.netskope.com/wp-content/themes/netskope/images/v5/lens/email.svg"
                     alt="email icon">
 
@@ -1722,14 +1722,20 @@ https://cdn&#91;.]discordapp&#91;.]com/attachments/773838254905622541/7738383054
 
 			function visualizerLoadScripts() {
 				document.querySelectorAll("script[data-visualizer-script]").forEach(function(elem) {
-					jQuery.getScript( elem.getAttribute("data-visualizer-script") )
-					.done( function( script, textStatus ) {
-						elem.setAttribute("src", elem.getAttribute("data-visualizer-script"));
-						elem.removeAttribute("data-visualizer-script");
+					// Replace the placeholder with a real script tag using async=false:
+					// scripts download in parallel but execute in insertion order, which
+					// preserves the WordPress dependency order. Parallel jQuery.getScript
+					// calls could execute render-facade.js before the chart renderer had
+					// registered its render event listener, leaving charts blank.
+					var script = document.createElement("script");
+					script.src = elem.getAttribute("data-visualizer-script");
+					script.async = false;
+					script.onload = function() {
 						setTimeout( function() {
 							visualizerRefreshChart();
 						} );
-					} );
+					};
+					elem.parentNode.replaceChild(script, elem);
 				});
 			}
 
@@ -1745,7 +1751,7 @@ https://cdn&#91;.]discordapp&#91;.]com/attachments/773838254905622541/7738383054
 			}
 		</script>
 			<script id="ppress-frontend-script-js-extra">
-var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"3bbf9bb7e4","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
+var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"765b0e4e41","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
 //# sourceURL=ppress-frontend-script-js-extra
 </script>
 

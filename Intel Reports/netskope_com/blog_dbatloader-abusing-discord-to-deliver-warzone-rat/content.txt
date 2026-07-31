@@ -156,7 +156,7 @@
         <!-- End VWO Async SmartCode -->
 
         
-	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.0) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.1) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
 	<title>DBatLoader: Abusing Discord to Deliver Warzone RAT - Netskope</title>
 	<meta name="description" content="Summary 67% of the malware downloads Netskope blocks come from popular cloud applications being abused by attackers. One of the services commonly abused" />
 	<link rel="canonical" href="https://www.netskope.com/blog/dbatloader-abusing-discord-to-deliver-warzone-rat" />
@@ -648,7 +648,7 @@ window.addEventListener("load", function() {
         </div>
 
         <div class="blog-page-lens__social-icon blog-page-lens__social-icon--email ">
-            <a href="/cdn-cgi/l/email-protection#ead5999f88808f899ed7aea88b9ea6858b8e8f98cfd9abc1ab889f9983848dc1ae83998985988ec19e85c1ae8f86839c8f98c1bd8b989085848fc1b8abbecc88858e93d7829e9e9a99d0c5c59d9d9dc4848f9e9981859a8fc4898587c58886858dc58e888b9e86858b8e8f98c78b889f9983848dc78e83998985988ec79e85c78e8f86839c8f98c79d8b989085848fc7988b9ecd">
+            <a href="/cdn-cgi/l/email-protection#94abe7e1f6fef1f7e0a9d0d6f5e0d8fbf5f0f1e6b1a7d5bfd5f6e1e7fdfaf3bfd0fde7f7fbe6f0bfe0fbbfd0f1f8fde2f1e6bfc3f5e6eefbfaf1bfc6d5c0b2f6fbf0eda9fce0e0e4e7aebbbbe3e3e3bafaf1e0e7fffbe4f1baf7fbf9bbf6f8fbf3bbf0f6f5e0f8fbf5f0f1e6b9f5f6e1e7fdfaf3b9f0fde7f7fbe6f0b9e0fbb9f0f1f8fde2f1e6b9e3f5e6eefbfaf1b9e6f5e0b3">
                 <img class="no_hover" src="https://www.netskope.com/wp-content/themes/netskope/images/v5/lens/email.svg"
                     alt="email icon">
 
@@ -1628,14 +1628,20 @@ window.addEventListener('load', function() {
 
 			function visualizerLoadScripts() {
 				document.querySelectorAll("script[data-visualizer-script]").forEach(function(elem) {
-					jQuery.getScript( elem.getAttribute("data-visualizer-script") )
-					.done( function( script, textStatus ) {
-						elem.setAttribute("src", elem.getAttribute("data-visualizer-script"));
-						elem.removeAttribute("data-visualizer-script");
+					// Replace the placeholder with a real script tag using async=false:
+					// scripts download in parallel but execute in insertion order, which
+					// preserves the WordPress dependency order. Parallel jQuery.getScript
+					// calls could execute render-facade.js before the chart renderer had
+					// registered its render event listener, leaving charts blank.
+					var script = document.createElement("script");
+					script.src = elem.getAttribute("data-visualizer-script");
+					script.async = false;
+					script.onload = function() {
 						setTimeout( function() {
 							visualizerRefreshChart();
 						} );
-					} );
+					};
+					elem.parentNode.replaceChild(script, elem);
 				});
 			}
 
@@ -1651,7 +1657,7 @@ window.addEventListener('load', function() {
 			}
 		</script>
 			<script id="ppress-frontend-script-js-extra">
-var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"3bbf9bb7e4","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
+var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"765b0e4e41","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
 //# sourceURL=ppress-frontend-script-js-extra
 </script>
 

@@ -156,7 +156,7 @@
         <!-- End VWO Async SmartCode -->
 
         
-	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.0) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.1) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
 	<title>Netskope Threat Coverage: REvil - Netskope</title>
 	<meta name="description" content="Summary The REvil ransomware (a.k.a Sodinokibi) is a threat group that operates in the RaaS (Ransomware-as-a-Service) model, where the infrastructure and" />
 	<link rel="canonical" href="https://www.netskope.com/blog/netskope-threat-coverage-revil" />
@@ -648,7 +648,7 @@ window.addEventListener("load", function() {
         </div>
 
         <div class="blog-page-lens__social-icon blog-page-lens__social-icon--email ">
-            <a href="/cdn-cgi/l/email-protection#38074b4d5a525d5b4c05765d4c4b5357485d136c504a5d594c137b574e5d4a595f5d1d0b79136a7d4e51541e5a575c4105504c4c484b0217174f4f4f16565d4c4b5357485d165b5755175a54575f17565d4c4b5357485d154c504a5d594c155b574e5d4a595f5d154a5d4e51541f">
+            <a href="/cdn-cgi/l/email-protection#0c337f796e66696f78314269787f67637c692758647e696d78274f637a697e6d6b69293f4d275e497a65602a6e636875316478787c7f3623237b7b7b226269787f67637c69226f6361236e60636b236269787f67637c692178647e696d78216f637a697e6d6b69217e697a65602b">
                 <img class="no_hover" src="https://www.netskope.com/wp-content/themes/netskope/images/v5/lens/email.svg"
                     alt="email icon">
 
@@ -1540,14 +1540,20 @@ window.addEventListener('load', function() {
 
 			function visualizerLoadScripts() {
 				document.querySelectorAll("script[data-visualizer-script]").forEach(function(elem) {
-					jQuery.getScript( elem.getAttribute("data-visualizer-script") )
-					.done( function( script, textStatus ) {
-						elem.setAttribute("src", elem.getAttribute("data-visualizer-script"));
-						elem.removeAttribute("data-visualizer-script");
+					// Replace the placeholder with a real script tag using async=false:
+					// scripts download in parallel but execute in insertion order, which
+					// preserves the WordPress dependency order. Parallel jQuery.getScript
+					// calls could execute render-facade.js before the chart renderer had
+					// registered its render event listener, leaving charts blank.
+					var script = document.createElement("script");
+					script.src = elem.getAttribute("data-visualizer-script");
+					script.async = false;
+					script.onload = function() {
 						setTimeout( function() {
 							visualizerRefreshChart();
 						} );
-					} );
+					};
+					elem.parentNode.replaceChild(script, elem);
 				});
 			}
 
@@ -1563,7 +1569,7 @@ window.addEventListener('load', function() {
 			}
 		</script>
 			<script id="ppress-frontend-script-js-extra">
-var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"3bbf9bb7e4","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
+var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"765b0e4e41","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
 //# sourceURL=ppress-frontend-script-js-extra
 </script>
 

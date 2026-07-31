@@ -156,7 +156,7 @@
         <!-- End VWO Async SmartCode -->
 
         
-	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.0) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.1) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
 	<title>Netskope Threat Coverage: The Return of Emotet - Netskope</title>
 	<meta name="description" content="Co-authored by Gustavo Palazolo and Ghanashyam Satpathy Summary At the beginning of 2021, Emotet was considered to be the world&#039;s most dangerous malware" />
 	<link rel="canonical" href="https://www.netskope.com/blog/netskope-threat-coverage-the-return-of-emotet" />
@@ -648,7 +648,7 @@ window.addEventListener("load", function() {
         </div>
 
         <div class="blog-page-lens__social-icon blog-page-lens__social-icon--email ">
-            <a href="/cdn-cgi/l/email-protection#cbf4b8bea9a1aea8bff685aebfb8a0a4bbaee09fa3b9aeaabfe088a4bdaeb9aaacaeeef88ae09fa3aee099aebfbeb9a5e0a4ade08ea6a4bfaebfeda9a4afb2f6a3bfbfbbb8f1e4e4bcbcbce5a5aebfb8a0a4bbaee5a8a4a6e4a9a7a4ace4a5aebfb8a0a4bbaee6bfa3b9aeaabfe6a8a4bdaeb9aaacaee6bfa3aee6b9aebfbeb9a5e6a4ade6aea6a4bfaebfec">
+            <a href="/cdn-cgi/l/email-protection#58672b2d3a323d3b2c65163d2c2b3337283d730c302a3d392c731b372e3d2a393f3d7d6b19730c303d730a3d2c2d2a3673373e731d35372c3d2c7e3a373c2165302c2c282b6277772f2f2f76363d2c2b3337283d763b3735773a34373f77363d2c2b3337283d752c302a3d392c753b372e3d2a393f3d752c303d752a3d2c2d2a3675373e753d35372c3d2c7f">
                 <img class="no_hover" src="https://www.netskope.com/wp-content/themes/netskope/images/v5/lens/email.svg"
                     alt="email icon">
 
@@ -1598,14 +1598,20 @@ window.addEventListener('load', function() {
 
 			function visualizerLoadScripts() {
 				document.querySelectorAll("script[data-visualizer-script]").forEach(function(elem) {
-					jQuery.getScript( elem.getAttribute("data-visualizer-script") )
-					.done( function( script, textStatus ) {
-						elem.setAttribute("src", elem.getAttribute("data-visualizer-script"));
-						elem.removeAttribute("data-visualizer-script");
+					// Replace the placeholder with a real script tag using async=false:
+					// scripts download in parallel but execute in insertion order, which
+					// preserves the WordPress dependency order. Parallel jQuery.getScript
+					// calls could execute render-facade.js before the chart renderer had
+					// registered its render event listener, leaving charts blank.
+					var script = document.createElement("script");
+					script.src = elem.getAttribute("data-visualizer-script");
+					script.async = false;
+					script.onload = function() {
 						setTimeout( function() {
 							visualizerRefreshChart();
 						} );
-					} );
+					};
+					elem.parentNode.replaceChild(script, elem);
 				});
 			}
 
@@ -1621,7 +1627,7 @@ window.addEventListener('load', function() {
 			}
 		</script>
 			<script id="ppress-frontend-script-js-extra">
-var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"3bbf9bb7e4","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
+var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"765b0e4e41","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
 //# sourceURL=ppress-frontend-script-js-extra
 </script>
 

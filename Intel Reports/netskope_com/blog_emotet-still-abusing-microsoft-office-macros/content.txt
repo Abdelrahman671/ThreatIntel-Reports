@@ -156,7 +156,7 @@
         <!-- End VWO Async SmartCode -->
 
         
-	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.0) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<!-- This site is optimized with the Yoast SEO Premium plugin v27.7 (Yoast SEO v28.1) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
 	<title>Emotet: Still Abusing Microsoft Office Macros - Netskope</title>
 	<meta name="description" content="Summary In April 2022, Netskope Threat Labs analyzed an Emotet campaign that was using LNK files instead of Microsoft Office documents, likely as a" />
 	<link rel="canonical" href="https://www.netskope.com/blog/emotet-still-abusing-microsoft-office-macros" />
@@ -648,7 +648,7 @@ window.addEventListener("load", function() {
         </div>
 
         <div class="blog-page-lens__social-icon blog-page-lens__social-icon--email ">
-            <a href="/cdn-cgi/l/email-protection#79460a0c1b131c1a0d443c14160d1c0d5c4a38522a0d10151552381b0c0a10171e5234101a0b160a161f0d52361f1f101a1c5234181a0b160a5f1b161d0044110d0d090a4356560e0e0e57171c0d0a1216091c571a1614561b15161e561c14160d1c0d540a0d10151554181b0c0a10171e5414101a0b160a161f0d54161f1f101a1c5414181a0b160a5e">
+            <a href="/cdn-cgi/l/email-protection#655a1610070f0006115820080a1100114056244e36110c09094e240710160c0b024e280c06170a160a03114e2a03030c06004e280406170a1643070a011c580d111115165f4a4a1212124b0b0011160e0a15004b060a084a07090a024a00080a1100114816110c090948040710160c0b0248080c06170a160a0311480a03030c060048080406170a1642">
                 <img class="no_hover" src="https://www.netskope.com/wp-content/themes/netskope/images/v5/lens/email.svg"
                     alt="email icon">
 
@@ -1611,14 +1611,20 @@ window.addEventListener('load', function() {
 
 			function visualizerLoadScripts() {
 				document.querySelectorAll("script[data-visualizer-script]").forEach(function(elem) {
-					jQuery.getScript( elem.getAttribute("data-visualizer-script") )
-					.done( function( script, textStatus ) {
-						elem.setAttribute("src", elem.getAttribute("data-visualizer-script"));
-						elem.removeAttribute("data-visualizer-script");
+					// Replace the placeholder with a real script tag using async=false:
+					// scripts download in parallel but execute in insertion order, which
+					// preserves the WordPress dependency order. Parallel jQuery.getScript
+					// calls could execute render-facade.js before the chart renderer had
+					// registered its render event listener, leaving charts blank.
+					var script = document.createElement("script");
+					script.src = elem.getAttribute("data-visualizer-script");
+					script.async = false;
+					script.onload = function() {
 						setTimeout( function() {
 							visualizerRefreshChart();
 						} );
-					} );
+					};
+					elem.parentNode.replaceChild(script, elem);
 				});
 			}
 
@@ -1634,7 +1640,7 @@ window.addEventListener('load', function() {
 			}
 		</script>
 			<script id="ppress-frontend-script-js-extra">
-var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"3bbf9bb7e4","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
+var pp_ajax_form = {"ajaxurl":"https://www.netskope.com/wp-admin/admin-ajax.php","confirm_delete":"Are you sure?","deleting_text":"Deleting...","deleting_error":"An error occurred. Please try again.","nonce":"765b0e4e41","disable_ajax_form":"false","is_checkout":"0","is_checkout_tax_enabled":"0","is_checkout_autoscroll_enabled":"true"};
 //# sourceURL=ppress-frontend-script-js-extra
 </script>
 

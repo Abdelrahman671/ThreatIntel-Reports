@@ -2541,6 +2541,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            var marketoPrefillStorageKey = 'rsMarketoPrefillPayload';
+
             if (typeof MktoForms2 === 'undefined') return;
 
             MktoForms2.loadForm(
@@ -2560,8 +2562,69 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         return;
                     }
 
+                    var isProgrammaticMarketoSubmit = false;
+
+                    // Marketo handles submission asynchronously; prevent the browser
+                    // from also performing a native form submit/navigation.
+                    formEl.addEventListener('submit', function(event) {
+                        if (isProgrammaticMarketoSubmit) {
+                            return;
+                        }
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        if (typeof event.stopImmediatePropagation === 'function') {
+                            event.stopImmediatePropagation();
+                        }
+
+                        return false;
+                    }, true);
+
+                    function submitViaMarketo(event) {
+                        if (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        isProgrammaticMarketoSubmit = true;
+
+                        try {
+                            form.submit();
+                        } finally {
+                            window.setTimeout(function() {
+                                isProgrammaticMarketoSubmit = false;
+                            }, 0);
+                        }
+                    }
+
+                    var submitControls = formEl.querySelectorAll('button[type="submit"], input[type="submit"]');
+
+                    Array.prototype.forEach.call(submitControls, function(control) {
+                        try {
+                            control.setAttribute('type', 'button');
+                        } catch (error) {}
+
+                        control.addEventListener('click', submitViaMarketo);
+                    });
+
+                    formEl.addEventListener('keydown', function(event) {
+                        var target = event.target;
+
+                        if (event.key !== 'Enter' || !target) {
+                            return;
+                        }
+
+                        if (target.tagName === 'TEXTAREA') {
+                            return;
+                        }
+
+                        submitViaMarketo(event);
+                    });
+
                     // Remove all inline Marketo styles
                     destyleMktoForm(form);
+                    applyStoredPrefill(form, formEl);
 
                     // Override submit button text
                     
@@ -2574,10 +2637,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         }
 
                         try {
+                            var currentPrefillPayload = getStoredPrefillPayload();
+
+                            if (currentPrefillPayload && isCurrentPagePrefillTarget(currentPrefillPayload)) {
+                                clearStoredPrefillPayload();
+                            }
+
                             document.dispatchEvent(new CustomEvent('rsMarketoFormSuccess', {
                                 detail: {
                                     formId: 1014,
-                                    wrapperId: 'mktoForm_1014_wrapper'
+                                    wrapperId: 'mktoForm_1014_wrapper',
+                                    formValues: form.getValues ? form.getValues() : {},
+                                    visibleFormValues: getVisibleFormValues(formEl)
                                 }
                             }));
                         } catch (error) {
@@ -2617,6 +2688,105 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 });
 
                 formEl.setAttribute('data-styles-ready', 'true');
+            }
+
+            function getVisibleFormValues(formEl) {
+                var visibleValues = {};
+                var fields = formEl.querySelectorAll('input[name], select[name], textarea[name]');
+
+                Array.prototype.forEach.call(fields, function(field) {
+                    var fieldName = field.getAttribute('name');
+
+                    if (!fieldName || field.disabled || field.type === 'hidden') {
+                        return;
+                    }
+
+                    if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) {
+                        return;
+                    }
+
+                    if (field.value === '' || field.value == null) {
+                        return;
+                    }
+
+                    visibleValues[fieldName] = field.value;
+                });
+
+                return visibleValues;
+            }
+
+            function normalizePath(path) {
+                if (!path) return '/';
+
+                return path.replace(/\/+$/, '') || '/';
+            }
+
+            function getStoredPrefillPayload() {
+                try {
+                    var rawPayload = window.localStorage.getItem(marketoPrefillStorageKey);
+
+                    if (!rawPayload) {
+                        return null;
+                    }
+
+                    return JSON.parse(rawPayload);
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function clearStoredPrefillPayload() {
+                try {
+                    window.localStorage.removeItem(marketoPrefillStorageKey);
+                } catch (error) {}
+            }
+
+            function isCurrentPagePrefillTarget(payload) {
+                if (!payload || !payload.targetUrl) {
+                    return false;
+                }
+
+                try {
+                    var targetUrl = new URL(payload.targetUrl, window.location.origin);
+
+                    return normalizePath(targetUrl.pathname) === normalizePath(window.location.pathname);
+                } catch (error) {
+                    return false;
+                }
+            }
+
+            function applyStoredPrefill(form, formEl) {
+                var payload = getStoredPrefillPayload();
+
+                if (!payload || !payload.values || !isCurrentPagePrefillTarget(payload)) {
+                    return;
+                }
+
+                var currentValues = form.getValues ? form.getValues() : {};
+                var formFields = formEl.querySelectorAll('input[name], select[name], textarea[name]');
+                var applicableValues = {};
+
+                Array.prototype.forEach.call(formFields, function(field) {
+                    var fieldName = field.getAttribute('name');
+
+                    if (!fieldName || !(fieldName in payload.values)) {
+                        return;
+                    }
+
+                    if (currentValues[fieldName]) {
+                        return;
+                    }
+
+                    applicableValues[fieldName] = payload.values[fieldName];
+                });
+
+                if (Object.keys(applicableValues).length) {
+                    if (typeof form.vals === 'function') {
+                        form.vals(applicableValues);
+                    } else if (typeof form.setValues === 'function') {
+                        form.setValues(applicableValues);
+                    }
+                }
             }
 
             // Ensure destyling runs if the form renders asynchronously
@@ -3249,7 +3419,7 @@ window.wpParselySiteId = 'specterops.io';
 <script id="page-links-to-js" defer src="https://specterops.io/wp-content/plugins/page-links-to/dist/new-tab.js?ver=3.4.1"></script>
 <script id="jetpack-stats-js-before">
 _stq = window._stq || [];
-_stq.push([ "view", {"v":"ext","blog":"209731532","post":"3972","tz":"-7","srv":"specterops.io","hp":"vip","j":"1:16.1.1"} ]);
+_stq.push([ "view", {"v":"ext","blog":"209731532","post":"3972","tz":"-7","srv":"specterops.io","hp":"vip","j":"1:16.1.2"} ]);
 _stq.push([ "clickTrackerInit", "209731532", "3972" ]);
 //# sourceURL=jetpack-stats-js-before
 </script>

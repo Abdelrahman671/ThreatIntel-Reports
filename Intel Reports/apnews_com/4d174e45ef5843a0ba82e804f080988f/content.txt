@@ -100,9 +100,9 @@
     <meta property="fb:app_id" content="870613919693099">
 
 
-    <meta data-rh="true" name="keywords" content="Media, Europe, Middle East, AK State Wire, LA State Wire, CA State Wire, Intl News, AP Top News, Russian hacking, VA State Wire, DC Wire, CO State Wire, Russia, OR State Wire, MI State Wire, North America, Politics, Technology, U.S. News">
-
     <meta name="ntv-kv" key="content" values="Media,Europe,MiddleEast,AKStateWire,LAStateWire,CAStateWire,IntlNews,APTopNews,Russianhacking,VAStateWire,DCWire,COStateWire,Russia,ORStateWire,MIStateWire,NorthAmerica,Politics,Technology,U.S.News">
+
+    <meta data-rh="true" name="keywords" content="Media, Europe, Middle East, AK State Wire, LA State Wire, CA State Wire, Intl News, AP Top News, Russian hacking, VA State Wire, DC Wire, CO State Wire, Russia, OR State Wire, MI State Wire, North America, Politics, Technology, U.S. News">
 
     <meta name="robots" content="max-image-preview:large,noarchive">
 
@@ -1639,7 +1639,47 @@ freestar.queue.push(function() {
 </script><script>
     window['BSP-app'] = false;
     window['BSP-view-mode'] = false;
+</script><script>
+  (function(d, w) {
+    function hasFacebookEmbed() {
+      return d.querySelector('.fb-post, .fb-video, .fb-like, .fb-share-button, .fb-comments, .fb-page');
+    }
+
+    function loadFacebookSdk() {
+      if (!hasFacebookEmbed() || d.getElementById('facebook-jssdk')) {
+        return;
+      }
+
+      var preconnect = d.createElement('link');
+      preconnect.rel = 'preconnect';
+      preconnect.href = 'https://connect.facebook.net';
+      d.head.appendChild(preconnect);
+
+      w.fbAsyncInit = function() {
+        FB.init({
+          
+            appId : '870613919693099',
+          
+          xfbml : true,
+          version : 'v2.9'
+        });
+      };
+
+      var js = d.createElement('script');
+      var fjs = d.getElementsByTagName('script')[0];
+      js.id = 'facebook-jssdk';
+      js.src = '//connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+
+    if (d.readyState === 'loading') {
+      d.addEventListener('DOMContentLoaded', loadFacebookSdk);
+    } else {
+      loadFacebookSdk();
+    }
+  }(document, window));
 </script>
+
 <meta name="permutive-dataLayer" content="{
   &quot;category&quot; : &quot;&quot;,
   &quot;dfp_kv&quot; : {
@@ -1696,60 +1736,7 @@ freestar.queue.push(function() {
                 "type": "web"
             }
     });
-</script><script type="text/javascript" src="https://s.ntv.io/serve/load.js" async id="nativo-head"></script>
-
-<script>
-    window.ntvConfig = window.ntvConfig || {};
-    window.ntvConfig.keyValues = window.ntvConfig.keyValues || {};
-    var segs = localStorage.getItem('_pnativo');
-    if (segs) {
-        window.ntvConfig.keyValues.permutive = JSON.parse(segs).join(",");
-    }
-</script><meta
-        name="vf:container_id"
-        content="4d174e45ef5843a0ba82e804f080988f"
-/>
-<script>
-  (function(d, w) {
-    function hasFacebookEmbed() {
-      return d.querySelector('.fb-post, .fb-video, .fb-like, .fb-share-button, .fb-comments, .fb-page');
-    }
-
-    function loadFacebookSdk() {
-      if (!hasFacebookEmbed() || d.getElementById('facebook-jssdk')) {
-        return;
-      }
-
-      var preconnect = d.createElement('link');
-      preconnect.rel = 'preconnect';
-      preconnect.href = 'https://connect.facebook.net';
-      d.head.appendChild(preconnect);
-
-      w.fbAsyncInit = function() {
-        FB.init({
-          
-            appId : '870613919693099',
-          
-          xfbml : true,
-          version : 'v2.9'
-        });
-      };
-
-      var js = d.createElement('script');
-      var fjs = d.getElementsByTagName('script')[0];
-      js.id = 'facebook-jssdk';
-      js.src = '//connect.facebook.net/en_US/sdk.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }
-
-    if (d.readyState === 'loading') {
-      d.addEventListener('DOMContentLoaded', loadFacebookSdk);
-    } else {
-      loadFacebookSdk();
-    }
-  }(document, window));
-</script>
-<script type="text/javascript" id="freestar-head-data">
+</script><script type="text/javascript" id="freestar-head-data">
   (function () {
     'use strict'; // Add strict mode
 
@@ -1828,7 +1815,20 @@ freestar.queue.push(function() {
       console.error("Freestar init error:", scriptErr.message);
     }
   })();
-</script><link rel="preconnect" href="https://fonts.googleapis.com">
+</script><script type="text/javascript" src="https://s.ntv.io/serve/load.js" async id="nativo-head"></script>
+
+<script>
+    window.ntvConfig = window.ntvConfig || {};
+    window.ntvConfig.keyValues = window.ntvConfig.keyValues || {};
+    var segs = localStorage.getItem('_pnativo');
+    if (segs) {
+        window.ntvConfig.keyValues.permutive = JSON.parse(segs).join(",");
+    }
+</script><meta
+        name="vf:container_id"
+        content="4d174e45ef5843a0ba82e804f080988f"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <script>
         var link = document.createElement('link');
@@ -2544,20 +2544,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-floods-missing-14d8016689e5ea7603a55de8e1986236'>People from more than 30 countries are missing after the flash floods in Nepal and China</a>
+                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Rescuers retrieve flood survivors caked in mud as death toll in Nepal-China border disaster climbs</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Death toll rises in Nepal-China border disaster as a lake poses new flood threat</a>
+                    <a href='https://apnews.com/article/king-harald-norway-228366941b7c48c59ececf004cc3c467'>Norway’s King Harald V dies at 89 and his son becomes King Haakon VIII</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/iran-trade-economy-usa-sanctions-3afc1e8ac43768e1fd45eac3735b8e92'>Iran scrambles to sustain trade as US threatens to sanction countries that refuse to break ties</a>
+                    <a href='https://apnews.com/article/iran-us-war-six-months-israel-mideast-1685cdc4e6ef330406e0ebe242b21e70'>Six months on, the Iran war has changed the Middle East, but not in the way its architects had hoped</a>
                 </li>
+                
+                
                 
                 
             </ul>
@@ -2661,20 +2663,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/marine-one-ntsb-trump-reagan-close-call-f2dbe1f79a802508167b1751d79be719'>White House construction contributed to radio problems that let Trump copter come close to jet</a>
+                    <a href='https://apnews.com/live/lindsay-clancy-trial-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Jury is excused, will return to deliberations Monday in Lindsay Clancy trial</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-texas-ice-shooting-christian-castro-extradition-d1299b21657fe35afae615386d40552d'>ICE officer's release from Texas jail opens a new front in the escalating fight over extradition</a>
+                    <a href='https://apnews.com/newsletter/morning-wire/august-28-2026'>Trump orders Lake Ontario renamed, Kennedy Center battle over Trump’s name, how the Iran war has changed the Mideast</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tropical-storm-dolly-atlantic-31ced4223cb59d4a5c599a0aa4c5756e'>Tropical Storms Karina and Lowell form in the Pacific Ocean as Dolly churns in the Atlantic</a>
+                    <a href='https://apnews.com/article/memphis-national-guard-tyrin-johnson-8959297a99c362d65aa2517a9d5f1984'>Autopsy shows Tennessee National Guard fatally shot 20-year-old armed man in the back</a>
                 </li>
+                
+                
                 
                 
                 
@@ -2781,22 +2785,20 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/lake-ontario-canada-america-trump-trade-war-3ac58dca0ca83c15605d4dbff146b28a'>Trump signs order renaming Lake Ontario as 'Lake America' in the United States</a>
+                    <a href='https://apnews.com/article/trump-venezuela-oil-reserves-eb0ed5a1e99602c21a7f690c3368020e'>Trump says US has entered deal with Venezuela to take control of 65 billion barrels of oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/rfk-jr-kennedy-samoa-vaccines-mmr-ba6ad3ffadca48599b1c178a392fb37b'>Exclusive: RFK Jr. said a Samoa trip had nothing to do with vaccines. New documents refute that</a>
+                    <a href='https://apnews.com/live/donald-trump-news-updates-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Trump says US will take control of 65 billion barrels of Venezuela’s oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/patriot-missiles-iran-war-russia-ukraine-trump-09c7d8030a2e11fbd8ee3f7176b3f2d4'>Exclusive: US Patriot missile stocks in Europe are 'beyond critical' due to Iran war, officials say</a>
+                    <a href='https://apnews.com/article/trump-voting-mail-ballots-midterms-executive-order-8ef4a669a50f3406481ffb8387ccad3c'>Trump administration appeals latest ruling blocking his mail voting order from taking effect</a>
                 </li>
-                
-                
                 
                 
             </ul>
@@ -2895,20 +2897,24 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/good-good-golf-pga-tour-austin-callaway-7571b7e461cf085e7b23f70b68bb2e11'>Good Good to no longer be title sponsor of PGA Tour event and loses Callaway sponsorship</a>
+                    <a href='https://apnews.com/article/dea-opioids-joan-rubinger-nurse-practitioner-e575853a66d0ef726351338932d073ff'>She was a pain specialist to top athletes. Her opioid prescribing alarmed the DEA</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fifa-uefa-infantino-criminal-complaint-kushner-2c0a1bbfc17bb159088a5d7108caac11'>UEFA prepares criminal complaint in Swiss courts against FIFA's Infantino over World Cup sell-off</a>
+                    <a href='https://apnews.com/article/tony-romo-arrest-3764a8fb1c3bc9fde1146c7a2f05a7a2'>Tony Romo facing three more citations in connection with his arrest last month</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pac12-cfp-flex-schedule-110ecfe17a7cb0f848b8732070fe60ed'>New-look Pac-12 looking to flex its way into CFP with unique schedule at end of regular season</a>
+                    <a href='https://apnews.com/article/jerry-sandusky-penn-state-football-74a5e76741ee22871232fdbf66bfd341'>Judge will hear recantation of sexual abuse claim against ex-Penn State coach Jerry Sandusky</a>
                 </li>
+                
+                
+                
+                
                 
                 
             </ul>
@@ -3004,19 +3010,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
+                    <a href='https://apnews.com/article/emily-wilson-odyssey-translation-homer-a05084e4753528dff13766703161d24d'>Emily Wilson's 'Odyssey' became a cultural flashpoint. Now, she's retranslating the whole thing</a>
+                </li>
+                
+                
+                
+                <li>
                     <a href='https://apnews.com/article/dolly-parton-death-country-icon-87156f3e6a1547b88bf414529b644ad3'>Dolly Parton, music star, actor and beloved figure who spanned generations, dies at 80 of cancer</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/yayoi-kusama-artist-obituary-f92e15d5e6a446f48f3675ddd2418b8a'>Yayoi Kusama, who splashed polka dots across the art world, dies at 97 in Tokyo</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href='https://apnews.com/article/tim-curry-dies-obituary-ece7aebde225cfcd16745cd0584494dd'>Tim Curry, iconic character actor and 'Rocky Horror Picture Show' star, dies at 80</a>
+                    <a href='https://apnews.com/article/dolly-parton-nashville-airport-rename-c982085a9a7e7887bb55520523884bfd'>Push to rename Nashville airport for Dolly Parton gets a boost from Tennessee's governor</a>
                 </li>
                 
                 
@@ -3106,13 +3112,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/inflation-federal-reserve-interest-rates-a8661a4be7fcf3076891382cf9df1a5e'>New Fed chair Kevin Warsh under pressure to clarify views on inflation, interest rates</a>
+                    <a href='https://apnews.com/article/federal-reserve-warsh-interest-trump-inflation-ab896df808df3a5a3fa8b943ac5f3867'>Fed Chair Warsh signals rate hikes may be needed with US inflation stubbornly elevated</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/housing-mortgage-rates-treasury-6a3a91617c9d9ec4d958e8ae34d64879'>Mortgage rates rise, bringing the average rate on a 30-year home loan to where it was 4 weeks ago</a>
+                    <a href='https://apnews.com/article/stocks-markets-oil-ai-nvidia-0a655f1c042b059279343443d5802907'>The bond market prepares for a hike to interest rates, while US stocks drift lower</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/nepal-tibet-floods-how-to-help-416f48083b8598278ffc93b23e7212c0'>How to help after Nepal and Tibet's catastrophic floods</a>
                 </li>
                 
                 
@@ -3131,8 +3143,73 @@ freestar.queue.push(function() {
     <div class="MainNavigationItem-text" data-has-dropdown="">
         
             <a  class="AnClick-MainNav"  href="https://apnews.com/science">Science
+                <svg width="8" height="6">
+                    <use href="#icon-chevron-down" />
+                </svg>
+            
             </a>
         
+        
+        <div class="MainNavigationItem-dropdown" data-main-dropdown="">
+            <div class='Subheader'>
+    <div class='Subheader-content' data-sectionTitle="Science">
+        <div class='Subheader-Sections Sections-two-column extraSpace'>
+            <div class='Subheader-Title'>SECTIONS</div>
+            <div class='Subheader-Sections-items'>
+                
+                
+                    
+                        <a href='https://apnews.com/hub/space' class='Subheader-Sections-items-item'>Space</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/hub/animals' class='Subheader-Sections-items-item'>Animals</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/hub/archaeology-and-anthropology' class='Subheader-Sections-items-item'>The Ancient World</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/climate-and-environment' class='Subheader-Sections-items-item'>Climate</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/health' class='Subheader-Sections-items-item'>Medicine</a>
+                    
+                
+                
+            </div>
+        </div>
+        <div class='Subheader-Top-Stories '>
+            <div class='Subheader-Title'>TOP STORIES</div>
+            
+            <ul>
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/spacex-musk-starship-splashdown-dad5fd5a6f3eedd3dfe23bd59a3adb6c'>SpaceX recovers Starship from the Indian Ocean a month after launch and is shipping it back to Texas</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/artemis-ii-medal-of-honor-astronauts-moonshot-b20b75e7fc2586315812238e27c36e77'>Artemis II astronauts receive nation's highest space honor for their successful moonshot</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/photo-gallery/lunar-eclipse-lights-skies-across-americas-europe-photos-816d28c2146fecf85213ed7bbeda5f18'>Un eclipse lunar ilumina los cielos de América y Europa, en fotos</a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+        </div>
         
     </div>
 
@@ -3204,12 +3281,6 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fact-check-trump-jimmy-carter-mail-absentee-ballots-fraud-c5ae733c697d0b440f37b632d9b4caea'>FACT FOCUS: The Trump administration is falsely claiming Jimmy Carter was against mail-in voting</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/fact-check-george-floyd-autopsy-new-892530421961'>George Floyd’s autopsy report is not new, does not say he died of an overdose</a>
                 </li>
                 
@@ -3223,6 +3294,12 @@ freestar.queue.push(function() {
                 
                 <li>
                     <a href='https://apnews.com/article/fact-check-kamala-harris-video-altered-today-quote-234791603419'>Video of Kamala Harris saying ‘today is today’ was altered</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/fact-check-trump-shooting-ear-damage-photo-470220313611'>A photo that appears to show Trump's ear with no damage after the attempted assassination is actually from 2022</a>
                 </li>
                 
                 
@@ -3258,19 +3335,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/chile-kayaking-tourism-whale-b0cafde4b640326f20a9da28003d6c26'>A humpback whale briefly swallows kayaker in Chilean Patagonia — and it's all captured on camera</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/switzerland-lausanne-speeding-ticket-edd115a3916250c7809d1bb338a33663'>A driver faces up to $110,000 in fines for speeding on a Swiss street. But he can afford it</a>
+                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
                 </li>
                 
                 
@@ -3282,13 +3359,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
+                    <a href='https://apnews.com/article/drunk-raccoon-liquor-store-bandit-virginia-5109feb2ea9ab9bf8954ec3798689fd0'>Raccoon goes on drunken rampage in Virginia liquor store and passes out on bathroom floor</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
+                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
                 </li>
                 
                 
@@ -3362,13 +3439,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/back-to-school-sleep-kids-4e0923586dc98bfc38d0a82b31c07cf7'>How to reset your child's sleep schedule for back-to-school season</a>
+                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -3537,13 +3614,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
+                    <a href='https://apnews.com/article/nepal-lake-china-flood-tibet-climate-5086eb25e29b23019632f7817739f807'>Why a newly formed lake is sparking fears of more flooding along the Nepal-China border</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-flash-floods-glaciers-climate-change-d8c11c2215ea0792e3612bf791e4299f'>Nepal floods highlight growing glacier risks in warming Himalayas</a>
+                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
                 </li>
                 
                 
@@ -3591,7 +3668,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pancreatic-cancer-drug-fda-approval-rasonque-03e437bfb8d728ec2a73b142cf8ec2fe'>FDA approves landmark pancreatic cancer drug that's shown to improve survival</a>
+                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
                 </li>
                 
                 
@@ -3603,19 +3680,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-16c6c527c13e88ac3cdea57ffdbd2e19'>Pennsylvania reports first 2 measles deaths in the US this year, both people unvaccinated</a>
+                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-politics-health-f102d57041e1bd4757142c9ab927b123'>Measles deaths reported in Pennsylvania spark fight among politicians and health officials</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/affordable-care-act-obamacare-subsidies-florida-health-b224d1bdb33690d8d2ddeb094437bdc8'>Florida, hard-hit by Obamacare drop-off, feels the squeeze of rising healthcare costs</a>
+                    <a href='https://apnews.com/article/juul-vape-update-fda-age-verification-juul2-10c93d78a67bf5e4be25f437528fb416'>Juul gets OK to sell updated vaping device with age-gating technology</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
+                    <a href='https://apnews.com/article/postpartum-psychosis-baby-blues-e1dd28bee97a984f3d58132c4fbd2e28'>What to know about postpartum psychosis, which can affect a new mom's sense of reality</a>
                 </li>
                 
                 
@@ -3679,7 +3756,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/influenced-social-media-mental-health-advice-620e277528728498c1202690d0512f85'>In their own words: What young people wish they'd known about social media</a>
+                    <a href='https://apnews.com/article/social-media-addiction-trial-la-5e54075023d837ccdc76c4ca512e925d'>Jury finds Instagram and YouTube liable in a landmark social media addiction trial</a>
                 </li>
                 
                 
@@ -3753,7 +3830,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/beer-drinking-party-red-solo-cup-fee2d1bf796ede9bf26f88c79efc392b'>Sippin' (and chuggin') through the years with a party mainstay — the red Solo cup</a>
+                    <a href='https://apnews.com/article/ariana-grande-women-bodies-criticism-59b6c7df63a168de33fa6d097ef22a4e'>Ariana Grande’s new video sets off talk about body and beauty standards — again</a>
                 </li>
                 
                 
@@ -3765,7 +3842,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/names-storms-hurricanes-operations-c299516e86619e07b7680a303199e9c5'>What’s in a name? Why naming storms, military operations and medical maladies matters</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -3819,7 +3896,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/israel-christians-nun-attack-jerusalem-66ca405dcaa7018e25c03b08754fa2b2'>Jerusalem court acquits a man indicted in nun attack, orders psychiatric care</a>
+                    <a href='https://apnews.com/article/hindu-nationalist-rss-mohan-bhagwat-new-york-protest-934a58a17a491eeeb71fd9285378121a'>Hindu nationalist leader spurs protests and calls for sanctions ahead of New York City speech</a>
                 </li>
                 
                 
@@ -3897,19 +3974,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pandillas-reos-prisiones-guatemala-tunel-violencia-cbf63c54ffb224f31a7d1babae5281c1'>Descubren túnel en construcción en una cárcel de Guatemala</a>
+                    <a href='https://apnews.com/article/monte-kailash-sagrado-peregrino-nepal-tibet-inundaciones-d11c3194de8124dd4d23b2082b225904'>Qué saber del monte Kailash, sagrado para peregrinos desaparecidos en inundaciones en Nepal y Tíbet</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cereales-general-mills-colorantes-36a9453c21f4a3511115db752c3f7c49'>General Mills elimina colorantes artificiales de todos sus cereales</a>
+                    <a href='https://apnews.com/article/republica-democratica-del-congo-ebola-vacunas-44ef74afaa975e85dccdb7ef620516de'>Congo inicia vacunación contra el brote de ébola de más rápido crecimiento de la historia</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-inundaciones-desaparecidos-de7b1092569981d32c648ddc990df513'>Más de 390 muertos y 1.400 desaparecidos por inundaciones en Nepal y Tíbet</a>
+                    <a href='https://apnews.com/article/kennedy-vacunas-samoa-viaje-testimonio-congreso-27224530d62ead678576d06a83836937'>Exclusiva: nuevos documentos ponen en duda testimonio de Kennedy Jr. sobre su viaje a Samoa en 2019</a>
                 </li>
                 
                 
@@ -5981,20 +6058,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-floods-missing-14d8016689e5ea7603a55de8e1986236'>People from more than 30 countries are missing after the flash floods in Nepal and China</a>
+                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Rescuers retrieve flood survivors caked in mud as death toll in Nepal-China border disaster climbs</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Death toll rises in Nepal-China border disaster as a lake poses new flood threat</a>
+                    <a href='https://apnews.com/article/king-harald-norway-228366941b7c48c59ececf004cc3c467'>Norway’s King Harald V dies at 89 and his son becomes King Haakon VIII</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/iran-trade-economy-usa-sanctions-3afc1e8ac43768e1fd45eac3735b8e92'>Iran scrambles to sustain trade as US threatens to sanction countries that refuse to break ties</a>
+                    <a href='https://apnews.com/article/iran-us-war-six-months-israel-mideast-1685cdc4e6ef330406e0ebe242b21e70'>Six months on, the Iran war has changed the Middle East, but not in the way its architects had hoped</a>
                 </li>
+                
+                
                 
                 
             </ul>
@@ -6160,20 +6239,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/marine-one-ntsb-trump-reagan-close-call-f2dbe1f79a802508167b1751d79be719'>White House construction contributed to radio problems that let Trump copter come close to jet</a>
+                    <a href='https://apnews.com/live/lindsay-clancy-trial-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Jury is excused, will return to deliberations Monday in Lindsay Clancy trial</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-texas-ice-shooting-christian-castro-extradition-d1299b21657fe35afae615386d40552d'>ICE officer's release from Texas jail opens a new front in the escalating fight over extradition</a>
+                    <a href='https://apnews.com/newsletter/morning-wire/august-28-2026'>Trump orders Lake Ontario renamed, Kennedy Center battle over Trump’s name, how the Iran war has changed the Mideast</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tropical-storm-dolly-atlantic-31ced4223cb59d4a5c599a0aa4c5756e'>Tropical Storms Karina and Lowell form in the Pacific Ocean as Dolly churns in the Atlantic</a>
+                    <a href='https://apnews.com/article/memphis-national-guard-tyrin-johnson-8959297a99c362d65aa2517a9d5f1984'>Autopsy shows Tennessee National Guard fatally shot 20-year-old armed man in the back</a>
                 </li>
+                
+                
                 
                 
                 
@@ -6341,22 +6422,20 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/lake-ontario-canada-america-trump-trade-war-3ac58dca0ca83c15605d4dbff146b28a'>Trump signs order renaming Lake Ontario as 'Lake America' in the United States</a>
+                    <a href='https://apnews.com/article/trump-venezuela-oil-reserves-eb0ed5a1e99602c21a7f690c3368020e'>Trump says US has entered deal with Venezuela to take control of 65 billion barrels of oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/rfk-jr-kennedy-samoa-vaccines-mmr-ba6ad3ffadca48599b1c178a392fb37b'>Exclusive: RFK Jr. said a Samoa trip had nothing to do with vaccines. New documents refute that</a>
+                    <a href='https://apnews.com/live/donald-trump-news-updates-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Trump says US will take control of 65 billion barrels of Venezuela’s oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/patriot-missiles-iran-war-russia-ukraine-trump-09c7d8030a2e11fbd8ee3f7176b3f2d4'>Exclusive: US Patriot missile stocks in Europe are 'beyond critical' due to Iran war, officials say</a>
+                    <a href='https://apnews.com/article/trump-voting-mail-ballots-midterms-executive-order-8ef4a669a50f3406481ffb8387ccad3c'>Trump administration appeals latest ruling blocking his mail voting order from taking effect</a>
                 </li>
-                
-                
                 
                 
             </ul>
@@ -6530,20 +6609,24 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/good-good-golf-pga-tour-austin-callaway-7571b7e461cf085e7b23f70b68bb2e11'>Good Good to no longer be title sponsor of PGA Tour event and loses Callaway sponsorship</a>
+                    <a href='https://apnews.com/article/dea-opioids-joan-rubinger-nurse-practitioner-e575853a66d0ef726351338932d073ff'>She was a pain specialist to top athletes. Her opioid prescribing alarmed the DEA</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fifa-uefa-infantino-criminal-complaint-kushner-2c0a1bbfc17bb159088a5d7108caac11'>UEFA prepares criminal complaint in Swiss courts against FIFA's Infantino over World Cup sell-off</a>
+                    <a href='https://apnews.com/article/tony-romo-arrest-3764a8fb1c3bc9fde1146c7a2f05a7a2'>Tony Romo facing three more citations in connection with his arrest last month</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pac12-cfp-flex-schedule-110ecfe17a7cb0f848b8732070fe60ed'>New-look Pac-12 looking to flex its way into CFP with unique schedule at end of regular season</a>
+                    <a href='https://apnews.com/article/jerry-sandusky-penn-state-football-74a5e76741ee22871232fdbf66bfd341'>Judge will hear recantation of sexual abuse claim against ex-Penn State coach Jerry Sandusky</a>
                 </li>
+                
+                
+                
+                
                 
                 
             </ul>
@@ -6689,19 +6772,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
+                    <a href='https://apnews.com/article/emily-wilson-odyssey-translation-homer-a05084e4753528dff13766703161d24d'>Emily Wilson's 'Odyssey' became a cultural flashpoint. Now, she's retranslating the whole thing</a>
+                </li>
+                
+                
+                
+                <li>
                     <a href='https://apnews.com/article/dolly-parton-death-country-icon-87156f3e6a1547b88bf414529b644ad3'>Dolly Parton, music star, actor and beloved figure who spanned generations, dies at 80 of cancer</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/yayoi-kusama-artist-obituary-f92e15d5e6a446f48f3675ddd2418b8a'>Yayoi Kusama, who splashed polka dots across the art world, dies at 97 in Tokyo</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href='https://apnews.com/article/tim-curry-dies-obituary-ece7aebde225cfcd16745cd0584494dd'>Tim Curry, iconic character actor and 'Rocky Horror Picture Show' star, dies at 80</a>
+                    <a href='https://apnews.com/article/dolly-parton-nashville-airport-rename-c982085a9a7e7887bb55520523884bfd'>Push to rename Nashville airport for Dolly Parton gets a boost from Tennessee's governor</a>
                 </li>
                 
                 
@@ -6835,13 +6918,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/inflation-federal-reserve-interest-rates-a8661a4be7fcf3076891382cf9df1a5e'>New Fed chair Kevin Warsh under pressure to clarify views on inflation, interest rates</a>
+                    <a href='https://apnews.com/article/federal-reserve-warsh-interest-trump-inflation-ab896df808df3a5a3fa8b943ac5f3867'>Fed Chair Warsh signals rate hikes may be needed with US inflation stubbornly elevated</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/housing-mortgage-rates-treasury-6a3a91617c9d9ec4d958e8ae34d64879'>Mortgage rates rise, bringing the average rate on a 30-year home loan to where it was 4 weeks ago</a>
+                    <a href='https://apnews.com/article/stocks-markets-oil-ai-nvidia-0a655f1c042b059279343443d5802907'>The bond market prepares for a hike to interest rates, while US stocks drift lower</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/nepal-tibet-floods-how-to-help-416f48083b8598278ffc93b23e7212c0'>How to help after Nepal and Tibet's catastrophic floods</a>
                 </li>
                 
                 
@@ -6942,6 +7031,32 @@ freestar.queue.push(function() {
                 
             </div>
         </div>
+        <div class='Subheader-Top-Stories '>
+            <div class='Subheader-Title'>TOP STORIES</div>
+            
+            <ul>
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/spacex-musk-starship-splashdown-dad5fd5a6f3eedd3dfe23bd59a3adb6c'>SpaceX recovers Starship from the Indian Ocean a month after launch and is shipping it back to Texas</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/artemis-ii-medal-of-honor-astronauts-moonshot-b20b75e7fc2586315812238e27c36e77'>Artemis II astronauts receive nation's highest space honor for their successful moonshot</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/photo-gallery/lunar-eclipse-lights-skies-across-americas-europe-photos-816d28c2146fecf85213ed7bbeda5f18'>Un eclipse lunar ilumina los cielos de América y Europa, en fotos</a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
     </div>
 </div>
             </span>
@@ -7032,12 +7147,6 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fact-check-trump-jimmy-carter-mail-absentee-ballots-fraud-c5ae733c697d0b440f37b632d9b4caea'>FACT FOCUS: The Trump administration is falsely claiming Jimmy Carter was against mail-in voting</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/fact-check-george-floyd-autopsy-new-892530421961'>George Floyd’s autopsy report is not new, does not say he died of an overdose</a>
                 </li>
                 
@@ -7051,6 +7160,12 @@ freestar.queue.push(function() {
                 
                 <li>
                     <a href='https://apnews.com/article/fact-check-kamala-harris-video-altered-today-quote-234791603419'>Video of Kamala Harris saying ‘today is today’ was altered</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/fact-check-trump-shooting-ear-damage-photo-470220313611'>A photo that appears to show Trump's ear with no damage after the attempted assassination is actually from 2022</a>
                 </li>
                 
                 
@@ -7090,19 +7205,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/chile-kayaking-tourism-whale-b0cafde4b640326f20a9da28003d6c26'>A humpback whale briefly swallows kayaker in Chilean Patagonia — and it's all captured on camera</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/switzerland-lausanne-speeding-ticket-edd115a3916250c7809d1bb338a33663'>A driver faces up to $110,000 in fines for speeding on a Swiss street. But he can afford it</a>
+                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
                 </li>
                 
                 
@@ -7114,13 +7229,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
+                    <a href='https://apnews.com/article/drunk-raccoon-liquor-store-bandit-virginia-5109feb2ea9ab9bf8954ec3798689fd0'>Raccoon goes on drunken rampage in Virginia liquor store and passes out on bathroom floor</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
+                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
                 </li>
                 
                 
@@ -7244,13 +7359,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/back-to-school-sleep-kids-4e0923586dc98bfc38d0a82b31c07cf7'>How to reset your child's sleep schedule for back-to-school season</a>
+                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -7483,13 +7598,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
+                    <a href='https://apnews.com/article/nepal-lake-china-flood-tibet-climate-5086eb25e29b23019632f7817739f807'>Why a newly formed lake is sparking fears of more flooding along the Nepal-China border</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-flash-floods-glaciers-climate-change-d8c11c2215ea0792e3612bf791e4299f'>Nepal floods highlight growing glacier risks in warming Himalayas</a>
+                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
                 </li>
                 
                 
@@ -7541,7 +7656,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pancreatic-cancer-drug-fda-approval-rasonque-03e437bfb8d728ec2a73b142cf8ec2fe'>FDA approves landmark pancreatic cancer drug that's shown to improve survival</a>
+                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
                 </li>
                 
                 
@@ -7553,19 +7668,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-16c6c527c13e88ac3cdea57ffdbd2e19'>Pennsylvania reports first 2 measles deaths in the US this year, both people unvaccinated</a>
+                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-politics-health-f102d57041e1bd4757142c9ab927b123'>Measles deaths reported in Pennsylvania spark fight among politicians and health officials</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/affordable-care-act-obamacare-subsidies-florida-health-b224d1bdb33690d8d2ddeb094437bdc8'>Florida, hard-hit by Obamacare drop-off, feels the squeeze of rising healthcare costs</a>
+                    <a href='https://apnews.com/article/juul-vape-update-fda-age-verification-juul2-10c93d78a67bf5e4be25f437528fb416'>Juul gets OK to sell updated vaping device with age-gating technology</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
+                    <a href='https://apnews.com/article/postpartum-psychosis-baby-blues-e1dd28bee97a984f3d58132c4fbd2e28'>What to know about postpartum psychosis, which can affect a new mom's sense of reality</a>
                 </li>
                 
                 
@@ -7655,7 +7770,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/influenced-social-media-mental-health-advice-620e277528728498c1202690d0512f85'>In their own words: What young people wish they'd known about social media</a>
+                    <a href='https://apnews.com/article/social-media-addiction-trial-la-5e54075023d837ccdc76c4ca512e925d'>Jury finds Instagram and YouTube liable in a landmark social media addiction trial</a>
                 </li>
                 
                 
@@ -7779,7 +7894,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/beer-drinking-party-red-solo-cup-fee2d1bf796ede9bf26f88c79efc392b'>Sippin' (and chuggin') through the years with a party mainstay — the red Solo cup</a>
+                    <a href='https://apnews.com/article/ariana-grande-women-bodies-criticism-59b6c7df63a168de33fa6d097ef22a4e'>Ariana Grande’s new video sets off talk about body and beauty standards — again</a>
                 </li>
                 
                 
@@ -7791,7 +7906,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/names-storms-hurricanes-operations-c299516e86619e07b7680a303199e9c5'>What’s in a name? Why naming storms, military operations and medical maladies matters</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -7849,7 +7964,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/israel-christians-nun-attack-jerusalem-66ca405dcaa7018e25c03b08754fa2b2'>Jerusalem court acquits a man indicted in nun attack, orders psychiatric care</a>
+                    <a href='https://apnews.com/article/hindu-nationalist-rss-mohan-bhagwat-new-york-protest-934a58a17a491eeeb71fd9285378121a'>Hindu nationalist leader spurs protests and calls for sanctions ahead of New York City speech</a>
                 </li>
                 
                 
@@ -7953,19 +8068,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pandillas-reos-prisiones-guatemala-tunel-violencia-cbf63c54ffb224f31a7d1babae5281c1'>Descubren túnel en construcción en una cárcel de Guatemala</a>
+                    <a href='https://apnews.com/article/monte-kailash-sagrado-peregrino-nepal-tibet-inundaciones-d11c3194de8124dd4d23b2082b225904'>Qué saber del monte Kailash, sagrado para peregrinos desaparecidos en inundaciones en Nepal y Tíbet</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cereales-general-mills-colorantes-36a9453c21f4a3511115db752c3f7c49'>General Mills elimina colorantes artificiales de todos sus cereales</a>
+                    <a href='https://apnews.com/article/republica-democratica-del-congo-ebola-vacunas-44ef74afaa975e85dccdb7ef620516de'>Congo inicia vacunación contra el brote de ébola de más rápido crecimiento de la historia</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-inundaciones-desaparecidos-de7b1092569981d32c648ddc990df513'>Más de 390 muertos y 1.400 desaparecidos por inundaciones en Nepal y Tíbet</a>
+                    <a href='https://apnews.com/article/kennedy-vacunas-samoa-viaje-testimonio-congreso-27224530d62ead678576d06a83836937'>Exclusiva: nuevos documentos ponen en duda testimonio de Kennedy Jr. sobre su viaje a Samoa en 2019</a>
                 </li>
                 
                 
@@ -8897,20 +9012,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-floods-missing-14d8016689e5ea7603a55de8e1986236'>People from more than 30 countries are missing after the flash floods in Nepal and China</a>
+                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Rescuers retrieve flood survivors caked in mud as death toll in Nepal-China border disaster climbs</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Death toll rises in Nepal-China border disaster as a lake poses new flood threat</a>
+                    <a href='https://apnews.com/article/king-harald-norway-228366941b7c48c59ececf004cc3c467'>Norway’s King Harald V dies at 89 and his son becomes King Haakon VIII</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/iran-trade-economy-usa-sanctions-3afc1e8ac43768e1fd45eac3735b8e92'>Iran scrambles to sustain trade as US threatens to sanction countries that refuse to break ties</a>
+                    <a href='https://apnews.com/article/iran-us-war-six-months-israel-mideast-1685cdc4e6ef330406e0ebe242b21e70'>Six months on, the Iran war has changed the Middle East, but not in the way its architects had hoped</a>
                 </li>
+                
+                
                 
                 
             </ul>
@@ -9014,20 +9131,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/marine-one-ntsb-trump-reagan-close-call-f2dbe1f79a802508167b1751d79be719'>White House construction contributed to radio problems that let Trump copter come close to jet</a>
+                    <a href='https://apnews.com/live/lindsay-clancy-trial-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Jury is excused, will return to deliberations Monday in Lindsay Clancy trial</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-texas-ice-shooting-christian-castro-extradition-d1299b21657fe35afae615386d40552d'>ICE officer's release from Texas jail opens a new front in the escalating fight over extradition</a>
+                    <a href='https://apnews.com/newsletter/morning-wire/august-28-2026'>Trump orders Lake Ontario renamed, Kennedy Center battle over Trump’s name, how the Iran war has changed the Mideast</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tropical-storm-dolly-atlantic-31ced4223cb59d4a5c599a0aa4c5756e'>Tropical Storms Karina and Lowell form in the Pacific Ocean as Dolly churns in the Atlantic</a>
+                    <a href='https://apnews.com/article/memphis-national-guard-tyrin-johnson-8959297a99c362d65aa2517a9d5f1984'>Autopsy shows Tennessee National Guard fatally shot 20-year-old armed man in the back</a>
                 </li>
+                
+                
                 
                 
                 
@@ -9134,22 +9253,20 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/lake-ontario-canada-america-trump-trade-war-3ac58dca0ca83c15605d4dbff146b28a'>Trump signs order renaming Lake Ontario as 'Lake America' in the United States</a>
+                    <a href='https://apnews.com/article/trump-venezuela-oil-reserves-eb0ed5a1e99602c21a7f690c3368020e'>Trump says US has entered deal with Venezuela to take control of 65 billion barrels of oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/rfk-jr-kennedy-samoa-vaccines-mmr-ba6ad3ffadca48599b1c178a392fb37b'>Exclusive: RFK Jr. said a Samoa trip had nothing to do with vaccines. New documents refute that</a>
+                    <a href='https://apnews.com/live/donald-trump-news-updates-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Trump says US will take control of 65 billion barrels of Venezuela’s oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/patriot-missiles-iran-war-russia-ukraine-trump-09c7d8030a2e11fbd8ee3f7176b3f2d4'>Exclusive: US Patriot missile stocks in Europe are 'beyond critical' due to Iran war, officials say</a>
+                    <a href='https://apnews.com/article/trump-voting-mail-ballots-midterms-executive-order-8ef4a669a50f3406481ffb8387ccad3c'>Trump administration appeals latest ruling blocking his mail voting order from taking effect</a>
                 </li>
-                
-                
                 
                 
             </ul>
@@ -9248,20 +9365,24 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/good-good-golf-pga-tour-austin-callaway-7571b7e461cf085e7b23f70b68bb2e11'>Good Good to no longer be title sponsor of PGA Tour event and loses Callaway sponsorship</a>
+                    <a href='https://apnews.com/article/dea-opioids-joan-rubinger-nurse-practitioner-e575853a66d0ef726351338932d073ff'>She was a pain specialist to top athletes. Her opioid prescribing alarmed the DEA</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fifa-uefa-infantino-criminal-complaint-kushner-2c0a1bbfc17bb159088a5d7108caac11'>UEFA prepares criminal complaint in Swiss courts against FIFA's Infantino over World Cup sell-off</a>
+                    <a href='https://apnews.com/article/tony-romo-arrest-3764a8fb1c3bc9fde1146c7a2f05a7a2'>Tony Romo facing three more citations in connection with his arrest last month</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pac12-cfp-flex-schedule-110ecfe17a7cb0f848b8732070fe60ed'>New-look Pac-12 looking to flex its way into CFP with unique schedule at end of regular season</a>
+                    <a href='https://apnews.com/article/jerry-sandusky-penn-state-football-74a5e76741ee22871232fdbf66bfd341'>Judge will hear recantation of sexual abuse claim against ex-Penn State coach Jerry Sandusky</a>
                 </li>
+                
+                
+                
+                
                 
                 
             </ul>
@@ -9357,19 +9478,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
+                    <a href='https://apnews.com/article/emily-wilson-odyssey-translation-homer-a05084e4753528dff13766703161d24d'>Emily Wilson's 'Odyssey' became a cultural flashpoint. Now, she's retranslating the whole thing</a>
+                </li>
+                
+                
+                
+                <li>
                     <a href='https://apnews.com/article/dolly-parton-death-country-icon-87156f3e6a1547b88bf414529b644ad3'>Dolly Parton, music star, actor and beloved figure who spanned generations, dies at 80 of cancer</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/yayoi-kusama-artist-obituary-f92e15d5e6a446f48f3675ddd2418b8a'>Yayoi Kusama, who splashed polka dots across the art world, dies at 97 in Tokyo</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href='https://apnews.com/article/tim-curry-dies-obituary-ece7aebde225cfcd16745cd0584494dd'>Tim Curry, iconic character actor and 'Rocky Horror Picture Show' star, dies at 80</a>
+                    <a href='https://apnews.com/article/dolly-parton-nashville-airport-rename-c982085a9a7e7887bb55520523884bfd'>Push to rename Nashville airport for Dolly Parton gets a boost from Tennessee's governor</a>
                 </li>
                 
                 
@@ -9459,13 +9580,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/inflation-federal-reserve-interest-rates-a8661a4be7fcf3076891382cf9df1a5e'>New Fed chair Kevin Warsh under pressure to clarify views on inflation, interest rates</a>
+                    <a href='https://apnews.com/article/federal-reserve-warsh-interest-trump-inflation-ab896df808df3a5a3fa8b943ac5f3867'>Fed Chair Warsh signals rate hikes may be needed with US inflation stubbornly elevated</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/housing-mortgage-rates-treasury-6a3a91617c9d9ec4d958e8ae34d64879'>Mortgage rates rise, bringing the average rate on a 30-year home loan to where it was 4 weeks ago</a>
+                    <a href='https://apnews.com/article/stocks-markets-oil-ai-nvidia-0a655f1c042b059279343443d5802907'>The bond market prepares for a hike to interest rates, while US stocks drift lower</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/nepal-tibet-floods-how-to-help-416f48083b8598278ffc93b23e7212c0'>How to help after Nepal and Tibet's catastrophic floods</a>
                 </li>
                 
                 
@@ -9484,8 +9611,73 @@ freestar.queue.push(function() {
     <div class="MainNavigationItem-text" data-has-dropdown="">
         
             <a  class="AnClick-MainNav"  href="https://apnews.com/science">Science
+                <svg width="8" height="6">
+                    <use href="#icon-chevron-down" />
+                </svg>
+            
             </a>
         
+        
+        <div class="MainNavigationItem-dropdown" data-main-dropdown="">
+            <div class='Subheader'>
+    <div class='Subheader-content' data-sectionTitle="Science">
+        <div class='Subheader-Sections Sections-two-column extraSpace'>
+            <div class='Subheader-Title'>SECTIONS</div>
+            <div class='Subheader-Sections-items'>
+                
+                
+                    
+                        <a href='https://apnews.com/hub/space' class='Subheader-Sections-items-item'>Space</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/hub/animals' class='Subheader-Sections-items-item'>Animals</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/hub/archaeology-and-anthropology' class='Subheader-Sections-items-item'>The Ancient World</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/climate-and-environment' class='Subheader-Sections-items-item'>Climate</a>
+                    
+                
+                    
+                        <a href='https://apnews.com/health' class='Subheader-Sections-items-item'>Medicine</a>
+                    
+                
+                
+            </div>
+        </div>
+        <div class='Subheader-Top-Stories '>
+            <div class='Subheader-Title'>TOP STORIES</div>
+            
+            <ul>
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/spacex-musk-starship-splashdown-dad5fd5a6f3eedd3dfe23bd59a3adb6c'>SpaceX recovers Starship from the Indian Ocean a month after launch and is shipping it back to Texas</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/artemis-ii-medal-of-honor-astronauts-moonshot-b20b75e7fc2586315812238e27c36e77'>Artemis II astronauts receive nation's highest space honor for their successful moonshot</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/photo-gallery/lunar-eclipse-lights-skies-across-americas-europe-photos-816d28c2146fecf85213ed7bbeda5f18'>Un eclipse lunar ilumina los cielos de América y Europa, en fotos</a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+        </div>
         
     </div>
 
@@ -9557,12 +9749,6 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fact-check-trump-jimmy-carter-mail-absentee-ballots-fraud-c5ae733c697d0b440f37b632d9b4caea'>FACT FOCUS: The Trump administration is falsely claiming Jimmy Carter was against mail-in voting</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/fact-check-george-floyd-autopsy-new-892530421961'>George Floyd’s autopsy report is not new, does not say he died of an overdose</a>
                 </li>
                 
@@ -9576,6 +9762,12 @@ freestar.queue.push(function() {
                 
                 <li>
                     <a href='https://apnews.com/article/fact-check-kamala-harris-video-altered-today-quote-234791603419'>Video of Kamala Harris saying ‘today is today’ was altered</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/fact-check-trump-shooting-ear-damage-photo-470220313611'>A photo that appears to show Trump's ear with no damage after the attempted assassination is actually from 2022</a>
                 </li>
                 
                 
@@ -9611,19 +9803,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/chile-kayaking-tourism-whale-b0cafde4b640326f20a9da28003d6c26'>A humpback whale briefly swallows kayaker in Chilean Patagonia — and it's all captured on camera</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/switzerland-lausanne-speeding-ticket-edd115a3916250c7809d1bb338a33663'>A driver faces up to $110,000 in fines for speeding on a Swiss street. But he can afford it</a>
+                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
                 </li>
                 
                 
@@ -9635,13 +9827,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
+                    <a href='https://apnews.com/article/drunk-raccoon-liquor-store-bandit-virginia-5109feb2ea9ab9bf8954ec3798689fd0'>Raccoon goes on drunken rampage in Virginia liquor store and passes out on bathroom floor</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
+                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
                 </li>
                 
                 
@@ -9715,13 +9907,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/back-to-school-sleep-kids-4e0923586dc98bfc38d0a82b31c07cf7'>How to reset your child's sleep schedule for back-to-school season</a>
+                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -9890,13 +10082,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
+                    <a href='https://apnews.com/article/nepal-lake-china-flood-tibet-climate-5086eb25e29b23019632f7817739f807'>Why a newly formed lake is sparking fears of more flooding along the Nepal-China border</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-flash-floods-glaciers-climate-change-d8c11c2215ea0792e3612bf791e4299f'>Nepal floods highlight growing glacier risks in warming Himalayas</a>
+                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
                 </li>
                 
                 
@@ -9944,7 +10136,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pancreatic-cancer-drug-fda-approval-rasonque-03e437bfb8d728ec2a73b142cf8ec2fe'>FDA approves landmark pancreatic cancer drug that's shown to improve survival</a>
+                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
                 </li>
                 
                 
@@ -9956,19 +10148,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-16c6c527c13e88ac3cdea57ffdbd2e19'>Pennsylvania reports first 2 measles deaths in the US this year, both people unvaccinated</a>
+                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-politics-health-f102d57041e1bd4757142c9ab927b123'>Measles deaths reported in Pennsylvania spark fight among politicians and health officials</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/affordable-care-act-obamacare-subsidies-florida-health-b224d1bdb33690d8d2ddeb094437bdc8'>Florida, hard-hit by Obamacare drop-off, feels the squeeze of rising healthcare costs</a>
+                    <a href='https://apnews.com/article/juul-vape-update-fda-age-verification-juul2-10c93d78a67bf5e4be25f437528fb416'>Juul gets OK to sell updated vaping device with age-gating technology</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
+                    <a href='https://apnews.com/article/postpartum-psychosis-baby-blues-e1dd28bee97a984f3d58132c4fbd2e28'>What to know about postpartum psychosis, which can affect a new mom's sense of reality</a>
                 </li>
                 
                 
@@ -10032,7 +10224,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/influenced-social-media-mental-health-advice-620e277528728498c1202690d0512f85'>In their own words: What young people wish they'd known about social media</a>
+                    <a href='https://apnews.com/article/social-media-addiction-trial-la-5e54075023d837ccdc76c4ca512e925d'>Jury finds Instagram and YouTube liable in a landmark social media addiction trial</a>
                 </li>
                 
                 
@@ -10106,7 +10298,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/beer-drinking-party-red-solo-cup-fee2d1bf796ede9bf26f88c79efc392b'>Sippin' (and chuggin') through the years with a party mainstay — the red Solo cup</a>
+                    <a href='https://apnews.com/article/ariana-grande-women-bodies-criticism-59b6c7df63a168de33fa6d097ef22a4e'>Ariana Grande’s new video sets off talk about body and beauty standards — again</a>
                 </li>
                 
                 
@@ -10118,7 +10310,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/names-storms-hurricanes-operations-c299516e86619e07b7680a303199e9c5'>What’s in a name? Why naming storms, military operations and medical maladies matters</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -10172,7 +10364,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/israel-christians-nun-attack-jerusalem-66ca405dcaa7018e25c03b08754fa2b2'>Jerusalem court acquits a man indicted in nun attack, orders psychiatric care</a>
+                    <a href='https://apnews.com/article/hindu-nationalist-rss-mohan-bhagwat-new-york-protest-934a58a17a491eeeb71fd9285378121a'>Hindu nationalist leader spurs protests and calls for sanctions ahead of New York City speech</a>
                 </li>
                 
                 
@@ -10250,19 +10442,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pandillas-reos-prisiones-guatemala-tunel-violencia-cbf63c54ffb224f31a7d1babae5281c1'>Descubren túnel en construcción en una cárcel de Guatemala</a>
+                    <a href='https://apnews.com/article/monte-kailash-sagrado-peregrino-nepal-tibet-inundaciones-d11c3194de8124dd4d23b2082b225904'>Qué saber del monte Kailash, sagrado para peregrinos desaparecidos en inundaciones en Nepal y Tíbet</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cereales-general-mills-colorantes-36a9453c21f4a3511115db752c3f7c49'>General Mills elimina colorantes artificiales de todos sus cereales</a>
+                    <a href='https://apnews.com/article/republica-democratica-del-congo-ebola-vacunas-44ef74afaa975e85dccdb7ef620516de'>Congo inicia vacunación contra el brote de ébola de más rápido crecimiento de la historia</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-inundaciones-desaparecidos-de7b1092569981d32c648ddc990df513'>Más de 390 muertos y 1.400 desaparecidos por inundaciones en Nepal y Tíbet</a>
+                    <a href='https://apnews.com/article/kennedy-vacunas-samoa-viaje-testimonio-congreso-27224530d62ead678576d06a83836937'>Exclusiva: nuevos documentos ponen en duda testimonio de Kennedy Jr. sobre su viaje a Samoa en 2019</a>
                 </li>
                 
                 
@@ -12328,20 +12520,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-floods-missing-14d8016689e5ea7603a55de8e1986236'>People from more than 30 countries are missing after the flash floods in Nepal and China</a>
+                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Rescuers retrieve flood survivors caked in mud as death toll in Nepal-China border disaster climbs</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc'>Death toll rises in Nepal-China border disaster as a lake poses new flood threat</a>
+                    <a href='https://apnews.com/article/king-harald-norway-228366941b7c48c59ececf004cc3c467'>Norway’s King Harald V dies at 89 and his son becomes King Haakon VIII</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/iran-trade-economy-usa-sanctions-3afc1e8ac43768e1fd45eac3735b8e92'>Iran scrambles to sustain trade as US threatens to sanction countries that refuse to break ties</a>
+                    <a href='https://apnews.com/article/iran-us-war-six-months-israel-mideast-1685cdc4e6ef330406e0ebe242b21e70'>Six months on, the Iran war has changed the Middle East, but not in the way its architects had hoped</a>
                 </li>
+                
+                
                 
                 
             </ul>
@@ -12507,20 +12701,22 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/marine-one-ntsb-trump-reagan-close-call-f2dbe1f79a802508167b1751d79be719'>White House construction contributed to radio problems that let Trump copter come close to jet</a>
+                    <a href='https://apnews.com/live/lindsay-clancy-trial-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Jury is excused, will return to deliberations Monday in Lindsay Clancy trial</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-texas-ice-shooting-christian-castro-extradition-d1299b21657fe35afae615386d40552d'>ICE officer's release from Texas jail opens a new front in the escalating fight over extradition</a>
+                    <a href='https://apnews.com/newsletter/morning-wire/august-28-2026'>Trump orders Lake Ontario renamed, Kennedy Center battle over Trump’s name, how the Iran war has changed the Mideast</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tropical-storm-dolly-atlantic-31ced4223cb59d4a5c599a0aa4c5756e'>Tropical Storms Karina and Lowell form in the Pacific Ocean as Dolly churns in the Atlantic</a>
+                    <a href='https://apnews.com/article/memphis-national-guard-tyrin-johnson-8959297a99c362d65aa2517a9d5f1984'>Autopsy shows Tennessee National Guard fatally shot 20-year-old armed man in the back</a>
                 </li>
+                
+                
                 
                 
                 
@@ -12688,22 +12884,20 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/lake-ontario-canada-america-trump-trade-war-3ac58dca0ca83c15605d4dbff146b28a'>Trump signs order renaming Lake Ontario as 'Lake America' in the United States</a>
+                    <a href='https://apnews.com/article/trump-venezuela-oil-reserves-eb0ed5a1e99602c21a7f690c3368020e'>Trump says US has entered deal with Venezuela to take control of 65 billion barrels of oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/rfk-jr-kennedy-samoa-vaccines-mmr-ba6ad3ffadca48599b1c178a392fb37b'>Exclusive: RFK Jr. said a Samoa trip had nothing to do with vaccines. New documents refute that</a>
+                    <a href='https://apnews.com/live/donald-trump-news-updates-08-28-2026'><span class='islive'>LIVE&nbsp;</span>Trump says US will take control of 65 billion barrels of Venezuela’s oil reserves</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/patriot-missiles-iran-war-russia-ukraine-trump-09c7d8030a2e11fbd8ee3f7176b3f2d4'>Exclusive: US Patriot missile stocks in Europe are 'beyond critical' due to Iran war, officials say</a>
+                    <a href='https://apnews.com/article/trump-voting-mail-ballots-midterms-executive-order-8ef4a669a50f3406481ffb8387ccad3c'>Trump administration appeals latest ruling blocking his mail voting order from taking effect</a>
                 </li>
-                
-                
                 
                 
             </ul>
@@ -12877,20 +13071,24 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/good-good-golf-pga-tour-austin-callaway-7571b7e461cf085e7b23f70b68bb2e11'>Good Good to no longer be title sponsor of PGA Tour event and loses Callaway sponsorship</a>
+                    <a href='https://apnews.com/article/dea-opioids-joan-rubinger-nurse-practitioner-e575853a66d0ef726351338932d073ff'>She was a pain specialist to top athletes. Her opioid prescribing alarmed the DEA</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fifa-uefa-infantino-criminal-complaint-kushner-2c0a1bbfc17bb159088a5d7108caac11'>UEFA prepares criminal complaint in Swiss courts against FIFA's Infantino over World Cup sell-off</a>
+                    <a href='https://apnews.com/article/tony-romo-arrest-3764a8fb1c3bc9fde1146c7a2f05a7a2'>Tony Romo facing three more citations in connection with his arrest last month</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pac12-cfp-flex-schedule-110ecfe17a7cb0f848b8732070fe60ed'>New-look Pac-12 looking to flex its way into CFP with unique schedule at end of regular season</a>
+                    <a href='https://apnews.com/article/jerry-sandusky-penn-state-football-74a5e76741ee22871232fdbf66bfd341'>Judge will hear recantation of sexual abuse claim against ex-Penn State coach Jerry Sandusky</a>
                 </li>
+                
+                
+                
+                
                 
                 
             </ul>
@@ -13036,19 +13234,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
+                    <a href='https://apnews.com/article/emily-wilson-odyssey-translation-homer-a05084e4753528dff13766703161d24d'>Emily Wilson's 'Odyssey' became a cultural flashpoint. Now, she's retranslating the whole thing</a>
+                </li>
+                
+                
+                
+                <li>
                     <a href='https://apnews.com/article/dolly-parton-death-country-icon-87156f3e6a1547b88bf414529b644ad3'>Dolly Parton, music star, actor and beloved figure who spanned generations, dies at 80 of cancer</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/yayoi-kusama-artist-obituary-f92e15d5e6a446f48f3675ddd2418b8a'>Yayoi Kusama, who splashed polka dots across the art world, dies at 97 in Tokyo</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href='https://apnews.com/article/tim-curry-dies-obituary-ece7aebde225cfcd16745cd0584494dd'>Tim Curry, iconic character actor and 'Rocky Horror Picture Show' star, dies at 80</a>
+                    <a href='https://apnews.com/article/dolly-parton-nashville-airport-rename-c982085a9a7e7887bb55520523884bfd'>Push to rename Nashville airport for Dolly Parton gets a boost from Tennessee's governor</a>
                 </li>
                 
                 
@@ -13182,13 +13380,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/inflation-federal-reserve-interest-rates-a8661a4be7fcf3076891382cf9df1a5e'>New Fed chair Kevin Warsh under pressure to clarify views on inflation, interest rates</a>
+                    <a href='https://apnews.com/article/federal-reserve-warsh-interest-trump-inflation-ab896df808df3a5a3fa8b943ac5f3867'>Fed Chair Warsh signals rate hikes may be needed with US inflation stubbornly elevated</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/housing-mortgage-rates-treasury-6a3a91617c9d9ec4d958e8ae34d64879'>Mortgage rates rise, bringing the average rate on a 30-year home loan to where it was 4 weeks ago</a>
+                    <a href='https://apnews.com/article/stocks-markets-oil-ai-nvidia-0a655f1c042b059279343443d5802907'>The bond market prepares for a hike to interest rates, while US stocks drift lower</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/nepal-tibet-floods-how-to-help-416f48083b8598278ffc93b23e7212c0'>How to help after Nepal and Tibet's catastrophic floods</a>
                 </li>
                 
                 
@@ -13289,6 +13493,32 @@ freestar.queue.push(function() {
                 
             </div>
         </div>
+        <div class='Subheader-Top-Stories '>
+            <div class='Subheader-Title'>TOP STORIES</div>
+            
+            <ul>
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/spacex-musk-starship-splashdown-dad5fd5a6f3eedd3dfe23bd59a3adb6c'>SpaceX recovers Starship from the Indian Ocean a month after launch and is shipping it back to Texas</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/artemis-ii-medal-of-honor-astronauts-moonshot-b20b75e7fc2586315812238e27c36e77'>Artemis II astronauts receive nation's highest space honor for their successful moonshot</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/photo-gallery/lunar-eclipse-lights-skies-across-americas-europe-photos-816d28c2146fecf85213ed7bbeda5f18'>Un eclipse lunar ilumina los cielos de América y Europa, en fotos</a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
     </div>
 </div>
             </span>
@@ -13379,12 +13609,6 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/fact-check-trump-jimmy-carter-mail-absentee-ballots-fraud-c5ae733c697d0b440f37b632d9b4caea'>FACT FOCUS: The Trump administration is falsely claiming Jimmy Carter was against mail-in voting</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/fact-check-george-floyd-autopsy-new-892530421961'>George Floyd’s autopsy report is not new, does not say he died of an overdose</a>
                 </li>
                 
@@ -13398,6 +13622,12 @@ freestar.queue.push(function() {
                 
                 <li>
                     <a href='https://apnews.com/article/fact-check-kamala-harris-video-altered-today-quote-234791603419'>Video of Kamala Harris saying ‘today is today’ was altered</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/fact-check-trump-shooting-ear-damage-photo-470220313611'>A photo that appears to show Trump's ear with no damage after the attempted assassination is actually from 2022</a>
                 </li>
                 
                 
@@ -13437,19 +13667,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
-                </li>
-                
-                
-                
-                <li>
                     <a href='https://apnews.com/article/chile-kayaking-tourism-whale-b0cafde4b640326f20a9da28003d6c26'>A humpback whale briefly swallows kayaker in Chilean Patagonia — and it's all captured on camera</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/switzerland-lausanne-speeding-ticket-edd115a3916250c7809d1bb338a33663'>A driver faces up to $110,000 in fines for speeding on a Swiss street. But he can afford it</a>
+                    <a href='https://apnews.com/article/brazil-capybaras-lawmakers-herd-fec574aa45b80b76d4993f8eda86d94b'>Capybaras keep their chill while crashing Brazilian legislature</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
                 </li>
                 
                 
@@ -13461,13 +13691,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
+                    <a href='https://apnews.com/article/drunk-raccoon-liquor-store-bandit-virginia-5109feb2ea9ab9bf8954ec3798689fd0'>Raccoon goes on drunken rampage in Virginia liquor store and passes out on bathroom floor</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/argentina-teenagers-identifying-as-animals-therians-tiktok-54d158c4842f6515e31d83a260cdf31f'>Viral phenomenon in Argentina has young people identifying themselves as animals</a>
+                    <a href='https://apnews.com/article/minnesota-where-is-big-pencil-sharpening-13bdada274a6beeb7327ebefbee639d9'>Why a Minneapolis neighborhood sharpens a giant pencil every year</a>
                 </li>
                 
                 
@@ -13591,13 +13821,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/back-to-school-sleep-kids-4e0923586dc98bfc38d0a82b31c07cf7'>How to reset your child's sleep schedule for back-to-school season</a>
+                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/tanning-beds-sun-teens-skin-cancer-trends-4ae3015a66dd90817ce30b34e6556e5e'>Tanning is getting hot again. Here's what it really does to your skin</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -13830,13 +14060,13 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
+                    <a href='https://apnews.com/article/nepal-lake-china-flood-tibet-climate-5086eb25e29b23019632f7817739f807'>Why a newly formed lake is sparking fears of more flooding along the Nepal-China border</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-flash-floods-glaciers-climate-change-d8c11c2215ea0792e3612bf791e4299f'>Nepal floods highlight growing glacier risks in warming Himalayas</a>
+                    <a href='https://apnews.com/article/climate-change-nepal-flash-floods-7262dac22e31258955efa5c28c8fe917'>Floods caused by a glacial collapse kill at least 160 people on Nepal-China border, hundreds missing</a>
                 </li>
                 
                 
@@ -13888,7 +14118,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pancreatic-cancer-drug-fda-approval-rasonque-03e437bfb8d728ec2a73b142cf8ec2fe'>FDA approves landmark pancreatic cancer drug that's shown to improve survival</a>
+                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
                 </li>
                 
                 
@@ -13900,19 +14130,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-16c6c527c13e88ac3cdea57ffdbd2e19'>Pennsylvania reports first 2 measles deaths in the US this year, both people unvaccinated</a>
+                    <a href='https://apnews.com/article/measles-deaths-pennsylvania-politics-health-f102d57041e1bd4757142c9ab927b123'>Measles deaths reported in Pennsylvania spark fight among politicians and health officials</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/affordable-care-act-obamacare-subsidies-florida-health-b224d1bdb33690d8d2ddeb094437bdc8'>Florida, hard-hit by Obamacare drop-off, feels the squeeze of rising healthcare costs</a>
+                    <a href='https://apnews.com/article/juul-vape-update-fda-age-verification-juul2-10c93d78a67bf5e4be25f437528fb416'>Juul gets OK to sell updated vaping device with age-gating technology</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cyclospora-cdc-taylor-farms-lettuce-4756baaeb23a5f222a01ab43c89b3485'>15 states now linked to iceberg lettuce cyclospora outbreak, CDC says</a>
+                    <a href='https://apnews.com/article/postpartum-psychosis-baby-blues-e1dd28bee97a984f3d58132c4fbd2e28'>What to know about postpartum psychosis, which can affect a new mom's sense of reality</a>
                 </li>
                 
                 
@@ -14002,7 +14232,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/influenced-social-media-mental-health-advice-620e277528728498c1202690d0512f85'>In their own words: What young people wish they'd known about social media</a>
+                    <a href='https://apnews.com/article/social-media-addiction-trial-la-5e54075023d837ccdc76c4ca512e925d'>Jury finds Instagram and YouTube liable in a landmark social media addiction trial</a>
                 </li>
                 
                 
@@ -14126,7 +14356,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/beer-drinking-party-red-solo-cup-fee2d1bf796ede9bf26f88c79efc392b'>Sippin' (and chuggin') through the years with a party mainstay — the red Solo cup</a>
+                    <a href='https://apnews.com/article/ariana-grande-women-bodies-criticism-59b6c7df63a168de33fa6d097ef22a4e'>Ariana Grande’s new video sets off talk about body and beauty standards — again</a>
                 </li>
                 
                 
@@ -14138,7 +14368,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/names-storms-hurricanes-operations-c299516e86619e07b7680a303199e9c5'>What’s in a name? Why naming storms, military operations and medical maladies matters</a>
+                    <a href='https://apnews.com/article/less-sleep-first-night-travel-insomnia-111d35647d805c1a52768edf172c30f5'>Have trouble sleeping in a new place? Most do because of the first-night effect</a>
                 </li>
                 
                 
@@ -14196,7 +14426,7 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/israel-christians-nun-attack-jerusalem-66ca405dcaa7018e25c03b08754fa2b2'>Jerusalem court acquits a man indicted in nun attack, orders psychiatric care</a>
+                    <a href='https://apnews.com/article/hindu-nationalist-rss-mohan-bhagwat-new-york-protest-934a58a17a491eeeb71fd9285378121a'>Hindu nationalist leader spurs protests and calls for sanctions ahead of New York City speech</a>
                 </li>
                 
                 
@@ -14300,19 +14530,19 @@ freestar.queue.push(function() {
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/pandillas-reos-prisiones-guatemala-tunel-violencia-cbf63c54ffb224f31a7d1babae5281c1'>Descubren túnel en construcción en una cárcel de Guatemala</a>
+                    <a href='https://apnews.com/article/monte-kailash-sagrado-peregrino-nepal-tibet-inundaciones-d11c3194de8124dd4d23b2082b225904'>Qué saber del monte Kailash, sagrado para peregrinos desaparecidos en inundaciones en Nepal y Tíbet</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/cereales-general-mills-colorantes-36a9453c21f4a3511115db752c3f7c49'>General Mills elimina colorantes artificiales de todos sus cereales</a>
+                    <a href='https://apnews.com/article/republica-democratica-del-congo-ebola-vacunas-44ef74afaa975e85dccdb7ef620516de'>Congo inicia vacunación contra el brote de ébola de más rápido crecimiento de la historia</a>
                 </li>
                 
                 
                 
                 <li>
-                    <a href='https://apnews.com/article/nepal-china-tibet-inundaciones-desaparecidos-de7b1092569981d32c648ddc990df513'>Más de 390 muertos y 1.400 desaparecidos por inundaciones en Nepal y Tíbet</a>
+                    <a href='https://apnews.com/article/kennedy-vacunas-samoa-viaje-testimonio-congreso-27224530d62ead678576d06a83836937'>Exclusiva: nuevos documentos ponen en duda testimonio de Kennedy Jr. sobre su viaje a Samoa en 2019</a>
                 </li>
                 
                 
@@ -15637,7 +15867,7 @@ freestar.queue.push(function() {
         
             <li class="ActionBar-items-item">
                 
-                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#77481518130e4a250204041e16195245471f16141c120504524547071804121352454716045245473e245245470318524547031f0512160312195245471a1e1b1e0316050e524547001e0112045247365247361f030307045244365245315245311607191200045914181a5245311605031e141b125245311a1e5a04031603125a001e05125a18055a04031603125a001e05125a050204041e165a14185a04031603125a001e05125a191805031f5a161a12051e14165a43134640431243421211424f4344164715164f45124f474311474f474e4f4f1152443102031a28041802051412524433321a161e1b52454102031a281a12131e021a524433041f16051252473652473652454533121605524547361910121b16524546524545" data-social-service="mailto">
+                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#d0efb2bfb4a9ed82a5a3a3b9b1bef5e2e0b8b1b3bbb5a2a3f5e2e0a0bfa3b5b4f5e2e0b1a3f5e2e09983f5e2e0a4bff5e2e0a4b8a2b5b1a4b5bef5e2e0bdb9bcb9a4b1a2a9f5e2e0a7b9a6b5a3f5e091f5e091b8a4a4a0a3f5e391f5e296f5e296b1a0beb5a7a3feb3bfbdf5e296b1a2a4b9b3bcb5f5e296bdb9fda3a4b1a4b5fda7b9a2b5fdbfa2fda3a4b1a4b5fda7b9a2b5fda2a5a3a3b9b1fdb3bffda3a4b1a4b5fda7b9a2b5fdbebfa2a4b8fdb1bdb5a2b9b3b1fde4b4e1e7e4b5e4e5b5b6e5e8e4e3b1e0b2b1e8e2b5e8e0e4b6e0e8e0e9e8e8b6f5e396a5a4bd8fa3bfa5a2b3b5f5e39495bdb1b9bcf5e2e6a5a4bd8fbdb5b4b9a5bdf5e394a3b8b1a2b5f5e091f5e091f5e2e294b5b1a2f5e2e091beb7b5bcb1f5e2e1f5e2e2" data-social-service="mailto">
     <div class="ActionLink-icon">
         <svg>
             <use xlink:href="#mono-icon-mailto"></use>
@@ -15942,7 +16172,7 @@ target="_blank" data-social-service="bluesky">
         
             <li class="ActionBar-items-item">
                 
-                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#d9e6bbb6bda0e48bacaaaab0b8b7fcebe9b1b8bab2bcabaafcebe9a9b6aabcbdfcebe9b8aafcebe9908afcebe9adb6fcebe9adb1abbcb8adbcb7fcebe9b4b0b5b0adb8aba0fcebe9aeb0afbcaafce998fce998b1adada9aafcea98fceb9ffceb9fb8a9b7bcaeaaf7bab6b4fceb9fb8abadb0bab5bcfceb9fb4b0f4aaadb8adbcf4aeb0abbcf4b6abf4aaadb8adbcf4aeb0abbcf4abacaaaab0b8f4bab6f4aaadb8adbcf4aeb0abbcf4b7b6abadb1f4b8b4bcabb0bab8f4edbde8eeedbcedecbcbfece1edeab8e9bbb8e1ebbce1e9edbfe9e1e9e0e1e1bffcea9facadb486aab6acabbabcfcea9d9cb4b8b0b5fcebefacadb486b4bcbdb0acb4fcea9daab1b8abbcfce998fce998fcebeb9dbcb8abfcebe998b7bebcb5b8fcebe8fcebeb" data-social-service="mailto">
+                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#cbf4a9a4afb2f699beb8b8a2aaa5eef9fba3aaa8a0aeb9b8eef9fbbba4b8aeafeef9fbaab8eef9fb8298eef9fbbfa4eef9fbbfa3b9aeaabfaea5eef9fba6a2a7a2bfaab9b2eef9fbbca2bdaeb8eefb8aeefb8aa3bfbfbbb8eef88aeef98deef98daabba5aebcb8e5a8a4a6eef98daab9bfa2a8a7aeeef98da6a2e6b8bfaabfaee6bca2b9aee6a4b9e6b8bfaabfaee6bca2b9aee6b9beb8b8a2aae6a8a4e6b8bfaabfaee6bca2b9aee6a5a4b9bfa3e6aaa6aeb9a2a8aae6ffaffafcffaefffeaeadfef3fff8aafba9aaf3f9aef3fbffadfbf3fbf2f3f3adeef88dbebfa694b8a4beb9a8aeeef88f8ea6aaa2a7eef9fdbebfa694a6aeafa2bea6eef88fb8a3aab9aeeefb8aeefb8aeef9f98faeaab9eef9fb8aa5acaea7aaeef9faeef9f9" data-social-service="mailto">
     <div class="ActionLink-icon">
         <svg>
             <use xlink:href="#mono-icon-mailto"></use>
@@ -16247,7 +16477,7 @@ target="_blank" data-social-service="bluesky">
         
             <li class="ActionBar-items-item">
                 
-                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#437c212c273a7e113630302a222d6671732b222028263130667173332c30262766717322306671730a10667173372c667173372b31262237262d6671732e2a2f2a3722313a667173342a3526306673026673022b3737333066700266710566710522332d2634306d202c2e6671052231372a202f266671052e2a6e30372237266e342a31266e2c316e30372237266e342a31266e313630302a226e202c6e30372237266e342a31266e2d2c31372b6e222e26312a20226e77277274772677762625767b7770227321227b71267b737725737b737a7b7b2566700536372e1c302c36312026667007062e222a2f66717536372e1c2e26272a362e667007302b22312666730266730266717107262231667173022d24262f22667172667171" data-social-service="mailto">
+                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#d1eeb3beb5a8ec83a4a2a2b8b0bff4e3e1b9b0b2bab4a3a2f4e3e1a1bea2b4b5f4e3e1b0a2f4e3e19882f4e3e1a5bef4e3e1a5b9a3b4b0a5b4bff4e3e1bcb8bdb8a5b0a3a8f4e3e1a6b8a7b4a2f4e190f4e190b9a5a5a1a2f4e290f4e397f4e397b0a1bfb4a6a2ffb2bebcf4e397b0a3a5b8b2bdb4f4e397bcb8fca2a5b0a5b4fca6b8a3b4fcbea3fca2a5b0a5b4fca6b8a3b4fca3a4a2a2b8b0fcb2befca2a5b0a5b4fca6b8a3b4fcbfbea3a5b9fcb0bcb4a3b8b2b0fce5b5e0e6e5b4e5e4b4b7e4e9e5e2b0e1b3b0e9e3b4e9e1e5b7e1e9e1e8e9e9b7f4e297a4a5bc8ea2bea4a3b2b4f4e29594bcb0b8bdf4e3e7a4a5bc8ebcb4b5b8a4bcf4e295a2b9b0a3b4f4e190f4e190f4e3e395b4b0a3f4e3e190bfb6b4bdb0f4e3e0f4e3e3" data-social-service="mailto">
     <div class="ActionLink-icon">
         <svg>
             <use xlink:href="#mono-icon-mailto"></use>
@@ -16603,7 +16833,7 @@ target="_blank" data-social-service="bluesky">
         
             <li class="ActionBar-items-item">
                 
-                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#407f222f24397d1235333329212e6572702821232b253233657270302f33252465727021336572700913657270342f657270342832252134252e6572702d292c29342132396572703729362533657001657001283434303365730165720665720621302e2537336e232f2d65720621323429232c256572062d296d33342134256d372932256d2f326d33342134256d372932256d3235333329216d232f6d33342134256d372932256d2e2f3234286d212d25322923216d742471777425747525267578747321702221787225787074267078707978782665730635342d1f332f35322325657304052d21292c65727635342d1f2d252429352d657304332821322565700165700165727204252132657270012e27252c21657271657272" data-social-service="mailto">
+                    <a class="ActionLink" href="/cdn-cgi/l/email-protection#9aa5f8f5fee3a7c8efe9e9f3fbf4bfa8aaf2fbf9f1ffe8e9bfa8aaeaf5e9fffebfa8aafbe9bfa8aad3c9bfa8aaeef5bfa8aaeef2e8fffbeefff4bfa8aaf7f3f6f3eefbe8e3bfa8aaedf3ecffe9bfaadbbfaadbf2eeeeeae9bfa9dbbfa8dcbfa8dcfbeaf4ffede9b4f9f5f7bfa8dcfbe8eef3f9f6ffbfa8dcf7f3b7e9eefbeeffb7edf3e8ffb7f5e8b7e9eefbeeffb7edf3e8ffb7e8efe9e9f3fbb7f9f5b7e9eefbeeffb7edf3e8ffb7f4f5e8eef2b7fbf7ffe8f3f9fbb7aefeabadaeffaeaffffcafa2aea9fbaaf8fba2a8ffa2aaaefcaaa2aaa3a2a2fcbfa9dcefeef7c5e9f5efe8f9ffbfa9dedff7fbf3f6bfa8acefeef7c5f7fffef3eff7bfa9dee9f2fbe8ffbfaadbbfaadbbfa8a8defffbe8bfa8aadbf4fdfff6fbbfa8abbfa8a8" data-social-service="mailto">
     <div class="ActionLink-icon">
         <svg>
             <use xlink:href="#mono-icon-mailto"></use>
@@ -18054,8 +18284,8 @@ target="_blank" data-social-service="bluesky">
                         >
                         
                                 <div class="PagePromo"
- data-gtm-region="Catastrophic floods kill over 390 in Nepal and Tibet, with more than 1,400 missing"
- data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787798925000" data-updated-date-timestamp="1787885038000">
+ data-gtm-region="Jury is excused, will return to deliberations Monday in Lindsay Clancy trial"
+ data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787913000000" data-updated-date-timestamp="1787950153096">
    
     
         
@@ -18083,7 +18313,102 @@ target="_blank" data-social-service="bluesky">
             <div class="PagePromo-title">
                 
                 
-                <a class="Link " href="https://apnews.com/article/climate-change-nepal-tibet-glacier-collapse-floods-61b592d428e4631add31ce052d0daf1f"><span class="PagePromoContentIcons-text">Catastrophic floods kill over 390 in Nepal and Tibet, with more than 1,400 missing</span></a>
+                <a class="Link " href="https://apnews.com/live/lindsay-clancy-trial-08-28-2026"><span class="PagePromoContentIcons-text">Jury is excused, will return to deliberations Monday in Lindsay Clancy trial</span></a>
+            </div>
+        </bsp-custom-headline>
+    
+      
+
+
+
+
+
+        
+
+
+
+
+        
+        
+
+    
+    
+    
+    
+    <div class="PagePromo-byline-container">
+        
+        
+            
+            
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    
+    
+    
+
+
+        
+
+        
+
+
+        
+
+        
+
+        
+    </div>
+
+    
+</div>
+                        
+                    </li>
+                    
+                
+
+                    
+                    <li class="PageList-items-item"
+                        
+                        >
+                        
+                                <div class="PagePromo"
+ data-gtm-region="Rescuers retrieve flood survivors caked in mud as death toll in Nepal-China border disaster climbs"
+ data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787887434000" data-updated-date-timestamp="1787951048000">
+   
+    
+        
+            
+        
+    
+
+    <div class="PagePromo-content">
+        
+        
+        
+        
+
+        
+    
+        
+
+
+    
+
+
+  
+    
+        <bsp-custom-headline custom-headline="div" >
+            <div class="PagePromo-title">
+                
+                
+                <a class="Link " href="https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc"><span class="PagePromoContentIcons-text">Rescuers retrieve flood survivors caked in mud as death toll in Nepal-China border disaster climbs</span></a>
             </div>
         </bsp-custom-headline>
     
@@ -18121,10 +18446,10 @@ target="_blank" data-social-service="bluesky">
         
         
         
-            <a class="PagePromo-commentCount " href="https://apnews.com/article/climate-change-nepal-tibet-glacier-collapse-floods-61b592d428e4631add31ce052d0daf1f"><svg class="CommentCount-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12">
+            <a class="PagePromo-commentCount " href="https://apnews.com/article/nepal-tibet-china-glacier-floods-ae9973b5fd2b1dc6d54c3e88b1b55bdc"><svg class="CommentCount-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12">
     <path d="M10.8 0H1.2C0.54 0 0 0.54 0 1.2V12L2.4 9.6H10.8C11.46 9.6 12 9.06 12 8.4V1.2C12 0.54 11.46 0 10.8 0ZM10.8 8.4H2.4L1.2 9.6V1.2H10.8V8.4Z" />
 </svg>
-<span class="CommentCount-template">378</span>
+<span class="CommentCount-template">55</span>
 </a>
         
     </div>
@@ -18159,8 +18484,8 @@ target="_blank" data-social-service="bluesky">
                         >
                         
                                 <div class="PagePromo"
- data-gtm-region="Trump signs order renaming Lake Ontario as ‘Lake America’ in the United States"
- data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787852069000" data-updated-date-timestamp="1787871441000">
+ data-gtm-region="What to know about the Mount Kailash pilgrimage site after floods in Nepal and Tibet"
+ data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787819461000" data-updated-date-timestamp="1787902344000">
    
     
         
@@ -18188,7 +18513,7 @@ target="_blank" data-social-service="bluesky">
             <div class="PagePromo-title">
                 
                 
-                <a class="Link " href="https://apnews.com/article/lake-ontario-canada-america-trump-trade-war-3ac58dca0ca83c15605d4dbff146b28a"><span class="PagePromoContentIcons-text">Trump signs order renaming Lake Ontario as ‘Lake America’ in the United States</span></a>
+                <a class="Link " href="https://apnews.com/article/mount-kailash-sacred-pilgrims-nepal-tibet-floods-259253eafa9dd331ec71033296da7c36"><span class="PagePromoContentIcons-text">What to know about the Mount Kailash pilgrimage site after floods in Nepal and Tibet</span></a>
             </div>
         </bsp-custom-headline>
     
@@ -18210,7 +18535,7 @@ target="_blank" data-social-service="bluesky">
     
     
     
-    <div class="PagePromo-byline-container" data-has-comment-count>
+    <div class="PagePromo-byline-container">
         
         
             
@@ -18220,17 +18545,11 @@ target="_blank" data-social-service="bluesky">
         
         
             <div class="PagePromo-readingtime">
-                <span class="ReadingTime-template">3 MIN READ</span>
+                <span class="ReadingTime-template">2 MIN READ</span>
             </div>
         
         
         
-        
-            <a class="PagePromo-commentCount " href="https://apnews.com/article/lake-ontario-canada-america-trump-trade-war-3ac58dca0ca83c15605d4dbff146b28a"><svg class="CommentCount-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12">
-    <path d="M10.8 0H1.2C0.54 0 0 0.54 0 1.2V12L2.4 9.6H10.8C11.46 9.6 12 9.06 12 8.4V1.2C12 0.54 11.46 0 10.8 0ZM10.8 8.4H2.4L1.2 9.6V1.2H10.8V8.4Z" />
-</svg>
-<span class="CommentCount-template">2035</span>
-</a>
         
     </div>
     
@@ -18261,11 +18580,11 @@ target="_blank" data-social-service="bluesky">
                     
                     <li class="PageList-items-item"
                         
-                        >
+                        data-has-live-badge>
                         
                                 <div class="PagePromo"
- data-gtm-region="Exclusive: RFK Jr. said a Samoa trip had nothing to do with vaccines. New documents refute that"
- data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787832040000" data-updated-date-timestamp="1787855366000">
+ data-gtm-region="Death toll rises in Nepal-China border disaster as lake poses new flood threat"
+ data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787899584001" data-updated-date-timestamp="1787922499007">
    
     
         
@@ -18274,6 +18593,41 @@ target="_blank" data-social-service="bluesky">
     
 
     <div class="PagePromo-content">
+        
+        
+        
+        
+
+    
+    
+    
+    
+    <div class="PagePromo-byline-container">
+        
+        
+            <div class="PagePromo-byline PagePromo-byline-live">
+                <p class="PagePromo-byline-liveEvent">live</p>
+                
+                
+                
+                
+                
+                
+            </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    
+    
+    
+
+
         
         
         
@@ -18293,7 +18647,7 @@ target="_blank" data-social-service="bluesky">
             <div class="PagePromo-title">
                 
                 
-                <a class="Link " href="https://apnews.com/article/rfk-jr-kennedy-samoa-vaccines-mmr-ba6ad3ffadca48599b1c178a392fb37b"><span class="PagePromoContentIcons-text">Exclusive: RFK Jr. said a Samoa trip had nothing to do with vaccines. New documents refute that</span></a>
+                <a class="Link " href="https://apnews.com/live/nepal-china-flash-flood-news-updates-08-28-2026"><span class="PagePromoContentIcons-text">Death toll rises in Nepal-China border disaster as lake poses new flood threat</span></a>
             </div>
         </bsp-custom-headline>
     
@@ -18306,42 +18660,6 @@ target="_blank" data-social-service="bluesky">
         
 
 
-
-
-        
-        
-
-    
-    
-    
-    
-    <div class="PagePromo-byline-container" data-has-comment-count>
-        
-        
-            
-            
-        
-        
-        
-        
-            <div class="PagePromo-readingtime">
-                <span class="ReadingTime-template">6 MIN READ</span>
-            </div>
-        
-        
-        
-        
-            <a class="PagePromo-commentCount " href="https://apnews.com/article/rfk-jr-kennedy-samoa-vaccines-mmr-ba6ad3ffadca48599b1c178a392fb37b"><svg class="CommentCount-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12">
-    <path d="M10.8 0H1.2C0.54 0 0 0.54 0 1.2V12L2.4 9.6H10.8C11.46 9.6 12 9.06 12 8.4V1.2C12 0.54 11.46 0 10.8 0ZM10.8 8.4H2.4L1.2 9.6V1.2H10.8V8.4Z" />
-</svg>
-<span class="CommentCount-template">489</span>
-</a>
-        
-    </div>
-    
-    
-    
-    
 
 
         
@@ -18369,8 +18687,8 @@ target="_blank" data-social-service="bluesky">
                         >
                         
                                 <div class="PagePromo"
- data-gtm-region="Exclusive: US Patriot missile stocks in Europe are ‘beyond critical’ due to Iran war, officials say"
- data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787845005000" data-updated-date-timestamp="1787855364000">
+ data-gtm-region="Trump says US has entered deal with Venezuela to take control of 65 billion barrels of oil reserves"
+ data-gtm-topic="No Value" data-align-top data-hide-dates="true" data-no-media data-gtm-region-item  data-posted-date-timestamp="1787958299000" data-updated-date-timestamp="1787967680000">
    
     
         
@@ -18398,7 +18716,7 @@ target="_blank" data-social-service="bluesky">
             <div class="PagePromo-title">
                 
                 
-                <a class="Link " href="https://apnews.com/article/patriot-missiles-iran-war-russia-ukraine-trump-09c7d8030a2e11fbd8ee3f7176b3f2d4"><span class="PagePromoContentIcons-text">Exclusive: US Patriot missile stocks in Europe are ‘beyond critical’ due to Iran war, officials say</span></a>
+                <a class="Link " href="https://apnews.com/article/trump-venezuela-oil-reserves-eb0ed5a1e99602c21a7f690c3368020e"><span class="PagePromoContentIcons-text">Trump says US has entered deal with Venezuela to take control of 65 billion barrels of oil reserves</span></a>
             </div>
         </bsp-custom-headline>
     
@@ -18430,16 +18748,16 @@ target="_blank" data-social-service="bluesky">
         
         
             <div class="PagePromo-readingtime">
-                <span class="ReadingTime-template">6 MIN READ</span>
+                <span class="ReadingTime-template">4 MIN READ</span>
             </div>
         
         
         
         
-            <a class="PagePromo-commentCount " href="https://apnews.com/article/patriot-missiles-iran-war-russia-ukraine-trump-09c7d8030a2e11fbd8ee3f7176b3f2d4"><svg class="CommentCount-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12">
+            <a class="PagePromo-commentCount " href="https://apnews.com/article/trump-venezuela-oil-reserves-eb0ed5a1e99602c21a7f690c3368020e"><svg class="CommentCount-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12">
     <path d="M10.8 0H1.2C0.54 0 0 0.54 0 1.2V12L2.4 9.6H10.8C11.46 9.6 12 9.06 12 8.4V1.2C12 0.54 11.46 0 10.8 0ZM10.8 8.4H2.4L1.2 9.6V1.2H10.8V8.4Z" />
 </svg>
-<span class="CommentCount-template">787</span>
+<span class="CommentCount-template">547</span>
 </a>
         
     </div>
@@ -19234,6 +19552,6 @@ target="_blank" data-social-service="bluesky">
 
         
         
-    <script>window.__CF$cv$params={r:'a322e18e0b65e6e8',t:'MTc4NzkxNTU0Nw==',u:'01a04812360c7272bf78fbba477eb02b',ut:'WRsEZW0ujoavLOX5LiXIwHYdgEaRquOP4NTjjLnJVXw-1787915548-1.2.1.1-9s.Sg.eMtH.9u6WnR_WDENFDXXkwZA48AM2Y4Qz5ft92nN1Z12P1PDcQmzEOIXAMY7QCpPQW1XNKxXd2tXllAlnUdJSUrhYqzzWt7m7poZU',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script></body>
+    <script>window.__CF$cv$params={r:'a329a8d25e2a939b',t:'MTc4Nzk4NjYyNA==',u:'01a04c4ec11a7b12a0fde4b605f88e80',ut:'ukmLsh.lOvahrrFs.cOrlxDspPTXKvANHNWRb9kYJ3c-1787986624-1.2.1.1-JwRSbFExstAaiYRRur5YibQEHR8M44yuy1_RQcqFrMH51HTlkesyi_YK7I1LtqFT.DwwT11qJ8j7Mf.Qlj6ac3UKINvJFemc8XsVoeCOjZQ',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script></body>
 </html>
 

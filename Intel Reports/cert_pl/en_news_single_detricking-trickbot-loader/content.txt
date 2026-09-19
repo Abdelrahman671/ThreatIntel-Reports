@@ -44,6 +44,10 @@
             $body.removeClass('mobile');
             $body.addClass('desktop');
         }
+
+        window.dispatchEvent(new CustomEvent('view_mode_changed', {
+            detail: { mobile: window.mobile }
+        }));
     }
 
     let media = window.matchMedia('(max-width: 800px)');
@@ -312,6 +316,16 @@
             - $('.mobile-header .menu-bar')[0].scrollHeight;
         $('.mobile-header .menu-overlay').css({'height': overlay_height});
         $('body.mobile').css({'padding-top': $mobile_header.outerHeight()});
+
+        function relayout_mobile(mobile) {
+            if (mobile) {
+                $('body').css({'padding-top': $mobile_header.outerHeight()});
+            } else {
+                $('body').css({'padding-top': ''});
+            }
+        }
+
+        window.addEventListener('view_mode_changed', e => relayout_mobile(e.detail.mobile));
 
         $burger.on('click', function() {
             if (active) {
@@ -1056,9 +1070,9 @@ Finally, the shellcode performs a call to the decrypted 64-bit helper shellcode 
                             ePUAP: /NASK-Instytut/SkrytkaESP<br/>
                             e-DorÄczenia: AE:PL-60057-61611-BCEGR-11<br/>
                             <br/>
-                            E-mail: <a href="/cdn-cgi/l/email-protection#452c2b232a05262037316b3529"><span class="__cf_email__" data-cfemail="5831363e37183b3d2a2c762834">[email&#160;protected]</span></a><br/>
+                            E-mail: <a href="/cdn-cgi/l/email-protection#a7cec9c1c8e7c4c2d5d389d7cb"><span class="__cf_email__" data-cfemail="9ef7f0f8f1defdfbeceab0eef2">[email&#160;protected]</span></a><br/>
                             Incident reporting: <a href="https://incydent.cert.pl/#!/lang=en">incydent.cert.pl</a><br/>
-                            <a href="/cdn-cgi/l/email-protection#dab9bfa8ae9ab9bfa8aef4aab6"><span class="__cf_email__" data-cfemail="0d6e687f794d6e687f79237d61">[email&#160;protected]</span></a>
+                            <a href="/cdn-cgi/l/email-protection#e685839492a685839492c8968a"><span class="__cf_email__" data-cfemail="5b383e292f1b383e292f752b37">[email&#160;protected]</span></a>
                         </p>
                     </div>
                 </div>

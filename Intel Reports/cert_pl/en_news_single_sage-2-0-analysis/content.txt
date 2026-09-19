@@ -44,6 +44,10 @@
             $body.removeClass('mobile');
             $body.addClass('desktop');
         }
+
+        window.dispatchEvent(new CustomEvent('view_mode_changed', {
+            detail: { mobile: window.mobile }
+        }));
     }
 
     let media = window.matchMedia('(max-width: 800px)');
@@ -312,6 +316,16 @@
             - $('.mobile-header .menu-bar')[0].scrollHeight;
         $('.mobile-header .menu-overlay').css({'height': overlay_height});
         $('body.mobile').css({'padding-top': $mobile_header.outerHeight()});
+
+        function relayout_mobile(mobile) {
+            if (mobile) {
+                $('body').css({'padding-top': $mobile_header.outerHeight()});
+            } else {
+                $('body').css({'padding-top': ''});
+            }
+        }
+
+        window.addEventListener('view_mode_changed', e => relayout_mobile(e.detail.mobile));
 
         $burger.on('click', function() {
             if (active) {
@@ -914,9 +928,9 @@
                             ePUAP: /NASK-Instytut/SkrytkaESP<br/>
                             e-DorÄczenia: AE:PL-60057-61611-BCEGR-11<br/>
                             <br/>
-                            E-mail: <a href="/cdn-cgi/l/email-protection#40292e262f00232532346e302c"><span class="__cf_email__" data-cfemail="442d2a222b04272136306a3428">[email&#160;protected]</span></a><br/>
+                            E-mail: <a href="/cdn-cgi/l/email-protection#452c2b232a05262037316b3529"><span class="__cf_email__" data-cfemail="d6bfb8b0b996b5b3a4a2f8a6ba">[email&#160;protected]</span></a><br/>
                             Incident reporting: <a href="https://incydent.cert.pl/#!/lang=en">incydent.cert.pl</a><br/>
-                            <a href="/cdn-cgi/l/email-protection#781b1d0a0c381b1d0a0c560814"><span class="__cf_email__" data-cfemail="99fafcebedd9fafcebedb7e9f5">[email&#160;protected]</span></a>
+                            <a href="/cdn-cgi/l/email-protection#6a090f181e2a090f181e441a06"><span class="__cf_email__" data-cfemail="bad9dfc8cefad9dfc8ce94cad6">[email&#160;protected]</span></a>
                         </p>
                     </div>
                 </div>

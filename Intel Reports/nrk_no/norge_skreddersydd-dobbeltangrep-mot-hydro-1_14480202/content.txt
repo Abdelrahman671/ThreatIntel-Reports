@@ -270,31 +270,63 @@ tag.setAttribute('content', darkModeThemeColor);
 <symbol id="simple-play-button" viewBox="0 0 42 42"><circle fill="#FFF" cx="21" cy="21" r="21" /><path fill="#393939" d="M16 12l14 9.335-14 9.335" /></symbol>
 </svg>
 <div id="container" class="page cf">
-<div class="g100 col fr sAUTO remoterenderedcontent-reference"><!-- include: /serum/render?id=1.14169816&amp;size=18&amp;perspective=RICH&amp;alignment=RIGHT --><link rel="stylesheet" href="https://static.nrk.no/nrkno-header/3.5.0/style.css" /><nrkno-header><style>
-:where(body) {
+<div class="g100 col fr sAUTO remoterenderedcontent-reference"><!-- include: /serum/render?id=1.14169816&amp;size=18&amp;perspective=RICH&amp;alignment=RIGHT --><link rel="stylesheet" href="https://static.nrk.no/nrkno-header/3.6.1/style.css" /><nrkno-header><style>:where(body) {
   margin: 0;
-  }
-.nrkno-header-wrapper:before {
-  content:'';
-  display:block;
-  background:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 14" id="nrk-logo-nrk" fill="white"%3E%3Cpath d="M0 12.999v-12h3.937v12H0Zm9.294-10.09L11.558 13H7.25l-2.704-12h2.417a2.276 2.276 0 0 1 1.513.55c.42.346.71.826.819 1.36ZM12.149 13v-12h3.938v12h-3.938Zm6.912-7.436a2.382 2.382 0 0 1-2.4-2.4 2.301 2.301 0 0 1 .321-1.2 2.41 2.41 0 0 1 3.278-.862c.356.21.653.506.862.862.215.363.326.778.321 1.2a2.35 2.35 0 0 1-.321 1.208 2.4 2.4 0 0 1-.862.87 2.3 2.3 0 0 1-1.2.322Zm2.99 7.436v-12h3.938v12h-3.937Zm8.923-5.442c.01.012.095.15.253.414s.364.602.617 1.014a314.615 314.615 0 0 1 1.597 2.62c.247.41.529.876.845 1.394H29.96c-.27-.44-.516-.837-.736-1.192-.22-.355-.453-.738-.7-1.149-.248-.41-.493-.81-.736-1.2-.242-.389-.45-.73-.625-1.022-.175-.293-.296-.49-.363-.592A1.747 1.747 0 0 1 26.513 7c.016-.29.11-.57.27-.811.067-.113.191-.313.371-.6s.392-.628.634-1.023c.242-.394.488-.797.736-1.208l.7-1.158.736-1.2h4.326L30.94 6.46a1.08 1.08 0 0 0-.17.54c.012.202.083.396.204.558Z"%3E%3C/path%3E%3C/svg%3E') no-repeat left / contain;
-  height:60px;
-  width:100%;
-  background-color:#1767ce;
-  background-size:60px;
+}
+
+.nrkno-header-wrapper::before {
+  content: '';
+  display: block;
+  background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 14" id="nrk-logo-nrk" fill="white"%3E%3Cpath d="M0 12.999v-12h3.937v12H0Zm9.294-10.09L11.558 13H7.25l-2.704-12h2.417a2.276 2.276 0 0 1 1.513.55c.42.346.71.826.819 1.36ZM12.149 13v-12h3.938v12h-3.938Zm6.912-7.436a2.382 2.382 0 0 1-2.4-2.4 2.301 2.301 0 0 1 .321-1.2 2.41 2.41 0 0 1 3.278-.862c.356.21.653.506.862.862.215.363.326.778.321 1.2a2.35 2.35 0 0 1-.321 1.208 2.4 2.4 0 0 1-.862.87 2.3 2.3 0 0 1-1.2.322Zm2.99 7.436v-12h3.938v12h-3.937Zm8.923-5.442c.01.012.095.15.253.414s.364.602.617 1.014a314.615 314.615 0 0 1 1.597 2.62c.247.41.529.876.845 1.394H29.96c-.27-.44-.516-.837-.736-1.192-.22-.355-.453-.738-.7-1.149-.248-.41-.493-.81-.736-1.2-.242-.389-.45-.73-.625-1.022-.175-.293-.296-.49-.363-.592A1.747 1.747 0 0 1 26.513 7c.016-.29.11-.57.27-.811.067-.113.191-.313.371-.6s.392-.628.634-1.023c.242-.394.488-.797.736-1.208l.7-1.158.736-1.2h4.326L30.94 6.46a1.08 1.08 0 0 0-.17.54c.012.202.083.396.204.558Z"%3E%3C/path%3E%3C/svg%3E')
+    no-repeat left / contain;
+  height: 60px;
+  width: 100%;
+  background-color: #1767ce;
+  background-size: 60px;
   box-shadow: -20px 0px 0 0px #1767ce;
-  margin-left:20px;
+  margin-left: 20px;
+}
+
+html.darkmode .nrkno-header-wrapper::before {
+  background-color: #0a2343;
+  box-shadow: -20px 0px 0 0px #0a2343;
+}
+
+:where(#nrkno-header) {
+  display: none;
+}
+
+/* App-webview pre-paint toggles: kept in sync with headerPrePaintClasses
+   in ./utils/app-webview-utils.ts. Update both if either changes. */
+html.nrkno-app-hide-header #nrkno-header {
+  display: none !important;
+}
+
+html.nrkno-app-hide-header .nrkno-header-wrapper::before {
+  content: none !important;
+  display: none !important;
+}
+
+html.nrkno-app-header #nrkno-header {
+  padding-top: env(safe-area-inset-top);
+}
+
+html.nrkno-app-header #nrkno-menu-button,
+html.nrkno-app-header .nrkno-header__user-wrapper {
+  display: none !important;
+}
+
+/* Uno's `lt-tablet` variant compiles to `max-width: <tablet - 0.1>px`; tablet = 933px. */
+@media (max-width: 932.9px) {
+  html.nrkno-app-center-logo #nrkno-header {
+    justify-content: center;
   }
-  
-  html.darkmode .nrkno-header-wrapper::before {
-    background-color:#0a2343;
-    box-shadow: -20px 0px 0 0px #0a2343;
+
+  html.nrkno-app-center-logo .nrkno-header__logo-link {
+    padding-right: var(--spacing-margin-l);
   }
-  
-  :where(#nrkno-header){
-  display:none;
-  }
-</style><div class=""><div class="nrkno-header-wrapper nrkno-css-reset"><header id="nrkno-header" class="max-w-header text-base bg-nav color-nav relative flex justify-between mx-auto leading-[3.125rem] tablet:leading-[3.75rem] w-full z-[100] tablet:pt-10 border-b border-b-$background-color-nav" data-testid="nrkno-header"><div class="nrkno-header-top-bar fixed top-0 w-full h-1.5 tablet:h-0 bg-header-topbar"></div><a href="#innhold" class="nrkno-header__skip-link sr-only z-[3] focus:not-sr-only focus:[clip-path:none] focus:bg-core-blue-100 focus:text-core-blue-950 leading-8 !absolute top-3.5 left-3.5 focus:px-4">Hopp til innhold</a><a class="nrkno-header__logo-link color-nav inline-flex align-top items-center h-header tablet:h-header-desktop pl-margin-l pr-margin-r  text-[1.6em] tablet:mr-7 -outline-offset-4" href="https://www.nrk.no/" aria-label="GÃ¥ til forsiden"><svg aria-hidden="true" width="2.188em" height="0.875em" viewBox="0 0 35 14" fill="currentColor" focusable="false" class="nrkno-header__logo w-[2.188em] h-[0.875em] align-middle"><path d="M0 12.999v-12h3.937v12H0Zm9.294-10.09L11.558 13H7.25l-2.704-12h2.417a2.276 2.276 0 0 1 1.513.55c.42.346.71.826.819 1.36ZM12.149 13v-12h3.938v12h-3.938Zm6.912-7.436a2.382 2.382 0 0 1-2.4-2.4 2.301 2.301 0 0 1 .321-1.2 2.41 2.41 0 0 1 3.278-.862c.356.21.653.506.862.862.215.363.326.778.321 1.2a2.35 2.35 0 0 1-.321 1.208 2.4 2.4 0 0 1-.862.87 2.3 2.3 0 0 1-1.2.322Zm2.99 7.436v-12h3.938v12h-3.937Zm8.923-5.442c.01.012.095.15.253.414s.364.602.617 1.014a314.615 314.615 0 0 1 1.597 2.62c.247.41.529.876.845 1.394H29.96c-.27-.44-.516-.837-.736-1.192-.22-.355-.453-.738-.7-1.149-.248-.41-.493-.81-.736-1.2-.242-.389-.45-.73-.625-1.022-.175-.293-.296-.49-.363-.592A1.747 1.747 0 0 1 26.513 7c.016-.29.11-.57.27-.811.067-.113.191-.313.371-.6s.392-.628.634-1.023c.242-.394.488-.797.736-1.208l.7-1.158.736-1.2h4.326L30.94 6.46a1.08 1.08 0 0 0-.17.54c.012.202.083.396.204.558Z"/></svg></a><div><button id="nrkno-menu-button" aria-expanded="false" aria-label="Meny" class="nrkno-header__menu-button color-nav appearance-none items-center justify-end border-none cursor-pointer inline-flex h-header tablet:h-header-desktop w-[2.5rem] pr-margin-r box-content tablet:hidden"><svg class="w-6 h-6" aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill-rule="evenodd"><rect width="20" height="2" x="2" y="4" class="fill-current transition duration-150"></rect><rect width="20" height="2" x="2" y="11" class="fill-current transition duration-100"></rect><rect width="20" height="2" x="2" y="18" class="fill-current transition duration-150"></rect></g></svg></button></div><nav aria-labelledby="nrkno-menu-button" class="nrkno-header__nav order-3 w-full z-[2] flex lt-tablet:hidden tablet:inline tablet:static tablet:align-top lt-tablet:flex-col lt-tablet:absolute lt-tablet:top-[100%]" data-ec-list="nrkno-meny" data-ec-name="nrkno-header"><div class="nrkno-header__nav-inner-wrapper bg-core-blue-900 dark:bg-core-blue-950 text-core-blue-50 dark:text-white text-[0.9rem] h-10 leading-10 overflow-x-auto text-center tablet:absolute tablet:left-0 tablet:top-0 tablet:w-full"><ul role="list" class="nrkno-header__apps-list flex min-w-[20rem] py-0 justify-around list-none items-center tablet:max-w-[40rem] m-auto tablet:!m-auto"><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://tv.nrk.no/" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://tv.nrk.no/" data-ec-name="NRK TV" data-ec-variant="N/A">NRK TV</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://radio.nrk.no/" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://radio.nrk.no/" data-ec-name="NRK Radio" data-ec-variant="N/A">NRK Radio</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://nrksuper.no" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://nrksuper.no" data-ec-name="NRK Super" data-ec-variant="N/A">NRK Super</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://p3.no" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://p3.no" data-ec-name="NRK P3" data-ec-variant="N/A">NRK P3</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://yr.no" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://yr.no" data-ec-name="Yr" data-ec-variant="N/A">Yr</a></li></ul></div><ul role="list" class="nrkno-header__promoted-categories-list lt-tablet:hidden tablet:inline list-none m-0 p-0"><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/nyheter/" data-ec-id="pp:2.6892" data-ec-name="Nyheter" data-ec-variant="N/A">Nyheter</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/sport/" data-ec-id="pp:2.6852" data-ec-name="Sport" data-ec-variant="N/A">Sport</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/kultur/" data-ec-id="pp:2.7015" data-ec-name="Kultur" data-ec-variant="N/A">Kultur</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/video/humor/" data-ec-id="https://www.nrk.no/video/humor/" data-ec-name="Humor" data-ec-variant="N/A">Humor</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/distrikt/" data-ec-id="pp:distrikt/" data-ec-name="Distrikt" data-ec-variant="N/A">Distrikt</a></li></ul><button class="nrkno-header__mega-menu-expand-button tablet:inline-flex lt-tablet:hidden font-600 cursor-pointer leading-normal ml-1 py-[0.375rem] px-[0.75rem] align-baseline hover:opacity-70 transition-all color-nav" aria-expanded="false" aria-controls="nrkno-header__mega" id="nrkno-header-megamenu-btn">Mer<span class="text-[0.6rem] ml-1.5 self-center"><svg viewBox="0 0 24 24" class="transform fill-current pointer-events-none align-middle" width="1.500em" height="1.500em" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 10.88l8 5.6 8-5.6V9l-8 5.6L4 9v1.88z"></path></svg><span></span></span></button><div class="nrkno-header__mega-menu color-default animate-nrk-header-fade tablet:shadow-sm leading-normal overflow-hidden tablet:absolute left-0 w-full z-2 order-2 tablet:hidden lt-tablet:block bg-default" id="nrkno-header__mega" aria-labelledby="nrkno-header-megamenu-btn"><div class="nrkno-header__mega-menu-outer-wrapper clear-both [display:table] m-auto max-w-[1190px] w-full px-4 tablet:px-5"><div class="nrkno-header__mega-menu-inner-wrapper lt-tablet:inline tablet:flex tablet:-ml-5 color-default"><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 lt-tablet:border-t dark:lt-tablet:border-t-transparent tablet:flex-2"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0"><a class="decoration-none! border-b-none! mt-0" href="/nyheter/" data-ec-id="pp:2.6892" data-ec-name="Nyheter" data-ec-variant="N/A">Nyheter</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nyheter/" data-ec-id="pp:2.6892" data-ec-name="Nyhetssenter" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Nyhetssenter</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/norge/" data-ec-id="pp:2.7008" data-ec-name="Norge" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Norge</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/urix/" data-ec-id="pp:2.7029" data-ec-name="Urix" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Urix</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/debatten/" data-ec-id="pp:2.7880" data-ec-name="Debatten" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Debatten</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/kultur/" data-ec-id="pp:2.7015" data-ec-name="Kultur" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Kultur</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nyttig/" data-ec-id="pp:2.7017" data-ec-name="Nyttig" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Nyttig</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/viten/" data-ec-id="pp:2.7016" data-ec-name="Viten" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Viten</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/dokumentar/" data-ec-id="pp:2.6837" data-ec-name="Dokumentar" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Dokumentar</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/ytring/" data-ec-id="pp:2.6831" data-ec-name="Ytring" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Ytring</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sapmi/" data-ec-id="pp:2.7375" data-ec-name="NRK SÃ¡pmi" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK SÃ¡pmi</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/kvensk/" data-ec-id="pp:2.7427" data-ec-name="NRK Kvensk" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Kvensk</a></li></ul></div><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 tablet:border-l tablet:flex-1"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0"><a class="decoration-none! border-b-none! mt-0" href="/sport/" data-ec-id="pp:2.6852" data-ec-name="Sport" data-ec-variant="N/A">Sport</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sport/" data-ec-id="pp:2.6852" data-ec-name="Sportsnyheter" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Sportsnyheter</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://resultater.nrk.no/" data-ec-id="pp:2.7128" data-ec-name="Livesport" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Livesport</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sport/sendeplan/" data-ec-id="pp:2.6851" data-ec-name="Sendeplan" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Sendeplan</a></li></ul><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase !mt-12"><a class="decoration-none! border-b-none! !mt-12" href="/spill/" data-ec-id="pp:2.8030" data-ec-name="Spill" data-ec-variant="N/A">Spill</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/emne/quiz-1.13834273" data-ec-id="pp:1.13834273" data-ec-name="Quiz" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Quiz</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/former-1.17105310" data-ec-id="pp:1.17105310" data-ec-name="Former (minispill)" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Former</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/tvers-1.17073958" data-ec-id="pp:1.17073958" data-ec-name="Tvers (minispill)" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Tvers</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://delta.nrk.no/spill/kula" data-ec-id="https://delta.nrk.no/spill/kula" data-ec-name="Kula (minispill)" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Kula</a></li></ul></div><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 tablet:border-l tablet:flex-2"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0"><a class="decoration-none! border-b-none! mt-0" href="/distrikt/" data-ec-id="pp:distrikt/" data-ec-name="Distrikt" data-ec-variant="N/A">Distrikt</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sorlandet/" data-ec-id="pp:2.6950" data-ec-name="Agder" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Agder</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/stor-oslo/" data-ec-id="pp:2.6954" data-ec-name="Akershus" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Akershus</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/buskerud/" data-ec-id="pp:2.6974" data-ec-name="Buskerud" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Buskerud</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/tromsogfinnmark/" data-ec-id="pp:2.7611" data-ec-name="Finnmark" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Finnmark</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/innlandet/" data-ec-id="pp:2.6944" data-ec-name="Innlandet" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Innlandet</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/mr/" data-ec-id="pp:2.6946" data-ec-name="M&amp;oslash;re og Romsdal" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">MÃ¸re og Romsdal</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nordland/" data-ec-id="pp:2.6947" data-ec-name="Nordland" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Nordland</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/stor-oslo/" data-ec-id="pp:2.6954" data-ec-name="Oslo" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Oslo</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/rogaland/" data-ec-id="pp:2.6948" data-ec-name="Rogaland" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Rogaland</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/vestfoldogtelemark/" data-ec-id="pp:2.7617" data-ec-name="Telemark" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Telemark</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/tromsogfinnmark/" data-ec-id="pp:2.7611" data-ec-name="Troms" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Troms</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/trondelag/" data-ec-id="pp:2.6943" data-ec-name="Tr&amp;oslash;ndelag" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">TrÃ¸ndelag</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/vestfoldogtelemark/" data-ec-id="pp:2.7617" data-ec-name="Vestfold" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Vestfold</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/vestland/" data-ec-id="pp:2.7623" data-ec-name="Vestland" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Vestland</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/ostfold/" data-ec-id="pp:2.6953" data-ec-name="&amp;Oslash;stfold" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Ãstfold</a></li></ul></div><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 tablet:border-l tablet:flex-1"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0">Temasider</h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/video/humor/" data-ec-id="https://www.nrk.no/video/humor/" data-ec-name="NRK Humor" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Humor</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/mat/" data-ec-id="pp:2.7009" data-ec-name="NRK Mat" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Mat</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/skole/" data-ec-id="pp:2.7159" data-ec-name="NRK Skole" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Skole</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://www.nrkbeta.no/" data-ec-id="https://www.nrkbeta.no" data-ec-name="NRKbeta" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRKbeta</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nyinorge/" data-ec-id="https://www.nrk.no/nyinorge/" data-ec-name="Ny i Norge" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Ny i Norge</a></li></ul><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase !mt-12"><a class="decoration-none! border-b-none! !mt-12" href="https://www.nrk.no/informasjon/" data-ec-id="pp:2.7002" data-ec-name="Info" data-ec-variant="N/A">Info</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://hjelp.nrk.no/" data-ec-id="https://hjelp.nrk.no" data-ec-name="Hjelp" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Hjelp</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/informasjon/" data-ec-id="pp:2.7002" data-ec-name="Informasjon" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Informasjon</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://info.nrk.no/baerekraft" data-ec-id="https://info.nrk.no/baerekraft" data-ec-name="BÃ¦rekraft" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">BÃ¦rekraft</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://info.nrk.no/karriere/" data-ec-id="https://info.nrk.no/karriere" data-ec-name="Karriere" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Karriere</a></li></ul></div></div></div></div></nav></header></div></div></nrkno-header>
+}
+</style><div class=""><div class="nrkno-header-wrapper nrkno-css-reset"><header id="nrkno-header" class="max-w-header text-base bg-nav color-nav relative flex justify-between mx-auto leading-[3.125rem] tablet:leading-[3.75rem] w-full z-[100] tablet:pt-10 border-b border-b-$background-color-nav" data-testid="nrkno-header"><a href="#innhold" class="nrkno-header__skip-link sr-only z-[3] focus:not-sr-only focus:[clip-path:none] focus:bg-core-blue-100 focus:text-core-blue-950 leading-8 !absolute top-3.5 left-3.5 focus:px-4">Hopp til innhold</a><a class="nrkno-header__logo-link color-nav inline-flex align-top items-center h-header tablet:h-header-desktop pl-margin-l pr-margin-r  text-[1.6em] tablet:mr-7 -outline-offset-4" href="https://www.nrk.no/" aria-label="GÃ¥ til forsiden" data-ignore-arialabel-in-preview="true"><svg aria-hidden="true" width="2.188em" height="0.875em" viewBox="0 0 35 14" fill="currentColor" focusable="false" class="nrkno-header__logo w-[2.188em] h-[0.875em] align-middle"><path d="M0 12.999v-12h3.937v12H0Zm9.294-10.09L11.558 13H7.25l-2.704-12h2.417a2.276 2.276 0 0 1 1.513.55c.42.346.71.826.819 1.36ZM12.149 13v-12h3.938v12h-3.938Zm6.912-7.436a2.382 2.382 0 0 1-2.4-2.4 2.301 2.301 0 0 1 .321-1.2 2.41 2.41 0 0 1 3.278-.862c.356.21.653.506.862.862.215.363.326.778.321 1.2a2.35 2.35 0 0 1-.321 1.208 2.4 2.4 0 0 1-.862.87 2.3 2.3 0 0 1-1.2.322Zm2.99 7.436v-12h3.938v12h-3.937Zm8.923-5.442c.01.012.095.15.253.414s.364.602.617 1.014a314.615 314.615 0 0 1 1.597 2.62c.247.41.529.876.845 1.394H29.96c-.27-.44-.516-.837-.736-1.192-.22-.355-.453-.738-.7-1.149-.248-.41-.493-.81-.736-1.2-.242-.389-.45-.73-.625-1.022-.175-.293-.296-.49-.363-.592A1.747 1.747 0 0 1 26.513 7c.016-.29.11-.57.27-.811.067-.113.191-.313.371-.6s.392-.628.634-1.023c.242-.394.488-.797.736-1.208l.7-1.158.736-1.2h4.326L30.94 6.46a1.08 1.08 0 0 0-.17.54c.012.202.083.396.204.558Z"/></svg></a><div><button id="nrkno-menu-button" aria-expanded="false" aria-label="Meny" data-ignore-arialabel-in-preview="true" class="nrkno-header__menu-button color-nav appearance-none items-center justify-end border-none cursor-pointer inline-flex h-header tablet:h-header-desktop w-[2.5rem] pr-margin-r box-content tablet:hidden"><svg class="w-6 h-6" aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24"><g fill-rule="evenodd"><rect width="20" height="2" x="2" y="4" class="fill-current transition duration-150"></rect><rect width="20" height="2" x="2" y="11" class="fill-current transition duration-100"></rect><rect width="20" height="2" x="2" y="18" class="fill-current transition duration-150"></rect></g></svg></button></div><nav aria-label="Meny" class="nrkno-header__nav order-3 w-full z-[2] flex lt-tablet:hidden tablet:inline tablet:static tablet:align-top lt-tablet:flex-col lt-tablet:absolute lt-tablet:top-[100%]" data-ec-list="nrkno-meny" data-ec-name="nrkno-header"><div class="nrkno-header__nav-inner-wrapper bg-core-blue-900 dark:bg-core-blue-950 text-core-blue-50 dark:text-white text-[0.9rem] h-10 leading-10 overflow-x-auto text-center tablet:absolute tablet:left-0 tablet:top-0 tablet:w-full"><ul role="list" class="nrkno-header__apps-list flex min-w-[20rem] py-0 justify-around list-none items-center tablet:max-w-[40rem] m-auto tablet:!m-auto"><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://tv.nrk.no/" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://tv.nrk.no/" data-ec-name="NRK TV" data-ec-variant="N/A">NRK TV</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://radio.nrk.no/" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://radio.nrk.no/" data-ec-name="NRK Radio" data-ec-variant="N/A">NRK Radio</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://nrksuper.no" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://nrksuper.no" data-ec-name="NRK Super" data-ec-variant="N/A">NRK Super</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://p3.no" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://p3.no" data-ec-name="NRK P3" data-ec-variant="N/A">NRK P3</a></li><li class="nrkno-header__apps-list-item inline-block my-0 mx-[0.3125rem]" role="listitem"><a href="https://yr.no" class="nrkno-header__apps-link block font-extralight no-underline min-w-[44px] tablet:px-4 hover:underline -outline-offset-4" data-ec-id="https://yr.no" data-ec-name="Yr" data-ec-variant="N/A">Yr</a></li></ul></div><ul role="list" class="nrkno-header__promoted-categories-list lt-tablet:hidden tablet:inline list-none m-0 p-0"><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/nyheter/" data-ec-id="pp:2.6892" data-ec-name="Nyheter" data-ec-variant="N/A">Nyheter</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/sport/" data-ec-id="pp:2.6852" data-ec-name="Sport" data-ec-variant="N/A">Sport</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/kultur/" data-ec-id="pp:2.7015" data-ec-name="Kultur" data-ec-variant="N/A">Kultur</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/video/humor/" data-ec-id="https://www.nrk.no/video/humor/" data-ec-name="Humor" data-ec-variant="N/A">Humor</a></li><li class="nrkno-header__promoted-categories-list-item inline my-0 mx-1" role="listitem"><a class="nrkno-header__promoted-categories-link color-nav rounded-[3px] inline-block font-600 leading-normal py-[0.375rem] px-[0.75rem] no-underline hover:opacity-70 transition-all" href="/distrikt/" data-ec-id="pp:distrikt/" data-ec-name="Distrikt" data-ec-variant="N/A">Distrikt</a></li></ul><button class="nrkno-header__mega-menu-expand-button tablet:inline-flex lt-tablet:hidden font-600 cursor-pointer leading-normal ml-1 py-[0.375rem] px-[0.75rem] align-baseline hover:opacity-70 transition-all color-nav" aria-expanded="false" aria-controls="nrkno-header__mega" id="nrkno-header-megamenu-btn">Mer<span class="text-[0.6rem] ml-1.5 self-center"><svg viewBox="0 0 24 24" class="transform fill-current pointer-events-none align-middle" width="1.500em" height="1.500em" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 10.88l8 5.6 8-5.6V9l-8 5.6L4 9v1.88z"></path></svg><span></span></span></button><div class="nrkno-header__mega-menu color-default animate-nrk-header-fade tablet:shadow-sm leading-normal overflow-hidden tablet:absolute left-0 w-full z-2 order-2 tablet:hidden lt-tablet:block bg-default" id="nrkno-header__mega" aria-labelledby="nrkno-header-megamenu-btn"><div class="nrkno-header__mega-menu-outer-wrapper clear-both [display:table] m-auto max-w-[1190px] w-full px-4 tablet:px-5"><div class="nrkno-header__mega-menu-inner-wrapper lt-tablet:inline tablet:flex tablet:-ml-5 color-default"><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 lt-tablet:border-t dark:lt-tablet:border-t-transparent tablet:flex-2"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0"><a class="decoration-none! border-b-none! mt-0" href="/nyheter/" data-ec-id="pp:2.6892" data-ec-name="Nyheter" data-ec-variant="N/A">Nyheter</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nyheter/" data-ec-id="pp:2.6892" data-ec-name="Nyhetssenter" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Nyhetssenter</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/norge/" data-ec-id="pp:2.7008" data-ec-name="Norge" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Norge</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/urix/" data-ec-id="pp:2.7029" data-ec-name="Urix" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Urix</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/debatten/" data-ec-id="pp:2.7880" data-ec-name="Debatten" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Debatten</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/kultur/" data-ec-id="pp:2.7015" data-ec-name="Kultur" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Kultur</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nyttig/" data-ec-id="pp:2.7017" data-ec-name="Nyttig" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Nyttig</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/viten/" data-ec-id="pp:2.7016" data-ec-name="Viten" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Viten</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/dokumentar/" data-ec-id="pp:2.6837" data-ec-name="Dokumentar" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Dokumentar</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/ytring/" data-ec-id="pp:2.6831" data-ec-name="Ytring" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Ytring</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sapmi/" data-ec-id="pp:2.7375" data-ec-name="NRK SÃ¡pmi" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK SÃ¡pmi</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/kvensk/" data-ec-id="pp:2.7427" data-ec-name="NRK Kvensk" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Kvensk</a></li></ul></div><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 tablet:border-l tablet:flex-1"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0"><a class="decoration-none! border-b-none! mt-0" href="/sport/" data-ec-id="pp:2.6852" data-ec-name="Sport" data-ec-variant="N/A">Sport</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sport/" data-ec-id="pp:2.6852" data-ec-name="Sportsnyheter" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Sportsnyheter</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://resultater.nrk.no/" data-ec-id="pp:2.7128" data-ec-name="Livesport" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Livesport</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sport/sendeplan/" data-ec-id="pp:2.6851" data-ec-name="Sendeplan" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Sendeplan</a></li></ul><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase !mt-12"><a class="decoration-none! border-b-none! !mt-12" href="/spill/" data-ec-id="pp:2.8030" data-ec-name="Spill" data-ec-variant="N/A">Spill</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/emne/quiz-1.13834273" data-ec-id="pp:1.13834273" data-ec-name="Quiz" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Quiz</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/former-1.17105310" data-ec-id="pp:1.17105310" data-ec-name="Former (minispill)" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Former</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/tvers-1.17073958" data-ec-id="pp:1.17073958" data-ec-name="Tvers (minispill)" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Tvers</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://delta.nrk.no/spill/kula" data-ec-id="https://delta.nrk.no/spill/kula" data-ec-name="Kula (minispill)" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Kula</a></li></ul></div><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 tablet:border-l tablet:flex-2"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0"><a class="decoration-none! border-b-none! mt-0" href="/distrikt/" data-ec-id="pp:distrikt/" data-ec-name="Distrikt" data-ec-variant="N/A">Distrikt</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/sorlandet/" data-ec-id="pp:2.6950" data-ec-name="Agder" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Agder</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/stor-oslo/" data-ec-id="pp:2.6954" data-ec-name="Akershus" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Akershus</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/buskerud/" data-ec-id="pp:2.6974" data-ec-name="Buskerud" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Buskerud</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/tromsogfinnmark/" data-ec-id="pp:2.7611" data-ec-name="Finnmark" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Finnmark</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/innlandet/" data-ec-id="pp:2.6944" data-ec-name="Innlandet" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Innlandet</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/mr/" data-ec-id="pp:2.6946" data-ec-name="M&amp;oslash;re og Romsdal" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">MÃ¸re og Romsdal</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nordland/" data-ec-id="pp:2.6947" data-ec-name="Nordland" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Nordland</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/stor-oslo/" data-ec-id="pp:2.6954" data-ec-name="Oslo" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Oslo</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/rogaland/" data-ec-id="pp:2.6948" data-ec-name="Rogaland" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Rogaland</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/vestfoldogtelemark/" data-ec-id="pp:2.7617" data-ec-name="Telemark" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Telemark</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/tromsogfinnmark/" data-ec-id="pp:2.7611" data-ec-name="Troms" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Troms</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/trondelag/" data-ec-id="pp:2.6943" data-ec-name="Tr&amp;oslash;ndelag" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">TrÃ¸ndelag</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/vestfoldogtelemark/" data-ec-id="pp:2.7617" data-ec-name="Vestfold" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Vestfold</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/vestland/" data-ec-id="pp:2.7623" data-ec-name="Vestland" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Vestland</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/ostfold/" data-ec-id="pp:2.6953" data-ec-name="&amp;Oslash;stfold" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Ãstfold</a></li></ul></div><div class="nrkno-header__mega-menu-category animate-nrk-header-fade px-0 pt-[1.875rem] pb-[1.75rem] tablet:pl-5 dark:tablet:border-l-core-blue-800 tablet:border-l tablet:flex-1"><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase mt-0">Temasider</h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/video/humor/" data-ec-id="https://www.nrk.no/video/humor/" data-ec-name="NRK Humor" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Humor</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/mat/" data-ec-id="pp:2.7009" data-ec-name="NRK Mat" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Mat</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/skole/" data-ec-id="pp:2.7159" data-ec-name="NRK Skole" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRK Skole</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://www.nrkbeta.no/" data-ec-id="https://www.nrkbeta.no" data-ec-name="NRKbeta" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">NRKbeta</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/nyinorge/" data-ec-id="https://www.nrk.no/nyinorge/" data-ec-name="Ny i Norge" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Ny i Norge</a></li></ul><h2 class="decoration-none! text-[0.8125rem] font-bold tracking-widest !mb-3 uppercase !mt-12"><a class="decoration-none! border-b-none! !mt-12" href="https://www.nrk.no/informasjon/" data-ec-id="pp:2.7002" data-ec-name="Info" data-ec-variant="N/A">Info</a></h2><ul class="gap-x-5 list-none p-0 -ml-4 tablet:-ml-5 tablet:columns-1 mobile:columns-2" role="list"><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://hjelp.nrk.no/" data-ec-id="https://hjelp.nrk.no" data-ec-name="Hjelp" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Hjelp</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="/informasjon/" data-ec-id="pp:2.7002" data-ec-name="Informasjon" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Informasjon</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://info.nrk.no/baerekraft" data-ec-id="https://info.nrk.no/baerekraft" data-ec-name="BÃ¦rekraft" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">BÃ¦rekraft</a></li><li class="animate-[nrk-header-fade_0.5s_50ms_backwards] break-inside-avoid align-middle tablet:min-w-[9rem]" role="listitem"><a href="https://info.nrk.no/karriere/" data-ec-id="https://info.nrk.no/karriere" data-ec-name="Karriere" data-ec-variant="N/A" class="block text-[0.9375em] font-light leading-[1.6] border-b-none! opacity-80 py-2! px-4 tablet:px-5 hover:animate-nrk-header-link-hover dark:hover:animate-nrk-header-link-hover-dark">Karriere</a></li></ul></div></div></div></div></nav></header></div></div></nrkno-header>
       <script>
         const headerEl = document.querySelector('nrkno-header');
         const url = new URL(window.location.href);
@@ -341,7 +373,7 @@ tag.setAttribute('content', darkModeThemeColor);
     if (headerElement) {
      const script = document.createElement('script');
         script.type = 'module';
-        script.src = 'https://static.nrk.no/nrkno-header/3.5.0/custom-element.es.js';
+        script.src = 'https://static.nrk.no/nrkno-header/3.6.1/custom-element.es.js';
         script.onload = () => {
           const wrapper = headerElement.querySelector('.nrkno-header-wrapper');
           if (wrapper) {
@@ -365,7 +397,7 @@ tag.setAttribute('content', darkModeThemeColor);
 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nrk-chevron-right" />
 </svg>
 </div>
-<ul class="menu__list" id="mi5JGjis1qRwCKWDCmdhbp_Q">
+<ul class="menu__list" id="minK8ymgVTQ42_j32LlEU6Aw">
 <li class="menu__item">
 <a class="menu__link skin-border-hover" data-id="2.6892" href="https://www.nrk.no/nyheter/">
 Siste nytt
@@ -390,7 +422,7 @@ NRK Ytring
 </nav>
 <script>
 require(['inline!standard:type/menu/Serum.MainMenu'], function(MainMenu) {
-MainMenu('#mi5JGjis1qRwCKWDCmdhbp_Q');
+MainMenu('#minK8ymgVTQ42_j32LlEU6Aw');
 });
 </script>
 </div></div></div></div></div><div class="g100 col fc s18 sg6 sg9 sg12 group-reference"><div class="group widget rich cf container-widget"><div class="g100 col fc s18 sg6 sg9 sg12 surrogate-reference"><!-- include: /serum/render?id=1.7592607&amp;secondary=1.14480202&amp;size=18&amp;perspective=RICH&amp;alignment=CENTER&amp;scope=ARTICLE --><!-- START: /templates/surrogate/surrogate.jsp -->
@@ -747,7 +779,7 @@ datetime="2019-03-19T16:47:45+01:00">
 </div>
 </div>
 <!-- include: /serum/render?id=panorama.singleton.favorittmarkering&amp;size=18&amp;perspective=RICH&amp;alignment=AUTO -->
-    <div class="min-side" data-state-id="j4erhpjpqg" data-static-host="https://static.nrk.no/publisering/min-side"><link
+    <div class="min-side" data-state-id="o9l0hsqd5c" data-static-host="https://static.nrk.no/publisering/min-side"><link
       rel="stylesheet"
       type="text/css"
       href="https://static.nrk.no/publisering/min-side/static/0-c2ddc9339a70fac9c76d.css"
@@ -756,7 +788,7 @@ datetime="2019-03-19T16:47:45+01:00">
       type="text/css"
       href="https://static.nrk.no/publisering/min-side/static/saveButton-62d288e344506c232def.css"
     /><script crossorigin="anonymous">
-        window['__clientConfig__j4erhpjpqg__'] = {"errorTracking":{"enabled":1},"loginConfig":{"mock":false,"loginUrl":"https:\u002F\u002Finnlogging.nrk.no","homeUrl":"https:\u002F\u002Fwww.nrk.no"},"favorites":{"articleBaseURL":"https:\u002F\u002Fwww.nrk.no\u002F","articlesPerPage":10},"statistics":{"enabled":true,"sourceIdPrefix":"nv","kilkaya":{"enabled":false,"scriptModuleUrl":"https:\u002F\u002Fcl-eu2.k5a.io\u002F618112c1d5dcb06e487079f2.module.js","scriptNoModuleUrl":"https:\u002F\u002Fcl-eu2.k5a.io\u002F618112c1d5dcb06e487079f2.nomodule.js"},"snowplow":{"enabled":true,"host":"https:\u002F\u002Fdata.nrk.no","environment":"prod","contentId":"min-side-page","contentSource":"nrkno-minside","appId":"no.nrk.web.minside"}},"api":{"url":"https:\u002F\u002Fwww.nrk.no\u002Fminside\u002Fapi"},"link":{"url":"https:\u002F\u002Fwww.nrk.no\u002Fminside","base":"\u002Fminside"},"assets":{"url":"https:\u002F\u002Fstatic.nrk.no\u002Fpublisering\u002Fmin-side\u002Fstatic\u002Fassets"}};
+        window['__clientConfig__o9l0hsqd5c__'] = {"errorTracking":{"enabled":1},"loginConfig":{"mock":false,"loginUrl":"https:\u002F\u002Finnlogging.nrk.no","homeUrl":"https:\u002F\u002Fwww.nrk.no"},"favorites":{"articleBaseURL":"https:\u002F\u002Fwww.nrk.no\u002F","articlesPerPage":10},"statistics":{"enabled":true,"sourceIdPrefix":"nv","kilkaya":{"enabled":false,"scriptModuleUrl":"https:\u002F\u002Fcl-eu2.k5a.io\u002F618112c1d5dcb06e487079f2.module.js","scriptNoModuleUrl":"https:\u002F\u002Fcl-eu2.k5a.io\u002F618112c1d5dcb06e487079f2.nomodule.js"},"snowplow":{"enabled":true,"host":"https:\u002F\u002Fdata.nrk.no","environment":"prod","contentId":"min-side-page","contentSource":"nrkno-minside","appId":"no.nrk.web.minside"}},"api":{"url":"https:\u002F\u002Fwww.nrk.no\u002Fminside\u002Fapi"},"link":{"url":"https:\u002F\u002Fwww.nrk.no\u002Fminside","base":"\u002Fminside"},"assets":{"url":"https:\u002F\u002Fstatic.nrk.no\u002Fpublisering\u002Fmin-side\u002Fstatic\u002Fassets"}};
       </script><script id="boot-script" type="application/javascript">
        if (window.location.href.indexOf('viewContext') === -1) {
          function detectIE() {
@@ -914,20 +946,20 @@ data-ec-name="nrkno_universe">
 <!--
 --><!--
 --><div class="g120 col fln s6 sl9 sl12 sl18 article-reference relation"
-data-id="noc:1529525"
+data-id="noc:1529792"
 data-reference-id="not:1370.">
-<!-- include: /serum/render?id=noc%3A1529525&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
+<!-- include: /serum/render?id=noc%3A1529792&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
 <div class="article widget lean plug-default plug lp_plug cf">
 <a class="autonomous"
-href="https://www.nrk.no/artikkel/8_8-millionar-personnummer-stolne-i-danmark-1529525"
-data-id="noc:1529525"
-data-ec-id="noc:1529525"
-data-ec-name="8,8 millionar personnummer stolne i Danmark">
+href="https://www.nrk.no/artikkel/kinesiskeide-leiebiler-filmet-hemmelig-forsvarsovelse-1529792"
+data-id="noc:1529792"
+data-ec-id="noc:1529792"
+data-ec-name="Kinesiskeide leiebiler filmet hemmelig forsvarsÃ¸velse">
 <figure class="image widget lean plug-image">
-<div class="responsive-img F169"><img sizes="100vw" srcset="https://gfx.nrk.no/kVxqDUM75c5L6SaxXsyI3QSeRxOPApYS7AXU2f542TUg.jpg 320w, https://gfx.nrk.no/kVxqDUM75c5L6SaxXsyI3QBtCG2LjuujbAXU2f542TUg.jpg 650w, https://gfx.nrk.no/kVxqDUM75c5L6SaxXsyI3QOKJL4mLEAxXAXU2f542TUg.jpg 1200w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="" title=""></div>
+<div class="responsive-img F169"><img sizes="100vw" srcset="https://gfx.nrk.no/F3bCfGW29zE268_gET1hIAXxmbV67jXL-CXpIk9B5TVA.jpg 320w, https://gfx.nrk.no/F3bCfGW29zE268_gET1hIAp6woM5g8d3SCXpIk9B5TVA.jpg 650w, https://gfx.nrk.no/F3bCfGW29zE268_gET1hIALC4I6aKSYcOCXpIk9B5TVA.jpg 1200w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="" title=""></div>
 </figure>
 <div class="plug-teaser">
-<h2 class="title">8,8 millionar personnummer stolne i Danmark</h2>
+<h2 class="title">Kinesiskeide leiebiler filmet hemmelig forsvarsÃ¸velse</h2>
 </div>
 </a>
 </div>
@@ -937,7 +969,7 @@ data-ec-name="8,8 millionar personnummer stolne i Danmark">
 -->
 </div>
 <div class="container-widget-content pagination nrk-pagination">
-<button class="flow-page-forward nrk-button" data-id="not:1370?size=5&amp;perspective=BRIEF&amp;alignment=AUTO&amp;quantity=1&amp;secondary=1.14480202&amp;cursor=eyJ0aW1lc3RhbXAiOiIyMDI2LTEwLTA1VDIwOjM1OjQyLjkwOVoiLCJjb250ZW50SWQiOjE1Mjk1MjV9">
+<button class="flow-page-forward nrk-button" data-id="not:1370?size=5&amp;perspective=BRIEF&amp;alignment=AUTO&amp;quantity=1&amp;secondary=1.14480202&amp;cursor=eyJ0aW1lc3RhbXAiOiIyMDI2LTEwLTA4VDA2OjU2OjE4LjA3MloiLCJjb250ZW50SWQiOjE1Mjk3OTJ9">
 <span class="button-icon">+</span>
 <span>Vis flere</span>
 </button>
@@ -975,23 +1007,23 @@ data-ec-name="nrkno_universe">
 <!--
 --><!--
 --><div class="g120 col fln s6 sl9 sl12 sl18 article-reference relation"
-data-id="1.18032702"
+data-id="1.18048713"
 data-reference-id="not:1276.">
-<!-- include: /serum/render?id=1.18032702&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
+<!-- include: /serum/render?id=1.18048713&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
 <div class="article widget lean plug-default plug lp_plug cf">
 <a class="autonomous"
-href="https://www.nrk.no/vestfoldogtelemark/frykter-industridod-etter-nedleggelse-pa-ulefoss_-_-vi-utkonkurrerer-oss-selv-1.18032702"
-data-id="1.18032702"
-data-ec-id="pp:article:1.18032702"
-data-ec-name="Frykter industridÃ¸d etter nedleggelse pÃ¥ Ulefoss: â Vi utkonkurrerer oss selv">
-<!-- include: /serum/render?id=1.18035164&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;type=image&amp;aspect=UNKNOWN&amp;classes=plug-image --><!-- START: /templates/image/image-lean.jsp -->
+href="https://www.nrk.no/ostfold/norske-skog-investerer-opptil-850-millioner-i-saugbrugs-i-halden-1.18048713"
+data-id="1.18048713"
+data-ec-id="pp:article:1.18048713"
+data-ec-name="Bygget raste sammen i 2023: NÃ¥ vil Norske Skog gjenreise det">
+<!-- include: /serum/render?id=1.18042103&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;caption=RAS%3A+Slik+s%C3%A5+det+ut+i+omr%C3%A5det+der+raste+skjedde+i+Halden.&amp;type=image&amp;aspect=F169&amp;classes=plug-image --><!-- START: /templates/image/image-lean.jsp -->
 <figure class="image widget lean plug-image">
-<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6Aza5uB3xKtW49udKLDukTkw.jpg 80w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6A6DrdYKPP1M09udKLDukTkw.jpg 160w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6AjyqmoQtMdyU9udKLDukTkw.jpg 350w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6AfIFi8Le_Npk9udKLDukTkw.jpg 450w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6AZt1lttrDpXk9udKLDukTkw.jpg 650w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6ALxXpunjE6Ts9udKLDukTkw.jpg 1000w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6AFoW97lkE7j49udKLDukTkw.jpg 1200w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6AqbEJ0P4bILA9udKLDukTkw.jpg 1600w, https://gfx.nrk.no/HLfdeIxecSTLLUK-BPID6Aj39uGOuBFCE9udKLDukTkw.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="Flytende, glÃ¸dende metall helles fra en stÃ¸peÃ¸se i et industrielt produksjonsanlegg. (Bildebeskrivelsen er laget av en KI-tjeneste)" title="Foto: Hans Philip Hofgaard / NRK"></div>
+<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPgSCii0IvWODcLRzENpJ6vUg.jpg 80w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPgze7SZf05sDoLRzENpJ6vUg.jpg 160w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPggihYYj70JEwLRzENpJ6vUg.jpg 350w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPgtOstEVYkOkYLRzENpJ6vUg.jpg 450w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPgcxWnzAGcEqILRzENpJ6vUg.jpg 650w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPgv3bECvVTQUkLRzENpJ6vUg.jpg 1000w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPgBW8wjn6uBkgLRzENpJ6vUg.jpg 1200w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPg7uSfiJr2Z24LRzENpJ6vUg.jpg 1600w, https://gfx.nrk.no/xQGCfRwTFo8oz8t93RgXPgJzMLLsr7G5oLRzENpJ6vUg.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="Et steinras traff Norske Skog Saugbrugs i Halden 27. april 2023." title="Foto: Tobias Nordli"></div>
 </figure>
 <!-- END: /templates/image/image-lean.jsp -->
 
 <div class="plug-teaser">
-<h2 class="title">Frykter industridÃ¸d etter nedleggelse pÃ¥ Ulefoss: â Vi utkonkurrerer oss selv</h2>
+<h2 class="title">Bygget raste sammen i 2023: NÃ¥ vil Norske Skog gjenreise det</h2>
 </div>
 </a>
 </div>
@@ -1001,7 +1033,7 @@ data-ec-name="Frykter industridÃ¸d etter nedleggelse pÃ¥ Ulefoss: â Vi 
 -->
 </div>
 <div class="container-widget-content pagination nrk-pagination">
-<button class="flow-page-forward nrk-button" data-id="not:1276?size=5&amp;perspective=BRIEF&amp;alignment=AUTO&amp;quantity=1&amp;secondary=1.14480202&amp;cursor=eyJ0aW1lc3RhbXAiOiIyMDI2LTEwLTA2VDE2OjI1OjU1WiIsImNvbnRlbnRJZCI6MTUyOTYxNn0=">
+<button class="flow-page-forward nrk-button" data-id="not:1276?size=5&amp;perspective=BRIEF&amp;alignment=AUTO&amp;quantity=1&amp;secondary=1.14480202&amp;cursor=eyJ0aW1lc3RhbXAiOiIyMDI2LTEwLTA3VDE2OjM4OjI1WiIsImNvbnRlbnRJZCI6MTUyOTczMn0=">
 <span class="button-icon">+</span>
 <span>Vis flere</span>
 </button>
@@ -1056,7 +1088,7 @@ new Article($(this).removeClass('js-initialize'));
     class="kur-house__main"
     data-version-id="5322177"
     data-published-time="2026-09-12T08:17:02.132Z"
-    data-generated-time="2026-10-08T07:48:34.259Z"
+    data-generated-time="2026-10-09T07:51:59.398Z"
   >
     
     <section class="kur-floor kur-floor--mix kur-floor--normal">
@@ -1296,21 +1328,24 @@ data-ec-list="pp:article:1.11001879"
 data-ec-name="nrkno_flow"
 ><div
 class="g100 col fl s9 sl12 sl18 sg6 compilation-reference relation flow-relation"
-data-id="1.14793414"
-data-reference-id="1.11001879.body21407"
-><!-- include: /serum/render?id=1.14793414&amp;size=9&amp;perspective=BRIEF&amp;alignment=LEFT&amp;quantity=40 -->
+data-id="1.11291900"
+data-reference-id="1.11001879.body21412"
+><!-- include: /serum/render?id=1.11291900&amp;size=9&amp;perspective=BRIEF&amp;alignment=LEFT&amp;quantity=40 -->
 <div class="compilation widget brief plug cf js-initialize lp_compilation"
-data-id="1.14793414"
+data-id="1.11291900"
 data-perspective="BRIEF"
 >
 <a class="autonomous"
-href="https://www.nrk.no/nyheter/okokrim-1.14793414"
-data-id="1.14793414"
-title="Ãkokrim">
+href="https://www.nrk.no/nyheter/nobels-fredspris-1.11291900"
+data-id="1.11291900"
+title="Nobels fredspris">
 <div class="compilation-media">
-<!-- include: /serum/render?id=1.16896375&amp;size=9&amp;perspective=RICH&amp;alignment=AUTO&amp;type=image&amp;aspect=UNKNOWN&amp;classes=plug-image --><!-- START: /templates/image/image-rich.jsp -->
+<!-- include: /serum/render?id=1.18050202&amp;size=9&amp;perspective=RICH&amp;alignment=AUTO&amp;type=image&amp;aspect=UNKNOWN&amp;classes=plug-image --><!-- START: /templates/image/image-rich.jsp -->
 <figure class="image widget rich plug-image">
-<div class="responsive-img F169"><img sizes="(min-width:1180px) 575px, (min-width:720px) 50vw, 100vw" srcset="https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53QNkP2WOcQyLLK8t6N9cHzWg.jpg 80w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53QuMNwrIUqhDXK8t6N9cHzWg.jpg 160w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53Qpavjg_HwjITK8t6N9cHzWg.jpg 350w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53QFDuPfzb7libK8t6N9cHzWg.jpg 450w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53Q5Yy3X4t3L_TK8t6N9cHzWg.jpg 650w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53QZtTvq9AwX-rK8t6N9cHzWg.jpg 1000w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53QqEABhUr6dgTK8t6N9cHzWg.jpg 1200w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53QrtvCzMpsLfTK8t6N9cHzWg.jpg 1600w, https://gfx.nrk.no/4Pxn1u_R2ZpjWleJmvi53QIYpqddk4RGrK8t6N9cHzWg.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="Ãkokrim stÃ¥r skrevet pÃ¥ en glassdÃ¸r i store, grÃ¥ bokstaver. Gjenskinn fra grÃ¸nne busker og andre bygninger i glasset." title=""></div>
+<div class="responsive-img F169"><img sizes="(min-width:1180px) 575px, (min-width:720px) 50vw, 100vw" srcset="https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywbTque0x3ld4BvHJntqcnhA.jpg 80w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywU11jOtLIe3sBvHJntqcnhA.jpg 160w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywXWqEdD6JE4wBvHJntqcnhA.jpg 350w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywbo1gFzowWQoBvHJntqcnhA.jpg 450w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywp_-tQcWtTewBvHJntqcnhA.jpg 650w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywJ-x5JaWCEmsBvHJntqcnhA.jpg 1000w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywKxfq1rQNRyQBvHJntqcnhA.jpg 1200w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywLZXmNZX7nOMBvHJntqcnhA.jpg 1600w, https://gfx.nrk.no/Sda7vqYcVq3dRPW0_UkUywbWEEyoQOMGkBvHJntqcnhA.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="Fredsprismedaljen" title="Foto: NTB"></div>
+<figcaption>
+<small>Foto: NTB</small>
+</figcaption>
 </figure>
 <!-- END: /templates/image/image-rich.jsp -->
 
@@ -1320,9 +1355,9 @@ title="Ãkokrim">
 </div>
 </div>
 <div class="plug-teaser skin-border">
-<h2 class="title">Ãkokrim: Kriminelle nettverk har etablert seg i norske nÃ¦ringer</h2>
+<h2 class="title">Julija Navalnaja bykset pÃ¥ bettingsiden Polymarket</h2>
 <span class="compilation-circle"></span>
-<span class="compilation-link">Ãkokrim</span>
+<span class="compilation-link">Nobels fredspris</span>
 <footer class="plug-footer">
 <div class="plug-metadata plug-metadata-footer">
 <span class="plug-metadata-icon skin-plug-icon">
@@ -1365,271 +1400,271 @@ data-permalink="">
 </header>
 <ul class="stream-lean-content relations" aria-live="polite">
 <li class="stream-item relation"
-id="1.18049084.1.18049084"
-data-id="1.18049084"
-data-reference-id="1.18049084.1.18049084"
+id="1.18050164.1.18050164"
+data-id="1.18050164"
+data-reference-id="1.18050164.1.18050164"
 data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18049084&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<!-- include: /serum/render?id=1.18050164&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
 <span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/okokrim_-kriminelle-nettverk-har-etablert-seg-i-norske-naeringer-1.18049084"
+<a href="https://www.nrk.no/nyheter/russisk-internett-rammet-av-droner-1.18050164"
 class="autonomous skin-text"
-data-id="1.18049084">
+data-id="1.18050164">
 <time class="bulletin-publication-time">
-09:07
+09:50
 </time>
-Ãkokrim: Kriminelle nettverk har etablert seg i norske nÃ¦ringer
+Russisk internett rammet av droner
 </a>
 </span>
 
 </li>
 <li class="stream-item relation"
-id="1.18048962.1.18048962"
-data-id="1.18048962"
-data-reference-id="1.18048962.1.18048962"
+id="1.18050154.1.18050154"
+data-id="1.18050154"
+data-reference-id="1.18050154.1.18050154"
 data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048962&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/tv-2_-tidligere-fotballspiller-domt-til-ni-ar-og-atte-maneders-fengsel-1.18048962"
-class="autonomous skin-text"
-data-id="1.18048962">
-<time class="bulletin-publication-time">
-08:10
-</time>
-TV 2: Tidligere fotballspiller dÃ¸mt til ni Ã¥r og Ã¥tte mÃ¥neders fengsel
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048941.1.18048941"
-data-id="1.18048941"
-data-reference-id="1.18048941.1.18048941"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048941&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/houthiene-hevder-de-har-angrepet-flyplass-i-riyadh-1.18048941"
-class="autonomous skin-text"
-data-id="1.18048941">
-<time class="bulletin-publication-time">
-05:37
-</time>
-Houthiene hevder de har angrepet flyplass i Riyadh
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048927.1.18048927"
-data-id="1.18048927"
-data-reference-id="1.18048927.1.18048927"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048927&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/ny-henrettelse-i-usa-etter-pike-saken-1.18048927"
-class="autonomous skin-text"
-data-id="1.18048927">
-<time class="bulletin-publication-time">
-05:28
-</time>
-Ny henrettelse i USA etter Pike-saken
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048926.1.18048926"
-data-id="1.18048926"
-data-reference-id="1.18048926.1.18048926"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048926&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/usa-gjentar-radet-om-a-forlate-russland-1.18048926"
-class="autonomous skin-text"
-data-id="1.18048926">
-<time class="bulletin-publication-time">
-03:59
-</time>
-USA gjentar rÃ¥det om Ã¥ forlate Russland
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048924.1.18048924"
-data-id="1.18048924"
-data-reference-id="1.18048924.1.18048924"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048924&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/bevaepnet-politi-i-kautokeino-etter-melding-om-skudd-1.18048924"
-class="autonomous skin-text"
-data-id="1.18048924">
-<time class="bulletin-publication-time">
-02:30
-</time>
-BevÃ¦pnet politi i Kautokeino etter melding om skudd
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048923.1.18048923"
-data-id="1.18048923"
-data-reference-id="1.18048923.1.18048923"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048923&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/trump-mener-han-fortjener-fredsprisen-1.18048923"
-class="autonomous skin-text"
-data-id="1.18048923">
-<time class="bulletin-publication-time">
-01:31
-</time>
-Trump mener han fortjener fredsprisen
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048922.1.18048922"
-data-id="1.18048922"
-data-reference-id="1.18048922.1.18048922"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048922&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/tankskip-skal-ha-blitt-angrepet-i-persiabukta-1.18048922"
-class="autonomous skin-text"
-data-id="1.18048922">
-<time class="bulletin-publication-time">
-00:54
-</time>
-Tankskip skal ha blitt angrepet i Persiabukta
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048909.1.18048909"
-data-id="1.18048909"
-data-reference-id="1.18048909.1.18048909"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048909&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/eirik-skadsdammen-er-dod-1.18048909"
-class="autonomous skin-text"
-data-id="1.18048909">
-<time class="bulletin-publication-time">
-23:55
-</time>
-Eirik Skadsdammen er dÃ¸d
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048846.1.18048846"
-data-id="1.18048846"
-data-reference-id="1.18048846.1.18048846"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048846&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/kvinnelig-oslo-advokat-pagrepet-for-vold-i-naere-relasjoner--1.18048846"
-class="autonomous skin-text"
-data-id="1.18048846">
-<time class="bulletin-publication-time">
-21:46
-</time>
-Kvinnelig Oslo-advokat pÃ¥grepet for vold i nÃ¦re relasjoner 
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048830.1.18048830"
-data-id="1.18048830"
-data-reference-id="1.18048830.1.18048830"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048830&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/maricarmen-_87_-som-utloste-spanske-boligprotester-er-dod-1.18048830"
-class="autonomous skin-text"
-data-id="1.18048830">
-<time class="bulletin-publication-time">
-20:37
-</time>
-Maricarmen (87) som utlÃ¸ste spanske boligprotester er dÃ¸d
-</a>
-</span>
-
-</li>
-<li class="stream-item relation"
-id="1.18048816.1.18048816"
-data-id="1.18048816"
-data-reference-id="1.18048816.1.18048816"
-data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048816&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<!-- include: /serum/render?id=1.18050154&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
 <span class="teaser widget reference emphasis-high">
-<a href="https://www.nrk.no/nyheter/tre-drept-og-36-skadd-i-flyplass-angrep-i-saudi-arabia-1.18048816"
+<a href="https://www.nrk.no/nyheter/prisene-steg-3_4-prosent-i-september-1.18050154"
 class="autonomous skin-text"
-data-id="1.18048816">
+data-id="1.18050154">
 <time class="bulletin-publication-time">
-20:14
+08:00
 </time>
-Tre drept og 36 skadd i flyplass-angrep i Saudi-Arabia
+Prisene steg 3,4 prosent i september
 </a>
 </span>
 
 </li>
 <li class="stream-item relation"
-id="1.18048653.1.18048653"
-data-id="1.18048653"
-data-reference-id="1.18048653.1.18048653"
+id="1.18050139.1.18050139"
+data-id="1.18050139"
+data-reference-id="1.18050139.1.18050139"
 data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048653&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<!-- include: /serum/render?id=1.18050139&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
 <span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/nyheter/christa-pike-alvorlig-skadd-etter-a-ha-vaknet-fra-henrettelsesforsok-1.18048653"
+<a href="https://www.nrk.no/nyheter/julija-navalnaja-bykset-pa-bettingsiden-polymarket-1.18050139"
 class="autonomous skin-text"
-data-id="1.18048653">
+data-id="1.18050139">
 <time class="bulletin-publication-time">
-19:59
+07:49
 </time>
-Christa Pike alvorlig skadd etter Ã¥ ha vÃ¥knet fra henrettelsesforsÃ¸k
+Julija Navalnaja bykset pÃ¥ bettingsiden Polymarket
 </a>
 </span>
 
 </li>
 <li class="stream-item relation"
-id="1.18048696.1.18048696"
-data-id="1.18048696"
-data-reference-id="1.18048696.1.18048696"
+id="1.18050125.1.18050125"
+data-id="1.18050125"
+data-reference-id="1.18050125.1.18050125"
 data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048696&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<!-- include: /serum/render?id=1.18050125&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
 <span class="teaser widget reference emphasis-medium">
-<a href="https://www.nrk.no/stor-oslo/beslagla-elsparkesykkel-med-toppfart-pa-140-km_t-1.18048696"
+<a href="https://www.nrk.no/nyheter/fredsprisvinner-machado-krever-venezuela-valg-innen-juli-1.18050125"
 class="autonomous skin-text"
-data-id="1.18048696">
+data-id="1.18050125">
 <time class="bulletin-publication-time">
-18:07
+07:26
 </time>
-Beslagla elsparkesykkel med toppfart pÃ¥ 140 km/t
+Fredsprisvinner Machado krever Venezuela-valg innen juli
 </a>
 </span>
 
 </li>
 <li class="stream-item relation"
-id="1.18048496.1.18048496"
-data-id="1.18048496"
-data-reference-id="1.18048496.1.18048496"
+id="1.18050087.1.18050087"
+data-id="1.18050087"
+data-reference-id="1.18050087.1.18050087"
 data-perspective="REFERENCE">
-<!-- include: /serum/render?id=1.18048496&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
-<span class="teaser widget reference emphasis-high">
-<a href="https://www.nrk.no/nyheter/who_-far-ikke-gjort-full-risikovurdering-av-mistenkt-pest-dodsfall-i-russland-1.18048496"
+<!-- include: /serum/render?id=1.18050087&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/1000-ar-gammel-olav-den-hellige-mynt-funnet-1.18050087"
 class="autonomous skin-text"
-data-id="1.18048496">
+data-id="1.18050087">
 <time class="bulletin-publication-time">
-17:47
+07:09
 </time>
-WHO: FÃ¥r ikke gjort full risikovurdering av mistenkt pest-dÃ¸dsfall i Russland
+1000 Ã¥r gammel Olav den hellige-mynt funnet
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18050060.1.18050060"
+data-id="1.18050060"
+data-reference-id="1.18050060.1.18050060"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18050060&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/ukraina_-minst-en-drept-i-russisk-luftangrep-1.18050060"
+class="autonomous skin-text"
+data-id="1.18050060">
+<time class="bulletin-publication-time">
+05:42
+</time>
+Ukraina: Minst Ã©n drept i russisk luftangrep
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18050041.1.18050041"
+data-id="1.18050041"
+data-reference-id="1.18050041.1.18050041"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18050041&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/bolsonaro-far-stotte-fra-nummer-tre-i-presidentvalget-1.18050041"
+class="autonomous skin-text"
+data-id="1.18050041">
+<time class="bulletin-publication-time">
+05:29
+</time>
+Bolsonaro fÃ¥r stÃ¸tte fra nummer tre i presidentvalget
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18050039.1.18050039"
+data-id="1.18050039"
+data-reference-id="1.18050039.1.18050039"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18050039&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/trump-gir-elon-musk-prestisjefylt-utmerkelse-1.18050039"
+class="autonomous skin-text"
+data-id="1.18050039">
+<time class="bulletin-publication-time">
+03:52
+</time>
+Trump gir Elon Musk prestisjefylt utmerkelse
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18050037.1.18050037"
+data-id="1.18050037"
+data-reference-id="1.18050037.1.18050037"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18050037&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/mann-skutt-av-ice-agent-i-new-york-1.18050037"
+class="autonomous skin-text"
+data-id="1.18050037">
+<time class="bulletin-publication-time">
+03:38
+</time>
+Mann skutt av ICE-agent i New York
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18050036.1.18050036"
+data-id="1.18050036"
+data-reference-id="1.18050036.1.18050036"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18050036&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/hegseth-om-planlagt-henrettelse_-skal-vaere__offentlig_-1.18050036"
+class="autonomous skin-text"
+data-id="1.18050036">
+<time class="bulletin-publication-time">
+01:58
+</time>
+Hegseth om planlagt henrettelse: Skal vÃ¦reÂ Â«offentligÂ»
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18050022.1.18050022"
+data-id="1.18050022"
+data-reference-id="1.18050022.1.18050022"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18050022&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/tronder-omkom-etter-fall-i-sjoen-i-bindal-1.18050022"
+class="autonomous skin-text"
+data-id="1.18050022">
+<time class="bulletin-publication-time">
+00:41
+</time>
+TrÃ¸nder omkom etter fall i sjÃ¸en i Bindal
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18049983.1.18049983"
+data-id="1.18049983"
+data-reference-id="1.18049983.1.18049983"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18049983&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/stor-oslo/ambassade-ansatt-tiltalt-for-grovt-skattesvik-1.18049983"
+class="autonomous skin-text"
+data-id="1.18049983">
+<time class="bulletin-publication-time">
+22:38
+</time>
+Ambassade-ansatt tiltalt for grovt skattesvik
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18049999.1.18049999"
+data-id="1.18049999"
+data-reference-id="1.18049999.1.18049999"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18049999&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/dsb_-alvorlige-samfunnskonsekvenser-1.18049999"
+class="autonomous skin-text"
+data-id="1.18049999">
+<time class="bulletin-publication-time">
+22:01
+</time>
+DSB: Alvorlige samfunnskonsekvenser
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18049960.1.18049960"
+data-id="1.18049960"
+data-reference-id="1.18049960.1.18049960"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18049960&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/mr/statsforvaltaren_-_-viser-kor-sarbar-vi-er-1.18049960"
+class="autonomous skin-text"
+data-id="1.18049960">
+<time class="bulletin-publication-time">
+21:39
+</time>
+Statsforvaltaren: â Viser kor sÃ¥rbar vi er
+</a>
+</span>
+
+</li>
+<li class="stream-item relation"
+id="1.18049988.1.18049988"
+data-id="1.18049988"
+data-reference-id="1.18049988.1.18049988"
+data-perspective="REFERENCE">
+<!-- include: /serum/render?id=1.18049988&amp;secondary=1.11001867&amp;size=9&amp;perspective=REFERENCE&amp;alignment=AUTO -->
+<span class="teaser widget reference emphasis-medium">
+<a href="https://www.nrk.no/nyheter/setter-inn-3000-laerere-i-frankrike-1.18049988"
+class="autonomous skin-text"
+data-id="1.18049988">
+<time class="bulletin-publication-time">
+21:21
+</time>
+Setter inn 3000 lÃ¦rere i Frankrike
 </a>
 </span>
 
@@ -1675,23 +1710,23 @@ data-ec-name="nrkno_universe">
 <!--
 --><!--
 --><div class="g33 col fln s6 sl9 sl12 sl18 article-reference relation"
-data-id="1.18049001"
+data-id="1.18049243"
 data-reference-id="1.11264150.">
-<!-- include: /serum/render?id=1.18049001&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
+<!-- include: /serum/render?id=1.18049243&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
 <div class="article widget lean plug-default plug lp_plug cf">
 <a class="autonomous"
-href="https://www.nrk.no/buskerud/suksesshistoria-om-fjellreven-_-nesten-som-tigeren-1.18049001"
-data-id="1.18049001"
-data-ec-id="pp:article:1.18049001"
-data-ec-name="Suksesshistoria om fjellreven â nesten som tigeren">
-<!-- include: /serum/render?id=1.18049003&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;caption=Fjellreven+er+eit+av+v%C3%A5re+beste+eksempel+p%C3%A5+korleis+det+er+jobba+over+mange+%C3%A5r+og+gjort+tiltak+som+er+avgjerande+for+%C3%A5+berge+arten&amp;type=image&amp;aspect=F169&amp;classes=plug-image --><!-- START: /templates/image/image-lean.jsp -->
+href="https://www.nrk.no/stor-oslo/liten-rift-om-ordforervervet-i-oslo-1.18049243"
+data-id="1.18049243"
+data-ec-id="pp:article:1.18049243"
+data-ec-name="Hvem skal utfordre Anne?">
+<!-- include: /serum/render?id=1.18049245&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;caption=Anne+Lindboe+har+v%C3%A6rt+H%C3%B8yres+ordf%C3%B8rer+i+Oslo+siden+2023.&amp;type=image&amp;aspect=F169&amp;classes=plug-image --><!-- START: /templates/image/image-lean.jsp -->
 <figure class="image widget lean plug-image">
-<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93wlMUo6ZwDQXb3cJCB9smZ1A.jpg 80w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93waZZ0m_XP-gD3cJCB9smZ1A.jpg 160w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93whuk-1m0cWlv3cJCB9smZ1A.jpg 350w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93wgxxqjYQJGBP3cJCB9smZ1A.jpg 450w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93wpCqsNaH3EVX3cJCB9smZ1A.jpg 650w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93wHZMzNNtuXSL3cJCB9smZ1A.jpg 1000w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93wg4ZnCDaqdjf3cJCB9smZ1A.jpg 1200w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93w5TYKdxBwCgn3cJCB9smZ1A.jpg 1600w, https://gfx.nrk.no/_ipW259rqdGRIMtmG3H93wEYyH5EdLyfz3cJCB9smZ1A.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="En fjellrev " title="Foto: NINA"></div>
+<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAuAEyBEbNDMzVO1fZi8YMKw.jpg 80w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAw-wn8v7qDyzVO1fZi8YMKw.jpg 160w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAs2-zNQXPL5HVO1fZi8YMKw.jpg 350w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAc5C8KUAjkTrVO1fZi8YMKw.jpg 450w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAHS08x9XBxKXVO1fZi8YMKw.jpg 650w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAvjIO2MA0jaDVO1fZi8YMKw.jpg 1000w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAPQdJjpxVgwDVO1fZi8YMKw.jpg 1200w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbA17CU6E5MhATVO1fZi8YMKw.jpg 1600w, https://gfx.nrk.no/js7ibbfs_c4fqD_GXysFbAX9u_WwwlzIjVO1fZi8YMKw.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="OrdfÃ¸rer Anne Rygg i rÃ¸d kjole med ordfÃ¸rerkjede foran et fargerikt veggmaleri. (Bildebeskrivelsen er laget av en KI-tjeneste)" title="Foto: Martin Solhaug Standal / NTB"></div>
 </figure>
 <!-- END: /templates/image/image-lean.jsp -->
 
 <div class="plug-teaser">
-<h2 class="title">Suksesshistoria om fjellreven â nesten som tigeren</h2>
+<h2 class="title">Hvem skal utfordre Anne?</h2>
 </div>
 </a>
 </div>
@@ -1701,23 +1736,23 @@ data-ec-name="Suksesshistoria om fjellreven â nesten som tigeren">
 --><!--
 --><!--
 --><div class="g33 col fln s6 sl9 sl12 sl18 article-reference relation"
-data-id="1.18048326"
+data-id="1.18049737"
 data-reference-id="1.11264150.">
-<!-- include: /serum/render?id=1.18048326&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
+<!-- include: /serum/render?id=1.18049737&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
 <div class="article widget lean plug-default plug lp_plug cf">
 <a class="autonomous"
-href="https://www.nrk.no/buskerud/nedslitte-fylkesveier_-_-kan-bli-katastrofalt-1.18048326"
-data-id="1.18048326"
-data-ec-id="pp:article:1.18048326"
-data-ec-name="Nedslitte fylkesveier: â Kan bli katastrofalt">
-<!-- include: /serum/render?id=1.18048325&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;caption=Fylkesveiene+mange+steder+i+landet+er+i+d%C3%A5rlig+forfatning+p%C3%A5+grunn+av+manglende+vedlikehold.+N%C3%A5+frykter+fylkesordf%C3%B8reren+i+Buskerud+at+veier+kan+bli+stengt%2C+dersom+det+ikke+bevilges+mer+penger.++&amp;type=image&amp;aspect=F169&amp;classes=plug-image --><!-- START: /templates/image/image-lean.jsp -->
+href="https://www.nrk.no/trondelag/togene-sto-stille-pa-grunn-av-togtrobbelet-1.18049737"
+data-id="1.18049737"
+data-ec-id="pp:article:1.18049737"
+data-ec-name="Fortsatt togforsinkelser selv om Telenor-feilen er rettet">
+<!-- include: /serum/render?id=1.18049953&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;caption=M%C3%85TTE+VENTE%3A+Dette+toget+som+egentlig+skulle+til+R%C3%B8ros+ble+st%C3%A5ende+p%C3%A5+Heimdal+stasjon+i+p%C3%A5vente+om+et+klarsignal.&amp;type=image&amp;aspect=F169&amp;classes=plug-image --><!-- START: /templates/image/image-lean.jsp -->
 <figure class="image widget lean plug-image">
-<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQ0-QjKheorzmRbgM8vW6sWg.jpg 80w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQjUate7tbjuaRbgM8vW6sWg.jpg 160w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQQfvXNZabObCRbgM8vW6sWg.jpg 350w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQnL3BJ3KrHF2RbgM8vW6sWg.jpg 450w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQL1_T4NbuZ4WRbgM8vW6sWg.jpg 650w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQEsecHaUOSnKRbgM8vW6sWg.jpg 1000w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQjWBoMzl965WRbgM8vW6sWg.jpg 1200w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQ5dVeCbPP_ISRbgM8vW6sWg.jpg 1600w, https://gfx.nrk.no/WmmqIzQVXYdNKBYZg5LuGQD2nBVfi4PI2RbgM8vW6sWg.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="Stor dump i en asfaltert vei med vannansamling. I bakgrunnen ses en vegkant med rekkverk og hus. (Bildebeskrivelsen er laget av en KI-tjeneste)" title="Foto: Eirik Haukenes / NRK"></div>
+<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQN-XT9ggSvR2aq-a3HjuKNg.jpg 80w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQnfOQ1vVu2fmaq-a3HjuKNg.jpg 160w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQjn2yeiP09lSaq-a3HjuKNg.jpg 350w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQehCqiGO_hvyaq-a3HjuKNg.jpg 450w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQ2DpVzxMFRSaaq-a3HjuKNg.jpg 650w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQFmlC0Hfkmriaq-a3HjuKNg.jpg 1000w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQaQySg7TOEqeaq-a3HjuKNg.jpg 1200w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQ6-S5G-3NpaKaq-a3HjuKNg.jpg 1600w, https://gfx.nrk.no/SqPGBt3l19jvgWk7tWY4iQG2Tb9jRCSJCaq-a3HjuKNg.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="Et tog stÃ¥r ved en perrong pÃ¥ en stasjon i skumringen. Skiltet pÃ¥ toget viser destinasjon RÃ¸ros. (Bildebeskrivelsen er laget av en KI-tjeneste)" title="Foto: Trond Odin Myhre Johansen / NRK"></div>
 </figure>
 <!-- END: /templates/image/image-lean.jsp -->
 
 <div class="plug-teaser">
-<h2 class="title">Nedslitte fylkesveier: â Kan bli katastrofalt</h2>
+<h2 class="title">Fortsatt togforsinkelser selv om Telenor-feilen er rettet</h2>
 </div>
 </a>
 </div>
@@ -1726,23 +1761,28 @@ data-ec-name="Nedslitte fylkesveier: â Kan bli katastrofalt">
 --></div><!--
 --><!--
 --><!--
---><div class="g33 col fln s6 sl9 sl12 sl18 link-reference relation"
-data-id="1.18048361"
+--><div class="g33 col fln s6 sl9 sl12 sl18 article-reference relation"
+data-id="1.18049090"
 data-reference-id="1.11264150.">
-<!-- include: /serum/render?id=1.18048361&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false -->
-<div class="link widget lean plug cf">
-<a class="autonomous" href="https://www.nrk.no/artikkel/dronning-mette-marit-skal-ikke-ha-offisielt-program-for-neste-sommer-1529708" data-id="1.18048361">
-<!-- include: /serum/render?id=1.18048359&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;type=image&amp;aspect=UNKNOWN --><!-- START: /templates/image/image-lean.jsp -->
-<figure class="image widget lean">
-<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVAY7m_Zru5fbBi1La6lq4Z2w.jpg 80w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVAKkbozkW1oDNi1La6lq4Z2w.jpg 160w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVA9LA8kDQh6gdi1La6lq4Z2w.jpg 350w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVATeXHxBxs-e5i1La6lq4Z2w.jpg 450w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVAV17SSMv1wkhi1La6lq4Z2w.jpg 650w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVAkdNXlP3rTTVi1La6lq4Z2w.jpg 1000w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVAqh5eG8HS6cdi1La6lq4Z2w.jpg 1200w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVA2KxZxApSqzli1La6lq4Z2w.jpg 1600w, https://gfx.nrk.no/2QcLiEWgGeAE4PuFWiUDVAxqq_8FeVFJ9i1La6lq4Z2w.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="Kong Haakon og dronning Mette-Marit helsa til folket" title="Foto: Torstein Georg BÃ¸e / NRK"></div>
+<!-- include: /serum/render?id=1.18049090&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;showDescription=false --><!-- START: /templates/article/article-lean.jsp -->
+<div class="article widget lean plug-default plug lp_plug cf">
+<a class="autonomous"
+href="https://www.nrk.no/stor-oslo/kuben-siktet-erkjenner-straffskyld-for-baering-av-kniv-1.18049090"
+data-id="1.18049090"
+data-ec-id="pp:article:1.18049090"
+data-ec-name="Kuben-siktet erkjenner straffskyld for bÃ¦ring av kniv">
+<!-- include: /serum/render?id=1.18036626&amp;size=6&amp;perspective=LEAN&amp;alignment=AUTO&amp;caption=NRK+har+verifisert+bildet+fra+knivstikkingen+p%C3%A5+Kuben.&amp;type=image&amp;aspect=F169&amp;classes=plug-image --><!-- START: /templates/image/image-lean.jsp -->
+<figure class="image widget lean plug-image">
+<div class="responsive-img F169"><img sizes="(min-width:1180px) 383px, (min-width:720px) 33vw, 100vw" srcset="https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQskTwjKadYjfH7Fquoa3Z2Q.jpg 80w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQ-jpSt5wv1P7H7Fquoa3Z2Q.jpg 160w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQ7N52XMtRkfvH7Fquoa3Z2Q.jpg 350w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQW2hMeNQ-f0fH7Fquoa3Z2Q.jpg 450w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQVpZV1TcgUDPH7Fquoa3Z2Q.jpg 650w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQ0nee3O9mS1HH7Fquoa3Z2Q.jpg 1000w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQnnmZK1xEW_rH7Fquoa3Z2Q.jpg 1200w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQn4VdEBtwaqbH7Fquoa3Z2Q.jpg 1600w, https://gfx.nrk.no/-xc1aFgZEntbes3BUKUxdQ1KtgrTw7l6_H7Fquoa3Z2Q.jpg 2000w" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="eager" alt="NRK har verifisert bilde fra knivstikkingen pÃ¥ Kuben. " title="Foto: Tips / Tips"></div>
 </figure>
 <!-- END: /templates/image/image-lean.jsp -->
 
 <div class="plug-teaser">
-<h2 class="title">Dronning Mette-Marit skal ikke ha offisielt program fÃ¸r neste sommer</h2>
+<h2 class="title">Kuben-siktet erkjenner straffskyld for bÃ¦ring av kniv</h2>
 </div>
 </a>
 </div>
+<!-- END: /templates/article/article-lean.jsp -->
 <!--
 --></div><!--
 -->

@@ -83,7 +83,7 @@
 
 
 
-<script type="module" src="/static/js/dist/darkModeFaviconToggle.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/darkModeFaviconToggle.bundle.js?285415281026" ></script>
 
 
 <!-- ====== FAVICONS ======= -->
@@ -175,11 +175,11 @@
         
         
 
-        <link rel="stylesheet" href="/static/css/techtarget_app.css?194309271026">
+        <link rel="stylesheet" href="/static/css/techtarget_app.css?205415281026">
 
         
 
-<script type="text/javascript" src="/static/js/ad_blocker_recovery.js?484109271026" defer></script>
+<script type="text/javascript" src="/static/js/ad_blocker_recovery.js?595215281026" defer></script>
 
 <!-- These are the 2 necessary scripts for the ad recovery message to work -->
     <script data-osano="MARKETING" async src="https://fundingchoicesmessages.google.com/i/pub-8553262192892817?ers=1" nonce="RORABhIXgMhQdZXbks8fZQ"></script>
@@ -208,7 +208,7 @@
 
         
 
-<script src="/static/js/jquery_360.min.js?484109271026"></script>
+<script src="/static/js/jquery_360.min.js?595215281026"></script>
 
         
 
@@ -260,11 +260,75 @@
 
 
 
-    
-    <script>
-        // since we're not loading lytics on the page, there's nothing to wait for and we can
-        //    trigger ad calls immediately
-        waitToLoadAds.trigger();
+    <script type="text/javascript">
+        
+        window.googletag = window.googletag || {};
+        googletag.cmd = googletag.cmd || [];
+
+        // initialize callback (source: https://learn.lytics.com/product-docs/lytics-javascript-tag/receiving-data-from-lytics)
+        !function(){"use strict";var o=window.jstag||(window.jstag={}),r=[];function n(e){o[e]=function(){for(var n=arguments.length,t=new Array(n),i=0;i<n;i++)t[i]=arguments[i];r.push([e,t])}}n("send"),n("mock"),n("identify"),n("pageView"),n("unblock"),n("getid"),n("setid"),n("loadEntity"),n("getEntity"),n("on"),n("once"),n("call"),o.loadScript=function(n,t,i){var e=document.createElement("script");e.async=!0,e.src=n,e.onload=t,e.onerror=i;var o=document.getElementsByTagName("script")[0],r=o&&o.parentNode||document.head||document.body,c=o||r.lastChild;return null!=c?r.insertBefore(e,c):r.appendChild(e),this},o.init=function n(t){return this.config=t,this.loadScript(t.src,function(){if(o.init===n)throw new Error("Load error!");o.init(o.config),function(){for(var n=0;n<r.length;n++){var t=r[n][0],i=r[n][1];o[t].apply(o,i)}r=void 0}()}),this}}();
+
+
+        // custom init + lytics default install tag from https://activate.getlytics.com/connect?aid=2751
+        // see https://learn.lytics.com/understanding/product-docs/lytics-javascript-tag/configuration#configuration-options
+        
+            var lyticsCid = '44fda7674f94228540d8fba6786f9770';
+            console.log('You are using the Lytics Prod account');
+        
+
+        
+
+        jstag.init({
+            src: `https://c.lytics.io/api/tag/${lyticsCid}/latest.min.js`,
+            pageAnalysis: {
+                dataLayerPull: {
+                    disabled: true
+                }
+            }
+        });
+        jstag.pageView();
+
+        
+        (function(){
+            var sailthru_cookie, sailthru_user_id;
+            function read_cookie(cookieName) {
+              var re = new RegExp('[; ]'+cookieName+'=([^\\s;]*)');
+              var sMatch = (' '+document.cookie).match(re);
+              if (cookieName && sMatch) return unescape(sMatch[1]);
+              return '';
+            }
+            sailthru_cookie = read_cookie('sailthru_hid');
+            if (sailthru_cookie.length > 56) {
+              sailthru_user_id = sailthru_cookie.slice(32,56);
+              jstag.send({ st_profile_id: sailthru_user_id });
+            }
+        })();
+
+        
+        
+        
+        
+        jstag.call('entityReady', () => waitToLoadAds.trigger());
+        setTimeout(() => waitToLoadAds.trigger(), 1000);  // also trigger lytics if it's taking too long
+
+        
+        
+        waitToLoadAds.push(function (lytics_data) {
+            // lytics_data won't be defined if lytics failed to load correctly. In that case
+            // we don't need to set any segments.
+            if (lytics_data && lytics_data.segments) {
+                googletag.cmd.push(function() {
+                    googletag.pubads().setTargeting("LyticsSegments", lytics_data.segments);
+                });
+            }
+        });
+
+        function getUID(id) {
+            window.dataLayer.push({'user_id': id});
+        };
+        jstag.getid(getUID);
+
+
     </script>
 
 
@@ -332,7 +396,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-<script type="module" src="/static/js/dist/lyticsHelper.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/lyticsHelper.bundle.js?285415281026" ></script>
 
 
         
@@ -340,7 +404,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <!-- HTMX for dynamic content loading -->
         
 
-<script src="/static/js/htmx_204.min.js?484109271026"></script>
+<script src="/static/js/htmx_204.min.js?595215281026"></script>
 
 
         
@@ -350,13 +414,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
             
 
-<script type="text/javascript" src="/static/js/mailcheck.min.js?484109271026" defer></script>
-<script type="text/javascript" src="/static/js/dive_mailcheck.js?484109271026" defer></script>
+<script type="text/javascript" src="/static/js/mailcheck.min.js?595215281026" defer></script>
+<script type="text/javascript" src="/static/js/dive_mailcheck.js?595215281026" defer></script>
 
         
 
         
-        <script src="/static/js/app.js?484109271026" defer></script>
+        <script src="/static/js/app.js?595215281026" defer></script>
 
         
             <script type="text/javascript">
@@ -369,7 +433,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 
             </script>
         
-        <script type="text/javascript" src="/static/js/divecounter.js?484109271026"></script>
+        <script type="text/javascript" src="/static/js/divecounter.js?595215281026"></script>
 
         
 
@@ -581,7 +645,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             
 
-<script type="module" src="/static/js/dist/activityTracking.bundle.js?274309271026" defer></script>
+<script type="module" src="/static/js/dist/activityTracking.bundle.js?285415281026" defer></script>
 
         
 
@@ -601,7 +665,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </script>
         <!-- for modal signup form -->
 
-        <script type="text/javascript" src="/static/js/jquery.simplemodal.divefork.min.js?484109271026" defer></script>
+        <script type="text/javascript" src="/static/js/jquery.simplemodal.divefork.min.js?595215281026" defer></script>
 
         
 
@@ -670,7 +734,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
                 var clean_text = escapeHtml(j_words.textContent);
                 var img = document.createElement('img');
-                img.src = '/static/img/social_icons/twitter-follow-icon.png?474109271026';
+                img.src = '/static/img/social_icons/twitter-follow-icon.png?595215281026';
                 img.alt = shareOnTwitterText;
                 img.loading = 'lazy';
 
@@ -739,17 +803,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         
 
-<script type="module" src="/static/js/dist/signupReferrer.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/signupReferrer.bundle.js?285415281026" ></script>
 
 
         
             
 
-<script type="module" src="/static/js/dist/searchTracking.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/searchTracking.bundle.js?285415281026" ></script>
 
             
 
-<script type="module" src="/static/js/dist/navRelatedQuestionsTracking.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/navRelatedQuestionsTracking.bundle.js?285415281026" ></script>
 
         
 
@@ -758,7 +822,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
             
 
-<script type="module" src="/static/js/dist/newSiteAlert.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/newSiteAlert.bundle.js?285415281026" ></script>
 
         
         
@@ -811,7 +875,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-<script type="text/javascript" src="/static/js/dist/adTemplates.bundle.js?274309271026" defer></script>
+<script type="text/javascript" src="/static/js/dist/adTemplates.bundle.js?285415281026" defer></script>
 <script>
     const desktopWidth = 1024;
     
@@ -902,7 +966,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script>window.fallbackAds = '[]'</script>
 
 
-<script type="module" src="/static/js/dist/onBoardDiagnostics.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/onBoardDiagnostics.bundle.js?285415281026" ></script>
 
 
 
@@ -914,7 +978,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </script>
     
 
-<script type="module" src="/static/js/dist/prestitialForecastingMode.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/prestitialForecastingMode.bundle.js?285415281026" ></script>
 
 
 
@@ -1287,20 +1351,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </a>
                 <button class="mobile-menu-toggle">
                     
-                    <img src="/static/img/menu_icons/menu_search.svg?151815271026" alt="menu" loading="lazy">
+                    <img src="/static/img/menu_icons/menu_search.svg?595215281026" alt="menu" loading="lazy">
                 </button>
                 <!-- newsletter and search, only shown on desktop -->
                 <ul class="desktop-menu-sub list-no-bullets">
                     <li>
                         <button class="search-toggle search-button-front analytics t-search-navigation-top">
                             
-                            <img src="/static/img/menu_icons/ai_search_black.svg?151815271026" alt="search" width="16" height="16" loading="lazy">
+                            <img src="/static/img/menu_icons/ai_search_black.svg?595215281026" alt="search" width="16" height="16" loading="lazy">
                         </button>
                     </li>
                     <li>
 
                         <a href="/signup/?signup_location=header" rel="nofollow" class="nav-menu-item nav-signup-button desktop-nav-signup-button tt-desktop-nav-signup-button analytics t-signup-navigation button">
-                            <img src="/static/img/email_icons/email-icon-black.png?151815271026" width="16" height="11" loading="lazy" alt="">
+                            <img src="/static/img/email_icons/email-icon-black.png?595215281026" width="16" height="11" loading="lazy" alt="">
                             Sign up
                         </a>
                     </li>
@@ -1323,10 +1387,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div class="menu-search-input-wrap">
                 <input id="search-desktop" type="search" name="q" placeholder="Ask a question..." data-role="none" autocomplete="off">
                 <button type="button" class="close menu-search-close" aria-label="Close search">
-                    <img src="/static/img/menu_icons/close.svg?151815271026" width="16" height="16" alt="" loading="lazy">
+                    <img src="/static/img/menu_icons/close.svg?595215281026" width="16" height="16" alt="" loading="lazy">
                 </button>
                 <button type="submit" value="" data-role="none" class="search-button-front menu-search-submit analytics t-search-navigation-drawer" aria-label="Search">
-                    <img src="/static/img/menu_icons/ai_search.svg?151815271026" alt="" height="16" width="16" loading="lazy">
+                    <img src="/static/img/menu_icons/ai_search.svg?595215281026" alt="" height="16" width="16" loading="lazy">
                 </button>
             </div>
         </form>
@@ -1630,11 +1694,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-<script type="module" src="/static/js/dist/navSignupHelper.bundle.js?012015271026" ></script>
+<script type="module" src="/static/js/dist/navSignupHelper.bundle.js?285415281026" ></script>
 
 
 
-<script type="module" src="/static/js/dist/techtargetNav.bundle.js?012015271026" ></script>
+<script type="module" src="/static/js/dist/techtargetNav.bundle.js?285415281026" ></script>
 
 
 <script>
@@ -1787,7 +1851,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   
 
-<script type="module" src="/static/js/dist/articleTooltip.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/articleTooltip.bundle.js?285415281026" ></script>
 
 
 
@@ -1799,7 +1863,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="javascript:void(0)"
            aria-label="Share article"
            class="social-icon-article social-icon-share analytics t-article-byline-social-share">
-            <img src="/static/img/social_icons/share-icon.svg?474109271026" alt="">
+            <img src="/static/img/social_icons/share-icon.svg?595215281026" alt="">
             <span class="social-icon__text">Share</span>
         </a>
         <div class="social-icon-share--tooltip">
@@ -1809,13 +1873,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                        aria-label="Copy link"
                        class="social-icon-article share-copy-link analytics t-article-byline-social-copy"
                        data-copy-url="https://www.techtarget.com/news/Ransomware-negotiations-An-inside-look-at-the-process/839121/">
-                        <img src="/static/img/social_icons/share_dropdown/share-link-box.svg?474109271026" alt="">
+                        <img src="/static/img/social_icons/share_dropdown/share-link-box.svg?595215281026" alt="">
                         <span class="social-icon__text share-dropdown__text">Copy link</span>
                     </a>
                 </li>
                 <li class="share-icon-list">
-                    <a href="/cdn-cgi/l/email-protection#9aa5c9eff8f0fff9eea7c8fbf4e9f5f7edfbe8ffbfa8aaf4fffdf5eef3fbeef3f5f4e9bfa9dbbfa8aadbf4bfa8aaf3f4e9f3feffbfa8aaf6f5f5f1bfa8aafbeebfa8aaeef2ffbfa8aaeae8f5f9ffe9e9bcfbf7eaa1d8f5fee3a7f2eeeeeae9bfa9dbb5b5edededb4eefff9f2eefbe8fdffeeb4f9f5f7b5f4ffede9b5c8fbf4e9f5f7edfbe8ffb7f4fffdf5eef3fbeef3f5f4e9b7dbf4b7f3f4e9f3feffb7f6f5f5f1b7fbeeb7eef2ffb7eae8f5f9ffe9e9b5a2a9a3aba8abb5" aria-label="Share article with email" class="social-icon-article analytics t-article-byline-social-email">
-                        <img src="/static/img/social_icons/share_dropdown/email.svg?474109271026" alt="">
+                    <a href="/cdn-cgi/l/email-protection#1b24486e79717e786f26497a756874766c7a697e3e292b757e7c746f727a6f727475683e285a3e292b5a753e292b727568727f7e3e292b777474703e292b7a6f3e292b6f737e3e292b6b6974787e68683d7a766b2059747f6226736f6f6b683e285a34346c6c6c356f7e78736f7a697c7e6f3578747634757e6c6834497a756874766c7a697e36757e7c746f727a6f72747568365a7536727568727f7e3677747470367a6f366f737e366b6974787e6868342328222a292a34" aria-label="Share article with email" class="social-icon-article analytics t-article-byline-social-email">
+                        <img src="/static/img/social_icons/share_dropdown/email.svg?595215281026" alt="">
                         <span class="social-icon__text share-dropdown__text">Email</span>
                     </a>
                 </li>
@@ -1824,7 +1888,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                        aria-label="Share article to Linkedin"
                        target="_blank"
                        class="social-icon-article analytics t-article-byline-social-linkedin">
-                        <img src="/static/img/social_icons/share_dropdown/linkedin.svg?474109271026" alt="">
+                        <img src="/static/img/social_icons/share_dropdown/linkedin.svg?595215281026" alt="">
                         <span class="social-icon__text share-dropdown__text">LinkedIn</span>
                     </a>
                 </li>
@@ -1833,7 +1897,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                        aria-label="Share article to X/Twitter"
                        target="_blank"
                        class="social-icon-article analytics t-article-byline-social-twitter">
-                        <img src="/static/img/social_icons/share_dropdown/x.svg?474109271026" alt="">
+                        <img src="/static/img/social_icons/share_dropdown/x.svg?595215281026" alt="">
                         <span class="social-icon__text share-dropdown__text">X/Twitter</span>
                     </a>
                 </li>
@@ -1842,7 +1906,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                        aria-label="Share article to Facebook"
                        target="_blank"
                        class="social-icon-article analytics t-article-byline-social-facebook">
-                        <img src="/static/img/social_icons/share_dropdown/facebook.svg?474109271026" alt="">
+                        <img src="/static/img/social_icons/share_dropdown/facebook.svg?595215281026" alt="">
                         <span class="social-icon__text share-dropdown__text">Facebook</span>
                     </a>
                 </li>
@@ -1851,7 +1915,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <a href="javascript:window.print()"
                        aria-label="Print article"
                        class="analytics t-article-byline-social-print social-icon-article js-social-icon-print">
-                        <img src="/static/img/social_icons/share_dropdown/print.svg?474109271026" alt="">
+                        <img src="/static/img/social_icons/share_dropdown/print.svg?595215281026" alt="">
                         <span class="social-icon__text share-dropdown__text">Print</span>
                     </a>
                 </li>
@@ -1869,7 +1933,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
          target="_blank"
          data-tooltip="Add us as a Google Preferred Source to see more of our articles in your search results."
          class="social-icon-article google-preferred analytics t-article-byline-social-google">
-        <img src="/static/img/social_icons/article_page/bookmark-add.svg?474109271026" alt="">
+        <img src="/static/img/social_icons/article_page/bookmark-add.svg?595215281026" alt="">
         <span class="social-icon__text">Add us on Google</span>
       </a>
     </li>
@@ -2177,7 +2241,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   
 
-<script type="module" src="/static/js/dist/articleTooltip.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/articleTooltip.bundle.js?285415281026" ></script>
 
 
 
@@ -2191,7 +2255,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
          target="_blank"
          data-tooltip="Add us as a Google Preferred Source to see more of our articles in your search results."
          class="social-icon-article google-preferred analytics t-article-end-social-google">
-        <img src="/static/img/social_icons/article_page/bookmark-add.svg?474109271026" alt="">
+        <img src="/static/img/social_icons/article_page/bookmark-add.svg?595215281026" alt="">
         <span class="social-icon__text">Add us on Google</span>
       </a>
     </li>
@@ -2201,7 +2265,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="javascript:void(0)"
            aria-label="Share article"
            class="social-icon-article social-icon-share analytics t-article-end-social-share">
-            <img src="/static/img/social_icons/share-icon.svg?474109271026" alt="">
+            <img src="/static/img/social_icons/share-icon.svg?595215281026" alt="">
             <span class="social-icon__text">Share</span>
         </a>
         <div class="social-icon-share--tooltip">
@@ -2210,13 +2274,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <a href="javascript:void(0)"
                    class="social-icon-article share-copy-link analytics t-article-end-social-copy"
                    data-copy-url="https://www.techtarget.com/news/Ransomware-negotiations-An-inside-look-at-the-process/839121/">
-                <img src="/static/img/social_icons/share_dropdown/share-link-box.svg?474109271026" alt="">
+                <img src="/static/img/social_icons/share_dropdown/share-link-box.svg?595215281026" alt="">
                 <span class="social-icon__text share-dropdown__text">Copy link</span>
                 </a>
             </li>
             <li class="share-icon-list">
-                <a href="/cdn-cgi/l/email-protection#a699f5d3c4ccc3c5d29bf4c7c8d5c9cbd1c7d4c3839496c8c3c1c9d2cfc7d2cfc9c8d58395e7839496e7c8839496cfc8d5cfc2c3839496cac9c9cd839496c7d2839496d2cec3839496d6d4c9c5c3d5d580c7cbd69de4c9c2df9bced2d2d6d58395e78989d1d1d188d2c3c5ced2c7d4c1c3d288c5c9cb89c8c3d1d589f4c7c8d5c9cbd1c7d4c38bc8c3c1c9d2cfc7d2cfc9c8d58be7c88bcfc8d5cfc2c38bcac9c9cd8bc7d28bd2cec38bd6d4c9c5c3d5d5899e959f97949789" aria-label="Share article with email" class="social-icon-article analytics t-article-end-social-email">
-                    <img src="/static/img/social_icons/share_dropdown/email.svg?474109271026" alt="">
+                <a href="/cdn-cgi/l/email-protection#ebd4b89e89818e889fd6b98a859884869c8a998eced9db858e8c849f828a9f82848598ced8aaced9dbaa85ced9db828598828f8eced9db87848480ced9db8a9fced9db9f838eced9db9b9984888e9898cd8a869bd0a9848f92d6839f9f9b98ced8aac4c49c9c9cc59f8e88839f8a998c8e9fc5888486c4858e9c98c4b98a859884869c8a998ec6858e8c849f828a9f82848598c6aa85c6828598828f8ec687848480c68a9fc69f838ec69b9984888e9898c4d3d8d2dad9dac4" aria-label="Share article with email" class="social-icon-article analytics t-article-end-social-email">
+                    <img src="/static/img/social_icons/share_dropdown/email.svg?595215281026" alt="">
                     <span class="social-icon__text share-dropdown__text">Email</span>
                 </a>
             </li>
@@ -2225,7 +2289,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                aria-label="Share article to Linkedin"
                target="_blank"
                class="social-icon-article analytics t-article-end-social-linkedin">
-                <img src="/static/img/social_icons/share_dropdown/linkedin.svg?474109271026" alt="">
+                <img src="/static/img/social_icons/share_dropdown/linkedin.svg?595215281026" alt="">
                 <span class="social-icon__text share-dropdown__text">LinkedIn</span>
             </a>
             </li>
@@ -2234,7 +2298,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                aria-label="Share article to X/Twitter"
                target="_blank"
                class="social-icon-article analytics t-article-end-social-twitter">
-                <img src="/static/img/social_icons/share_dropdown/x.svg?474109271026" alt="">
+                <img src="/static/img/social_icons/share_dropdown/x.svg?595215281026" alt="">
                 <span class="social-icon__text share-dropdown__text">X/Twitter</span>
             </a>
             </li>
@@ -2243,7 +2307,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                    aria-label="Share article to Facebook"
                    target="_blank"
                    class="social-icon-article analytics t-article-end-social-facebook">
-                    <img src="/static/img/social_icons/share_dropdown/facebook.svg?474109271026" alt="">
+                    <img src="/static/img/social_icons/share_dropdown/facebook.svg?595215281026" alt="">
                     <span class="social-icon__text share-dropdown__text">Facebook</span>
                 </a>
             </li>
@@ -2252,7 +2316,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <a href="javascript:window.print()"
                aria-label="Print article"
                class="analytics t-article-end-social-print social-icon-article js-social-icon-print">
-                <img src="/static/img/social_icons/share_dropdown/print.svg?474109271026" alt="">
+                <img src="/static/img/social_icons/share_dropdown/print.svg?595215281026" alt="">
                 <span class="social-icon__text share-dropdown__text">Print</span>
             </a>
             </li>
@@ -2357,7 +2421,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="https://www.google.com/recaptcha/api.js?render=6Lc-lpYsAAAAAMhweO3XD1__w-vHSSOVRRpARwEM" async defer></script>
 
 
-<script type="module" src="/static/js/dist/editorialGate.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/editorialGate.bundle.js?285415281026" ></script>
 
 
     
@@ -2388,9 +2452,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <form class="form js-form-email-validate" name="signup" action="/signup/Cybersecurity/" method="POST">
                 
 
-                <label for="id_5c049c_email" class="email-input js-email-input">
+                <label for="id_884e92_email" class="email-input js-email-input">
                     <span class="screen-reader-text">Email:</span>
-                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_5c049c_email">
+                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_884e92_email">
                 </label>
 
                 <span class="captcha-container">
@@ -2408,7 +2472,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <input type="hidden" name="referral_url">
 
                 
-                    <input type="hidden" name="js_enabled" value="0" id="id_5c049c_js_enabled">
+                    <input type="hidden" name="js_enabled" value="0" id="id_884e92_js_enabled">
                 
 
                 
@@ -2434,7 +2498,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 
                 
 
-<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?285415281026" ></script>
 
                 
                 <label class="error email_error" style="display:none;">A valid email address is required.</label>
@@ -2480,9 +2544,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <form class="form js-form-email-validate" name="signup" action="/signup/Cybersecurity/" method="POST">
                 
 
-                <label for="id_3e1aaa_email" class="email-input js-email-input">
+                <label for="id_8fee56_email" class="email-input js-email-input">
                     <span class="screen-reader-text">Email:</span>
-                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_3e1aaa_email">
+                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_8fee56_email">
                 </label>
 
                 <span class="captcha-container">
@@ -2500,7 +2564,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <input type="hidden" name="referral_url">
 
                 
-                    <input type="hidden" name="js_enabled" value="0" id="id_3e1aaa_js_enabled">
+                    <input type="hidden" name="js_enabled" value="0" id="id_8fee56_js_enabled">
                 
 
                 
@@ -2526,7 +2590,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 
                 
 
-<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?285415281026" ></script>
 
                 
                 <label class="error email_error" style="display:none;">A valid email address is required.</label>
@@ -2569,6 +2633,91 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
         <img
         class="carousel-item__image"
+        src="https://imgproxy.divecdn.com/C_gkwwzvJfdtEKzVJSFJ2ykHokhs23EcmlTTCHb9Xbs/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjY3MDI0MTIwLmpwZw==.webp"
+        width="1200" height="675"
+        srcset="https://imgproxy.divecdn.com/tLTIqlo83ntq84zpKdumkmKikfbZyhNnOyg4E6gj45w/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjY3MDI0MTIwLmpwZw==.webp 300w, https://imgproxy.divecdn.com/Tw3llw_XzxFkvyQ7w7-1Ec88hgyJ4lbfFBOgKmPmskI/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjY3MDI0MTIwLmpwZw==.webp 600w, https://imgproxy.divecdn.com/C_gkwwzvJfdtEKzVJSFJ2ykHokhs23EcmlTTCHb9Xbs/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjY3MDI0MTIwLmpwZw==.webp 1200w"
+        sizes="(min-width: 40em ) 25vw, 100vw"
+        alt="Two IT professionals review information on a computer beside server racks."
+        
+        >
+    
+
+        </div>
+    
+        <div class="proximized_carousel_image" id="carousel_1">
+            
+
+    
+        <img
+        class="carousel-item__image"
+        src="https://imgproxy.divecdn.com/A5IRJz9KTKGYm7itWEPgju-0knKiQihSZE2kNWqV13U/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMzcwMDE2MzYwLmpwZw==.webp"
+        width="1200" height="675"
+        srcset="https://imgproxy.divecdn.com/isZHsNHKXhcrmPsutJJDm3Gs74h4y38lU4mOSMM8fz4/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMzcwMDE2MzYwLmpwZw==.webp 300w, https://imgproxy.divecdn.com/h67eeEVrwm05ealPdHVjkeJPTKDPjTxtowfFCWxmqH4/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMzcwMDE2MzYwLmpwZw==.webp 600w, https://imgproxy.divecdn.com/A5IRJz9KTKGYm7itWEPgju-0knKiQihSZE2kNWqV13U/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMzcwMDE2MzYwLmpwZw==.webp 1200w"
+        sizes="(min-width: 40em ) 25vw, 100vw"
+        alt="A digital blue fingerprint lifted being lifted off a mirrored surface against a black background. Binary code makes up the fingerprint."
+        
+        >
+    
+
+        </div>
+    
+        <div class="proximized_carousel_image" id="carousel_2">
+            
+
+    
+        <img
+        class="carousel-item__image"
+        src="https://imgproxy.divecdn.com/LsrV85N8-trKbl9TeFglg30dLH-J15qx39PD_EXQcrw/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNTAyMzIwMzkyLmpwZw==.webp"
+        width="1200" height="675"
+        srcset="https://imgproxy.divecdn.com/cACVN8a8kjMQNNPGtc6nAVHykB24fFoEVwA6oZqVnxM/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNTAyMzIwMzkyLmpwZw==.webp 300w, https://imgproxy.divecdn.com/P8o-LBVgM52sLKwXT-T-LR8zamc1NYJFEfAROQxC8Ew/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNTAyMzIwMzkyLmpwZw==.webp 600w, https://imgproxy.divecdn.com/LsrV85N8-trKbl9TeFglg30dLH-J15qx39PD_EXQcrw/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNTAyMzIwMzkyLmpwZw==.webp 1200w"
+        sizes="(min-width: 40em ) 25vw, 100vw"
+        alt="Person in a black hooded sweatshirt sitting in front of computer monitors displaying code."
+        
+        >
+    
+
+        </div>
+    
+        <div class="proximized_carousel_image" id="carousel_3">
+            
+
+    
+        <img
+        class="carousel-item__image"
+        src="https://imgproxy.divecdn.com/SlUQk3Dzyx3ebEJs2NOPtv5y6-qFSdD8qsMfpf1y6V0/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjcwMzU0MDMyLmpwZw==.webp"
+        width="1200" height="675"
+        srcset="https://imgproxy.divecdn.com/2W7JuzqIM32ynmITmFUMRRidaz4iZBqsd0CFkwk4UXA/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjcwMzU0MDMyLmpwZw==.webp 300w, https://imgproxy.divecdn.com/nQzzbm7wljGuYFwvR2SuQqMtmQGII6jZihhB56yf_tk/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjcwMzU0MDMyLmpwZw==.webp 600w, https://imgproxy.divecdn.com/SlUQk3Dzyx3ebEJs2NOPtv5y6-qFSdD8qsMfpf1y6V0/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjcwMzU0MDMyLmpwZw==.webp 1200w"
+        sizes="(min-width: 40em ) 25vw, 100vw"
+        alt="A hand holds a magnifying glass over a digital shield with a padlock and green checkmark, representing cybersecurity and risk management."
+        
+        >
+    
+
+        </div>
+    
+        <div class="proximized_carousel_image" id="carousel_4">
+            
+
+    
+        <img
+        class="carousel-item__image"
+        src="https://imgproxy.divecdn.com/4v-4ZzZR87BNZC1arOOfVBTq0tPBZeOaxqph1EUY2pU/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjU5OTY5MDE5LmpwZw==.webp"
+        width="1200" height="675"
+        srcset="https://imgproxy.divecdn.com/9sps5x64OhMEU4TKCDFTxq8DF8j0LdFZF1coYE9LAc8/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjU5OTY5MDE5LmpwZw==.webp 300w, https://imgproxy.divecdn.com/6__-fVeSkLZbCLK8tjtVCkx9BPAiqFUK4K1HEvoobco/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjU5OTY5MDE5LmpwZw==.webp 600w, https://imgproxy.divecdn.com/4v-4ZzZR87BNZC1arOOfVBTq0tPBZeOaxqph1EUY2pU/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjU5OTY5MDE5LmpwZw==.webp 1200w"
+        sizes="(min-width: 40em ) 25vw, 100vw"
+        alt="Image shows abstractly layered digital screens, data flow and programming scripts."
+        
+        >
+    
+
+        </div>
+    
+        <div class="proximized_carousel_image" id="carousel_5">
+            
+
+    
+        <img
+        class="carousel-item__image"
         src="https://imgproxy.divecdn.com/_Ea2tBWgIY7OYWO0FDI7y_rwyn1VDo0dECNRF-P3pw8/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9VU19DYXBpdG9sX0J1aWxkaW5nLmpwZw==.webp"
         width="1200" height="675"
         srcset="https://imgproxy.divecdn.com/n2E2_Jiw5yJ6ylCTrbx-Pa_6jznVO701zJ1dM2VQzwU/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9VU19DYXBpdG9sX0J1aWxkaW5nLmpwZw==.webp 300w, https://imgproxy.divecdn.com/-f4nASlgzptDX7c_jWRLk_7jr6xgXFATdSmGjSDcb0U/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9VU19DYXBpdG9sX0J1aWxkaW5nLmpwZw==.webp 600w, https://imgproxy.divecdn.com/_Ea2tBWgIY7OYWO0FDI7y_rwyn1VDo0dECNRF-P3pw8/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9VU19DYXBpdG9sX0J1aWxkaW5nLmpwZw==.webp 1200w"
@@ -2580,7 +2729,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </div>
     
-        <div class="proximized_carousel_image" id="carousel_1">
+        <div class="proximized_carousel_image" id="carousel_6">
             
 
     
@@ -2597,7 +2746,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </div>
     
-        <div class="proximized_carousel_image" id="carousel_2">
+        <div class="proximized_carousel_image" id="carousel_7">
             
 
     
@@ -2614,91 +2763,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </div>
     
-        <div class="proximized_carousel_image" id="carousel_3">
-            
-
-    
-        <img
-        class="carousel-item__image"
-        src="https://imgproxy.divecdn.com/cSj-YrE5F_KDrdZhXUzH5ZuX2pg7Xm7-JJlyZcEQn5I/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9BSS1QdXNoYmFjay5qcGc=.webp"
-        width="1200" height="675"
-        srcset="https://imgproxy.divecdn.com/tBLWIVbKdhZ7Dg0tX6D6pLP-QkRybc1A65oPEuIAHRs/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9BSS1QdXNoYmFjay5qcGc=.webp 300w, https://imgproxy.divecdn.com/ohFWe1ioDVX5qQ1XF75xibuqXQpfzFVi85d6zcZHxwg/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9BSS1QdXNoYmFjay5qcGc=.webp 600w, https://imgproxy.divecdn.com/cSj-YrE5F_KDrdZhXUzH5ZuX2pg7Xm7-JJlyZcEQn5I/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9BSS1QdXNoYmFjay5qcGc=.webp 1200w"
-        sizes="(min-width: 40em ) 25vw, 100vw"
-        alt="CISOs collaborate to developing secure code and patch vulnerabilities"
-        
-        >
-    
-
-        </div>
-    
-        <div class="proximized_carousel_image" id="carousel_4">
-            
-
-    
-        <img
-        class="carousel-item__image"
-        src="https://imgproxy.divecdn.com/tsEpbh2RpZhnCeQsXDgOoN4R5hVP-s9QLUQBdtZiE9g/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMDYzNTAxNDgwLmpwZw==.webp"
-        width="1200" height="675"
-        srcset="https://imgproxy.divecdn.com/KIIpOzj_qfXX5SPfR3jmXHsoYjSIjjHHmzMqoZPJFLs/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMDYzNTAxNDgwLmpwZw==.webp 300w, https://imgproxy.divecdn.com/ZmmWdMd8zGng2xdeZhr4CvnjFo6uuWbvk2OO7_3BVgQ/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMDYzNTAxNDgwLmpwZw==.webp 600w, https://imgproxy.divecdn.com/tsEpbh2RpZhnCeQsXDgOoN4R5hVP-s9QLUQBdtZiE9g/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMDYzNTAxNDgwLmpwZw==.webp 1200w"
-        sizes="(min-width: 40em ) 25vw, 100vw"
-        alt="A white-outlined padlock on top of green and blue abstract code, network nodes and connections."
-        
-        >
-    
-
-        </div>
-    
-        <div class="proximized_carousel_image" id="carousel_5">
-            
-
-    
-        <img
-        class="carousel-item__image"
-        src="https://imgproxy.divecdn.com/FAikg7j1bBmmGfjNuSyFEfNBwpQH58-NmR3RF3Xv69E/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMTM2MTg3ODU3X0V0SmhQTDEuanBn.webp"
-        width="1200" height="675"
-        srcset="https://imgproxy.divecdn.com/WKcNul51_0kTb078dylwqTHxZuJkLq0P7q4j4L6uqIg/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMTM2MTg3ODU3X0V0SmhQTDEuanBn.webp 300w, https://imgproxy.divecdn.com/6Tk8KH5X9xyNPfTpTL2vmwnwRcy3-ckN-VYKi42jaxM/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMTM2MTg3ODU3X0V0SmhQTDEuanBn.webp 600w, https://imgproxy.divecdn.com/FAikg7j1bBmmGfjNuSyFEfNBwpQH58-NmR3RF3Xv69E/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMTM2MTg3ODU3X0V0SmhQTDEuanBn.webp 1200w"
-        sizes="(min-width: 40em ) 25vw, 100vw"
-        alt="Yellow, orange and white paper planes flying toward a coral colored umbrella on blue background."
-        
-        >
-    
-
-        </div>
-    
-        <div class="proximized_carousel_image" id="carousel_6">
-            
-
-    
-        <img
-        class="carousel-item__image"
-        src="https://imgproxy.divecdn.com/ExDDcdtR2ZE_mTKFAFxOG70lLLdkO1z5k0ysT01ymak/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjk4NjkzODAxLmpwZw==.webp"
-        width="1200" height="675"
-        srcset="https://imgproxy.divecdn.com/RqMFlEGPUGc1DRTIChZMybvBRMDuEgHAxocY5vrPW1k/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjk4NjkzODAxLmpwZw==.webp 300w, https://imgproxy.divecdn.com/UhXgBx_I7SHYXP2w_sCn1Yy6NVD1AmSk1SM536MsZTc/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjk4NjkzODAxLmpwZw==.webp 600w, https://imgproxy.divecdn.com/ExDDcdtR2ZE_mTKFAFxOG70lLLdkO1z5k0ysT01ymak/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjk4NjkzODAxLmpwZw==.webp 1200w"
-        sizes="(min-width: 40em ) 25vw, 100vw"
-        alt="An employee with a headset is sitting in front of two monitors"
-        
-        >
-    
-
-        </div>
-    
-        <div class="proximized_carousel_image" id="carousel_7">
-            
-
-    
-        <img
-        class="carousel-item__image"
-        src="https://imgproxy.divecdn.com/4XeyTP2wtrz6AyQ1YpvaYxFozGIS9GvW8aQr8vNsKMA/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9UZWNoVGFyZ2V0X2Jsb2ctaGVhZGVyMnguanBn.webp"
-        width="1200" height="675"
-        srcset="https://imgproxy.divecdn.com/6uVglJNufcuqn4bka4xL342UCFTP0cCeREqRPnTZNVc/g:ce/rs:fill:300:169:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9UZWNoVGFyZ2V0X2Jsb2ctaGVhZGVyMnguanBn.webp 300w, https://imgproxy.divecdn.com/Brle5i4lMx0RLW_87VJiIUebBJoLNCBl2hAOvkp1X4g/g:ce/rs:fill:600:338:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9UZWNoVGFyZ2V0X2Jsb2ctaGVhZGVyMnguanBn.webp 600w, https://imgproxy.divecdn.com/4XeyTP2wtrz6AyQ1YpvaYxFozGIS9GvW8aQr8vNsKMA/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9UZWNoVGFyZ2V0X2Jsb2ctaGVhZGVyMnguanBn.webp 1200w"
-        sizes="(min-width: 40em ) 25vw, 100vw"
-        alt="The techtarget logo in teal next to the text reading techtarget set against a dark-blue background"
-        
-        >
-    
-
-        </div>
-    
 </div>
 
 
@@ -2706,7 +2770,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="https://d12v9rtnomnebu.cloudfront.net/carousel/glider.min.js" defer></script>
 <script>
 window.carouselData = {};
-window.carouselData.carouselStories = [{"title": "Federal AI security guidance misses real-world enterprise threats", "link": "https://www.techtarget.com/news/federal-ai-security-guidance-misses-real-world-enterprise-threats/872976/", "pub_date": "Oct. 27, 2026"}, {"title": "PHP2Shell explained: Timeline of the global vulnerability crisis", "link": "https://www.techtarget.com/news/php2shell-explained-timeline-of-the-global-vulnerability-crisis/872935/", "pub_date": "Oct. 27, 2026"}, {"title": "AI makes Rust rewrites easier, but there are caveats", "link": "https://www.techtarget.com/news/ai-makes-rust-rewrites-easier-but-there-are-caveats/872914/", "pub_date": "Oct. 27, 2026"}, {"title": "Some businesses are pulling back from AI. CISOs can\u2019t afford to", "link": "https://www.techtarget.com/news/some-businesses-are-pulling-back-from-ai-cisos-cant-afford-to/872917/", "pub_date": "Oct. 27, 2026"}, {"title": "Welcome to TechTarget Cybersecurity", "link": "https://www.techtarget.com/news/welcome-to-techtarget-cybersecurity/833614/", "pub_date": "Oct. 27, 2026"}, {"title": "Cyber insurance explained, from selection to post-purchase", "link": "https://www.techtarget.com/news/Cyber-insurance-explained-from-selection-to-post-purchase/836066/", "pub_date": "Oct. 23, 2026"}, {"title": "Help desk deepfakes: Why CISOs must rethink verification", "link": "https://www.techtarget.com/news/Help-desk-deepfakes-Why-CISOs-must-rethink-verification/836067/", "pub_date": "Oct. 23, 2026"}, {"title": "Max-severity GitLab flaw lets attackers run code on servers", "link": "https://www.techtarget.com/news/Max-severity-GitLab-flaw-lets-attackers-run-code-on-servers/836068/", "pub_date": "Oct. 22, 2026"}]
+window.carouselData.carouselStories = [{"title": "What FBI breach tells CIOs about outsourced IT oversight", "link": "https://www.techtarget.com/news/what-fbi-breach-tells-cios-about-outsourced-it-oversight/873083/", "pub_date": "Oct. 28, 2026"}, {"title": "Why identity recovery must be part of your backup strategy", "link": "https://www.techtarget.com/news/why-identity-recovery-must-be-part-of-your-backup-strategy/873078/", "pub_date": "Oct. 28, 2026"}, {"title": "AI-driven vibe hacking is lowering the bar for attackers", "link": "https://www.techtarget.com/news/ai-driven-vibe-hacking-is-lowering-the-bar-for-attackers/873060/", "pub_date": "Oct. 28, 2026"}, {"title": "Cybersecurity risk management: Best practices and frameworks", "link": "https://www.techtarget.com/news/Cybersecurity-risk-management-Best-practices-and-frameworks/836552/", "pub_date": "Oct. 28, 2026"}, {"title": "Wave of PHP2Shell-style flaws coming, Nvidia security exec predicts", "link": "https://www.techtarget.com/news/wave-of-php2shell-style-flaws-coming-nvidia-security-exec-predicts/872958/", "pub_date": "Oct. 28, 2026"}, {"title": "Federal AI security guidance misses real-world enterprise threats", "link": "https://www.techtarget.com/news/federal-ai-security-guidance-misses-real-world-enterprise-threats/872976/", "pub_date": "Oct. 27, 2026"}, {"title": "PHP2Shell explained: Timeline of the global vulnerability crisis", "link": "https://www.techtarget.com/news/php2shell-explained-timeline-of-the-global-vulnerability-crisis/872935/", "pub_date": "Oct. 27, 2026"}, {"title": "AI makes Rust rewrites easier, but there are caveats", "link": "https://www.techtarget.com/news/ai-makes-rust-rewrites-easier-but-there-are-caveats/872914/", "pub_date": "Oct. 27, 2026"}]
 
 // For each carousel story in our object, add the HTML contents of the corresponding .proximized_carousel_image DIV as a property
 // This will be used in the carousel.mustache.html template to display the image
@@ -2727,7 +2791,7 @@ window.carouselData.storylineTitle = ""
 </script>
 
 
-<script type="module" src="/static/js/dist/storylinesCarousel.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/storylinesCarousel.bundle.js?285415281026" ></script>
 
 
     
@@ -2813,9 +2877,9 @@ window.carouselData.storylineTitle = ""
             <form class="form js-form-email-validate" name="signup" action="/signup/Cybersecurity/" method="POST">
                 
 
-                <label for="id_3a9754_email" class="email-input js-email-input">
+                <label for="id_4c1578_email" class="email-input js-email-input">
                     <span class="screen-reader-text">Email:</span>
-                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_3a9754_email">
+                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_4c1578_email">
                 </label>
 
                 <span class="captcha-container">
@@ -2833,7 +2897,7 @@ window.carouselData.storylineTitle = ""
                 <input type="hidden" name="referral_url">
 
                 
-                    <input type="hidden" name="js_enabled" value="0" id="id_3a9754_js_enabled">
+                    <input type="hidden" name="js_enabled" value="0" id="id_4c1578_js_enabled">
                 
 
                 
@@ -2859,7 +2923,7 @@ window.carouselData.storylineTitle = ""
                 
                 
 
-<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?285415281026" ></script>
 
                 
                 <label class="error email_error" style="display:none;">A valid email address is required.</label>
@@ -2937,41 +3001,12 @@ window.carouselData.storylineTitle = ""
                         <p class="label label--soft webinars-box__eyebrow">
                             
                                 
-                                <time datetime="2026-11-05T11:00:00-05:00">
-                                    November 5, 2026, 11:00 AM ET
-                                </time>
-                            
-                        </p>
-                        <a class="analytics t-webinar-sidebar-item-2 sidebar-box-list__item-title"
-                           target="_blank"
-                           rel="noopener"
-                           href="https://www.brighttalk.com/webcast/288/677925">
-                            Awareness Alone Fails: Transform Security Habits Across SaaS Environments
-                        </a>
-                    </div>
-                </li>
-            
-                <li class="sidebar-box-list__item webinars-box__item flex">
-                    
-                        <div class="sidebar-box-list__icon sidebar-box-list__icon--loud">
-                            
-<svg class="webinar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-    <path class="webinar-icon__glyph" d="M5 20C4.45 20 3.97917 19.8042 3.5875 19.4125C3.19583 19.0208 3 18.55 3 18V6C3 5.45 3.19583 4.97917 3.5875 4.5875C3.97917 4.19583 4.45 4 5 4H6V2H8V4H14V2H16V4H17C17.55 4 18.0208 4.19583 18.4125 4.5875C18.8042 4.97917 19 5.45 19 6V12.1C18.6667 12.05 18.3333 12.025 18 12.025C17.6667 12.025 17.3333 12.05 17 12.1V10H5V18H12C12 18.3333 12.025 18.6667 12.075 19C12.125 19.3333 12.2167 19.6667 12.35 20H5ZM5 8H17V6H5V8Z"/>
-    <path class="webinar-icon__plus" d="M17 22V19H14V17H17V14H19V17H22V19H19V22H17Z"/>
-</svg>
-
-                        </div>
-                    
-                    <div class="sidebar-box-title-container">
-                        <p class="label label--soft webinars-box__eyebrow">
-                            
-                                
                                 <time datetime="2026-11-05T04:00:00-05:00">
                                     November 5, 2026, 4:00 AM ET
                                 </time>
                             
                         </p>
-                        <a class="analytics t-webinar-sidebar-item-3 sidebar-box-list__item-title"
+                        <a class="analytics t-webinar-sidebar-item-2 sidebar-box-list__item-title"
                            target="_blank"
                            rel="noopener"
                            href="https://www.brighttalk.com/webcast/188/677445">
@@ -3000,11 +3035,40 @@ window.carouselData.storylineTitle = ""
                                 </time>
                             
                         </p>
-                        <a class="analytics t-webinar-sidebar-item-4 sidebar-box-list__item-title"
+                        <a class="analytics t-webinar-sidebar-item-3 sidebar-box-list__item-title"
                            target="_blank"
                            rel="noopener"
                            href="https://www.brighttalk.com/webcast/288/678028">
                             Weakest Link: How Security Gaps and Bad AI Hygiene Can Kill a Business
+                        </a>
+                    </div>
+                </li>
+            
+                <li class="sidebar-box-list__item webinars-box__item flex">
+                    
+                        <div class="sidebar-box-list__icon sidebar-box-list__icon--loud">
+                            
+<svg class="webinar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path class="webinar-icon__glyph" d="M5 20C4.45 20 3.97917 19.8042 3.5875 19.4125C3.19583 19.0208 3 18.55 3 18V6C3 5.45 3.19583 4.97917 3.5875 4.5875C3.97917 4.19583 4.45 4 5 4H6V2H8V4H14V2H16V4H17C17.55 4 18.0208 4.19583 18.4125 4.5875C18.8042 4.97917 19 5.45 19 6V12.1C18.6667 12.05 18.3333 12.025 18 12.025C17.6667 12.025 17.3333 12.05 17 12.1V10H5V18H12C12 18.3333 12.025 18.6667 12.075 19C12.125 19.3333 12.2167 19.6667 12.35 20H5ZM5 8H17V6H5V8Z"/>
+    <path class="webinar-icon__plus" d="M17 22V19H14V17H17V14H19V17H22V19H19V22H17Z"/>
+</svg>
+
+                        </div>
+                    
+                    <div class="sidebar-box-title-container">
+                        <p class="label label--soft webinars-box__eyebrow">
+                            
+                                
+                                <time datetime="2026-11-03T13:00:00-05:00">
+                                    November 3, 2026, 1:00 PM ET
+                                </time>
+                            
+                        </p>
+                        <a class="analytics t-webinar-sidebar-item-4 sidebar-box-list__item-title"
+                           target="_blank"
+                           rel="noopener"
+                           href="https://www.brighttalk.com/webcast/288/677227">
+                            Identity Is the New Perimeter: Defend Against the Authentication-First Attack
                         </a>
                     </div>
                 </li>
@@ -3228,9 +3292,9 @@ window.carouselData.storylineTitle = ""
             <form class="form js-form-email-validate" name="signup" action="/signup/Cybersecurity/" method="POST">
                 
 
-                <label for="id_58cf9a_email" class="email-input js-email-input">
+                <label for="id_413654_email" class="email-input js-email-input">
                     <span class="screen-reader-text">Email:</span>
-                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_58cf9a_email">
+                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_413654_email">
                 </label>
 
                 <span class="captcha-container">
@@ -3248,7 +3312,7 @@ window.carouselData.storylineTitle = ""
                 <input type="hidden" name="referral_url">
 
                 
-                    <input type="hidden" name="js_enabled" value="0" id="id_58cf9a_js_enabled">
+                    <input type="hidden" name="js_enabled" value="0" id="id_413654_js_enabled">
                 
 
                 
@@ -3274,7 +3338,7 @@ window.carouselData.storylineTitle = ""
                 
                 
 
-<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?285415281026" ></script>
 
                 
                 <label class="error email_error" style="display:none;">A valid email address is required.</label>
@@ -3464,7 +3528,7 @@ window.carouselData.storylineTitle = ""
 <div class="baseline-footer-wrapper">
     <div class="baseline-footer-logo">
         <a href="https://www.informatechtarget.com">
-            <img src="/static/img/ITechTarget-Logo.png?464109271026" alt="Informa TechTarget" loading="lazy" />
+            <img src="/static/img/ITechTarget-Logo.png?595215281026" alt="Informa TechTarget" loading="lazy" />
         </a>
     </div>
     <div class="baseline-footer-content">
@@ -3480,7 +3544,7 @@ window.carouselData.storylineTitle = ""
             
 
 <div class="baseline-footer">
-    &copy; 2025 TechTarget, Inc. or its subsidiaries. All rights reserved. An Informa PLC company.
+    &copy; 2026 TechTarget, Inc. or its subsidiaries. All rights reserved. An Informa PLC company.
     <br>
     <a href="https://www.informatechtarget.com/privacy-policy/">Privacy policy</a>
     | <a href="https://www.informatechtarget.com/terms-of-use/">Terms of use</a>
@@ -3524,14 +3588,14 @@ window.carouselData.storylineTitle = ""
                     aria-label="Clear search"
                     hidden
                 >
-                    <img src="/static/img/components/forms/x-circle.svg?464109271026" width="16" height="16" alt="">
+                    <img src="/static/img/components/forms/x-circle.svg?595215281026" width="16" height="16" alt="">
                 </button>
             </form>
         </div>
         
         
             <button type="button" class="mm-top-bar__close js-mm-close" aria-label="Close menu">
-                <img src="/static/img/menu_icons/close.svg?474109271026" width="16" height="16" alt="">
+                <img src="/static/img/menu_icons/close.svg?595215281026" width="16" height="16" alt="">
             </button>
         
     </div>
@@ -3552,7 +3616,7 @@ window.carouselData.storylineTitle = ""
             <button>
                 <span>Topics</span>
                 <span class="accordion-toggle-arrow">
-                    <img src="/static/img/menu_icons/chevron_down.svg?474109271026" width="16" height="9" alt="down arrow" loading="lazy">
+                    <img src="/static/img/menu_icons/chevron_down.svg?595215281026" width="16" height="9" alt="down arrow" loading="lazy">
                 </span>
             </button>
             <ul class="list-no-bullets">
@@ -3631,9 +3695,9 @@ window.carouselData.storylineTitle = ""
             <form class="form js-form-email-validate" name="signup" action="/signup/Cybersecurity/" method="POST">
                 
 
-                <label for="id_73bc47_email" class="email-input js-email-input">
+                <label for="id_e0880c_email" class="email-input js-email-input">
                     <span class="screen-reader-text">Email:</span>
-                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_73bc47_email">
+                    <input type="email" name="email" placeholder="Work email address" class="email" maxlength="320" required id="id_e0880c_email">
                 </label>
 
                 <span class="captcha-container">
@@ -3651,7 +3715,7 @@ window.carouselData.storylineTitle = ""
                 <input type="hidden" name="referral_url">
 
                 
-                    <input type="hidden" name="js_enabled" value="0" id="id_73bc47_js_enabled">
+                    <input type="hidden" name="js_enabled" value="0" id="id_e0880c_js_enabled">
                 
 
                 
@@ -3677,7 +3741,7 @@ window.carouselData.storylineTitle = ""
                 
                 
 
-<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/sendEmailToLytics.bundle.js?285415281026" ></script>
 
                 
                 <label class="error email_error" style="display:none;">A valid email address is required.</label>
@@ -3951,7 +4015,7 @@ window.carouselData.storylineTitle = ""
 
         
         
-    <script src="/static/js/news.js?484109271026" async></script>
+    <script src="/static/js/news.js?595215281026" async></script>
     <script>
         //Add styling for pdf only if admin button is clicked
         $(".download-promoted-story-button").click(function(){
@@ -3971,22 +4035,22 @@ window.carouselData.storylineTitle = ""
     
     
 
-<script type="module" src="/static/js/dist/article.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/article.bundle.js?285415281026" ></script>
 
 
         <!-- Track signups for Facebook Conversions API -->
         
 
-<script type="module" src="/static/js/dist/signupValidation.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/signupValidation.bundle.js?285415281026" ></script>
 
         
 
-<script type="module" src="/static/js/dist/gtmEvents.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/gtmEvents.bundle.js?285415281026" ></script>
 
         <!-- Convert straight quotes to curly -->
         
 
-<script type="module" src="/static/js/dist/smartQuotes.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/smartQuotes.bundle.js?285415281026" ></script>
 
         <!-- HTMX press release analytics -->
         
@@ -4019,10 +4083,10 @@ window.carouselData.storylineTitle = ""
                 stylesheet.setAttribute("type", "text/css");
                 stylesheet.setAttribute("media", "print");
                 if (window.location.pathname.includes('trendline')) {
-                    stylesheet.setAttribute("href", "/static/css/print_trendline.css?154309271026");
+                    stylesheet.setAttribute("href", "/static/css/print_trendline.css?165415281026");
                 }
                 else {
-                    stylesheet.setAttribute("href", "/static/css/print.css?154309271026");
+                    stylesheet.setAttribute("href", "/static/css/print.css?165415281026");
                 }
                 document.getElementsByTagName("head")[0].appendChild(stylesheet);
             });
@@ -4061,7 +4125,7 @@ window.carouselData.storylineTitle = ""
             
 
 
-<script type="module" src="/static/js/dist/mobileFooterAd.bundle.js?274309271026" ></script>
+<script type="module" src="/static/js/dist/mobileFooterAd.bundle.js?285415281026" ></script>
 
 <div class="mobile-footer-ad" id="mobile-footer-ad" role="complementary" aria-label="Advertisement">
     <div class="mobile-footer-ad__slot" id="dfp-mobilefooter-mobile"></div>
@@ -4099,6 +4163,6 @@ window.carouselData.storylineTitle = ""
 
           
         
-    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"9a304ef27e94431ca1278b62c9487931","spa":2}' crossorigin="anonymous"></script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a518307f891cb8d4',t:'MTc5MzE3MjE0Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a52070a0390c8114',t:'MTc5MzI1ODY1OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"9a304ef27e94431ca1278b62c9487931","spa":2}' crossorigin="anonymous"></script>
+</body>
 </html>
